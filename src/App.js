@@ -1,72 +1,74 @@
 import React, { useState } from 'react';
 
 export default function App() {
+
+  const [currentQuestion,setCurrentQuestion]=useState(0);
+	const [showScore, setShowScore]=useState(false);
+	const [currentScore,setScore]=useState(0);
 	const questions = [
 		{
-			questionText: 'What is the capital of France?',
-			answerOptions: [
-				{ answerText: 'New York', isCorrect: false },
-				{ answerText: 'London', isCorrect: false },
-				{ answerText: 'Paris', isCorrect: true },
-				{ answerText: 'Dublin', isCorrect: false },
-			],
-		},
-		{
-			questionText: 'Who is CEO of Tesla?',
-			answerOptions: [
-				{ answerText: 'Jeff Bezos', isCorrect: false },
-				{ answerText: 'Elon Musk', isCorrect: true },
-				{ answerText: 'Bill Gates', isCorrect: false },
-				{ answerText: 'Tony Stark', isCorrect: false },
-			],
-		},
-		{
-			questionText: 'The iPhone was created by which company?',
-			answerOptions: [
-				{ answerText: 'Apple', isCorrect: true },
-				{ answerText: 'Intel', isCorrect: false },
-				{ answerText: 'Amazon', isCorrect: false },
-				{ answerText: 'Microsoft', isCorrect: false },
-			],
-		},
-		{
-			questionText: 'How many Harry Potter books are there?',
+			questionText: 'What is 1+1?',
 			answerOptions: [
 				{ answerText: '1', isCorrect: false },
+				{ answerText: '3', isCorrect: false },
+				{ answerText: '2', isCorrect: true },
 				{ answerText: '4', isCorrect: false },
-				{ answerText: '6', isCorrect: false },
-				{ answerText: '7', isCorrect: true },
+			],
+		},
+		{
+			questionText: 'Hou many stars are there in the whole universe',
+			answerOptions: [
+				{ answerText: '1000', isCorrect: false },
+				{ answerText: '13200000', isCorrect: true },
+				{ answerText: '42000', isCorrect: false },
+				{ answerText: '8200000', isCorrect: false },
+			],
+		},
+		{
+			questionText: 'Where is Berlin?',
+			answerOptions: [
+				{ answerText: 'German', isCorrect: true },
+				{ answerText: 'France', isCorrect: false },
+				{ answerText: 'Grace', isCorrect: false },
+				{ answerText: 'Italy', isCorrect: false },
+			],
+		},
+		{
+			questionText: 'why do I use React?',
+			answerOptions: [
+				{ answerText: 'Pretty sure that there is a good reason', isCorrect: false },
+				{ answerText: 'Becasue others sucks', isCorrect: false },
+				{ answerText: 'Becasue is good', isCorrect: false },
+				{ answerText: 'Becasue professor ask to', isCorrect: true },
 			],
 		},
 	];
 	const handleNextQuestion=(isCorrect)=>{
+    if(isCorrect){
+      setScore(currentScore+1);
+   }else{
+
+   }
 		const nextQuestion=currentQuestion+1;
 		if(nextQuestion<questions.length){
-			if(isCorrect){
-			 	setScore(currentScore+1);
-			}else{
-
-			}
+		
 			setCurrentQuestion(nextQuestion);
 		}else{
 			setShowScore(true);
 		}
 	}
 	
-	const [currentQuestion,setCurrentQuestion]=useState(0);
-	const [showScore, setShowScore]=useState(false);
-	const [currentScore,setScore]=useState(0);
+
 	return (
 		<div className='app'>
-			{/* HINT: replace "false" with logic to display the 
-      score when the user has answered all the questions */}
+			
 			{showScore ? (
-				<div className='score-section'>You scored  out of {currentScore}</div>
+				<div className='score-section'>Your score is {currentScore}</div>
 			) : (
 				<>
 					<div className='question-section'>
 						<div className='question-count'>
-							<span>Question 1</span>/{questions.length}
+							<span>Question {currentQuestion+1}</span>/{questions.length}
 						</div>
 						<div className='question-text'>{questions[currentQuestion].questionText}</div>
 					</div>
