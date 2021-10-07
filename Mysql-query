@@ -42,5 +42,23 @@
 -- INSERT INTO QuizQuestion(questionID,QID,questionText,option1,option2,option3,option4,correct) 
 -- VALUES(1,2,"what is 2 plus 4","11","60","6","33","6");
 
+-- INSERT INTO QuizQuestion(questionID,QID,questionText,option1,option2,option3,option4,correct) 
+-- VALUES(2,2,"what is 10 plus 4","11","14","62","333","14");
+
 -- SELECT questionText,q2.questionID,option1,option2,option3,option4,correct FROM quiz q, QuizQuestion q2 
 -- WHERE q2.QID=1 AND q.QID=q2.QID;
+
+-- SELECT questionText,q2.questionID,option1,option2,option3,option4,correct FROM quiz q, QuizQuestion q2 
+-- WHERE q2.QID=1 AND q.QID=q2.QID and questionID=1;
+
+-- INSERT INTO QuizQuestion(questionID,QID,questionText,option1,option2,option3,option4,correct) 
+-- VALUES(2,2,"what is 10 plus 4","11","14","62","333","14");
+
+-- SELECT questionText,q2.questionID,option1,option2,option3,option4,correct FROM quiz q, QuizQuestion q2 
+-- WHERE q2.QID=1 AND q.QID=q2.QID and questionID=1;
+-- SELECT questionText,q2.questionID FROM quiz q, QuizQuestion q2 
+-- WHERE q2.QID=1 AND q.QID=q2.QID and questionID=1;
+-- SELECT option1,option2,option3,option4 FROM quiz q, QuizQuestion q2 
+-- WHERE q2.QID=1 AND q.QID=q2.QID and questionID=1;
+-- SELECT correct FROM quiz q, QuizQuestion q2 
+-- WHERE q2.QID=1 AND q.QID=q2.QID and questionID=1;
