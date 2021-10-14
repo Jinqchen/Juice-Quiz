@@ -62,3 +62,61 @@
 -- WHERE q2.QID=1 AND q.QID=q2.QID and questionID=1;
 -- SELECT correct FROM quiz q, QuizQuestion q2 
 -- WHERE q2.QID=1 AND q.QID=q2.QID and questionID=1;
+
+
+
+------- pseudo cod
+
+
+select name, PID, description
+from platform
+order by random()
+limit 10;
+
+select q.name, q.QID, q.description
+from Quiz q,platform p
+WHERE p.id=‘???’
+order by random()
+limit 10;
+
+Select name, id, description
+From platform
+Where tag=‘???’;
+
+Select *
+FROM Quizquestion 
+Where QID=‘???’ ;
+
+SELECT * 
+FROM Platform
+Where PID=‘???’;
+
+SELECT name, PID, description
+From platform 
+Where name LIKE ‘??%’;
+
+select q.name, q.QID, q.description
+from Quiz q , platform p
+WHERE p.id=‘???’ And q.name LIKE ‘???%’
+
+Delete from Quiz 
+Where PID=‘???’ AND QID=‘???’
+
+DELETE FROM platform
+Where PID=‘???’
+
+Insert into Quiz(releaser, QID,PID, ave_rate, description)
+values(‘???’, ‘12345, ’ ???’, 0.0, ‘???’)
+Insert into Quizquestion(QID,QuestionID, option1, option2, option3, option4, correctoption, text)
+values(‘12345’, ‘1’,’???’, ’???’, ’???’, ’???’, ’???’ )
+
+insert into platform(PID, description, tag, styles)
+values(‘???’, ‘???’, ‘???’, ‘???’)
+
+SELECT RLv 
+FROM Reputation
+Where UID=‘???’ AND PID=‘???’
+
+
+
+
