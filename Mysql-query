@@ -166,3 +166,21 @@ backup for database
 
 
 select * from quizoptions
+
+
+
+in program queries:
+
+
+select optionnumber, Optionx from quizoptions
+where QID=1 AND QuestionID=1 ;
+-- change QID OR QuestionID to select different quiz option number and options
+
+
+select correctness from quizoptions
+where optionnumber=1 and QID=1 and QuestionID=1 ;
+-- change QID OR QuestionID or optionnumber to see different option's corrections
+
+select Optionx ,correctness  from quizoptions
+where QID=1 AND QuestionID=1 and optionnumber=1 ;
+
