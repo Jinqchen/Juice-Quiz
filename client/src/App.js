@@ -91,6 +91,7 @@ export default class App extends Component {
 			}
 
 			
+<<<<<<< HEAD
 		} else {
 			if (isCorrect) {
 				currentScore = currentScore + 1;
@@ -99,6 +100,15 @@ export default class App extends Component {
 			this.setState({ showScore: true });
 		};
 		
+=======
+			this.setState({currentQuestion:nextQuestion});
+		}else{
+			if(isCorrect){
+				currentScore = currentScore +1;
+				this.setState({currentScore:currentScore})}
+			    this.setState({showScore:true}) ;
+		}
+>>>>>>> parent of fd1185b (debug)
 		console.log(this.state.currentQuestion);
 		this.processData();
 	}
