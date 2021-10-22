@@ -67,7 +67,7 @@ app.get ('/api/get',(req,res)=>{
 			 var str = JSON.stringify(result2);
              var obj = JSON.parse(str)
 
-			 file[i+1]['Optionx']=obj['Optionx'];
+			 file[i+1]['Optionx']=obj;
 			 });
 
 	   }
