@@ -184,3 +184,11 @@ where optionnumber=1 and QID=1 and QuestionID=1 ;
 select Optionx ,correctness  from quizoptions
 where QID=1 AND QuestionID=1 and optionnumber=1 ;
 
+
+
+select count(QuestionID) from quizquestion
+where QID=1;
+
+select count(optionnumber) from quizoptions
+where QID=1 and QuestionID=1
+
