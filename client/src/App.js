@@ -68,6 +68,7 @@ export default class App extends Component {
         
 		handleNextQuestion =(answerOption)=>{
 		var currentQuestion = this.state.currentQuestion;
+		console.log('handler');
 		var isCorrect = false;
 	    if (answerOption["correctness"] === 1){isCorrect = true;}
 
@@ -78,8 +79,6 @@ export default class App extends Component {
 			if(isCorrect){
 			 	currentScore = currentScore +1;
 				 this.setState({currentScore:currentScore});
-			}else{
-
 			}
 			
 			this.setState({currentQuestion:nextQuestion});
