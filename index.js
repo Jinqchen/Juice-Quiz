@@ -32,16 +32,6 @@ var con = mysql.createConnection({
 
 
 
-
-
-
-
-
-
-
-
-
-
 app.get ('/api/get',(req,res)=>{
    
     console.log("Connected!");
@@ -97,20 +87,10 @@ app.get ('/api/get',(req,res)=>{
 //   }); 
 
 
-
-    // for(let i = 0; i < file["qnumber"]; i++){
-	//  con.query("select optionnumber, Optionx from quizoptions where QID=1 AND QuestionID="+String(i+1)+";", function (err1, result) {
-	//   if (err1) throw err1;
-	//   file={};
-	//   file[i]=result;
-	//   res.send(file);
-	// });
-
 	
  
-
 app.listen(process.env.PORT || 3001,()=>{
-  console.log('listening for requests on port'+process.env.PORT)
+  console.log('listening for requests on port'+ process.env.PORT);
 })
 
 
