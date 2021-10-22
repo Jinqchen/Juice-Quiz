@@ -42,8 +42,6 @@ var con = mysql.createConnection({
 
 
 
-
-
 app.get ('/api/get',(req,res)=>{
    
     console.log("Connected!");
@@ -55,9 +53,9 @@ app.get ('/api/get',(req,res)=>{
 		file[quiznumber]=result;
 	  
 		for(let i = 0; i < quizn; i++){
-			con.query("select optionnumber, Optionx from quizoptions where QID=1 AND QuestionID="+String(i+1)+";", function (err1, result) {
-			 if (err1) throw err1;
-			 file[i]=result;
+			con.query("select optionnumber, Optionx from quizoptions where QID=1 AND QuestionID="+String(i+1)+";", function (err2, result2) {
+			 if (err2) throw err2;
+			 file[i]=result2;
 			 res.send(file);
 		   });
 	   }
