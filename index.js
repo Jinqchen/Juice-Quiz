@@ -17,9 +17,6 @@ app.get("/", function (request, response) {
 });
 
 
-
-
-
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(cors());
@@ -33,6 +30,20 @@ var con = mysql.createConnection({
 });
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 app.get ('/api/get',(req,res)=>{
    
     console.log("Connected!");
@@ -42,22 +53,20 @@ app.get ('/api/get',(req,res)=>{
 		if (err1) throw err1;
 	    file={};
 		file[quiznumber]=result;
-	  }.then(quizn=>{
+	  
 		for(let i = 0; i < quizn; i++){
 			con.query("select optionnumber, Optionx from quizoptions where QID=1 AND QuestionID="+String(i+1)+";", function (err1, result) {
 			 if (err1) throw err1;
-			 file={};
 			 file[i]=result;
 			 res.send(file);
 		   });
 	   }
-
-	}
-
+       }
 	  )
+	}
   );
  
-}) 
+
 
 // app.post("/register", (req, res) => {
 // 	const username = req.body.username;
