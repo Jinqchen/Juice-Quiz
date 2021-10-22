@@ -37,11 +37,24 @@ app.get ('/api/get',(req,res)=>{
    
     console.log("Connected!");
     con.query(
-		"select optionnumber, Optionx from quizoptions where QID=1 AND QuestionID="+String(1+1)+";", 
+		"select count(QuestionID) from quizquestion where QID=1 ;", 
 		function (err1, result) {
 		if (err1) throw err1;
-		res.send(result);
-	  }
+	    file={};
+		file[quiznumber]=result;
+	  }.then(quizn=>{
+		for(let i = 0; i < quizn; i++){
+			con.query("select optionnumber, Optionx from quizoptions where QID=1 AND QuestionID="+String(i+1)+";", function (err1, result) {
+			 if (err1) throw err1;
+			 file={};
+			 file[i]=result;
+			 res.send(file);
+		   });
+	   }
+
+	}
+
+	  )
   );
  
 }) 
@@ -55,7 +68,7 @@ app.get ('/api/get',(req,res)=>{
 // 		console.log(err);
 // 	  }
   
-// 	  con.query(
+// 	  db.query(
 // 		"INSERT INTO users (username, password) VALUES (?,?)",
 // 		[username, hash],
 // 		(err, result) => {
