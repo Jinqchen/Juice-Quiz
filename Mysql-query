@@ -1,4 +1,6 @@
 backup for database 
+
+
 -- create table users (
 -- UID char(8) unique,
 -- Uname char(10) unique,
@@ -109,6 +111,58 @@ backup for database
 -- insert into quizoptions(QID,QuestionID,Optionx,correctness)
 -- value(1,5,'90',false);
 
+-- ALTER TABLE quizoptions
+-- ADD COLUMN optionnumber int AFTER QuestionID;
 
 
+-- truncate table quizoptions;
+-- select * from quizoptions
 
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,1,1,'7 days',true);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,1,2,'2 days',false);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,1,3,'12 days',false);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,1,4,'14 days',false);
+
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,2,1,'24',true);
+
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,2,2,'5',false);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,2,3,'6',false);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,2,4,'1',false);
+
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,3,1,'5',false);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,3,2,'2',true);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,3,3,'1',false);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,3,4,'8',false);
+
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,4,1,'5',false);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,4,2,'65',false);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,4,3,'31',true);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,4,4,'51',false);
+
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,5,1,'5',false);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,5,2,'555',false);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,5,3,'60',true);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,5,4,'90',false);
+
+
+select * from quizoptions
