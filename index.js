@@ -50,9 +50,9 @@ app.get ('/api/get',(req,res)=>{
 		function (err1, result) {
 		if (err1) throw err1;
 	    file={};
-		file[quiznumber]=result;
+		file['quiznumber']=result;
 	  
-		for(let i = 0; i < quizn; i++){
+		for(let i = 0; i < result; i++){
 			con.query("select optionnumber, Optionx from quizoptions where QID=1 AND QuestionID="+String(i+1)+";", function (err2, result2) {
 			 if (err2) throw err2;
 			 file[i]=result2;
