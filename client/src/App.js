@@ -77,13 +77,9 @@ export default class App extends Component {
 
 		
 		const nextQuestion = currentQuestion+1;
-<<<<<<< HEAD
 		console.log('nextQuestion');
 		console.log('questlen');
 		this.setState({ currentQuestion: nextQuestion });
-=======
-
->>>>>>> parent of 962a7ff (fix bug test)
 		if (nextQuestion < questlen) {
 			if (isCorrect) {
 				currentScore = currentScore + 1;
@@ -91,7 +87,6 @@ export default class App extends Component {
 			}
 
 			
-<<<<<<< HEAD
 		} else {
 			if (isCorrect) {
 				currentScore = currentScore + 1;
@@ -100,15 +95,6 @@ export default class App extends Component {
 			this.setState({ showScore: true });
 		};
 		
-=======
-			this.setState({currentQuestion:nextQuestion});
-		}else{
-			if(isCorrect){
-				currentScore = currentScore +1;
-				this.setState({currentScore:currentScore})}
-			    this.setState({showScore:true}) ;
-		}
->>>>>>> parent of fd1185b (debug)
 		console.log(this.state.currentQuestion);
 		this.processData();
 	}
