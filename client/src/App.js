@@ -77,9 +77,13 @@ export default class App extends Component {
 
 		
 		const nextQuestion = currentQuestion+1;
+<<<<<<< HEAD
 		console.log('nextQuestion');
 		console.log('questlen');
 		this.setState({ currentQuestion: nextQuestion });
+=======
+
+>>>>>>> parent of 962a7ff (fix bug test)
 		if (nextQuestion < questlen) {
 			if (isCorrect) {
 				currentScore = currentScore + 1;
