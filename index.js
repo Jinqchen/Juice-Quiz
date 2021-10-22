@@ -55,8 +55,10 @@ app.get ('/api/get',(req,res)=>{
 			con.query("select Qtext from quizquestion where QID=1 AND QuestionID="+String(i+1)+";", 
 			function (err2, result2) {
 			 if (err2) throw err2;
-			 //file[i+1]= {};
-			 file[i+1]=JSON.stringify(result2);
+			 file[i+1]= {};
+			 var str = JSON.stringify(result2[0]);
+             var obj = JSON.parse(str)
+			 file[i+1]['Qtext']=JSON.stringify(result2['Qtext']);
 			 });
 			
 			
