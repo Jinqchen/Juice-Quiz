@@ -67,24 +67,25 @@ app.get ('/api/get',(req,res)=>{
  
 
 
-// app.post("/api/register", (req, res) => {
-// 	const username = req.body.username;
-// 	const password = req.body.password;
+app.post("/api/register", (req, res) => {
+	const username = req.body.username;
+	const password = req.body.password;
+    const email  = req.body.email;
+	const id = 1;
+	bcrypt.hash(password, saltRounds, (err, hash) => {
+	  if (err) {
+		console.log(err);
+	  }
   
-// 	bcrypt.hash(password, saltRounds, (err, hash) => {
-// 	  if (err) {
-// 		console.log(err);
-// 	  }
-  
-// 	  db.query(
-// 		"INSERT INTO users (username, password) VALUES (?,?)",
-// 		[username, hash],
-// 		(err, result) => {
-// 		  console.log(err);
-// 		}
-// 	  );
-// 	});
-//   }); 
+	  con.query(
+		"INSERT INTO users (UID,Uname,Uemail,Upass) VALUES (?,?,?,?)",
+		[id,username,email, hash],
+		(err, result) => {
+		  console.log(err);
+		}
+	  );
+	});
+  }); 
 
 
 	

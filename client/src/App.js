@@ -88,8 +88,8 @@ export default class App extends Component {
 				this.setState({currentScore:currentScore})}
 			    this.setState({showScore:true}) ;
 		};
+		
 		console.log(this.state.currentQuestion);
-		this.forceUpdate();
 		this.processData();
 	}
 	

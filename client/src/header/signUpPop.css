@@ -1,0 +1,21 @@
+.SIGNUP{
+    font-size: 38px;
+    text-align: center;
+ }.signUpBoard{
+	list-style: none;
+	background-color: #ee9c20;
+	overflow: hidden;
+    align-self: center;
+    width: 600px;
+    height: 300px; 
+    left:40%; 
+    padding:10px;
+
+} input{
+  position: absolute;
+  right:600px;
+  color: black
+}
+.userInput{
+    padding-bottom: 10px;
+}
