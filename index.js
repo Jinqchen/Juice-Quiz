@@ -77,7 +77,6 @@ app.post("/api/register", (req, res) => {
 		console.log(err);
 	  }
   
-<<<<<<< HEAD
 	  con.query(
 		"INSERT INTO users (UID,Uname,Uemail,Upass) VALUES (?,?,?,?)",
 		[id,username,email, hash],
@@ -87,22 +86,6 @@ app.post("/api/register", (req, res) => {
 	  );
 	});
   }); 
-=======
-// 	bcrypt.hash(password, saltRounds, (err, hash) => {
-// 	  if (err) {
-// 		console.log(err);
-// 	  }
-  
-// 	  db.query(
-// 		"INSERT INTO users (UID,Uname,Uemail,Upass) VALUES (?,?,?,?)",
-// 		[id,username,email, hash],
-// 		(err, result) => {
-// 		  console.log(err);
-// 		}
-// 	  );
-// 	});
-//   }); 
->>>>>>> 4605540c1787126477918c58c9ec2681e594d81b
 
 
 	
