@@ -32,7 +32,9 @@ export default class App extends Component {
 		 var myJSON = JSON.stringify(json);
 	     var myObj = JSON.parse(myJSON);
 		 this.setState({ques:JSON.stringify(myObj) });
+		 console.log("before");
 		 this.processData();
+		 console.log("after");
 		 
    })   
 })
@@ -48,6 +50,8 @@ export default class App extends Component {
 			this.setState({queslength:data["count(QuestionID)"]});
 			let index = this.state.currentQuestion;
 			console.log(index);
+			console.log(this.state.queslength);
+			console.log("processing");
 			let Optionx = data[index+1]['Optionx'];
 			var option1 =Optionx[0];
 			var option2 =Optionx[1];
