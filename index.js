@@ -29,22 +29,45 @@ var con = mysql.createConnection({
 	user: "b0fb64176d0a67",
 	password: "1322f121",
 	database: "heroku_a8e492587e5e18a",
-	port:3306
+	port:3306,
 });
 
 
 app.get ('/api/get',(req,res)=>{
    
-     console.log("Connected!");
-     
-	 con.query("select count(QuestionID) from quizquestion where QID=1 ;", function (err1, result) {
+    console.log("Connected!");
+    con.query(
+		"select count(QuestionID) from quizquestion where QID=1 ;", 
+		function (err1, result) {
 		if (err1) throw err1;
-		file={};
-		file["qnumber"]=result;
-		res.send(file)
+		res.send(result);
+		res.send(result);
 	  }
   );
-   
+ 
+}) 
+
+// app.post("/register", (req, res) => {
+// 	const username = req.body.username;
+// 	const password = req.body.password;
+  
+// 	bcrypt.hash(password, saltRounds, (err, hash) => {
+// 	  if (err) {
+// 		console.log(err);
+// 	  }
+  
+// 	  con.query(
+// 		"INSERT INTO users (username, password) VALUES (?,?)",
+// 		[username, hash],
+// 		(err, result) => {
+// 		  console.log(err);
+// 		}
+// 	  );
+// 	});
+//   }); 
+
+
+
     // for(let i = 0; i < file["qnumber"]; i++){
 	//  con.query("select optionnumber, Optionx from quizoptions where QID=1 AND QuestionID="+String(i+1)+";", function (err1, result) {
 	//   if (err1) throw err1;
@@ -52,10 +75,9 @@ app.get ('/api/get',(req,res)=>{
 	//   file[i]=result;
 	//   res.send(file);
 	// });
-}
+
 	
  
-)
 
 app.listen(process.env.PORT || 3001,()=>{
   console.log('listening for requests on port'+process.env.PORT)
