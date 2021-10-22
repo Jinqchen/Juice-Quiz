@@ -58,8 +58,6 @@ export default class App extends Component {
 			this.setState({opt3:option3});
 			this.setState({opt4:option4});
 			this.setState({answerOptions:[option1,option2,option3,option4]});
-			this.setState({RIGHT: data[index]['correct']});
-            console.log(this.state.RIGHT);
 		}
 		
         
