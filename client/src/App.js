@@ -17,7 +17,6 @@ export default class App extends Component {
 			opt2:"",
 			opt3:"",
 			opt4:"",
-			RIGHT:"",
 			answerOptions:[]
 		};
 	  }
@@ -46,28 +45,28 @@ export default class App extends Component {
 
 	    processData =()=>{
 			var data = JSON.parse(this.state.ques);
-			console.log(data.length);
-			this.setState({queslength:data.length});
+			this.setState({queslength:data["count(QuestionID)"]});
 			let index = this.state.currentQuestion;
-			var option1 =data[index]['option1'];
-			var option2 =data[index]['option2'];
-			var option3 =data[index]['option3'];
-			var option4 =data[index]['option4'];
-			this.setState({quesText:data[index]['questionText']})
+			let Optionx = data[index+1]['Optionx'];
+			var option1 =Optionx[0];
+			var option2 =Optionx[1];
+			var option3 =Optionx[2];
+			var option4 =Optionx[3];
+			this.setState({quesText:data[index]['questionText']});
 			this.setState({opt1:option1});
 			this.setState({opt2:option2});
 			this.setState({opt3:option3});
 			this.setState({opt4:option4});
 			this.setState({answerOptions:[option1,option2,option3,option4]});
-			this.setState({RIGHT: data[index]['correct']})
-            console.log(this.state.RIGHT)
+			this.setState({RIGHT: data[index]['correct']});
+            console.log(this.state.RIGHT);
 		}
 		
         
 		handleNextQuestion =(answerOption)=>{
 		var currentQuestion = this.state.currentQuestion;
 		var isCorrect = false;
-	    if (answerOption === this.state.RIGHT){isCorrect = true;}
+	    if (answerOption["correctness"] === 1){isCorrect = true;}
 
 	    var currentScore = this.state.currentScore;
 	    var questlen = this.state.queslength;
@@ -113,7 +112,7 @@ export default class App extends Component {
 					</div>
 					<div className='answer-section'>
 						 {this.state.answerOptions.map((answerOption)=>
-						 <button onClick={()=>this.handleNextQuestion(answerOption)}>{answerOption}</button>
+						 <button onClick={()=>this.handleNextQuestion(answerOption)}>{answerOption['Optionx']}</button>
 						 )}
 					</div>
 				</>

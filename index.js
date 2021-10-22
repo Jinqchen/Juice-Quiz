@@ -68,8 +68,6 @@ app.get ('/api/get',(req,res)=>{
             var obj = JSON.parse(str);
             file[i+1]['Optionx']=obj;
 			});
-
-
 	   }
        }
 	  )
