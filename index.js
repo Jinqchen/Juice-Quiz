@@ -61,16 +61,14 @@ app.get ('/api/get',(req,res)=>{
 			 file[i+1]['Qtext']=obj['Qtext'];
 			 });
 			
-			con.query("select Optionx from quizoptions where QID=1 AND QuestionID="+String(i+1)+";", 
+			con.query("select Optionx ,correctness  from quizoptions where QID=1 AND QuestionID="+String(i+1)+";", 
 			function (err2, result2) {
-			 console.log("yes");
-			 if (err2) throw err2;
-			 console.log(result2);
-			 var str = JSON.stringify(result2);
-             var obj = JSON.parse(str);
+			if (err2) throw err2;
+		    var str = JSON.stringify(result2);
+            var obj = JSON.parse(str);
+            file[i+1]['Optionx']=obj;
+			});
 
-			 file[i+1]['Optionx']=obj;
-			 });
 
 	   }
        }
