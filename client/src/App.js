@@ -33,7 +33,8 @@ export default class App extends Component {
 	     var myObj = JSON.parse(myJSON);
 		 this.setState({ques:JSON.stringify(myObj) });
 		 this.processData();
-		 console.log("y");
+		 this.forceUpdate();
+		 
    })   
 })
    

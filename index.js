@@ -67,7 +67,7 @@ app.get ('/api/get',(req,res)=>{
  
 
 
-// app.post("/register", (req, res) => {
+// app.post("/api/register", (req, res) => {
 // 	const username = req.body.username;
 // 	const password = req.body.password;
   
