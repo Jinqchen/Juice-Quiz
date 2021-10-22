@@ -58,7 +58,7 @@ app.get ('/api/get',(req,res)=>{
 			 file[i+1]= {};
 			 var str = JSON.stringify(result2[0]);
              var obj = JSON.parse(str)
-			 file[i+1]['Qtext']=JSON.stringify(result2['Qtext']);
+			 file[i+1]['Qtext']=JSON.stringify(obj['Qtext']);
 			 });
 			
 			
