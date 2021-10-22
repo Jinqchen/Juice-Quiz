@@ -77,8 +77,8 @@ app.get ('/api/get',(req,res)=>{
 // 	  }
   
 // 	  db.query(
-// 		"INSERT INTO users (username, password) VALUES (?,?)",
-// 		[username, hash],
+// 		"INSERT INTO users (UID,Uname,Uemail,Upass) VALUES (?,?,?,?)",
+// 		[id,username,email, hash],
 // 		(err, result) => {
 // 		  console.log(err);
 // 		}
