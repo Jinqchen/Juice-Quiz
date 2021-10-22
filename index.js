@@ -36,7 +36,7 @@ var con = mysql.createConnection({
 app.get ('/api/get',(req,res)=>{
 
      console.log("Connected!");
-	con.query("SELECT questionText,q2.questionID,option1,option2,option3,option4,correct FROM quiz q, QuizQuestion q2 WHERE q2.QID=1 AND q.QID=q2.QID;", function (err1, result) {
+	 con.query("select Qtext from quizquestion where QID=1 and QuestionID=1 ;", function (err1, result) {
 	  if (err1) throw err1;
 	  res.send(result);
  
