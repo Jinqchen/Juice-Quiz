@@ -74,7 +74,10 @@ export default class App extends Component {
 
 	    var currentScore = this.state.currentScore;
 	    var questlen = this.state.queslength;
-		const nextQuestion=currentQuestion+1;
+
+		currentQuestion=currentQuestion+1
+		const nextQuestion=currentQuestion;
+		
 		if(nextQuestion<questlen){
 			if(isCorrect){
 			 	currentScore = currentScore +1;
