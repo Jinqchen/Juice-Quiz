@@ -54,12 +54,13 @@ app.get ('/api/get',(req,res)=>{
 		for(let i = 0; i < result[0]["count(QuestionID)"]; i++){
 			con.query("select optionnumber, Optionx from quizoptions where QID=1 AND QuestionID="+String(i+1)+";", function (err2, result2) {
 			 if (err2) throw err2;
-			 file[i]=result2[0];
-			 res.send(file);
+			 file[i]=JSON.stringify(result2);
+			 
 		   });
 	   }
        }
 	  )
+	  res.send(file);
 	}
   );
  
