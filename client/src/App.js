@@ -52,7 +52,7 @@ export default class App extends Component {
 			var option2 =Optionx[1];
 			var option3 =Optionx[2];
 			var option4 =Optionx[3];
-			this.setState({quesText:data[index]['Qtext']});
+			this.setState({quesText:data[index+1]['Qtext']});
 			this.setState({opt1:option1});
 			this.setState({opt2:option2});
 			this.setState({opt3:option3});
