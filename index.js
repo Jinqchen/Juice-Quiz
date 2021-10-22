@@ -58,16 +58,17 @@ app.get ('/api/get',(req,res)=>{
 			 file[i+1]= {};
 			 var str = JSON.stringify(result2[0]);
              var obj = JSON.parse(str)
-			 file[i+1]['Qtext']=JSON.stringify(obj['Qtext']);
+			 file[i+1]['Qtext']=obj['Qtext'];
 			 });
 			
-			
-			
-			// con.query("select optionnumber, Optionx from quizoptions where QID=1 AND QuestionID="+String(i+1)+";", 
-			// function (err2, result2) {
-			//  if (err2) throw err2;
-			//  file[i+1]=JSON.stringify(result2);
-			//  });
+			con.query("select Optionx from quizoptions where QID=1 AND QuestionID="+String(i+1)+";", 
+			function (err2, result2) {
+			 if (err2) throw err2;
+			 var str = JSON.stringify(result2[0]);
+             var obj = JSON.parse(str)
+
+			 file[i+1]['Optionx']=obj['Optionx'];
+			 });
 
 	   }
        }
