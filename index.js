@@ -55,7 +55,7 @@ app.get ('/api/get',(req,res)=>{
 }
 	
  
-})
+)
 
 app.listen(process.env.PORT || 3001,()=>{
   console.log('listening for requests on port'+process.env.PORT)
