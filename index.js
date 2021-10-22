@@ -50,9 +50,9 @@ app.get ('/api/get',(req,res)=>{
 		function (err1, result) {
 		if (err1) throw err1;
 	    file={};
-		file['quiznumber']=result;
+		file["count(QuestionID)"]=result[0]["count(QuestionID)"];
 	    res.send(file);
-		for(let i = 0; i < result; i++){
+		for(let i = 0; i < result[0]["count(QuestionID)"]; i++){
 			con.query("select optionnumber, Optionx from quizoptions where QID=1 AND QuestionID="+String(i+1)+";", function (err2, result2) {
 			 if (err2) throw err2;
 			 file[i]=result2;
