@@ -52,11 +52,21 @@ app.get ('/api/get',(req,res)=>{
 	    file={};
 		file["count(QuestionID)"]=result[0]["count(QuestionID)"];
 		for(let i = 0; i < result[0]["count(QuestionID)"]; i++){
-			con.query("select optionnumber, Optionx from quizoptions where QID=1 AND QuestionID="+String(i+1)+";", function (err2, result2) {
+			con.query("select Qtext from quizquestion where QID=1 AND QuestionID="+String(i+1)+";", 
+			function (err2, result2) {
 			 if (err2) throw err2;
-			 file[i]=JSON.stringify(result2);
-			 
-		   });
+			 //file[i+1]= {};
+			 file[i+1]=JSON.stringify(result2);
+			 });
+			
+			
+			
+			// con.query("select optionnumber, Optionx from quizoptions where QID=1 AND QuestionID="+String(i+1)+";", 
+			// function (err2, result2) {
+			//  if (err2) throw err2;
+			//  file[i+1]=JSON.stringify(result2);
+			//  });
+
 	   }
        }
 	  )
