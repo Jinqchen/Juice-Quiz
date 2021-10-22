@@ -2,7 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 import './header.css' ; 
 import Signup from'./signUpPop';
-import Axios from "axios"
+//import Axios from "axios"
 
 
 export default class header extends Component {
@@ -18,18 +18,18 @@ export default class header extends Component {
             confirmPassword:"",
 		};
 	  }
-     submit =()=>{
-      Axios.post("https://juice-quiz.herokuapp.com/api/register", { 
-      username: this.state.userName, 
-      email: this.state.email, 
-      password:this.state.password,
-      confirmPassword:this.state.confirmPassword 
- }).then((response) => { 
- console.log(response); 
- }); 
+//      submit =()=>{
+//       Axios.post("https://juice-quiz.herokuapp.com/api/register", { 
+//       username: this.state.userName, 
+//       email: this.state.email, 
+//       password:this.state.password,
+//       confirmPassword:this.state.confirmPassword 
+//  }).then((response) => { 
+//  console.log(response); 
+//  }); 
       
-      this.setState({visible:false})
-  }
+//       this.setState({visible:false})
+//   }
     getEmail(signUpemail){
       this.setState({email: signUpemail})
       console.log("parent email is:")

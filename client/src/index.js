@@ -5,7 +5,7 @@ import App from './App';
 import Header from './header/header';
 
 ReactDOM.render(
-  <Header />,
+ // <Header />,
     <App />,
   document.getElementById('root')
 );
