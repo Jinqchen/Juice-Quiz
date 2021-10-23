@@ -87,14 +87,13 @@ export default class App extends Component {
 			}
 
 			
-		} else {
-			if (isCorrect) {
-				currentScore = currentScore + 1;
-				this.setState({ currentScore: currentScore })
-			}
-			this.setState({ showScore: true });
-		};
-		
+			this.setState({currentQuestion:nextQuestion});
+		}else{
+			if(isCorrect){
+				currentScore = currentScore +1;
+				this.setState({currentScore:currentScore})}
+			    this.setState({showScore:true}) ;
+		}
 		console.log(this.state.currentQuestion);
 		this.processData();
 	}
