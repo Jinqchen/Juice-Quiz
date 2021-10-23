@@ -1,0 +1,194 @@
+backup for database 
+
+
+-- create table users (
+-- UID char(8) unique,
+-- Uname char(10) unique,
+-- Uemail char(35) unique,
+-- Upass char(30),
+-- primary key(UID)
+-- )
+-- create table userstyle(
+-- UID CHAR(8),
+-- pic blob,
+-- primary key(UID),
+-- foreign key(UID) references users(UID)
+-- );
+
+-- create table quiz (
+-- QID INT,
+-- ave_rate float,
+-- primary key (QID)
+-- );
+-- create table quizquestion(
+-- QID int,
+-- QuestionID int,
+-- Qtext text,
+-- primary key (QID,QuestionID),
+-- foreign key (QID) references quiz(QID)
+-- on delete no action
+-- on update cascade
+
+
+-- );
+-- ALTER TABLE quizquestion ADD UNIQUE (QuestionID);
+
+-- create table quizoptions(
+-- QID int,
+-- QuestionID int,
+-- Optionx text,
+-- correctness boolean,
+-- foreign key(QID)references quiz(QID)
+-- on delete no action
+-- on update cascade,
+-- foreign key(QuestionID) references quizquestion(QuestionID)
+-- on delete no action
+-- on update cascade
+
+-- )
+
+
+
+
+-- insert into quiz(QID,ave_rate)
+-- value(1,1.0);
+-- insert into quiz(QID,ave_rate)
+-- value(2,1.0);
+-- insert into quizquestion(QID,QuestionID,Qtext)
+-- value(1,1,"How many days are there in a week");
+-- insert into quizquestion(QID,QuestionID,Qtext)
+-- value(1,2,"How many hours are there in a day");
+-- insert into quizquestion(QID,QuestionID,Qtext)
+-- value(1,3,"What is one plus one?");
+-- insert into quizquestion(QID,QuestionID,Qtext)
+-- value(1,4,"how many days May has?");
+-- insert into quizquestion(QID,QuestionID,Qtext)
+-- value(1,5,"how many seconds per minute?");
+
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,1,'7 days',true);
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,1,'2 days',false);
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,1,'12 days',false);
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,1,'14 days',false);
+
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,2,'7',true);
+
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,2,'5',false);
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,2,'6',false);
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,2,'1',false);
+
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,3,'5',false);
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,3,'2',true);
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,3,'1',false);
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,3,'8',false);
+
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,4,'5',false);
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,4,'65',false);
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,4,'31',true);
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,4,'51',false);
+
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,5,'5',false);
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,5,'555',false);
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,5,'60',true);
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,5,'90',false);
+
+-- ALTER TABLE quizoptions
+-- ADD COLUMN optionnumber int AFTER QuestionID;
+
+
+-- truncate table quizoptions;
+-- select * from quizoptions
+
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,1,1,'7 days',true);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,1,2,'2 days',false);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,1,3,'12 days',false);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,1,4,'14 days',false);
+
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,2,1,'24',true);
+
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,2,2,'5',false);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,2,3,'6',false);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,2,4,'1',false);
+
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,3,1,'5',false);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,3,2,'2',true);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,3,3,'1',false);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,3,4,'8',false);
+
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,4,1,'5',false);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,4,2,'65',false);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,4,3,'31',true);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,4,4,'51',false);
+
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,5,1,'5',false);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,5,2,'555',false);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,5,3,'60',true);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,5,4,'90',false);
+
+
+select * from quizoptions
+
+
+
+in program queries:
+
+
+select optionnumber, Optionx from quizoptions
+where QID=1 AND QuestionID=1 ;
+-- change QID OR QuestionID to select different quiz option number and options
+
+
+select correctness from quizoptions
+where optionnumber=1 and QID=1 and QuestionID=1 ;
+-- change QID OR QuestionID or optionnumber to see different option's corrections
+
+select Optionx ,correctness  from quizoptions
+where QID=1 AND QuestionID=1 and optionnumber=1 ;
+
+
+
+select count(QuestionID) from quizquestion
+where QID=1;
+
+select count(optionnumber) from quizoptions
+where QID=1 and QuestionID=1
+
