@@ -33,6 +33,12 @@ backup for database
 -- );
 -- ALTER TABLE quizquestion ADD UNIQUE (QuestionID);
 
+ALTER TABLE `heroku_a8e492587e5e18a`.`users` 
+CHANGE COLUMN `Uname` `Uname` CHAR(10) NOT NULL ,
+CHANGE COLUMN `Uemail` `Uemail` CHAR(35) NOT NULL ,
+CHANGE COLUMN `Upass` `Upass` CHAR(30) NOT NULL ;
+
+
 
 -- drop table platformstyle;
 -- drop table platform;
