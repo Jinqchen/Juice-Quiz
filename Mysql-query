@@ -252,3 +252,22 @@ foreign key(PID) references platform(PID)
 )
 
 
+
+-- insert into platformstyle(PID,Pcover)
+-- value(1,'platform_image/1.jpg');
+-- insert into platformstyle(PID,Pcover)
+-- value(2,'platform_image/2.jpg');
+-- insert into platformstyle(PID,Pcover)
+-- value(3,'platform_image/3.jpg');
+-- insert into platformstyle(PID,Pcover)
+-- value(4,'platform_image/4.jpg');
+-- insert into platformstyle(PID,Pcover)
+-- value(5,'platform_image/5.jpg');
+-- insert into platformstyle(PID,Pcover)
+-- value(6,'platform_image/6.jpg');
+-- insert into platformstyle(PID,Pcover)
+-- value(7,'platform_image/7.jpg');
+-- insert into platformstyle(PID,Pcover)
+-- value(8,'platform_image/8.jpg')
+
+select * from platformstyle;
