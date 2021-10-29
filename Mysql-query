@@ -33,6 +33,41 @@ backup for database
 -- );
 -- ALTER TABLE quizquestion ADD UNIQUE (QuestionID);
 
+
+-- drop table platformstyle;
+-- drop table platform;
+-- create table platform (
+-- PID int unique,
+-- Pname char(20) unique,
+
+-- primary key(PID)
+-- );
+-- CREATE table platformstyle(
+-- PID int,
+-- Pcover char(30),
+-- foreign key(PID) references platform(PID)
+-- on delete no action
+-- on update cascade
+-- );
+
+-- insert into  platform(PID,Pname)
+-- value(1,'NASA');
+-- insert into  platform(PID,Pname)
+-- value(2,'MLB');
+-- insert into  platform(PID,Pname)
+-- value(3,'League of Legend');
+-- insert into  platform(PID,Pname)
+-- value(4,'Cowboy Bebop');
+-- insert into  platform(PID,Pname)
+-- value(5,'C++');
+-- insert into  platform(PID,Pname)
+-- value(6,'JAZZ');
+-- insert into  platform(PID,Pname)
+-- value(7,'CALCULUS');
+-- insert into  platform(PID,Pname)
+-- value(8,'Ancient Egypt');
+
+
 -- create table quizoptions(
 -- QID int,
 -- QuestionID int,
