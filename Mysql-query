@@ -303,3 +303,25 @@ value(1,'firstUser','firstuser@gmail.com','firstuserkey');
 insert into userstyle (UID,pic)
 value(1,'user_image/1.png');
 
+-- ALTER TABLE platform 
+-- add constraint check (tag in ('Game','Math','Programming','Culture','History','Sport','Tech','Economy','Science','Life hack','Music','Movie','Food'));
+
+-- create table contain (
+-- PID INT,
+-- QID INT,
+-- PRIMARY KEY(PID,QID),
+-- FOREIGN KEY (PID) REFERENCES platform (PID)
+-- ON DELETE NO ACTION
+-- ON UPDATE CASCADE,
+-- FOREIGN KEY (QID) REFERENCES quiz (QID)
+-- ON DELETE NO ACTION
+-- ON UPDATE CASCADE
+
+-- )
+-- select * from users
+
+SELECT Pcover,p.PID,Pname from platformstyle s,platform p
+where p.tag='Game' and s.PID=p.PID;
+
+-- select * from platformstyle
+
