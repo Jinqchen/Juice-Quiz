@@ -277,3 +277,29 @@ foreign key(PID) references platform(PID)
 -- value(8,'platform_image/8.jpg')
 
 select * from platformstyle;
+
+
+drop table userstyle;
+drop table users;
+
+
+create table users (
+UID int unique not null,
+Uname char(10) unique not null,
+Uemail char(35) unique not null,
+Upass char(30),
+primary key(UID)
+);
+create table userstyle(
+UID int,
+pic char(30),
+primary key(UID),
+foreign key(UID) references users(UID)
+on delete no action
+on update cascade
+);
+insert into users(UID,Uname,Uemail,Upass)
+value(1,'firstUser','firstuser@gmail.com','firstuserkey');
+insert into userstyle (UID,pic)
+value(1,'user_image/1.png');
+
