@@ -1,0 +1,69 @@
+.signUpBoard{
+
+  background-color: orange;
+  width: 700px;
+  height: 500px;
+  display: block;
+  margin: 0 auto;
+}
+.SIGNUP{
+    font-size: 38px;  
+    padding-left: 20px;
+ } 
+  input{  
+      background-color: white;
+    display: block;
+    margin: 0 auto;
+    outline-style: none ;
+    border: 1px solid #ccc; 
+    border-radius: 3px;
+    padding: 13px 14px;
+    width: 620px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: "Microsoft soft"; 
+    color: black;
+    
+}
+.userInput{
+    top:100px;
+    position: relative;   
+     padding: 10px;
+}
+.cancel{ 
+  position: relative;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 12px,16px;
+  text-decoration: white;
+  width: 25px;
+  height: 25px;
+ 
+  font-size: 16px;
+  color: #ffffff;
+  background-color: black; 
+  align-items: center;
+  border: none;
+  cursor: pointer; 
+  float: right;
+  
+}
+.SignUp{ 
+  position: relative;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 12px,16px;
+  text-decoration: white;
+  width: 200px;
+  height: 50px;
+  margin: 0 auto;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: black; 
+  align-items: center;
+  border: none;
+  cursor: pointer;  
+  bottom: 70px;
+}
