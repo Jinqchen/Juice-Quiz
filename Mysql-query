@@ -324,4 +324,16 @@ SELECT Pcover,p.PID,Pname from platformstyle s,platform p
 where p.tag='Game' and s.PID=p.PID;
 
 -- select * from platformstyle
+create table reputation (
+Rpoint int default 0,
+UID INT,
+PID INT,
+PRIMARY KEY(UID,PID),
+FOREIGN KEY (UID) REFERENCES users(UID)
+ON DELETE NO ACTION
+ON UPDATE CASCADE,
+FOREIGN KEY(PID) references platform(PID)
+ON DELETE NO ACTION
+ON UPDATE CASCADE
 
+)
