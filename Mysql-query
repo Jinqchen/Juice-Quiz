@@ -1,4 +1,4 @@
-backup for database 
+backup for db
 
 
 -- create table users (
@@ -191,29 +191,4 @@ where QID=1;
 
 select count(optionnumber) from quizoptions
 where QID=1 and QuestionID=1
-
-
-
--- insert into users(UID,Uname,Uemail,Upass)
--- value(1,'firstUser','firstuser@gmail.com','firstuserkey');
--- insert into userstyle (UID,pic)
--- value(1,'user_image/1.png');
-ALTER TABLE userstyle MODIFY pic char(30);
-
-select * from users;
-select * from userstyle
-
-create table platform (
-PID char(8) unique,
-Pname char(20) unique,
-
-primary key(PID)
-);
-CREATE table platformstyle(
-PID CHAR(8),
-Pcover char(30),
-foreign key(PID) references platform(PID)
-
-)
-
 
