@@ -337,3 +337,126 @@ ON DELETE NO ACTION
 ON UPDATE CASCADE
 
 )
+
+
+-- select Rpoint,PID from reputation 
+-- where UID=4
+
+-- ALTER TABLE quiz
+-- ADD COLUMN hot int AFTER ave_rate;
+
+-- select * from platform;
+-- insert into platform 
+-- value(14,'Math','Math');
+-- insert into platformstyle
+-- value(14,'./platform_image/14.jgp')
+
+-- create table Own(
+-- PID INT unique,
+-- UID INT unique,
+-- PRIMARY KEY(PID,UID),
+-- FOREIGN KEY(PID) REFERENCES platform(PID)
+-- on delete no action
+-- on update cascade,
+
+-- FOREIGN KEY(UID) REFERENCES users(UID)
+-- on delete no action
+-- on update cascade
+
+
+-- );
+-- create table Coown(
+-- PID INT,
+-- UID INT,
+-- PRIMARY KEY(PID,UID),
+-- FOREIGN KEY(PID) REFERENCES platform(PID)
+-- on delete no action
+-- on update cascade,
+
+-- FOREIGN KEY(UID) REFERENCES users(UID)
+-- on delete no action
+-- on update cascade
+
+
+-- );
+-- create table subscribe(
+-- PID INT,
+-- UID INT,
+-- PRIMARY KEY(PID,UID),
+-- FOREIGN KEY(PID) REFERENCES platform(PID)
+-- on delete no action
+-- on update cascade,
+
+-- FOREIGN KEY(UID) REFERENCES users(UID)
+-- on delete no action
+-- on update cascade
+
+
+-- )
+select * from reputation 
+order by PID;
+
+-- insert into Own
+-- value(1,7),
+-- (2,8),
+-- (3,9),
+-- (4,10),
+-- (5,11),
+-- (6,12),
+-- (7,11),
+-- (8,12),
+-- (9,8),
+-- (10,13),
+-- (11,3),
+-- (12,5),
+-- (13,6)
+
+
+
+-- drop table Own;
+-- create table Own(
+-- PID INT unique,
+-- UID INT ,
+-- PRIMARY KEY(PID,UID),
+-- FOREIGN KEY(PID) REFERENCES platform(PID)
+-- on delete no action
+-- on update cascade,
+
+-- FOREIGN KEY(UID) REFERENCES users(UID)
+-- on delete no action
+-- on update cascade
+
+
+-- );
+
+-- insert into coown
+-- value (1,7),
+-- (2,4),
+-- (3,6),
+-- (4,7)
+-- insert into subscribe
+-- value(1,3),
+-- (1,7),
+-- (2,8),
+-- (2,4),(3,9),(3,6),(4,10),
+-- (4,7),
+-- (5,11),
+-- (5,9),
+-- (6,12),
+-- (6,10),
+-- (7,3),
+-- (7,11),(8,12),
+-- (8,5),
+-- (9,8),
+-- (10,13),
+-- (11,3),
+-- (11,4),
+-- (12,5),
+-- (13,6)
+-- select * from quiz;
+-- ALTER TABLE quiz
+-- ADD COLUMN description text AFTER hot;
+select * from quiz;
+
+
+
