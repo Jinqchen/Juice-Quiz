@@ -3,7 +3,8 @@ import { Component } from 'react';
 import './header.css' ; 
 import Signup from'./signUpPop';
 import Signin from'./signInPop';
-import { Media } from 'reactstrap';
+//import { Media } from 'reactstrap';
+import { BrowserRouter as Router, Route,Routes, Link } from 'react-router-dom';
 //import Axios from "axios"
 
 
@@ -65,7 +66,7 @@ export default class header extends Component {
     }
 
 
-    
+
     userIcon(){
 
       alert("icon hit")
@@ -76,7 +77,9 @@ export default class header extends Component {
 	return (
             <div>
             <div className="navbar">
+            <Link to='/'>
             <img src="logo.jpg"></img>
+            </Link>
             {!this.state.login&&<button onClick={()=>this.setState({SignInVisible:true,display:"block"})}  type="button" className='account'>Sign in</button>||<button onClick={()=>this.signOut()}  type="button" className='account'>Sign out</button>}
             { !this.state.login&&<button onClick={()=>this.setState({SignupVisible:true,display:"block"})}  type="button" className='account'>Sign up</button>||<img src="account.jpg" className='accountIcon'  onClick={()=>this.userIcon()} ></img>}
        
