@@ -13,7 +13,7 @@ export default class header extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { 
-            login:true,
+            login:false,
             SignInVisible:false, 
             SignupVisible:false,
             userName:"",
@@ -54,10 +54,16 @@ export default class header extends Component {
     signUpcallback=()=>{
       this.setState({SignupVisible: false,display:"none"})
     }
+
+    Success=()=>{
+      this.setState({login:true})
+    }
+
+
     signOut(){
       this.setState({login:false})
     }
-    
+
     userIcon(){
 
       alert("icon hit")
@@ -70,14 +76,14 @@ export default class header extends Component {
             <div className="navbar">
             <img src="logo.jpg"></img>
             {!this.state.login&&<button onClick={()=>this.setState({SignInVisible:true,display:"block"})}  type="button" className='account'>Sign in</button>||<button onClick={()=>this.signOut()}  type="button" className='account'>Sign out</button>}
-            { !this.state.login&&<button onClick={()=>this.setState({SignupVisible:true,display:"block"})}  type="button" className='account'>Sign up</button>||<img src="icon.jpg" className='accountIcon'  onClick={()=>this.userIcon()} ></img>}
+            { !this.state.login&&<button onClick={()=>this.setState({SignupVisible:true,display:"block"})}  type="button" className='account'>Sign up</button>||<img src="account.jpg" className='accountIcon'  onClick={()=>this.userIcon()} ></img>}
        
              </div>
           
           <div className="main" style={{display:this.state.display}}> 
-          {this.state.SignInVisible && <Signin   signIncallback={this.signIncallback} getEmail={this.getEmail.bind(this) }  getPassword={this.getPassword.bind(this)}   className="board"></Signin>}
+          {this.state.SignInVisible && <Signin   signIncallback={this.signIncallback} Success={this.Success} getEmail={this.getEmail.bind(this) }  getPassword={this.getPassword.bind(this)}   className="board"></Signin>}
         
-          {this.state.SignupVisible && <Signup  signUpcallback={this.signUpcallback} getEmail={this.getEmail.bind(this) } getConfirm={this.getConfirm.bind(this)} getPassword={this.getPassword.bind(this)} getUserName={this.getUserName.bind(this)} className="board"></Signup>}
+          {this.state.SignupVisible && <Signup  signUpcallback={this.signUpcallback} Success={this.Success} getEmail={this.getEmail.bind(this) } getConfirm={this.getConfirm.bind(this)} getPassword={this.getPassword.bind(this)} getUserName={this.getUserName.bind(this)} className="board"></Signup>}
               
        
           </div>

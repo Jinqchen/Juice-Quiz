@@ -65,7 +65,6 @@ app.get('/api/get',(req,res)=>{
   );
  
   app.get ('/api/Platform',(req,res)=>{
-   
     console.log("Connected!");
     con.query(
 		"SELECT Pcover,p.PID,Pname,tag from platformstyle s,platform p where s.PID=p.PID  order BY RAND() limit 8;", 

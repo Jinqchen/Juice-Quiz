@@ -52,6 +52,7 @@ import Axios from "axios";
          console.log(response); 
          this.setState({visible:false})
          this.props.signUpcallback();
+         this.props.Success()
          }); 
      }
      else{
