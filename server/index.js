@@ -104,7 +104,7 @@ app.post('/api/register', (req, res) => {
 		if (err) {
 		  res.send({ err: err });
 		}
-  
+
 		if (result.length > 0) {
 		    
 			if (result === password) {
