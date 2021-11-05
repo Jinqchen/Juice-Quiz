@@ -140,4 +140,3 @@ export default class singlePlatForm extends Component {
 	}
     
 }
-

@@ -81,6 +81,17 @@ app.get ('/api/Platform',(req,res)=>{
 	    res.send(result);}
   );})
 
+//   app.get ('/api/Pquiz',(req,res)=>{
+//     console.log("Connected!");
+//     con.query(
+// 		"select QID,description,hot,ave_rate from quiz order by hot desc", 
+// 		function (err1, result) {
+// 		if (err1) throw err1;
+// 	    res.send(result);}
+//   );})
+
+
+
 app.post('/api/register', (req, res) => {
 	const username = req.body.username;
 	const password = req.body.password;
