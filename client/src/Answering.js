@@ -22,10 +22,11 @@ export default class App extends Component {
 	}
 
 	componentDidMount = () => {
-
+       // const url = 'https://juice-quiz.herokuapp.com/api/get';
+		const local= 'http://localhost:3001/api/get';
 		console.log("Component did mount")
 		setTimeout(() => {
-			fetch('https://juice-quiz.herokuapp.com/api/get')
+			fetch(local)
 				.then(response => { return response.json() })
 				.then(json => {
 					console.log(json);

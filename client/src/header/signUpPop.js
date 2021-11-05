@@ -40,9 +40,10 @@ import Axios from "axios";
 
     //这里传参给后端  
     signUp(){
-      
-       if(this.state.password===this.state.conformPassword){   
-         Axios.post("https://juice-quiz.herokuapp.com/api/register", { 
+     // const url = 'https://juice-quiz.herokuapp.com/api/register';
+      const local= 'http://localhost:3001/api/register';
+      if(this.state.password===this.state.conformPassword){   
+         Axios.post(local, { 
               username: this.state.userName, 
               email: this.state.email, 
               password:this.state.password,

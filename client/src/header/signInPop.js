@@ -3,40 +3,42 @@ import { Component } from 'react';
 import './signInPop.css' 
 import Axios from "axios";
 
-    export default class signIn extends Component {
-        constructor(props) {
-            super(props);
-            this.state = { 
-              trigger:false, 
-                email:"",
-                password:"" 
+export default class signIn extends Component {
+      constructor(props) {
+          super(props);
+          this.state = { 
+            trigger:false, 
+            email:"",
+            password:"" 
             };
             console.log(this.props.SignInVisible)
-          }
+      }
            
-        handleChangePassWord(e) {  
+      handleChangePassWord(e) {  
           this.setState({password: e.target.value});  
           this.props.getPassword(this.state.password)
-        
-     }
+      }
    
-       handleChangeEmail(e) {  
-     this.setState({email: e.target.value});  
-     this.props.getEmail(this.state.email)
-   
-     
-     //用这个函数来传参给后端 
-}   signIn(){
-    Axios.post("https://juice-quiz.herokuapp.com/api/login", {
-    email: this.state.email,
-    password: this.state.password,
-  }).then((response) => {
-     alert("email is "+this.state.email)
-  alert("password is "+this.state.password)
-  this.props.signIncallback()
-  });
- 
-}
+      handleChangeEmail(e) {  
+      this.setState({email: e.target.value});  
+      this.props.getEmail(this.state.email) 
+      }   
+    
+
+
+    signIn(){
+       // const url = 'https://juice-quiz.herokuapp.com/api/login';
+        const local= 'http://localhost:3001/api/login';
+        Axios.post(local, {
+        email: this.state.email,
+        password: this.state.password,
+      }).then((response) => {
+        alert("email is "+this.state.email)
+        alert("password is "+this.state.password)
+        this.props.signIncallback()
+      });
+    
+    }
 
     
       render(){ 

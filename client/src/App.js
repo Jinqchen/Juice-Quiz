@@ -3,9 +3,11 @@ import { Component } from 'react';
 import './App.css' 
 import Header from './header/header';
 import Menu from './page/menu';
+import ShowPlatformList from'./header/showPlatformLIst';
+import SinglePlatForm from './singlePlatform/singlePlatForm';
+import { BrowserRouter as Router, Route,Routes, Link } from 'react-router-dom';
 
-import ShowPlatformList from'./header/showPlatformLIst'
-import SinglePlatForm from './singlePlatform/singlePlatForm'
+
 
 
 export default class App extends Component {
@@ -16,28 +18,25 @@ export default class App extends Component {
 		};
 	}
  
-
-
- 
- 
-
-
-
 	render() {
 		 
 		return (
 				
-			<div>
-				{/* <ShowPlatformList></ShowPlatformList> */}
+            <div className='App'>
 				
-<div className='App'>
-				{/* <SinglePlatForm></SinglePlatForm> */}
-				{/* <Menu></Menu> */}
-		</div>
-		<Header></Header>
+				<Router> 
+				  <Header/>
+                  <Routes>
+				   	   <Route exact path='/' element={<Menu />} />
+				       <Route path='/platform' element={<SinglePlatForm/>} />	   
+			      </Routes>
 
-			</div>
+                </Router>	
+		    </div>
+		     
+			
 			
 		);
+		
 	}
 }

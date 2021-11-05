@@ -68,7 +68,7 @@ app.get('/api/get',(req,res)=>{
    
     console.log("Connected!");
     con.query(
-		"SELECT Pcover,p.PID,Pname,tag from platformstyle s,platform p where s.PID=p.PID  order BY RAND() limit 3;", 
+		"SELECT Pcover,p.PID,Pname,tag from platformstyle s,platform p where s.PID=p.PID  order BY RAND() limit 8;", 
 		function (err1, result) {
 		if (err1) throw err1;
 	    res.send(result);}
@@ -78,15 +78,18 @@ app.post('/api/register', (req, res) => {
 	const username = req.body.username;
 	const password = req.body.password;
     const email  = req.body.email;
-	const id = con.query('select COUNT(UID) from users',(res)=>{return res+1});
-	console.log(id);
-	con.query(
+	const id = con.query('select COUNT(UID) from users',(res)=>{
+		console.log(res);
+		con.query(
 		"INSERT INTO users (UID,Uname,Uemail,Upass) VALUES (?,?,?,?)",
 		[id,username,email,password],
 		(err, result) => {
 		  console.log(err);
 		}
 	  );
+	});
+	
+
 
   }); 
 
@@ -121,13 +124,18 @@ app.post('/api/register', (req, res) => {
 	);
   });
 
-// app.listen(3001,()=>{
-// 	  console.log("running");
-// 	})
+
+
+
+
+
+app.listen(3001,()=>{
+	  console.log("running");
+	})
 	
 
 
 
-app.listen(process.env.PORT || 3001,()=>{
-  console.log('listening for requests on port'+ process.env.PORT);
-})
+// app.listen(process.env.PORT || 3001,()=>{
+//   console.log('listening for requests on port'+ process.env.PORT);
+// })
