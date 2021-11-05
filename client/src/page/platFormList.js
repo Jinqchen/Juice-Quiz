@@ -11,6 +11,7 @@ class PlatFormList extends React.Component {
 	
 
     store=(place)=>{
+		console.log(place);
 		localStorage.setItem('Pcover', place['Pcover']);
 		localStorage.setItem('Pname', place['Pname']);
 		localStorage.setItem('PID', place['PID']);
@@ -20,8 +21,9 @@ class PlatFormList extends React.Component {
 	render(){
 		
 		const menu = this.props.places.map((place) => {
+	       
 			return(
-			    <Link to={'/platform/'+place.Pname} onClick={this.store(place)}>
+			    <Link to={'/platform/'+place.Pname} onClick={()=>this.store(place)}>
                 <div className="list">  
                 
                 <Media left>

@@ -45,7 +45,7 @@ export default class Menu extends Component {
  
     async process(){
         const url = 'https://juice-quiz.herokuapp.com/api/Platform';
-       // const local= 'http://localhost:3001/api/Platform';
+        //const url= 'http://localhost:3001/api/Platform';
       const res = await Axios.get(url)
       .then(res=>{return res.data})
       .then( result =>{
