@@ -95,30 +95,27 @@ app.post('/api/register', (req, res) => {
 
   app.post('/api/login', (req, res) => {
 	const email = req.body.email;
-	const password = req.body.password;
-  
-	db.query(
+	const password = req.body.password;  
+	con.query(
 	  "select Upass From users where Uemail =?;",
 	  email,
 	  (err, result) => {
+		  console.log(result);
 		if (err) {
 		  res.send({ err: err });
 		}
-
 		if (result.length > 0) {
 		    
-			if (result === password) {
-			  req.session.user = result;
-			  console.log(req.session.user);
-			  res.send(result);
+			if (result[0]["Upass"] === password) {
+			  res.send({message:"Welcome!",success:true});
 			} 
 			else {
-			  res.send({ message: "Wrong username/password combination!" });
+			  res.send({ message: "Wrong username/password combination!",success:false});
 			}
 		 
 		} 
 		else {
-		  res.send({ message: "User doesn't exist" });
+		  res.send({ message: "User doesn't exist",success:false });
 		}
 	  }
 	);

@@ -33,10 +33,17 @@ export default class signIn extends Component {
         email: this.state.email,
         password: this.state.password,
       }).then((response) => {
-        console.log(response);
-        alert("email is "+this.state.email)
-        alert("password is "+this.state.password)
-        this.props.signIncallback()
+        console.log(response.data);
+        if (response.data['success']==true){
+          this.props.signIncallback();
+          this.props.Success();
+        }
+        else{
+          alert(response.data['message'])
+        }
+
+
+        
       });
     
     }
