@@ -2,6 +2,8 @@ import React from 'react';
 import { Component } from 'react';  
 import './singlePlatForm.css'
 import { Media } from 'reactstrap';
+import { useParams } from 'react-router';
+
 const places = 
 	[
 		{
@@ -42,6 +44,7 @@ const places =
 
 	
 	];
+
 export default class singlePlatForm extends Component {
 	constructor(props) {
 		super(props);
@@ -50,10 +53,13 @@ export default class singlePlatForm extends Component {
 			subscribed:false,
 			authority:false,
 			places: "",
-            renderList:{places}
+            renderList:{places},
+			Pname :localStorage.getItem('Pname'),
+			Pcover:localStorage.getItem('Pcover')
 		};
     
-        
+		
+		
 	}
 
 	sortByHot(){ 
@@ -75,14 +81,20 @@ export default class singlePlatForm extends Component {
 	}
 	apply(){
 		this.setState({apply:true})
-	}
+	};
     
+	get=()=>{
+		 const {name} = useParams();
+	}
+
  
  
 
-
+   
 
 	render() {     
+		
+	//const {name} = useParams();
 		 const menu = this.state.renderList.places.map((place) => {
 		return(
 		 
@@ -93,7 +105,7 @@ export default class singlePlatForm extends Component {
 			 </div >
 			 	<div className='content'> 
 				 <div className='discription'>{place.discrpiton}</div>
-			 	<Media object src={place.image} alt={place.id} className='userIcon'/> 
+			 	<Media object src={'../'+place.image} alt={place.id} className='userIcon'/> 
 				 </div>
 			</div>
 			
@@ -106,8 +118,8 @@ export default class singlePlatForm extends Component {
             </div>
 			<div className="platFormButton">
 				{/* 此处读取平台的图片！ */}
-                <img src='./icon.jpg' className='icon'></img> 
-            <h className='platFormName'>Platform Name</h>
+                <img src= {'../'+this.state.Pcover}  className='icon'></img> 
+            <h className='platFormName'>{this.state.Pname}</h>
 			{!this.state.subscribed&&<button className='platformaccount'  onClick={()=>this.subscribe()}>subscribe</button>||<button className='platformaccount' >subscribed √</button>}
 			{!this.state.apply&&<button className='platformaccount'  onClick={()=>this.apply()}>Apply to be co-owner</button>||<button className='platformaccount' >apply has been sent</button>}
           

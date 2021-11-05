@@ -1,5 +1,6 @@
 import React from 'react';
 import { Component } from 'react';  
+import { Link } from 'react-router-dom';
 
 import { Media } from 'reactstrap';
 import './showPlatformLIst.css'   
@@ -87,17 +88,20 @@ const places =
         
         const menu = this.state.renderList.places.map((place) => {
             return(
-			 
+			    
                 <div className="list">  
-                
+               
                 <Media left>
+				<Link to="../platform">
 			 	<Media object src={place.image} alt={place.id} className='object'/> 
-                 
+                </Link>
                 <h>{place.name}</h>
-				 		</Media>   
+				
+				</Media>
+				
                 <Media className='reputation' >{place.reputation}</Media>
                 </div>
-                
+               
 			);
 		});
        

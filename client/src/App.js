@@ -7,6 +7,7 @@ import ShowPlatformList from'./header/showPlatformLIst';
 import SinglePlatForm from './singlePlatform/singlePlatForm';
 import Answer from './Answering.js';
 import { BrowserRouter as Router, Route,Routes, Link } from 'react-router-dom';
+import showPlatformList from './header/showPlatformLIst';
 
 
 
@@ -29,8 +30,9 @@ export default class App extends Component {
 				  <Header/>
                   <Routes>
 				   	   <Route exact path='/' element={<Menu />} />
-				       <Route path='/platform' element={<SinglePlatForm/>} />	  
+				       <Route path='/platform/:id' element={<SinglePlatForm/>} />	  
 					   <Route path='/answer' element ={<Answer/>} />
+					   <Route path='/profile' element ={<ShowPlatformList/>}/>
 			      </Routes>
 
                 </Router>	
