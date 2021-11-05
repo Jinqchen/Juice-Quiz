@@ -1,7 +1,7 @@
 import React from 'react';
 import { Media } from 'reactstrap';
 import './platFormMedia.css'; 
-
+import { BrowserRouter as Router, Route,Routes, Link } from 'react-router-dom';
 class PlatFormList extends React.Component {
 	constructor(props){
 		super(props);
@@ -13,7 +13,7 @@ class PlatFormList extends React.Component {
 		
 		const menu = this.props.places.map((place) => {
 			return(
-			 
+			    <Link to='/platform'>
                 <div className="list">  
                 
                 <Media left>
@@ -22,7 +22,7 @@ class PlatFormList extends React.Component {
                  <div className="platFormName">{place.Pname}</div>
 				 		</Media>   
                 </div>
-                
+                </Link>
 			);
 		});
 		

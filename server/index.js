@@ -30,7 +30,6 @@ var con = mysql.createConnection({
 
 
 
-
 app.get('/api/get',(req,res)=>{
    
     console.log("Connected!");
