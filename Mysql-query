@@ -386,3 +386,7 @@ VALUE(7,2),
 (5,21),(5,22),
 (6,23),(6,24),
 (2,1),(2,6)
+
+SELECT q.QID,q.Qname,q.ave_rate,q.hot,q.description ,u.Uname AS Releaser
+FROM quiz q,contain c,releases r,users u
+WHERE q.QID=c.QID AND q.QID=r.QID and r.UID = U.UID and c.PID=5
