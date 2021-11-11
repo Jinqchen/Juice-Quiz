@@ -248,3 +248,120 @@ VERSION 4.0
 -- ORDER BY Rpoint DESC
 
 
+
+-- select p.PID,p.Pname, ps.Pcover
+-- from platform p, platformstyle ps
+-- where p.Pname LIKE '%pop%' and p.PID=ps.PID
+
+
+-- INSERT INTO contain (PID,QID)
+-- VALUE(14,1),
+-- (1,2),
+-- (8,3),
+-- (5,4),
+-- (5,5),
+-- (14,6),
+-- (5,7)
+
+
+-- SELECT q.QID,q.ave_rate,q.hot,q.description 
+-- FROM quiz q,contain c
+-- WHERE q.QID=c.QID and c.PID=5
+
+-- select q.QID,q.ave_rate,q.hot,q.description 
+-- from quiz q,contain c
+-- where q.QID=c.QID and c.PID=5 q.description  LIKE '%pop%' 
+
+-- alter table  quiz add Qname char(15) after QID
+
+-- UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `Qname` = 'Math quiz' WHERE (`QID` = '1');
+-- UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `Qname` = 'basic chemistry' WHERE (`QID` = '2');
+-- UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `Qname` = 'Ancient Egypt', `description` = 'This is a quiz about basic Ancient Egypt culture' WHERE (`QID` = '3');
+-- UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `Qname` = 'computer science' WHERE (`QID` = '4');
+-- UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `Qname` = 'Cse 416' WHERE (`QID` = '5');
+-- UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `Qname` = 'AMS basic' WHERE (`QID` = '6');
+-- UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `Qname` = 'script language' WHERE (`QID` = '7');
+
+-- SELECT q.QID,q.Qname,q.ave_rate,q.hot,q.description 
+-- FROM quiz q,contain c
+-- WHERE q.QID=c.QID and c.PID=5
+
+-- select q.QID,q.Qname,q.ave_rate,q.hot,q.description 
+-- from quiz q,contain c
+-- where q.QID=c.QID and c.PID=5 and q.Qname  LIKE '%lan%' 
+
+-- select U.UID,U.Uname,Rpoint
+-- from users U,platform P,reputation R
+-- where P.PID=1 AND P.PID= R.PID AND U.UID=R.UID
+-- ORDER BY Rpoint DESC
+-- INSERT INTO `heroku_a8e492587e5e18a`.`reputation` (`Rpoint`, `UID`, `PID`) VALUES ('11', '2', '14');
+-- INSERT INTO `heroku_a8e492587e5e18a`.`own` (`PID`, `UID`) VALUES ('14', '2');
+-- UPDATE `heroku_a8e492587e5e18a`.`coown` SET `UID` = '3' WHERE (`PID` = '1') and (`UID` = '7');
+-- INSERT INTO `heroku_a8e492587e5e18a`.`subscribe` (`PID`) VALUES ('14');
+
+
+-- CREATE TABLE releases (
+-- UID INT,
+-- QID INT,
+-- PRIMARY KEY (UID,QID),
+-- FOREIGN KEY (UID)REFERENCES users (UID)
+-- ON UPDATE CASCADE
+-- ON DELETE NO ACTION,
+-- FOREIGN KEY (QID)REFERENCES quiz (QID)
+-- ON UPDATE CASCADE
+-- ON DELETE NO ACTION
+-- )
+
+
+INSERT INTO quiz(QID,Qname,ave_rate,hot,description)
+value(8,'space ship',3,432,'how NASA build a space ship'),
+(9,'MLB little quiz',2,42,'basic knowledge of MLB'),
+(10,'DEMO QUIZ',4,25,'DEMO QUIZ FOR P3'),
+(11,'DOMO QUIZ ',1,232,'DEMO FOR P4'),
+(12,'DOMO QUIZ XX ',14,212,'DEMO FOR P6'),
+(13,'DOMO QUIZ XXX',2,122,'DEMO FOR P7'),
+(14,'DOMO QUIZ ',2,223,'DEMO FOR P8'),
+(15,'DOMO QUIZ ',3,242,'DEMO FOR P9'),
+(16,'DOMO QUIZ ',1,262,'DEMO FOR P9'),
+(17,'DOMO QUIZ ',2.1,522,'DEMO FOR P10'),
+(18,'DOMO QUIZ ',3.3,232,'DEMO FOR P10'),
+(19,'DOMO QUIZ ',2.3,212,'DEMO FOR P11'),
+(20,'DOMO QUIZ ',1.1,232,'DEMO FOR 11'),
+(21,'DOMO QUIZ ',1.5,222,'DEMO FOR P12'),
+(22,'DOMO QUIZ ',3.1,222,'DEMO FOR P12'),
+(23,'DOMO QUIZ ',1.2,252,'DEMO FOR P13'),
+(24,'DOMO QUIZ ',1.8,212,'DEMO FOR P13'),
+(25,'DOMO QUIZ ',1.2,242,'DEMO FOR P6'),
+(26,'DOMO QUIZ ',1.4,262,'DEMO FOR P7'),
+(27,'DOMO QUIZ ',4.1,212,'DEMO FOR P6'),
+(28,'DOMO QUIZ ',2.3,272,'DEMO FOR P7'),
+(29,'DOMO QUIZ ',4.5,242,'DEMO FOR P8'),
+(30,'DOMO QUIZ ',2,122,'DEMO FOR P2'),
+(31,'DOMO QUIZ ',3.4,222,'DEMO FOR P3'),
+(32,'DOMO QUIZ ',25,224,'DEMO FOR P4');
+
+INSERT INTO contain
+VALUE (1,8),
+(2,9),
+(3,10),
+(4,11),
+(6,12),(7,13),
+(8,14),
+(9,15),(9,16),
+(10,17),
+(10,18),
+(11,19),
+(11,20),
+(12,21),
+(12,22),
+(13,23),
+(13,24),
+(6,25),
+(7,26),
+(6,27),
+(7,28),
+(8,29),
+(2,30),
+(3,31),
+(4,32)
+
