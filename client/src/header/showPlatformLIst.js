@@ -11,35 +11,35 @@ const places =
 			name: 'Classic Music',
 			image: './classicMusic.jpg',
 			tag: 'music',
-            reputation:1000
+            reputation:1200
 		} ,
 		{
 			id: 1,
 			name: 'Pop Music',
 			image: './popMusic.jpg',
 			tag: 'music',
-            reputation:1000
+            reputation:200
 		}  ,
 		{
 			id: 2,
 			name: 'League of Legend',
 			image: './lol.jpg',
 			tag: 'game',
-            reputation:1000
+            reputation:5230
 		} ,
 		{
 			id: 3,
 			name: 'C++',
 			image: './c++.png',
 			tag: 'programing',
-            reputation:1000
+            reputation:7000
 		} ,
 		{
 			id: 4,
 			name: 'NBA',
 			image: './nba.png',
 			tag: 'sport',
-            reputation:1000
+            reputation:5000
 		} ,
 		{
 			id: 5,
@@ -78,6 +78,10 @@ const places =
             };   
       
           }
+
+	unsubscribe(){
+
+	}
            
      
    
@@ -89,30 +93,43 @@ const places =
         const menu = this.state.renderList.places.map((place) => {
             return(
 			    
-                <div className="list">  
-               
-                <Media left>
-				<Link to="../platform">
-			 	<Media object src={place.image} alt={place.id} className='object'/> 
-                </Link>
-                <h>{place.name}</h>
+                <div className="list">   
+			<div class="box">
+        <div class="box-bg">
+            <img src={place.image} alt="" />
+        </div>
+        <div class="box-text"> 
+            <h4>{place.name}</h4> 
+			
+		<button className="boxbtn" > unsubscribed</button>
+        </div>
+    </div>
+ 
+				 
 				
-				</Media>
-				
-                <Media className='reputation' >{place.reputation}</Media>
+                <div className='reputation' >reputation: {place.reputation}/10000
+			<progress className='repoBar'  max="10000" value={place.reputation}> 70% </progress>
+			 
+				</div>
                 </div>
                
 			);
 		});
        
         return (
-          
+			<>
+			
             <div className='board'>
-            
+
+            <div className="boardTitle">subscribed platform</div>
+			
             {menu}
+
 
                  
                   </div>
+
+				  </>
                   
         );
       
