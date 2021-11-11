@@ -1,3 +1,44 @@
+.rankRepo{
+    color: rgb(255, 0, 0);
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.reputationValue{
+    color:red;
+    position: absolute;
+    right:0;
+    height: 0
+}
+.rankList{
+    margin-top: 20px;
+    margin-bottom: 20px;   
+    height: 100px;
+}.rankBoard{
+    border-color: grey;
+    border-style: solid;
+    border-radius: 5px;
+    position: absolute;
+    display: block;
+    right:20px;
+    top:50%;
+    width: 200px; 
+    background-color:aliceblue; 
+}
+.rankName{
+    color:  #e49132; 
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.rankIcon{
+    width: 50px;
+    height: 40px;
+}
+.rankBoardTitle{
+    height: 40px;
+    background-color: grey;
+    text-align: center;
+    padding-top: 20px;
+}
 .header{
     background-color: aliceblue;
     

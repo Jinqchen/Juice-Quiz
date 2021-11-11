@@ -3,42 +3,26 @@ import { Component } from 'react';
 import './singlePlatForm.css'
 import { Media } from 'reactstrap';
 import Axios from "axios";
-// const places = 
-// 	[
-// 		{
-// 			id: 0,
-// 			name: '1',
-// 			image: './classicMusic.jpg',
-// 			owner: 'A',
-// 			discrpiton:'abababaaba',
-//             rate:1000,
-// 			hot:10
-// 		} ,
-// 		{
-// 			id: 1,
-// 			name: '122',
-// 			image: './classicMusic.jpg',
-// 			owner: 'A',
-// 			discrpiton:'abababaaba',
-//             rate:10,
-// 			hot:5
-// 		} ,{
-// 			id: 2,
-// 			name: '1',
-// 			image: './classicMusic.jpg',
-// 			owner: 'A',
-// 			discrpiton:'abababaaba',
-//             rate:1010,
-// 			hot:2
-// 		} ,{
-// 			id: 3,
-// 			name: '1',
-// 			image: './classicMusic.jpg',
-// 			owner: 'A',
-// 			discrpiton:'abababaaba',
-//             rate:10100,
-// 			hot:1
-// 		} ,	];
+const places = 
+	[
+		{
+			id: 0,
+			name: 'user1',
+			image: './account.jpg', 
+			reputation:2
+			 
+		} ,
+		{
+			id: 0,
+			name: 'user3',
+			image: './popMusic.jpg',
+			reputation:2
+		} ,{
+			id: 0,
+			name: 'user2',
+			image: './classicMusic.jpg',
+			reputation:2
+		}  	];
 
 const PID = localStorage.getItem('PID')
 // const url = 'https://juice-quiz.herokuapp.com/api/platform/quizlist';
@@ -63,7 +47,8 @@ export default class singlePlatForm extends Component {
 			Pcover:localStorage.getItem('Pcover'),
 			PID: localStorage.getItem('PID'),
 			rander:false,
-			searchContent:""
+			searchContent:"",
+			rankList:{places}
 		};
         
 	}
@@ -188,9 +173,34 @@ export default class singlePlatForm extends Component {
 			
 	// 	);
 	// });}
+
+	const menu = this.state.rankList.places.map((place) => {
+		return(
+			
+						<div className="rankList">   
+					
+				<div> 
+				<img src={place.image} className="rankIcon" />
+			 
+					<h4 class="rankName">{place.name}</h4> 
+					<h4 class="rankRepo">reputation:{place.reputation}{}</h4> 
+					
+					<div class="reputationValue"> 
+					 
+			</div>
+			</div>
+ 
+			</div>
+		   
+		);
+	});
 		
 		return (
             <div> 
+				<div className="rankBoard"> 
+				<div className="rankBoardTitle"> reputation rank  </div>
+				<div>{menu}</div>
+				</div> 
             <div className="header">
                 
             </div>

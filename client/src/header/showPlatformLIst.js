@@ -96,7 +96,7 @@ const places =
                 <div className="list">   
 			<div class="box">
         <div class="box-bg">
-            <img src={place.image} alt="" />
+            <img src={place.image} />
         </div>
         <div class="box-text"> 
             <h4>{place.name}</h4> 
