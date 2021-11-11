@@ -62,7 +62,8 @@ export default class singlePlatForm extends Component {
 			Pname :localStorage.getItem('Pname'),
 			Pcover:localStorage.getItem('Pcover'),
 			PID: localStorage.getItem('PID'),
-			rander:false
+			rander:false,
+			searchContent:""
 		};
         
 	}
@@ -157,6 +158,14 @@ export default class singlePlatForm extends Component {
        });
     }
 
+	handleChangeSearch(e) {  
+		this.setState({searchContent: e.target.value});   
+	} 
+
+	search(){
+		alert(this.state.searchContent)
+		}
+
    
 
 	render() {     
@@ -185,6 +194,12 @@ export default class singlePlatForm extends Component {
             <div className="header">
                 
             </div>
+
+			<div className="search"> 
+			<input className='searchContent' required onChange={this.handleChangeSearch.bind(this)}></input>
+			<button className='searchButton'onClick={()=>this.search()}>Search </button>
+			</div>
+
 			<div className="platFormButton">
 				{/* 此处读取平台的图片！ */}
                 <img src= {'../'+this.state.Pcover}  className='icon'></img> 
