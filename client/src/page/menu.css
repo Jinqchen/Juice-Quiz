@@ -1,0 +1,26 @@
+.menu{ 
+   display: block;
+   position: absolute;
+   top:0%;
+   left: 0%;
+   height: 100%;
+   width: 100%;
+   background-color: #EEEEEE; 
+   text-align: center;
+}
+.item{
+    position: relative;
+    display: block;
+    background-color: #EEEEEE; 
+    width:100%; 
+    float:left;
+}
+.tagFilter{
+    width: 100%;
+    background-color: #918f8f; 
+    padding-top: 250px;
+     
+}
+.search{
+    color: black;
+}

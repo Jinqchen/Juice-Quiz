@@ -1,0 +1,23 @@
+.object{
+    position: relative;
+   
+    width: 100px;
+    height: 50px;
+}
+.list{ 
+    padding-bottom: 100px;
+    position: relative;
+    display: flex; 
+    padding: 20px;
+}
+.board{
+    display: block;
+    position: relative; 
+    padding-top: 100px; 
+    background-color: red; 
+    width: 50%;
+    margin:0 auto
+}
+.reputation{
+    padding-left: 700px;
+}
