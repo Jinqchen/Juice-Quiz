@@ -17,17 +17,17 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(cors());
 
-app.use(
-	session({
-	  key: "userId",
-	  secret: "subscribe",
-	  resave: false,
-	  saveUninitialized: false,
-	  cookie: {
-		expires: 60 * 60 * 24,
-	  },
-	})
-  );
+// app.use(
+// 	session({
+// 	  key: "userId",
+// 	  secret: "subscribe",
+// 	  resave: false,
+// 	  saveUninitialized: false,
+// 	  cookie: {
+// 		expires: 60 * 60 * 24,
+// 	  },
+// 	})
+//   );
   
 
 
