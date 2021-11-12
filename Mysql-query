@@ -390,3 +390,60 @@ VALUE(7,2),
 SELECT q.QID,q.Qname,q.ave_rate,q.hot,q.description ,u.Uname AS Releaser
 FROM quiz q,contain c,releases r,users u
 WHERE q.QID=c.QID AND q.QID=r.QID and r.UID = U.UID and c.PID=5
+
+-- insert into subscribe (PID,UID)
+-- value(?,?);
+-- insert into coown (PID,UID)
+-- value(?,?);
+
+-- SELECT EXISTS(
+--          SELECT *
+--          FROM subscribe
+--          WHERE UID=1 and PID=1)
+
+-- insert into userstyle
+
+-- value(0, './user_image/1.png' ),
+-- (2, './user_image/1.png' ),
+-- (3, './user_image/1.png' ),
+-- (4, './user_image/1.png' ),
+-- (5, './user_image/1.png' ),
+-- (6, './user_image/1.png' ),
+-- (7, './user_image/1.png' ),
+-- (8, './user_image/1.png' ),
+-- (9, './user_image/1.png' ),
+-- (10, './user_image/1.png' ),
+-- (11, './user_image/1.png' ),
+-- (12, './user_image/1.png' ),
+-- (13, './user_image/1.png' ),
+-- (14, './user_image/1.png' ),
+-- (15, './user_image/1.png' ),
+-- (16, './user_image/1.png' ),
+-- (17, './user_image/1.png' ),
+-- (18, './user_image/1.png' ),
+-- (19, './user_image/1.png' ),
+-- (20, './user_image/1.png' ),
+-- (21, './user_image/1.png' ),
+-- (22, './user_image/1.png' ),
+-- (23, './user_image/1.png' )
+-- SELECT q.QID,q.Qname,q.ave_rate,q.hot,q.description ,u.Uname AS Releaser, pic 
+-- FROM quiz q,contain c,releases r,users u, userstyle us
+-- WHERE q.QID=c.QID AND q.QID=r.QID and r.UID = U.UID and r.UID=us.UID and c.PID=5
+
+-- alter table platform add replimit int
+-- UPDATE `heroku_a8e492587e5e18a`.`platform` SET `replimit` = '15' WHERE (`PID` = '1');
+-- UPDATE `heroku_a8e492587e5e18a`.`platform` SET `replimit` = '15' WHERE (`PID` = '2');
+-- UPDATE `heroku_a8e492587e5e18a`.`platform` SET `replimit` = '15' WHERE (`PID` = '3');
+-- UPDATE `heroku_a8e492587e5e18a`.`platform` SET `replimit` = '15' WHERE (`PID` = '4');
+-- UPDATE `heroku_a8e492587e5e18a`.`platform` SET `replimit` = '15' WHERE (`PID` = '5');
+-- UPDATE `heroku_a8e492587e5e18a`.`platform` SET `replimit` = '15' WHERE (`PID` = '6');
+-- UPDATE `heroku_a8e492587e5e18a`.`platform` SET `replimit` = '15' WHERE (`PID` = '7');
+-- UPDATE `heroku_a8e492587e5e18a`.`platform` SET `replimit` = '15' WHERE (`PID` = '8');
+-- UPDATE `heroku_a8e492587e5e18a`.`platform` SET `replimit` = '15' WHERE (`PID` = '9');
+-- UPDATE `heroku_a8e492587e5e18a`.`platform` SET `replimit` = '15' WHERE (`PID` = '10');
+-- UPDATE `heroku_a8e492587e5e18a`.`platform` SET `replimit` = '15' WHERE (`PID` = '11');
+-- UPDATE `heroku_a8e492587e5e18a`.`platform` SET `replimit` = '15' WHERE (`PID` = '12');
+-- UPDATE `heroku_a8e492587e5e18a`.`platform` SET `replimit` = '15' WHERE (`PID` = '13');
+-- UPDATE `heroku_a8e492587e5e18a`.`platform` SET `replimit` = '15' WHERE (`PID` = '14');
+
+
