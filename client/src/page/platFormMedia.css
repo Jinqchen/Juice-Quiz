@@ -17,13 +17,14 @@
 	display: flex;
 	justify-content:start;
 	flex-flow: wrap;
+	
 
 
 }
 .list{
-	width: 200px;
+	 width: 300px;
 	 height: 200px;
-	 margin: 100px;
+	 margin: 50px;
 
 	
  }

@@ -3,50 +3,28 @@ import { Component } from 'react';
 import './singlePlatForm.css'
 import { Media } from 'reactstrap';
 import Axios from "axios";
+
 // const places = 
 // 	[
 // 		{
 // 			id: 0,
-// 			name: '1',
-// 			image: './classicMusic.jpg',
-// 			owner: 'A',
-// 			discrpiton:'abababaaba',
-//             rate:1000,
-// 			hot:10
+// 			name: 'user1',
+// 			image: './account.jpg', 
+// 			reputation:2
+			 
 // 		} ,
 // 		{
-// 			id: 1,
-// 			name: '122',
-// 			image: './classicMusic.jpg',
-// 			owner: 'A',
-// 			discrpiton:'abababaaba',
-//             rate:10,
-// 			hot:5
+// 			id: 0,
+// 			name: 'user3',
+// 			image: './popMusic.jpg',
+// 			reputation:2
 // 		} ,{
-// 			id: 2,
-// 			name: '1',
+// 			id: 0,
+// 			name: 'user2',
 // 			image: './classicMusic.jpg',
-// 			owner: 'A',
-// 			discrpiton:'abababaaba',
-//             rate:1010,
-// 			hot:2
-// 		} ,{
-// 			id: 3,
-// 			name: '1',
-// 			image: './classicMusic.jpg',
-// 			owner: 'A',
-// 			discrpiton:'abababaaba',
-//             rate:10100,
-// 			hot:1
-// 		} ,	];
+// 			reputation:2
+// 		}  	];
 
-const PID = localStorage.getItem('PID')
-// const url = 'https://juice-quiz.herokuapp.com/api/platform/quizlist';
-// const url= `http://localhost:3001/api/platform/quizlist/${PID}`;
-// const res = await Axios.get(url)
-//       .then(res=>{return res.data})
-// console.log(res)
-var isrander=false;
 export default class singlePlatForm extends Component {
 	_isMounted = false;
 	constructor(props) {
@@ -55,6 +33,7 @@ export default class singlePlatForm extends Component {
 			//决定是否显示subscribe按钮和订阅按钮
 			subscribed:false,
 			authority:false,
+			logged:localStorage.getItem("Logged"),
 			places: '',
             renderList:[{}],
 			hotac:true,
@@ -62,7 +41,10 @@ export default class singlePlatForm extends Component {
 			Pname :localStorage.getItem('Pname'),
 			Pcover:localStorage.getItem('Pcover'),
 			PID: localStorage.getItem('PID'),
-			rander:false
+			rander:false,
+			searchContent:"",
+			rankList:[{}],
+			rank:''
 		};
         
 	}
@@ -71,7 +53,11 @@ export default class singlePlatForm extends Component {
 	
  componentDidMount=()=>{
 	this.get() ;
-	this.setState({rander:true})
+	this.get_ranklist();
+	this.setState({rander:true});
+	this.is_sub();
+	
+
 }
 
 
@@ -96,7 +82,6 @@ export default class singlePlatForm extends Component {
 		this.setState({renderList: places })
 	}
 	
-
 	sortByRate(){
 		var places = this.state.places
 		if(this.state.rateac){
@@ -121,8 +106,33 @@ export default class singlePlatForm extends Component {
 	//申请和订阅在这里
 	subscribe(){
 
-	   
-		this.setState({subscribed:true})
+	   const url = 'https://juice-quiz.herokuapp.com/api/platform/dosubscribe';
+	   //const url= 'http://localhost:3001/api/platform/dosubscribe';
+	     
+		  Axios.post(url, { 
+			PID : this.state.PID,
+			UID: localStorage.getItem("UID"),
+		  }).then((response) => { 
+		  console.log(response); 
+		  this.setState({subscribed:true})
+		  }); 
+	 
+	this.inital_reputation()	
+
+	}
+
+	inital_reputation(){
+	   const url = 'https://juice-quiz.herokuapp.com/api/platform/initalR';
+	   //const url= 'http://localhost:3001/api/platform/initalR';
+	     
+		  Axios.post(url, { 
+			PID : this.state.PID,
+			UID: localStorage.getItem("UID"),
+		  }).then((response) => { 
+		  console.log(response); 
+		  this.setState({subscribed:true})
+		  }); 
+
 
 	}
 
@@ -145,8 +155,8 @@ export default class singlePlatForm extends Component {
 	
 	async get(){
 		this._isMounted = true;
-       // const url = 'https://juice-quiz.herokuapp.com/api/platform/quizlist';
-		 const url= `http://localhost:3001/api/platform/quizlist/${this.state.PID}`;
+       const url = `https://juice-quiz.herokuapp.com/api/platform/quizlist/${this.state.PID}`;
+		 //const url= `http://localhost:3001/api/platform/quizlist/${this.state.PID}`;
       const res = await Axios.get(url)
       .then(res=>{return res.data})
       .then( result =>{
@@ -156,35 +166,105 @@ export default class singlePlatForm extends Component {
           this.setState({renderList:this.state.places});}          
        });
     }
+    
 
+    async get_ranklist(){
+		const url = `https://juice-quiz.herokuapp.com/api/platform/ranklist/${this.state.PID}`;
+		//const url= `http://localhost:3001/api/platform/ranklist/${this.state.PID}`;
+		const res = await Axios.get(url)
+		.then(res=>{return res.data})
+		.then( result =>{
+			if(this._isMounted){
+			console.log(result);
+			this.setState({rank:result},()=>{console.log(this.state.rank);});
+			this.setState({rankList:this.state.rank});}          
+		 });
+	}
+
+
+
+	 is_sub(){
+		 console.log("start")
+          const url = 'https://juice-quiz.herokuapp.com/api/platform/subscribe';
+		 //const url= `http://localhost:3001/api/platform/subscribe`;
+         Axios.post(url, {
+			PID : this.state.PID,
+			UID: localStorage.getItem("UID"),
+		  }).then((response) => {
+			console.log(response.data);
+			console.log("end")
+			this.setState({subscribed: response.data["subscribe"]})
+		  });
+	}
    
 
-	render() {     
-		
-		
-	// 	if(this.state.rander){const menu = this.state.renderList.map((place) => {
-	// 	console.log(this.state.places)	
-	// 	return(
-		 
-	// 		<div className="item">  
-	// 		 <div className='title'>
-	// 			 {place.name} 
-	// 			 <div className='rate'>⭐: {place.rate} 🔥：{place.hot}</div> 
-	// 		 </div >
-	// 		 	<div className='content'> 
-	// 			 <div className='discription'>{place.discrpiton}</div>
-	// 		 	<Media object src={'../'+place.image} alt={place.id} className='userIcon'/> 
-	// 			 </div>
-	// 		</div>
+	handleChangeSearch(e) {  
+		this.setState({searchContent: e.target.value});   
+	} 
+
+	async search(){
+		if (this.state.searchContent===""){
+			this.get();
+		}else{
+			const url= `https://juice-quiz.herokuapp.com/api/quiz/${this.state.searchContent}`;
+		//const url= `http://localhost:3001/api/quiz/${this.state.searchContent}`;
+		  const res = await Axios.get(url,{
+			params: {
+			  PID: this.state.PID			  
+			}
+		  })
+		  .then(res=>{return res.data})
+		  .then( result =>{
 			
-	// 	);
-	// });}
+			  console.log(result);
+			  this.setState({places:result},()=>{console.log(this.state.places);});
+			  this.setState({renderList:this.state.places});        
+		   });
 		
+		}
+		
+		}
+
+
+
+
+
+	render() {     
+		const menu = this.state.rankList.map((place) => {
+			return(
+				
+							<div className="rankList">   
+						
+					<div> 
+					<img src={'../'+place.pic} className="rankIcon" />
+				 
+						<h4 class="rankName">{place.Uname}</h4> 
+						<h4 class="rankRepo">reputation:{place.Rpoint}{}</h4> 
+						
+						<div class="reputationValue"> 
+						 
+				</div>
+				</div>
+	 
+				</div>
+			   
+			);
+		});
+		console.log(this.state.subscribed);
 		return (
-            <div> 
-            <div className="header">
-                
-            </div>
+           <div>
+				 
+				<div className="rankBoard"> 
+				<div className="rankBoardTitle"> reputation rank  </div>
+				<div>{menu}</div>
+				</div> 
+            <div className="header"> 
+			</div> 
+			<div className="search"> 
+			<input className='searchContent' required onChange={this.handleChangeSearch.bind(this)}></input>
+			<button className='searchButton'onClick={()=>this.search()}>Search </button>
+			</div>   
+            
 			<div className="platFormButton">
 				{/* 此处读取平台的图片！ */}
                 <img src= {'../'+this.state.Pcover}  className='icon'></img> 
@@ -204,7 +284,7 @@ export default class singlePlatForm extends Component {
 			<div className='platFormlist'> 
 			<div>
 			{this.state.rander&&this.state.renderList.map((place) => {
-		console.log(this.state.places)	
+		//console.log(this.state.places)	
 		return(
 		 
 			<div className="item">  

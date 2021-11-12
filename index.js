@@ -39,6 +39,7 @@ var con = mysql.createPool({
 	port:3306,
 });
 
+//Answering
 app.get('/api/get',(req,res)=>{
    
     console.log("Connected!");
@@ -71,7 +72,7 @@ app.get('/api/get',(req,res)=>{
 	  res.send(file);
 	}
   );
- 
+ //Get platform list
 app.get ('/api/Platform',(req,res)=>{
     console.log("Connected!");
     con.query(
@@ -80,11 +81,11 @@ app.get ('/api/Platform',(req,res)=>{
 		if (err1) throw err1;
 	    res.send(result);}
   );})
-
+// Get quizlist
   app.get ('/api/platform/quizlist/:id',(req,res)=>{
     console.log("quiz Connected!");
 	const PID = req.params.id;
-	console.log(PID);
+	
     con.query(
 		`SELECT q.QID,q.Qname,q.ave_rate,q.hot,q.description ,u.Uname AS Releaser, pic 
 		FROM quiz q,contain c,releases r,users u, userstyle us
@@ -95,6 +96,36 @@ app.get ('/api/Platform',(req,res)=>{
 	    res.send(result);}
   );})
 
+  app.get ('/api/user/subscribed/:id',(req,res)=>{
+    console.log("uer Connected!");
+	const UID = req.params.id;
+	
+    con.query(
+		`select s.PID,r.Rpoint,ps.Pcover,p.Pname
+		from subscribe s, reputation r,platform p,platformstyle ps
+		where  r.UID=s.UID AND s.UID=`+UID+ ` and p.PID= s.PID AND p.PID= r.PID AND ps.PID=p.PID 
+		ORDER BY r.Rpoint desc`, 
+		function (err1, result) {
+		if (err1) throw err1;
+		console.log(result);
+	    res.send(result);}
+  );})
+//Get ranklist
+  app.get ('/api/platform/ranklist/:id',(req,res)=>{
+    console.log("rank Connected!");
+	const PID = req.params.id;
+    con.query(
+		`select U.UID,U.Uname,Rpoint,pic
+		from users U,platform P,reputation R,userstyle us
+		where P.PID=`+PID+` AND P.PID= R.PID AND U.UID=R.UID and U.UID=us.UID
+		ORDER BY Rpoint DESC`, 
+		function (err1, result) {
+		if (err1) throw err1;
+		console.log(result);
+	    res.send(result);}
+  );})
+
+//Search
   app.get ('/api/platform/:name',(req,res)=>{
     console.log("platform Connected!");
 	const name = req.params.name;
@@ -105,22 +136,29 @@ app.get ('/api/Platform',(req,res)=>{
 		where p.Pname LIKE '%`+name+`%' and p.PID=ps.PID`, 
 		function (err1, result) {
 		if (err1) throw err1;
-		console.log(result);
+		
+	    res.send(result);}
+  );})
+
+  app.get ('/api/quiz/:name',(req,res)=>{
+    console.log("platform Connected!");
+	const name = req.params.name;
+	const PID = req.query.PID;
+	console.log(PID);
+    con.query(
+		`select q.QID,q.Qname,q.ave_rate,q.hot,q.description 
+		from quiz q,contain c
+		where q.QID=c.QID and c.PID=`+PID+` and q.Qname  LIKE '%`+name+`%'`, 
+		function (err1, result) {
+		if (err1) throw err1;
+		
 	    res.send(result);}
   );})
 
 
-//   app.get ('/api/Pquiz',(req,res)=>{
-//     console.log("Connected!");
-//     con.query(
-// 		"select QID,description,hot,ave_rate from quiz order by hot desc", 
-// 		function (err1, result) {
-// 		if (err1) throw err1;
-// 	    res.send(result);}
-//   );})
 
 
-
+//Logging System
 app.post('/api/register', (req, res) => {
 	const username = req.body.username;
 	const password = req.body.password;
@@ -145,7 +183,7 @@ app.post('/api/login', (req, res) => {
 	const email = req.body.email;
 	const password = req.body.password;  
 	con.query(
-	  `select Upass From users where Uemail =?;`,
+	  `select Upass,UID From users where Uemail =?;`,
 	  email,
 	  (err, result) => {
 		  console.log(result);
@@ -157,7 +195,7 @@ app.post('/api/login', (req, res) => {
 				// req.session.user = result;
                 // console.log(req.session.user);
                 
-			    res.send({message:"Welcome!",success:true});
+			    res.send({message:"Welcome!",success:true,UID:result[0]["UID"]});
 			} 
 			else {
 			  res.send({ message: "Wrong username/password combination!",success:false});
@@ -169,6 +207,72 @@ app.post('/api/login', (req, res) => {
 	  }
 	);
   });
+
+
+//Platform subscribe
+app.post('/api/platform/subscribe', (req, res) => {
+	const PID = req.body.PID;
+	const UID = req.body.UID;  
+	console.log(PID);
+	console.log("sub");
+	con.query(
+	  `SELECT EXISTS(
+		SELECT *
+		FROM subscribe
+		WHERE UID=? and PID=?)`,
+	  [UID,PID],
+	  (err, result) => {
+		  var sub =result[0]["EXISTS(\n\t\tSELECT *\n\t\tFROM subscribe\n\t\tWHERE UID='"+UID+"' and PID='"+PID+"')"];
+		  console.log(sub);
+		if (err) {
+		  res.send({ err: err });
+		}
+	    if (sub==1){
+			res.send({subscribe:true});
+		}else{
+			res.send({subscribe:false});
+		}
+	  }
+	);
+  });
+
+  app.post('/api/platform/dosubscribe', (req, res) => {
+	const PID = req.body.PID;
+	const UID = req.body.UID;  
+	console.log(PID);
+	console.log("subed");
+	con.query(
+	  `insert into subscribe (PID,UID)
+	  value(?,?);`,
+	  [PID,UID],
+	  (err, result) => {
+		  console.log(result);
+		if (err) {
+		  res.send({ err: err });
+		}
+	  }
+	);
+  });
+
+  app.post('/api/platform/initalR', (req, res) => {
+	const PID = req.body.PID;
+	const UID = req.body.UID;  
+	console.log(PID);
+	console.log("subed");
+	con.query(
+	  `insert into reputation (Rpoint,PID,UID)
+	  value(0,?,?);`,
+	  [PID,UID],
+	  (err, result) => {
+		  console.log(result);
+		if (err) {
+		  res.send({ err: err });
+		}
+	  }
+	);
+  });
+
+
 
 app.listen(3001,()=>{
 	  console.log("running");

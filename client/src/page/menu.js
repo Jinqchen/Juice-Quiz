@@ -43,8 +43,8 @@ export default class Menu extends Component {
 	} 
  
     async process(){
-        // const url = 'https://juice-quiz.herokuapp.com/api/Platform';
-        const url= 'http://localhost:3001/api/Platform';
+         const url = 'https://juice-quiz.herokuapp.com/api/Platform';
+        //const url= 'http://localhost:3001/api/Platform';
       const res = await Axios.get(url)
       .then(res=>{return res.data})
       .then( result =>{
@@ -59,7 +59,8 @@ export default class Menu extends Component {
     //在这里进行qurey
     async search(){
     alert(this.state.searchContent)
-    const url= `http://localhost:3001/api/platform/${this.state.searchContent}`;
+    const url=`https://juice-quiz.herokuapp.com/api/platform/${this.state.searchContent}`;
+   // const url= `http://localhost:3001/api/platform/${this.state.searchContent}`;
       const res = await Axios.get(url)
       .then(res=>{return res.data})
       .then( result =>{

@@ -65,7 +65,8 @@ export default class header extends Component {
     }
 
     signOut=()=>{ 
-      this.setState({login:false})
+      this.setState({login:false});
+      localStorage.setItem("Logged",false);
     }
 
 
