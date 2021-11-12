@@ -3,7 +3,6 @@ import { Component } from 'react';
 import './singlePlatForm.css'
 import { Media } from 'reactstrap';
 import Axios from "axios";
-<<<<<<< HEAD
 
 // const places = 
 // 	[
@@ -26,36 +25,6 @@ import Axios from "axios";
 // 			reputation:2
 // 		}  	];
 
-=======
-const places = 
-	[
-		{
-			id: 0,
-			name: 'user1',
-			image: './account.jpg', 
-			reputation:2
-			 
-		} ,
-		{
-			id: 0,
-			name: 'user3',
-			image: './popMusic.jpg',
-			reputation:2
-		} ,{
-			id: 0,
-			name: 'user2',
-			image: './classicMusic.jpg',
-			reputation:2
-		}  	];
-
-const PID = localStorage.getItem('PID')
-// const url = 'https://juice-quiz.herokuapp.com/api/platform/quizlist';
-// const url= `http://localhost:3001/api/platform/quizlist/${PID}`;
-// const res = await Axios.get(url)
-//       .then(res=>{return res.data})
-// console.log(res)
-var isrander=false;
->>>>>>> f5af9878e263f22bf6e36d3300fc5f62cce26920
 export default class singlePlatForm extends Component {
 	_isMounted = false;
 	constructor(props) {
@@ -74,12 +43,8 @@ export default class singlePlatForm extends Component {
 			PID: localStorage.getItem('PID'),
 			rander:false,
 			searchContent:"",
-<<<<<<< HEAD
 			rankList:[{}],
 			rank:''
-=======
-			rankList:{places}
->>>>>>> f5af9878e263f22bf6e36d3300fc5f62cce26920
 		};
         
 	}
@@ -216,7 +181,6 @@ export default class singlePlatForm extends Component {
 		 });
 	}
 
-<<<<<<< HEAD
 
 
 	 is_sub(){
@@ -232,16 +196,6 @@ export default class singlePlatForm extends Component {
 			this.setState({subscribed: response.data["subscribe"]})
 		  });
 	}
-=======
-	handleChangeSearch(e) {  
-		this.setState({searchContent: e.target.value});   
-	} 
-
-	search(){
-		alert(this.state.searchContent)
-		}
-
->>>>>>> f5af9878e263f22bf6e36d3300fc5f62cce26920
    
 
 	handleChangeSearch(e) {  
@@ -262,38 +216,12 @@ export default class singlePlatForm extends Component {
 		  .then(res=>{return res.data})
 		  .then( result =>{
 			
-<<<<<<< HEAD
 			  console.log(result);
 			  this.setState({places:result},()=>{console.log(this.state.places);});
 			  this.setState({renderList:this.state.places});        
 		   });
 		
 		}
-=======
-	// 	);
-	// });}
-
-	const menu = this.state.rankList.places.map((place) => {
-		return(
-			
-						<div className="rankList">   
-					
-				<div> 
-				<img src={place.image} className="rankIcon" />
-			 
-					<h4 class="rankName">{place.name}</h4> 
-					<h4 class="rankRepo">reputation:{place.reputation}{}</h4> 
-					
-					<div class="reputationValue"> 
-					 
-			</div>
-			</div>
- 
-			</div>
-		   
-		);
-	});
->>>>>>> f5af9878e263f22bf6e36d3300fc5f62cce26920
 		
 		}
 
@@ -324,17 +252,12 @@ export default class singlePlatForm extends Component {
 		});
 		console.log(this.state.subscribed);
 		return (
-<<<<<<< HEAD
            <div>
 				 
-=======
-            <div> 
->>>>>>> f5af9878e263f22bf6e36d3300fc5f62cce26920
 				<div className="rankBoard"> 
 				<div className="rankBoardTitle"> reputation rank  </div>
 				<div>{menu}</div>
 				</div> 
-<<<<<<< HEAD
             <div className="header"> 
 			</div> 
 			<div className="search"> 
@@ -342,17 +265,6 @@ export default class singlePlatForm extends Component {
 			<button className='searchButton'onClick={()=>this.search()}>Search </button>
 			</div>   
             
-=======
-            <div className="header">
-                
-            </div>
-
-			<div className="search"> 
-			<input className='searchContent' required onChange={this.handleChangeSearch.bind(this)}></input>
-			<button className='searchButton'onClick={()=>this.search()}>Search </button>
-			</div>
-
->>>>>>> f5af9878e263f22bf6e36d3300fc5f62cce26920
 			<div className="platFormButton">
 				{/* 此处读取平台的图片！ */}
                 <img src= {'../'+this.state.Pcover}  className='icon'></img> 

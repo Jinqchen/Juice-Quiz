@@ -6,7 +6,6 @@
     height: 100%;
     width: 100%;
     background-color: #EEEEEE; 
-<<<<<<< HEAD
     text-align: center;
  }
  .item{
@@ -49,41 +48,3 @@
      width: 100px;
      border-radius: 5px;
  }
-=======
-    width:100%; 
-    float:left;
-}
-.tagFilter{
-    width: 100%; 
-    background-color: #918f8f;  
-     
-}
-.search{
-    margin-top: 30px;
-    color: black;
-    display: flex;
-    position: relative;
-    left: 25%;
-
-}
-.searchContent{
-    margin: 0px;
-    width: 800px;
-}
-.searchButton{
-    color: #F78223;
-    background-color: #EEEEEE;
-    float: right;
-    
-    text-align: center;
-    text-decoration: #ffffff;  
-    
-    color: #ffffff;
-    background-color:#F78223;
-    align-items: center;
-    border: none;
-    cursor: pointer;
-    width: 100px;
-    border-radius: 5px;
-}
->>>>>>> f5af9878e263f22bf6e36d3300fc5f62cce26920
