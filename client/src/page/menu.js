@@ -19,10 +19,10 @@ export default class Menu extends Component {
 	}
     
     
-    componentDidMount=()=>{
-        this.process();
+    // componentDidMount=()=>{
+    //     this.process();
        
-    };
+    // };
 
 
 
@@ -43,7 +43,7 @@ export default class Menu extends Component {
 	} 
  
     async process(){
-        //const url = 'https://juice-quiz.herokuapp.com/api/Platform';
+        // const url = 'https://juice-quiz.herokuapp.com/api/Platform';
         const url= 'http://localhost:3001/api/Platform';
       const res = await Axios.get(url)
       .then(res=>{return res.data})
@@ -57,8 +57,19 @@ export default class Menu extends Component {
     }
 
     //在这里进行qurey
-    search(){
+    async search(){
     alert(this.state.searchContent)
+    const url= `http://localhost:3001/api/platform/${this.state.searchContent}`;
+      const res = await Axios.get(url)
+      .then(res=>{return res.data})
+      .then( result =>{
+		
+		  //console.log(result);
+          this.setState({places:result},()=>{console.log(this.state.places);});
+          this.setState({renderList:this.state.places});        
+       });
+
+    
     }
  
 	render() {    
@@ -83,8 +94,6 @@ export default class Menu extends Component {
 			<input className='searchContent' required onChange={this.handleChangeSearch.bind(this)}></input>
 			<button className='searchButton'onClick={()=>this.search()}>Search </button>
 			</div>
-
-
 
 			<div className="item">
             <PlatFormList places={this.state.renderList} /> 

@@ -84,10 +84,10 @@ import Axios from "axios";
                     </input>
                   </div>
                   <div className="userInput">     
-                    <input type="text" placeholder="Enter password" name="password" required onChange={this.handleChangePassWord.bind(this)}></input>
+                    <input  type="password" placeholder="Enter password" name="password" required onChange={this.handleChangePassWord.bind(this)}></input>
                   </div>
                   <div className="userInput">     
-                    <input type="text" placeholder="Confirm your password" name="confirmPassword" required onChange={this.handleChangeConfirmPassword.bind(this)}></input>
+                    <input type="password" placeholder="Confirm your password" name="confirmPassword" required onChange={this.handleChangeConfirmPassword.bind(this)}></input>
                   </div>
                  
                   </div>

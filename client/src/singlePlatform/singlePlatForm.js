@@ -2,115 +2,184 @@ import React from 'react';
 import { Component } from 'react';  
 import './singlePlatForm.css'
 import { Media } from 'reactstrap';
-import { useParams } from 'react-router';
+import Axios from "axios";
+// const places = 
+// 	[
+// 		{
+// 			id: 0,
+// 			name: '1',
+// 			image: './classicMusic.jpg',
+// 			owner: 'A',
+// 			discrpiton:'abababaaba',
+//             rate:1000,
+// 			hot:10
+// 		} ,
+// 		{
+// 			id: 1,
+// 			name: '122',
+// 			image: './classicMusic.jpg',
+// 			owner: 'A',
+// 			discrpiton:'abababaaba',
+//             rate:10,
+// 			hot:5
+// 		} ,{
+// 			id: 2,
+// 			name: '1',
+// 			image: './classicMusic.jpg',
+// 			owner: 'A',
+// 			discrpiton:'abababaaba',
+//             rate:1010,
+// 			hot:2
+// 		} ,{
+// 			id: 3,
+// 			name: '1',
+// 			image: './classicMusic.jpg',
+// 			owner: 'A',
+// 			discrpiton:'abababaaba',
+//             rate:10100,
+// 			hot:1
+// 		} ,	];
 
-const places = 
-	[
-		{
-			id: 0,
-			name: '1',
-			image: './classicMusic.jpg',
-			owner: 'A',
-			discrpiton:'abababaaba',
-            rate:1000,
-			hot:10
-		} ,
-		{
-			id: 1,
-			name: '122',
-			image: './classicMusic.jpg',
-			owner: 'A',
-			discrpiton:'abababaaba',
-            rate:10,
-			hot:5
-		} ,{
-			id: 2,
-			name: '1',
-			image: './classicMusic.jpg',
-			owner: 'A',
-			discrpiton:'abababaaba',
-            rate:1010,
-			hot:2
-		} ,{
-			id: 3,
-			name: '1',
-			image: './classicMusic.jpg',
-			owner: 'A',
-			discrpiton:'abababaaba',
-            rate:10100,
-			hot:1
-		} ,
-  
-
-	
-	];
-
+const PID = localStorage.getItem('PID')
+// const url = 'https://juice-quiz.herokuapp.com/api/platform/quizlist';
+// const url= `http://localhost:3001/api/platform/quizlist/${PID}`;
+// const res = await Axios.get(url)
+//       .then(res=>{return res.data})
+// console.log(res)
+var isrander=false;
 export default class singlePlatForm extends Component {
+	_isMounted = false;
 	constructor(props) {
 		super(props);
 		this.state = {
 			//决定是否显示subscribe按钮和订阅按钮
 			subscribed:false,
 			authority:false,
-			places: "",
-            renderList:{places},
+			places: '',
+            renderList:[{}],
+			hotac:true,
+			rateac:true,
 			Pname :localStorage.getItem('Pname'),
-			Pcover:localStorage.getItem('Pcover')
+			Pcover:localStorage.getItem('Pcover'),
+			PID: localStorage.getItem('PID'),
+			rander:false
 		};
-    
-		
-		
+        
 	}
+    
+
+	
+ componentDidMount=()=>{
+	this.get() ;
+	this.setState({rander:true})
+}
+
+
+
+
+
 
 	sortByHot(){ 
-		places.sort(function(a, b){return -a.hot + b.hot}); 
+		var places = this.state.places
+		if(this.state.hotac){
+          places.sort(function(a, b){return -a.hot + b.hot});
+		   this.setState({hotac:false});
+		}
+		else{
+		 places.sort(function(a, b){return a.hot - b.hot}); 
+		 this.setState({hotac:true});
+		}
+		
+		this.setState({rateac:true})
 		console.log(places)
-		this.setState({renderList: {places} })
+		
+		this.setState({renderList: places })
 	}
+	
 
 	sortByRate(){
-		places.sort(function(a, b){return -a.rate + b.rate}); 
+		var places = this.state.places
+		if(this.state.rateac){
+			places.sort(function(a, b){return -a.ave_rate + b.ave_rate}); 
+			this.setState({rateac:false})
+		  }
+		  else{
+		   places.sort(function(a, b){return a.ave_rate - b.ave_rate}); 
+		   this.setState({rateac:true})
+		  }
+		  this.setState({hotac:true})
 		console.log(places)
-		this.setState({renderList: {places} })
+		this.setState({renderList: places })
 
 	}
+ 
+
+
+
+
+
 	//申请和订阅在这里
 	subscribe(){
+
+	   
 		this.setState({subscribed:true})
 
 	}
+
+
 	apply(){
 		this.setState({apply:true})
 	};
     
-	get=()=>{
-		 const {name} = useParams();
-	}
-
- 
- 
+	// async get(){	
+	// 		// const url = 'https://juice-quiz.herokuapp.com/api/platform/quizlist';
+	// 		 const url= `http://localhost:3001/api/platform/quizlist/${this.state.PID}`;
+	// 		 await Axios.get(url, 
+	// 		  ).then(res=>{return res.data})
+	// 		  .then((response) => {
+    //           this.setState({places:response},() => console.log(this.state.places)) 	   
+	// 		 });
+			 
+					   
+	// }
+	
+	async get(){
+		this._isMounted = true;
+       // const url = 'https://juice-quiz.herokuapp.com/api/platform/quizlist';
+		 const url= `http://localhost:3001/api/platform/quizlist/${this.state.PID}`;
+      const res = await Axios.get(url)
+      .then(res=>{return res.data})
+      .then( result =>{
+		  if(this._isMounted){
+		  //console.log(result);
+          this.setState({places:result},()=>{console.log(this.state.places);});
+          this.setState({renderList:this.state.places});}          
+       });
+    }
 
    
 
 	render() {     
 		
-	//const {name} = useParams();
-		 const menu = this.state.renderList.places.map((place) => {
-		return(
+		
+	// 	if(this.state.rander){const menu = this.state.renderList.map((place) => {
+	// 	console.log(this.state.places)	
+	// 	return(
 		 
-			<div className="item">  
-			 <div className='title'>
-				 {place.name} 
-				 <div className='rate'>⭐: {place.rate} 🔥：{place.hot}</div> 
-			 </div >
-			 	<div className='content'> 
-				 <div className='discription'>{place.discrpiton}</div>
-			 	<Media object src={'../'+place.image} alt={place.id} className='userIcon'/> 
-				 </div>
-			</div>
+	// 		<div className="item">  
+	// 		 <div className='title'>
+	// 			 {place.name} 
+	// 			 <div className='rate'>⭐: {place.rate} 🔥：{place.hot}</div> 
+	// 		 </div >
+	// 		 	<div className='content'> 
+	// 			 <div className='discription'>{place.discrpiton}</div>
+	// 		 	<Media object src={'../'+place.image} alt={place.id} className='userIcon'/> 
+	// 			 </div>
+	// 		</div>
 			
-		);
-	});
+	// 	);
+	// });}
+		
 		return (
             <div> 
             <div className="header">
@@ -133,7 +202,32 @@ export default class singlePlatForm extends Component {
 			</div>
  
 			<div className='platFormlist'> 
-			<div>{menu}</div>
+			<div>
+			{this.state.rander&&this.state.renderList.map((place) => {
+		console.log(this.state.places)	
+		return(
+		 
+			<div className="item">  
+			 <div className='title'>
+				 {place.Qname} 
+				 <div className='rate'>⭐: {place.ave_rate} 🔥：{place.hot}</div> 
+			 </div >
+			 	<div className='content'> 
+				 <div className='discription'>{place.description}</div>
+			 	<Media object src={'../'+place.pic} alt={place.Releaser} className='userIcon'/> 
+				 </div>
+			</div>
+			
+		);
+	})}
+			
+			
+			
+			
+			
+			
+			
+			</div>
 			 </div>
 		</div>
 		)

@@ -1,7 +1,7 @@
 .menu{ 
    display: block;
    position: absolute;
-   top:0%;
+   top:100px;
    left: 0%;
    height: 100%;
    width: 100%;
@@ -16,11 +16,30 @@
     float:left;
 }
 .tagFilter{
-    width: 100%;
-    background-color: #918f8f; 
-    padding-top: 250px;
+    width: 100%; 
+    background-color: #918f8f;  
      
 }
 .search{
     color: black;
+    display: flex;
+    position: relative;
+    left: 30%;
+}
+.searchContent{
+    margin: 0px;
+}
+.searchButton{
+    color: #F78223;
+    background-color: #EEEEEE;
+    float: right;
+    
+    text-align: center;
+    text-decoration: #ffffff;  
+    
+    color: #ffffff;
+    background-color:#F78223;
+    align-items: center;
+    border: none;
+    cursor: pointer;
 }

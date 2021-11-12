@@ -4,8 +4,11 @@ import './header.css' ;
 import Signup from'./signUpPop';
 import Signin from'./signInPop';
 //import { Media } from 'reactstrap';
-import { BrowserRouter as Router, Route,Routes, Link } from 'react-router-dom';
+import {  Link } from 'react-router-dom';
 //import Axios from "axios"
+import IconTab from './iconTab' 
+ 
+
 
 
 export default class header extends Component {
@@ -61,8 +64,7 @@ export default class header extends Component {
       localStorage.setItem('email', this.state.email);  
     }
 
-
-    signOut(){
+    signOut=()=>{ 
       this.setState({login:false})
     }
 
@@ -73,26 +75,33 @@ export default class header extends Component {
       alert("icon hit")
     }
 
-  render(){  
-      
+    
+
+  render(){   
 	return (
             <div>
-            <div className="navbar">
+           
+            <div className="navbar"> 
+            
             <Link to='/'>
-            <img src="logo.jpg"></img>
+            <img src="logo.jpg" className="juiceIcon"></img>
             </Link>
-            {!this.state.login&&<button onClick={()=>this.setState({SignInVisible:true,display:"block"})}  type="button" className='account'>Sign in</button>||<button onClick={()=>this.signOut()}  type="button" className='account'>Sign out</button>}
-            { !this.state.login&&<button onClick={()=>this.setState({SignupVisible:true,display:"block"})}  type="button" className='account'>Sign up</button>||<Link to='/profile'><img src="account.jpg" className='accountIcon'  onClick={()=>this.userIcon()} ></img></Link>}
+            {/* {!this.state.login&&<button onClick={()=>this.setState({SignInVisible:true,display:"block"})}  type="button" className='account'>Sign in</button>||<button onClick={()=>this.signOut()}  type="button" className='account'>Sign out</button>}
+            { !this.state.login&&<button onClick={()=>this.setState({SignupVisible:true,display:"block"})}  type="button" className='account'>Sign up</button>||<Link to='/profile'><img src="account.jpg" className='accountIcon'  onClick={()=>this.userIcon()} ></img></Link>} */}
+            {!this.state.login&&<button onClick={()=>this.setState({SignInVisible:true,display:"block"})}  type="button" className='account'>Sign in</button>}
+            { !this.state.login&&<button onClick={()=>this.setState({SignupVisible:true,display:"block"})}  type="button" className='account'>Sign up</button>}
+            
+            {this.state.login&&<IconTab  signOutcallback={this.signOut.bind(this)}></IconTab>}
        
              </div>
           
           <div className="main" style={{display:this.state.display}}> 
+          
           {this.state.SignInVisible && <Signin   signIncallback={this.signIncallback} Success={this.Success} getEmail={this.getEmail.bind(this) }  getPassword={this.getPassword.bind(this)}   className="board"></Signin>}
-        
           {this.state.SignupVisible && <Signup  signUpcallback={this.signUpcallback} Success={this.Success} getEmail={this.getEmail.bind(this) } getConfirm={this.getConfirm.bind(this)} getPassword={this.getPassword.bind(this)} getUserName={this.getUserName.bind(this)} className="board"></Signup>}
               
+          </div> 
        
-          </div>
           </div>
              
         

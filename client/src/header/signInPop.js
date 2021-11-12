@@ -27,14 +27,14 @@ export default class signIn extends Component {
 
 
     signIn(){
-      //const url = 'https://juice-quiz.herokuapp.com/api/login';
+     // const url = 'https://juice-quiz.herokuapp.com/api/login';
       const url= 'http://localhost:3001/api/login';
         Axios.post(url, {
         email: this.state.email,
         password: this.state.password,
       }).then((response) => {
         console.log(response.data);
-        if (response.data['success']==true){
+        if (response.data['success']===true){
           this.props.signIncallback();
           this.props.Success();
         }
@@ -68,7 +68,7 @@ export default class signIn extends Component {
                   </div>
                    
                   <div className="userInput">     
-                    <input type="text" placeholder="Enter password" name="password" required onChange={this.handleChangePassWord.bind(this)}></input>
+                    <input  type="password" placeholder="Enter password" name="password" required onChange={this.handleChangePassWord.bind(this)}></input>
                   </div>
                    
                   </div>

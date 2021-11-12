@@ -81,6 +81,35 @@ app.get ('/api/Platform',(req,res)=>{
 	    res.send(result);}
   );})
 
+  app.get ('/api/platform/quizlist/:id',(req,res)=>{
+    console.log("quiz Connected!");
+	const PID = req.params.id;
+	console.log(PID);
+    con.query(
+		`SELECT q.QID,q.Qname,q.ave_rate,q.hot,q.description ,u.Uname AS Releaser, pic 
+		FROM quiz q,contain c,releases r,users u, userstyle us
+		WHERE q.QID=c.QID AND q.QID=r.QID and r.UID = U.UID and r.UID=us.UID and c.PID=`+PID, 
+		function (err1, result) {
+		if (err1) throw err1;
+		console.log(result);
+	    res.send(result);}
+  );})
+
+  app.get ('/api/platform/:name',(req,res)=>{
+    console.log("platform Connected!");
+	const name = req.params.name;
+	console.log(name);
+    con.query(
+		`select p.PID,p.Pname, ps.Pcover
+		from platform p, platformstyle ps
+		where p.Pname LIKE '%`+name+`%' and p.PID=ps.PID`, 
+		function (err1, result) {
+		if (err1) throw err1;
+		console.log(result);
+	    res.send(result);}
+  );})
+
+
 //   app.get ('/api/Pquiz',(req,res)=>{
 //     console.log("Connected!");
 //     con.query(
@@ -116,7 +145,7 @@ app.post('/api/login', (req, res) => {
 	const email = req.body.email;
 	const password = req.body.password;  
 	con.query(
-	  "select Upass From users where Uemail =?;",
+	  `select Upass From users where Uemail =?;`,
 	  email,
 	  (err, result) => {
 		  console.log(result);

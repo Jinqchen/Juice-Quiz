@@ -6,8 +6,8 @@ import Menu from './page/menu';
 import ShowPlatformList from'./header/showPlatformLIst';
 import SinglePlatForm from './singlePlatform/singlePlatForm';
 import Answer from './Answering.js';
-import { BrowserRouter as Router, Route,Routes, Link } from 'react-router-dom';
-import showPlatformList from './header/showPlatformLIst';
+import { BrowserRouter as Router, Route,Routes} from 'react-router-dom';
+// import showPlatformList from './header/showPlatformLIst';
 
 
 
