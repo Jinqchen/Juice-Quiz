@@ -27,17 +27,34 @@ export default class Menu extends Component {
 
 
 
-    filter=(tag)=>{ 
-        const newList=[]
-        for (let i = 0; i < this.state.places.length; i++) { 
-            if(this.state.places[i].tag===tag){    
-              newList.push(this.state.places[i])
-            }
-        }
-             console.log(newList.length) 
-             this.setState({renderList:newList})
-    };
+    // filter=(tag)=>{ 
+    //     const newList=[]
+    //     for (let i = 0; i < this.state.places.length; i++) { 
+    //         if(this.state.places[i].tag===tag){    
+    //           newList.push(this.state.places[i])
+    //         }
+    //     }
+    //          console.log(newList.length) 
+    //          this.setState({renderList:newList})
+    // };
+  
+     filter=(tag)=>{
+        const url = `https://juice-quiz.herokuapp.com/api/Platform/${tag}`;
+        //const url= 'http://localhost:3001/api/Platformtag';
+      const res = Axios.get(url)
+      .then(res=>{return res.data})
+      .then( result =>{
+          console.log(result);
+          this.setState({places:result});
+          this.state.renderList=[...this.state.places];
+          console.log(this.state.renderList.length);
+          this.setState({places:this.state.renderList});
+       });
+     }
     
+
+
+
     handleChangeSearch(e) {  
 		this.setState({searchContent: e.target.value});   
 	} 

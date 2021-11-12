@@ -76,11 +76,25 @@ app.get('/api/get',(req,res)=>{
 app.get ('/api/Platform',(req,res)=>{
     console.log("Connected!");
     con.query(
-		"SELECT Pcover,p.PID,Pname,tag from platformstyle s,platform p where s.PID=p.PID  order BY RAND() limit 8;", 
+		"SELECT Pcover,p.PID,Pname,tag from platformstyle s,platform p where s.PID=p.PID  order BY RAND() limit 4;", 
 		function (err1, result) {
 		if (err1) throw err1;
 	    res.send(result);}
   );})
+
+  app.get ('/api/Platform/:tag',(req,res)=>{
+    console.log("Connected!");
+	const tag = req.params.tag
+    con.query(
+		`SELECT Pcover,p.PID,Pname from platformstyle s,platform p
+		 where s.PID=p.PID AND p.tag='`+tag +`' order BY RAND() limit 2`, 
+		function (err1, result) {
+		if (err1) throw err1;
+	    res.send(result);}
+  );})
+
+
+
 // Get quizlist
   app.get ('/api/platform/quizlist/:id',(req,res)=>{
     console.log("quiz Connected!");
