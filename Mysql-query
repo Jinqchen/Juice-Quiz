@@ -445,5 +445,59 @@ WHERE q.QID=c.QID AND q.QID=r.QID and r.UID = U.UID and c.PID=5
 -- UPDATE `heroku_a8e492587e5e18a`.`platform` SET `replimit` = '15' WHERE (`PID` = '12');
 -- UPDATE `heroku_a8e492587e5e18a`.`platform` SET `replimit` = '15' WHERE (`PID` = '13');
 -- UPDATE `heroku_a8e492587e5e18a`.`platform` SET `replimit` = '15' WHERE (`PID` = '14');
+-- select p.PID,p.Pname, ps.Pcover
+-- from platform p, platformstyle ps
+-- where p.Pname LIKE '%pop%' and p.PID=ps.PID
+
+-- select q.QID,q.Qname,q.ave_rate,q.hot,q.description 
+-- from quiz q,contain c
+-- where q.QID=c.QID and c.PID=5 and q.Qname  LIKE '%lan%'
+
+
+
+-- select U.UID,U.Uname,Rpoint,pic
+-- from users U,platform P,reputation R,userstyle us
+-- where P.PID=1 AND P.PID= R.PID AND U.UID=R.UID and U.UID=us.UID
+-- ORDER BY Rpoint DESC
+
+-- select s.PID,r.Rpoint,ps.Pcover,p.Pname
+-- from subscribe s, reputation r,platform p,platformstyle ps
+-- where  r.UID=s.UID AND s.UID=3 and p.PID= s.PID AND p.PID= r.PID AND ps.PID=p.PID 
+-- ORDER BY r.Rpoint desc
+
+-- select Rpoint ,replimit
+-- from platform p,reputation r
+-- where r.UID=3 AND p.PID=10 AND r.PID=p.PID
+
+-- select Rpoint 
+-- from reputation r
+-- where r.UID=3 AND r.PID=7;
+
+-- select  replimit
+-- from platform p
+-- where  p.PID=7
+
+-- insert into coown(PID,UID)
+-- value(?,?)
+
+-- SELECT EXISTS(SELECT UID FROM coown WHERE UID=3 AND PID=7)
+
+-- insert into reputation (Rpoint,UID,PID)
+-- value(0,?,?)
+-- select PID from subscribe where UID=3
+-- insert into subscribe
+-- value(7,3)
+
+
+-- select s.PID,r.Rpoint,ps.Pcover,p.Pname
+-- from subscribe s, reputation r,platform p,platformstyle ps
+-- where  r.UID=s.UID AND s.UID=3 and p.PID= s.PID AND p.PID= r.PID AND ps.PID=p.PID 
+-- ORDER BY r.Rpoint desc
+select * from platform;
+INSERT INTO REPUTATION
+value (0,3,4),
+(0,3,12);
+insert into subscribe
+value(11,3)
 
 
