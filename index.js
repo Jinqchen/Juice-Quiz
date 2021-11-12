@@ -274,10 +274,10 @@ app.post('/api/platform/subscribe', (req, res) => {
 
 
 
-app.listen(3001,()=>{
-	  console.log("running");
-	})
+// app.listen(3001,()=>{
+// 	  console.log("running");
+// 	})
 	
-// app.listen(process.env.PORT || 3001,()=>{
-//   console.log('listening for requests on port'+ process.env.PORT);
-// })
+app.listen(process.env.PORT || 3001,()=>{
+  console.log('listening for requests on port'+ process.env.PORT);
+})
