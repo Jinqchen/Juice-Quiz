@@ -1,0 +1,137 @@
+.rankRepo{
+    color: rgb(255, 0, 0);
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.reputationValue{
+    color:red;
+    position: absolute;
+    right:0;
+    height: 0
+}
+.rankList{
+    margin-top: 20px;
+    margin-bottom: 20px;   
+    height: 100px;
+}.rankBoard{
+    border-color: grey;
+    border-style: solid;
+    border-radius: 5px;
+    position: absolute;
+    display: block;
+    right:20px;
+    top:50%;
+    width: 200px; 
+    background-color:aliceblue; 
+}
+.rankName{
+    color:  #e49132; 
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.rankIcon{
+    width: 50px;
+    height: 40px;
+}
+.rankBoardTitle{
+    height: 40px;
+    background-color: grey;
+    text-align: center;
+    padding-top: 20px;
+}
+.header{
+    background-color: aliceblue;
+    
+    width: 100%;
+    background-color: #e49132; 
+    padding-top: 80px;
+}
+.platFormButton{
+    
+    margin-top: 20px;
+    position: relative;
+    display: flex; 
+    width: 100%;
+    height: 70px;
+    background-color: #ffffff;   
+}
+.platFormName{
+    font-size:40px;
+    margin-right: 100px;
+    margin-left:100px；
+}
+.platformaccount{
+    margin-right:50px; 
+    height: auto;
+    background-color:#e49132; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center; 
+    display: inline-block;
+    font-size: 16px;
+    height: 70%;
+    width:15%
+}
+.icon{
+    width: 100px;
+    height: 100px;
+    border-radius:100%;
+    margin-top: -50px;  
+    margin-left: 100px;
+}
+.sort{
+    display: block;
+    margin: 0 auto;
+    margin-top: 10px;
+    background-color: white;
+    width:70%; 
+}
+.sortButton{
+    font-size: 40px; 
+    color: black;
+    background-color: white;
+    margin-right: 50px;
+    border: transparent;
+}
+.platFormlist{
+    display: block;
+    margin: 0 auto; 
+    background-color: aliceblue;
+    width: 70%;
+    font-size: 50px;
+}
+.item{ 
+    margin-top: 50px;
+    background-color:  #ffffff; 
+    text-decoration: black;
+    height: 300px; 
+    font-size: 50px;
+}
+ .title{
+    text-decoration: white;
+    background-color: grey;
+    height: 50px;
+    font-size: 50px;
+    display: flex;
+}
+.rate{
+    position: absolute;
+    right: 200px;
+    font-size: 30px;
+}
+ 
+ 
+.userIcon{
+    position:absolute;
+    bottom: 0;
+    right: 0;
+    height: 100px;
+    width: 100px;
+}
+.discription{
+   color: black;
+   width: 70%; 
+   font-size: 19px;
+}
+
