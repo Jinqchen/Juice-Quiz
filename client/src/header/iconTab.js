@@ -19,6 +19,13 @@ const IconTab=(props)=>{
             icon:<AiIcons.AiFillCheckCircle/>,
 			cName:"nav-text"
 		} ,
+    {
+			 
+			title: 'My Platforms',
+			path: './managePlatform',  
+            icon:<AiIcons.AiOutlineBlock/>,
+			cName:"nav-text"
+		} ,
 		{
             title: 'Message',
 			path: './',  
