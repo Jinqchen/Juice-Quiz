@@ -4,27 +4,6 @@ import './singlePlatForm.css'
 import { Media } from 'reactstrap';
 import Axios from "axios";
 
-// const places = 
-// 	[
-// 		{
-// 			id: 0,
-// 			name: 'user1',
-// 			image: './account.jpg', 
-// 			reputation:2
-			 
-// 		} ,
-// 		{
-// 			id: 0,
-// 			name: 'user3',
-// 			image: './popMusic.jpg',
-// 			reputation:2
-// 		} ,{
-// 			id: 0,
-// 			name: 'user2',
-// 			image: './classicMusic.jpg',
-// 			reputation:2
-// 		}  	];
-
 export default class singlePlatForm extends Component {
 	_isMounted = false;
 	constructor(props) {
@@ -32,6 +11,7 @@ export default class singlePlatForm extends Component {
 		this.state = {
 			//决定是否显示subscribe按钮和订阅按钮
 			subscribed:false,
+			co_owner:false,
 			authority:false,
 			logged:localStorage.getItem("Logged"),
 			places: '',
@@ -44,7 +24,9 @@ export default class singlePlatForm extends Component {
 			rander:false,
 			searchContent:"",
 			rankList:[{}],
-			rank:''
+			rank:'',
+			replimit:0,
+			Urep:0
 		};
         
 	}
@@ -56,7 +38,9 @@ export default class singlePlatForm extends Component {
 	this.get_ranklist();
 	this.setState({rander:true});
 	this.is_sub();
-	
+	this.is_coowner();
+	this.get_replimit();
+	this.get_Urep();
 
 }
 
@@ -106,8 +90,8 @@ export default class singlePlatForm extends Component {
 	//申请和订阅在这里
 	subscribe(){
 
-	   const url = 'https://juice-quiz.herokuapp.com/api/platform/dosubscribe';
-	   //const url= 'http://localhost:3001/api/platform/dosubscribe';
+	   //const url = 'https://juice-quiz.herokuapp.com/api/platform/dosubscribe';
+	   const url= 'http://localhost:3001/api/platform/dosubscribe';
 	     
 		  Axios.post(url, { 
 			PID : this.state.PID,
@@ -122,8 +106,8 @@ export default class singlePlatForm extends Component {
 	}
 
 	inital_reputation(){
-	   const url = 'https://juice-quiz.herokuapp.com/api/platform/initalR';
-	   //const url= 'http://localhost:3001/api/platform/initalR';
+	   //const url = 'https://juice-quiz.herokuapp.com/api/platform/initalR';
+	   const url= 'http://localhost:3001/api/platform/initalR';
 	     
 		  Axios.post(url, { 
 			PID : this.state.PID,
@@ -138,25 +122,50 @@ export default class singlePlatForm extends Component {
 
 
 	apply(){
-		this.setState({apply:true})
+		  //const url = `https://juice-quiz.herokuapp.com/api/platform/dosubscribe`;
+		  const url= `http://localhost:3001/api/platform/dosubscribe`;
+	     
+		  Axios.post(url, { 
+			PID : this.state.PID,
+			UID: localStorage.getItem("UID"),
+		  }).then((response) => { 
+		  console.log(response); 
+		  this.setState({coowner:true})
+		  }); 
 	};
     
-	// async get(){	
-	// 		// const url = 'https://juice-quiz.herokuapp.com/api/platform/quizlist';
-	// 		 const url= `http://localhost:3001/api/platform/quizlist/${this.state.PID}`;
-	// 		 await Axios.get(url, 
-	// 		  ).then(res=>{return res.data})
-	// 		  .then((response) => {
-    //           this.setState({places:response},() => console.log(this.state.places)) 	   
-	// 		 });
-			 
-					   
-	// }
+   get_replimit(){
+         //const url = `https://juice-quiz.herokuapp.com/api/platform/replimit`;
+		  const url= `http://localhost:3001/api/platform/${this.state.PID}/replimit`;
+		  Axios.get(url).then(res=>{return res.data})
+		  .then((response) => {   
+		  this.setState({replimit:response[0]['replimit']});
+		  console.log(this.state.replimit)
+		  });
+   }
+
+   get_Urep(){
+	   //const url = `https://juice-quiz.herokuapp.com/api/platform/userRep`;
+	   const url= `http://localhost:3001/api/platform/userRep`;
+	   Axios.get(url,{
+		PID : this.state.PID,
+		UID: localStorage.getItem("UID"),
+	   }).then(res=>{return res.data})
+	   .then((response) => {   
+		console.log(response);
+	   //this.setState({Urep:response[0]['Rpoint']});
+	   console.log(this.state.Urep)
+	   });
+   }
+
+
+
+
 	
 	async get(){
 		this._isMounted = true;
-       const url = `https://juice-quiz.herokuapp.com/api/platform/quizlist/${this.state.PID}`;
-		 //const url= `http://localhost:3001/api/platform/quizlist/${this.state.PID}`;
+       //const url = `https://juice-quiz.herokuapp.com/api/platform/quizlist/${this.state.PID}`;
+		 const url= `http://localhost:3001/api/platform/quizlist/${this.state.PID}`;
       const res = await Axios.get(url)
       .then(res=>{return res.data})
       .then( result =>{
@@ -169,8 +178,8 @@ export default class singlePlatForm extends Component {
     
 
     async get_ranklist(){
-		const url = `https://juice-quiz.herokuapp.com/api/platform/ranklist/${this.state.PID}`;
-		//const url= `http://localhost:3001/api/platform/ranklist/${this.state.PID}`;
+		//const url = `https://juice-quiz.herokuapp.com/api/platform/ranklist/${this.state.PID}`;
+		const url= `http://localhost:3001/api/platform/ranklist/${this.state.PID}`;
 		const res = await Axios.get(url)
 		.then(res=>{return res.data})
 		.then( result =>{
@@ -184,19 +193,37 @@ export default class singlePlatForm extends Component {
 
 
 	 is_sub(){
-		 console.log("start")
-          const url = 'https://juice-quiz.herokuapp.com/api/platform/subscribe';
-		 //const url= `http://localhost:3001/api/platform/subscribe`;
+		
+         // const url = 'https://juice-quiz.herokuapp.com/api/platform/subscribe';
+		 const url= `http://localhost:3001/api/platform/subscribe`;
          Axios.post(url, {
 			PID : this.state.PID,
 			UID: localStorage.getItem("UID"),
 		  }).then((response) => {
 			console.log(response.data);
-			console.log("end")
 			this.setState({subscribed: response.data["subscribe"]})
 		  });
 	}
    
+	is_coowner(){
+		console.log("start")
+		// const url = 'https://juice-quiz.herokuapp.com/api/platform/coowner';
+		const url= `http://localhost:3001/api/platform/coowner`;
+		Axios.post(url, {
+		   PID : this.state.PID,
+		   UID: localStorage.getItem("UID"),
+		 }).then((response) => {
+		   console.log(response.data);
+		   this.setState({co_owner: response.data["coowner"]})
+		 });
+   }
+
+
+
+
+
+
+
 
 	handleChangeSearch(e) {  
 		this.setState({searchContent: e.target.value});   
@@ -206,8 +233,8 @@ export default class singlePlatForm extends Component {
 		if (this.state.searchContent===""){
 			this.get();
 		}else{
-			const url= `https://juice-quiz.herokuapp.com/api/quiz/${this.state.searchContent}`;
-		//const url= `http://localhost:3001/api/quiz/${this.state.searchContent}`;
+		//	const url= `https://juice-quiz.herokuapp.com/api/quiz/${this.state.searchContent}`;
+		const url= `http://localhost:3001/api/quiz/${this.state.searchContent}`;
 		  const res = await Axios.get(url,{
 			params: {
 			  PID: this.state.PID			  
@@ -270,7 +297,7 @@ export default class singlePlatForm extends Component {
                 <img src= {'../'+this.state.Pcover}  className='icon'></img> 
             <h className='platFormName'>{this.state.Pname}</h>
 			{!this.state.subscribed&&<button className='platformaccount'  onClick={()=>this.subscribe()}>subscribe</button>||<button className='platformaccount' >subscribed √</button>}
-			{!this.state.apply&&<button className='platformaccount'  onClick={()=>this.apply()}>Apply to be co-owner</button>||<button className='platformaccount' >apply has been sent</button>}
+			{!this.state.co_owner&&<button className='platformaccount'  onClick={()=>this.apply()}>Apply to be co-owner</button>||<button className='platformaccount' >apply has been sent</button>}
           
 		     
             </div>

@@ -139,6 +139,18 @@ app.get ('/api/Platform',(req,res)=>{
 	    res.send(result);}
   );})
 
+  app.get ('/api/platform/:id/replimit',(req,res)=>{
+	const PID = req.params.id;
+    con.query(
+		`select  replimit
+		from platform p
+		where  p.PID=${PID}`, 
+		function (err1, result) {
+		if (err1) throw err1;
+		console.log(result);
+	    res.send(result);}
+  );})
+
 //Search
   app.get ('/api/platform/:name',(req,res)=>{
     console.log("platform Connected!");
@@ -179,9 +191,9 @@ app.post('/api/register', (req, res) => {
     const email  = req.body.email;
 	con.query('select COUNT(UID) from users',function(err,result){
 		var index = result[0]["COUNT(UID)"]
-		console.log(index);
+		//console.log(index);
 		var id =index;
-		console.log(id);
+		//console.log(id);
 		con.query(
 		"INSERT INTO users (UID,Uname,Uemail,Upass) VALUES (?,?,?,?)",
 		[id,username,email,password],
@@ -227,8 +239,8 @@ app.post('/api/login', (req, res) => {
 app.post('/api/platform/subscribe', (req, res) => {
 	const PID = req.body.PID;
 	const UID = req.body.UID;  
-	console.log(PID);
-	console.log("sub");
+//	console.log(PID);
+	//console.log("sub");
 	con.query(
 	  `SELECT EXISTS(
 		SELECT *
@@ -237,7 +249,7 @@ app.post('/api/platform/subscribe', (req, res) => {
 	  [UID,PID],
 	  (err, result) => {
 		  var sub =result[0]["EXISTS(\n\t\tSELECT *\n\t\tFROM subscribe\n\t\tWHERE UID='"+UID+"' and PID='"+PID+"')"];
-		  console.log(sub);
+		
 		if (err) {
 		  res.send({ err: err });
 		}
@@ -249,6 +261,49 @@ app.post('/api/platform/subscribe', (req, res) => {
 	  }
 	);
   });
+
+  app.post('/api/platform/coowner', (req, res) => {
+	const PID = req.body.PID;
+	const UID = req.body.UID;  
+	con.query(
+	  `SELECT EXISTS(SELECT UID FROM coown WHERE UID=? AND PID=?)`,
+	  [UID,PID],
+	  (err, result) => {
+		//  console.log(result);
+		  var sub =result[0]["EXISTS(SELECT UID FROM coown WHERE UID='"+UID+"' AND PID='"+PID+"')"];
+		//  console.log(sub);
+		if (err) {
+		  res.send({ err: err });
+		}
+	    if (sub==1){
+			res.send({coowner:true});
+		}else{
+			res.send({coowner:false});
+		}
+	  }
+	);
+  });
+
+app.get('/api/platform/userRep',(req,res)=>{
+	console.log("User:");
+	const PID = req.query.PID;
+	const UID = req.query.UID;
+	console.log(PID);
+	con.query(
+		`select Rpoint 
+		from reputation r
+		where r.UID=${UID} AND r.PID=${PID};`, 
+		function (err1, result) {
+		if (err1) throw err1;
+		console.log(result);
+	    res.send(result);}
+  )
+}
+)
+
+
+
+
 
   app.post('/api/platform/dosubscribe', (req, res) => {
 	const PID = req.body.PID;
@@ -288,10 +343,10 @@ app.post('/api/platform/subscribe', (req, res) => {
 
 
 
-// app.listen(3001,()=>{
-// 	  console.log("running");
-// 	})
+app.listen(3001,()=>{
+	  console.log("running");
+	})
 	
-app.listen(process.env.PORT || 3001,()=>{
-  console.log('listening for requests on port'+ process.env.PORT);
-})
+// app.listen(process.env.PORT || 3001,()=>{
+//   console.log('listening for requests on port'+ process.env.PORT);
+// })

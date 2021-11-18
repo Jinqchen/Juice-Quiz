@@ -15,7 +15,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "mysql": "^2.18.1",
-    "node": "^17.0.1"
+    "node": "^17.1.0"
   },
   "heroku-run-build-script": true
 }
