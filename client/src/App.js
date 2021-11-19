@@ -37,6 +37,7 @@ export default class App extends Component {
 					   <Route path='/answer' element ={<Answer/>} />
 					   <Route path='/profile' element ={<ShowPlatformList/>}/>
 					   <Route path='/managePlatform' element ={<ManagePlatform/>}/>
+					   <Route path='/platformEdit/:id' element ={<EditPlatform/>}/>
 
 			      </Routes>
 
