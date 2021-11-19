@@ -3,7 +3,7 @@ import { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Media } from 'reactstrap';
-import './EditPlatform.css'; 
+import './CreatePlatform.css'; 
 import Axios from "axios";  
 
 
@@ -14,89 +14,93 @@ import Axios from "axios";
               trigger:false,   
               name:"",
               tag:"",
-              namechange:false,
-              tagchange:false,
               oneOnwer:false,
               requireReputation:0,
-              repchange:false,
-              EPID:localStorage.getItem('EditPID'),
+              PID:0,
               success:false
             };    
           }
+        
         handleChangeName(e) {  
-            this.setState({name: e.target.value}); 
-            this.setState({namechange:true});  
+            this.setState({name: e.target.value});   
         }
      
         handleChangeTag(e) {  
-        this.setState({tag: e.target.value});  
-        this.setState({tagchange:true}); 
+        this.setState({tag: e.target.value});   
         }
-
         handleChangeOnwer(e)   {
-            this.setState({oneOnwer: e.target.value}); 
-            if (e.target.value){
-              this.setState({replimit:99999});
-              this.setState({repchange:true}); 
-            }    
-        }
+            this.setState({oneOnwer: e.target.value});  
+          if (e.target.value){
+            this.setState({replimit:99999})
+          }    
+          
+          
+          }
 
         handleReputation(e){
-            this.setState({requireReputation: e.target.value}); 
-            console.log(this.state.requireReputation)
-            this.setState({repchange:true});  
+            this.setState({requireReputation: e.target.value});  
+         
         }
+        
+        uploadIcon(){
 
-       updateName(){
-        //const url = `https://juice-quiz.herokuapp.com/api/EditPlatform/name/${this.state.name}`;
-          const url= `http://localhost:3001/api/EditPlatform/name/${this.state.name}`;
-        Axios.put(url,{PID:this.state.EPID}).then((response) => { 
-      console.log(response); 
-      }
-      )
-    }
-    updateTag(){
-      //const url = `https://juice-quiz.herokuapp.com/api/EditPlatform/tag/${this.state.tag}`;
-        const url= `http://localhost:3001/api/EditPlatform/tag/${this.state.tag}`;
-      
-    Axios.put(url,{PID:this.state.EPID}).then((response) => { 
-    console.log(response); 
-    }
-    )
-  }
-  updateRep(){
-    //const url = `https://juice-quiz.herokuapp.com/api/EditPlatform/replimit/${this.state.replimit}`;
-      const url= `http://localhost:3001/api/EditPlatform/replimit/${this.state.requireReputation}`;
-    
-  Axios.put(url,{PID:this.state.EPID}).then((response) => { 
-  console.log(response); 
-  }
-  )
-}
-
-
-
-
-
+        }
+        
+        
+        
         submit(){ 
-        if(this.state.namechange){
-          this.updateName()
-        }
-        if(this.state.tagchange){
-          this.updateTag()
-        }
-        if(this.state.repchange){
-          this.updateRep()
-        }
-        alert("Change updated!")
-        }
-        // uploadIcon(){
-
-        // }
-        // create(){
           
-        // }
-    
+     //const url = 'https://juice-quiz.herokuapp.com/api/createplatform';
+      const url= 'http://localhost:3001/api/createplatform';
+      Axios.post(url, { 
+             Pname: this.state.name, 
+             tag: this.state.tag, 
+             replimit:this.state.requireReputation,
+             
+        }).then((res)=>{return res.data})
+        .then((response) => { 
+          this.setState({PID:response['PID']});
+          this.setState({success:true});
+        }); 
+      
+       this.own();
+       this.inital_reputation();
+       alert("Platform Created!") 
+      }
+       
+        
+    //insert to own 
+    own(){
+       //const url = `https://juice-quiz.herokuapp.com/api/CreatePlatform/doown`;
+		  const url= `http://localhost:3001/api/CreatePlatform/doown`;
+	     
+		  Axios.post(url, { 
+			PID : this.state.PID,
+			UID: localStorage.getItem("UID"),
+		  }).then((response) => { 
+		  console.log(response); 
+		  
+		  }); 
+    }
+
+    inital_reputation(){
+      //const url = 'https://juice-quiz.herokuapp.com/api/CreatePlatform/initalR';
+      const url= 'http://localhost:3001/api/CreatePlatform/initalR';
+        
+       Axios.post(url, { 
+       PID : this.state.PID,
+       UID: localStorage.getItem("UID"),
+       }).then((response) => { 
+       console.log(response); 
+       
+       }); 
+ 
+ 
+   }
+
+
+
+
 render(){ 
         
 	
@@ -139,22 +143,23 @@ render(){
         <select value={this.state.value} onChange={this.handleChangeOnwer.bind(this)}>
             <option value="true">Yes</option>
             <option value="false">no</option> 
-          </select>
+        </select>
           </label>
 
           </li>
-         {!this.state.oneOnwer&& <li>
+      {!this.state.oneOnwer&&<li>
         <label>  reputation need
           <input className="repNeed" onChange={this.handleReputation.bind(this)}></input>
  
         </label>
         </li>
-     }
+      }
       </form>
 
+      
       <button  className="submit" onClick={()=>this.submit()} >Submit</button>
 			 
-			  </div>
+			</div>
 
 			  </>
 			  

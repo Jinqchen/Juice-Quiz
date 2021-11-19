@@ -39,13 +39,16 @@
 .box-text   { 
     display: flex;
     width:400px; 
-    text-decoration: black;
+    text-decoration: black; 
+    z-index:9999999; 
 }
 .box-text h4 { 
             width:200px; 
             text-decoration: black; text-align: center;
         }
-.boxbtn-manage{  
+.boxbtn-manage{ 
+   
+    display: flex;
     color: #ffffff;
     background-color:#5fe037;
     align-items: center;

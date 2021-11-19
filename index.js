@@ -41,37 +41,41 @@ var con = mysql.createPool({
 
 //Answering
 app.get('/api/get',(req,res)=>{
-   
-    console.log("Connected!");
+      console.log("Connected!");
     con.query(
 		"select count(QuestionID) from quizquestion where QID=1 ;", 
 		function (err1, result) {
 		if (err1) throw err1;
 	    file={};
 		file["count(QuestionID)"]=result[0]["count(QuestionID)"];
+		console.log(file);
 		for(let i = 0; i < result[0]["count(QuestionID)"]; i++){
 			con.query("select Qtext from quizquestion where QID=1 AND QuestionID="+String(i+1)+";", 
 			function (err2, result2) {
 			 if (err2) throw err2;
+			 console.log(result2);
 			 file[i+1]= {};
 			 var str = JSON.stringify(result2[0]);
              var obj = JSON.parse(str)
 			 file[i+1]['Qtext']=obj['Qtext'];
+			 console.log(file);
 			 });
 			
-			con.query("select Optionx ,correctness  from quizoptions where QID=1 AND QuestionID="+String(i+1)+";", 
-			function (err2, result2) {
-			if (err2) throw err2;
-		    var str = JSON.stringify(result2);
-            var obj = JSON.parse(str);
-            file[i+1]['Optionx']=obj;
-			});
+			// con.query("select Optionx ,correctness  from quizoptions where QID=1 AND QuestionID="+String(i+1)+";", 
+			// function (err2, result2) {
+			// if (err2) throw err2;
+		    // var str = JSON.stringify(result2);
+            // var obj = JSON.parse(str);
+            // file[i+1]['Optionx']=obj;
+			// });
 	   }
        }
 	  )
 	  res.send(file);
 	}
   );
+
+
  //Get platform list
 app.get ('/api/Platform',(req,res)=>{
     console.log("Connected!");
@@ -87,12 +91,11 @@ app.get ('/api/Platform',(req,res)=>{
 	const tag = req.params.tag
     con.query(
 		`SELECT Pcover,p.PID,Pname from platformstyle s,platform p
-		 where s.PID=p.PID AND p.tag='`+tag +`' order BY RAND() limit 2`, 
+		 where s.PID=p.PID AND p.tag='`+tag +`' order BY RAND() limit 3`, 
 		function (err1, result) {
 		if (err1) throw err1;
 	    res.send(result);}
   );})
-
 
 
 // Get quizlist
@@ -124,6 +127,27 @@ app.get ('/api/Platform',(req,res)=>{
 		console.log(result);
 	    res.send(result);}
   );})
+
+  app.get ('/api/user/owned/:id',(req,res)=>{
+    console.log("owned Connected!");
+	const UID = req.params.id;
+	console.log("UID:"+UID);
+    con.query(
+		`select o.PID,p.Pname from own o, platform p
+		where UID=${UID} and o.PID=p.PID `, 
+		function (err1, result) {
+		if (err1) throw err1;
+		console.log(result);
+	    res.send(result);}
+  );})
+
+
+
+
+
+
+
+
 //Get ranklist
   app.get ('/api/platform/ranklist/:id',(req,res)=>{
     console.log("rank Connected!");
@@ -262,7 +286,7 @@ app.post('/api/platform/subscribe', (req, res) => {
 	);
   });
 
-  app.post('/api/platform/coowner', (req, res) => {
+app.post('/api/platform/coowner', (req, res) => {
 	const PID = req.body.PID;
 	const UID = req.body.UID;  
 	con.query(
@@ -284,10 +308,11 @@ app.post('/api/platform/subscribe', (req, res) => {
 	);
   });
 
-app.get('/api/platform/userRep',(req,res)=>{
+
+app.get('/api/platform/userRep/:id',(req,res)=>{
 	console.log("User:");
+	const UID = req.params.id;
 	const PID = req.query.PID;
-	const UID = req.query.UID;
 	console.log(PID);
 	con.query(
 		`select Rpoint 
@@ -323,6 +348,30 @@ app.get('/api/platform/userRep',(req,res)=>{
 	);
   });
 
+
+  app.post('/api/platform/doapply', (req, res) => {
+	const PID = req.body.PID;
+	const UID = req.body.UID;  
+	console.log(PID);
+	console.log("apply");
+	con.query(
+	  `insert into coown (PID,UID)
+	  value(?,?);`,
+	  [PID,UID],
+	  (err, result) => {
+		  console.log(result);
+		if (err) {
+		  res.send({ err: err });
+		}
+	  }
+	);
+  });
+
+
+  
+
+
+
   app.post('/api/platform/initalR', (req, res) => {
 	const PID = req.body.PID;
 	const UID = req.body.UID;  
@@ -340,6 +389,115 @@ app.get('/api/platform/userRep',(req,res)=>{
 	  }
 	);
   });
+
+
+
+
+
+//Create a platform 
+  app.post('/api/CreatePlatform/initalR', (req, res) => {
+	const PID = req.body.PID;
+	const UID = req.body.UID;  
+	console.log(PID);
+	console.log("subed");
+	con.query(
+	  `insert into reputation (Rpoint,PID,UID)
+	  value(0,?,?);`,
+	  [PID,UID],
+	  (err, result) => {
+		  console.log(result);
+		if (err) {
+		  res.send({ err: err });
+		}
+	  }
+	);
+  });
+
+app.post('/api/createplatform', (req, res) => {
+	const Pname = req.body.Pname;
+	const tag = req.body.tag;
+    const replimit  = req.body.replimit;
+	con.query('select COUNT(*)from platform',function(err,result){
+		var index = result[0]["COUNT(*)"]
+		console.log("index:"+index);
+		var id =index+1;
+		console.log(id);
+		con.query(
+		"insert into platform(PID,Pname,tag,replimit) value(?,?,?,?)",
+		[id,Pname,tag,replimit],
+		(err, result) => {
+		  console.log(err);
+		  res.send({PID:id,success:true});
+		}
+	  );
+	});
+  }); 
+
+
+app.post('/api/CreatePlatform/doown', (req, res) => {
+	const PID = req.body.PID;
+	const UID = req.body.UID;  
+	console.log(PID);
+	console.log("apply");
+	con.query(
+	  `insert into own (PID,UID)
+	  value(?,?);`,
+	  [PID,UID],
+	  (err, result) => {
+		  console.log(result);
+		if (err) {
+		  res.send({ err: err });
+		}
+	  }
+	);
+  });
+
+//Edit platform
+app.put('/api/EditPlatform/name/:name',(req,res)=>{
+     const name = req.params.name;
+	 const PID = req.body.PID;
+     con.query(
+		`UPDATE platform SET Pname='`+name+`'
+		where PID=?;`,
+		[PID],
+		(err, result) => {
+			console.log(result);
+		  if (err) {
+			res.send({ err: err });
+		  }
+		}
+	  );
+})
+app.put('/api/EditPlatform/tag/:tag',(req,res)=>{
+	const tag = req.params.tag;
+	const PID = req.body.PID;
+	con.query(
+	   `UPDATE platform SET tag='`+tag+`'
+	   where PID=?;`,
+	   [PID],
+	   (err, result) => {
+		   console.log(result);
+		 if (err) {
+		   res.send({ err: err });
+		 }
+	   }
+	 );
+})
+app.put('/api/EditPlatform/replimit/:replimit',(req,res)=>{
+	const replimit = req.params.replimit;
+	const PID = req.body.PID;
+	con.query(
+	   `UPDATE platform SET replimit='`+replimit+`'
+	   where PID=?;`,
+	   [PID],
+	   (err, result) => {
+		   console.log(result);
+		 if (err) {
+		   res.send({ err: err });
+		 }
+	   }
+	 );
+})
 
 
 

@@ -3,6 +3,7 @@ import { Component } from 'react';
 import './singlePlatForm.css'
 import { Media } from 'reactstrap';
 import Axios from "axios";
+import { Link } from 'react-router-dom';
 
 export default class singlePlatForm extends Component {
 	_isMounted = false;
@@ -40,15 +41,13 @@ export default class singlePlatForm extends Component {
 	this.is_sub();
 	this.is_coowner();
 	this.get_replimit();
-	this.get_Urep();
-
 }
 
 
 
 
 
-
+// Sort function 
 	sortByHot(){ 
 		var places = this.state.places
 		if(this.state.hotac){
@@ -84,13 +83,9 @@ export default class singlePlatForm extends Component {
  
 
 
-
-
-
 	//申请和订阅在这里
 	subscribe(){
-
-	   //const url = 'https://juice-quiz.herokuapp.com/api/platform/dosubscribe';
+     //const url = 'https://juice-quiz.herokuapp.com/api/platform/dosubscribe';
 	   const url= 'http://localhost:3001/api/platform/dosubscribe';
 	     
 		  Axios.post(url, { 
@@ -102,9 +97,16 @@ export default class singlePlatForm extends Component {
 		  }); 
 	 
 	this.inital_reputation()	
-
 	}
 
+unsubscribe(){
+ this.setState({subscribed:false});
+ this.setState({co_owner:false});
+}
+
+
+
+	
 	inital_reputation(){
 	   //const url = 'https://juice-quiz.herokuapp.com/api/platform/initalR';
 	   const url= 'http://localhost:3001/api/platform/initalR';
@@ -120,20 +122,35 @@ export default class singlePlatForm extends Component {
 
 	}
 
-
-	apply(){
-		  //const url = `https://juice-quiz.herokuapp.com/api/platform/dosubscribe`;
-		  const url= `http://localhost:3001/api/platform/dosubscribe`;
+// Apply function 
+	do_apply(){
+		  //const url = `https://juice-quiz.herokuapp.com/api/platform/doapply`;
+		  const url= `http://localhost:3001/api/platform/doapply`;
 	     
 		  Axios.post(url, { 
 			PID : this.state.PID,
 			UID: localStorage.getItem("UID"),
 		  }).then((response) => { 
 		  console.log(response); 
-		  this.setState({coowner:true})
+		  this.setState({co_owner:true})
 		  }); 
 	};
-    
+      
+   apply(){
+     if(!this.state.subscribed){
+		 alert("You need to subscribe the platform first!")
+	 }
+	 else{
+		 this.get_Urep();
+		 if(this.state.Urep < this.state.replimit){
+			 alert("You didn't reach the co-owner requirment")
+		 }
+		 else{
+			 this.do_apply();
+		 }
+	 }
+   }
+
    get_replimit(){
          //const url = `https://juice-quiz.herokuapp.com/api/platform/replimit`;
 		  const url= `http://localhost:3001/api/platform/${this.state.PID}/replimit`;
@@ -142,26 +159,20 @@ export default class singlePlatForm extends Component {
 		  this.setState({replimit:response[0]['replimit']});
 		  console.log(this.state.replimit)
 		  });
-   }
+   };
 
    get_Urep(){
-	   //const url = `https://juice-quiz.herokuapp.com/api/platform/userRep`;
-	   const url= `http://localhost:3001/api/platform/userRep`;
-	   Axios.get(url,{
-		PID : this.state.PID,
-		UID: localStorage.getItem("UID"),
+	   //const url = `https://juice-quiz.herokuapp.com/api/platform/userRep/${localStorage.getItem("UID")}`;
+	   const url= `http://localhost:3001/api/platform/userRep/${localStorage.getItem("UID")}`;
+	    Axios.get(url,{
+			params:{
+			PID : this.state.PID,}
 	   }).then(res=>{return res.data})
 	   .then((response) => {   
-		console.log(response);
-	   //this.setState({Urep:response[0]['Rpoint']});
-	   console.log(this.state.Urep)
+	   this.setState({Urep:response[0]['Rpoint']});
 	   });
-   }
+   };
 
-
-
-
-	
 	async get(){
 		this._isMounted = true;
        //const url = `https://juice-quiz.herokuapp.com/api/platform/quizlist/${this.state.PID}`;
@@ -174,8 +185,7 @@ export default class singlePlatForm extends Component {
           this.setState({places:result},()=>{console.log(this.state.places);});
           this.setState({renderList:this.state.places});}          
        });
-    }
-    
+    };
 
     async get_ranklist(){
 		//const url = `https://juice-quiz.herokuapp.com/api/platform/ranklist/${this.state.PID}`;
@@ -188,9 +198,7 @@ export default class singlePlatForm extends Component {
 			this.setState({rank:result},()=>{console.log(this.state.rank);});
 			this.setState({rankList:this.state.rank});}          
 		 });
-	}
-
-
+	};
 
 	 is_sub(){
 		
@@ -203,7 +211,7 @@ export default class singlePlatForm extends Component {
 			console.log(response.data);
 			this.setState({subscribed: response.data["subscribe"]})
 		  });
-	}
+	};
    
 	is_coowner(){
 		console.log("start")
@@ -216,18 +224,11 @@ export default class singlePlatForm extends Component {
 		   console.log(response.data);
 		   this.setState({co_owner: response.data["coowner"]})
 		 });
-   }
-
-
-
-
-
-
-
-
+    };
+//Search 
 	handleChangeSearch(e) {  
 		this.setState({searchContent: e.target.value});   
-	} 
+	} ;
 
 	async search(){
 		if (this.state.searchContent===""){
@@ -250,7 +251,7 @@ export default class singlePlatForm extends Component {
 		
 		}
 		
-		}
+	};
 
 
 
@@ -296,8 +297,8 @@ export default class singlePlatForm extends Component {
 				{/* 此处读取平台的图片！ */}
                 <img src= {'../'+this.state.Pcover}  className='icon'></img> 
             <h className='platFormName'>{this.state.Pname}</h>
-			{!this.state.subscribed&&<button className='platformaccount'  onClick={()=>this.subscribe()}>subscribe</button>||<button className='platformaccount' >subscribed √</button>}
-			{!this.state.co_owner&&<button className='platformaccount'  onClick={()=>this.apply()}>Apply to be co-owner</button>||<button className='platformaccount' >apply has been sent</button>}
+			{!this.state.subscribed&&<button className='platformaccount'  onClick={()=>this.subscribe()}>subscribe</button>||<button className='platformaccount' onClick={()=>this.unsubscribe()} >subscribed √</button>}
+			{!this.state.co_owner&&<button className='platformaccount'  onClick={()=>this.apply()}>Apply to be co-owner</button>||<button className='platformaccount' >Co-Owner</button>}
           
 		     
             </div>
@@ -316,8 +317,8 @@ export default class singlePlatForm extends Component {
 		 
 			<div className="item">  
 			 <div className='title'>
-				 {place.Qname} 
-				 <div className='rate'>⭐: {place.ave_rate} 🔥：{place.hot}</div> 
+				<Link to={"/platform/"+this.state.PID+"/answer/"+place.QID}> {place.Qname} </Link>
+				<div className='rate'>⭐: {place.ave_rate} 🔥：{place.hot}</div> 
 			 </div >
 			 	<div className='content'> 
 				 <div className='discription'>{place.description}</div>

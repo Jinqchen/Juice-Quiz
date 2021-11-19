@@ -89,6 +89,12 @@ export default class header extends Component {
             </Link>
             {/* {!this.state.login&&<button onClick={()=>this.setState({SignInVisible:true,display:"block"})}  type="button" className='account'>Sign in</button>||<button onClick={()=>this.signOut()}  type="button" className='account'>Sign out</button>}
             { !this.state.login&&<button onClick={()=>this.setState({SignupVisible:true,display:"block"})}  type="button" className='account'>Sign up</button>||<Link to='/profile'><img src="account.jpg" className='accountIcon'  onClick={()=>this.userIcon()} ></img></Link>} */}
+           
+            <Link to='/platformCreate'>
+            {this.state.login&&<button className='create'> CREATE YOUR PLATFORM </button>}
+            </Link>
+           
+           
             {!this.state.login&&<button onClick={()=>this.setState({SignInVisible:true,display:"block"})}  type="button" className='account'>Sign in</button>}
             { !this.state.login&&<button onClick={()=>this.setState({SignupVisible:true,display:"block"})}  type="button" className='account'>Sign up</button>}
             
