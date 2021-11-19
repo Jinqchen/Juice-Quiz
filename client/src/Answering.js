@@ -1,7 +1,7 @@
 import React from 'react';
 import { Component } from 'react';
 import Axios from "axios";
-
+import './answer_question.css';
 
 export default class App extends Component {
 	constructor(props) {
@@ -19,13 +19,14 @@ export default class App extends Component {
 			opt3: "",
 			opt4: "",
 			answerOptions: [],
-			QID: localStorage.getItem('QID')
+			QID: localStorage.getItem('QID'),
+			is_Mount:false
 		};
 	}
 
 	componentDidMount = () => {
-        // const url = `https://juice-quiz.herokuapp.com/api/answer/${this.state.QID}`;
-		const url= `http://localhost:3001/api/answer/${this.state.QID}`;
+         const url = `https://juice-quiz.herokuapp.com/api/answer/${this.state.QID}`;
+		//const url= `http://localhost:3001/api/answer/${this.state.QID}`;
 		console.log("Component did mount")
         Axios.get(url)
 		.then(res=>{return res.data})
@@ -67,6 +68,7 @@ export default class App extends Component {
 
 
 	handleNextQuestion = (answerOption) => {
+		var is_Mount=false;
 		var currentQuestion = this.state.currentQuestion;
 		console.log('handler');
 		var isCorrect = false;
@@ -79,11 +81,12 @@ export default class App extends Component {
 		const nextQuestion = currentQuestion+1;
 		console.log('nextQuestion');
 		console.log('questlen');
-		this.setState({ currentQuestion: nextQuestion });
+		this.setState({ currentQuestion: nextQuestion },()=>{;
 		if (nextQuestion < questlen) {
 			if (isCorrect) {
 				currentScore = currentScore + 1;
 				this.setState({ currentScore: currentScore });
+				this.processData()
 			}
 
 			
@@ -95,8 +98,8 @@ export default class App extends Component {
 			this.setState({ showScore: true });
 		};
 		
-		console.log(this.state.currentQuestion);
-		this.processData();
+		});
+		
 	}
 
 
@@ -106,20 +109,20 @@ export default class App extends Component {
 
 	render() {
 		return (
-			<div className='app'>
+			<div className='answering'>
 				{this.state.showScore ? (
 					<div className='score-section'>You scored  out of {this.state.currentScore}</div>
 				) : (
 					<>
 						<div className='question-section'>
 							<div className='question-count'>
-								<span>Question {this.state.currentQuestion + 1} </span>/
+								<span>Question {this.state.currentQuestion + 1} </span>/{this.state.queslength}
 							</div>
 							<div className='question-text'>{this.state.quesText}</div>
 						</div>
 						<div className='answer-section'>
 							{this.state.answerOptions.map((answerOption) =>
-								<button onClick={() => this.handleNextQuestion(answerOption)}>{answerOption['text']}</button>
+								<button classname='answering_Btn' onClick={() => this.handleNextQuestion(answerOption)}>{answerOption['text']}</button>
 							)}
 						</div>
 					</>
