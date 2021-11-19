@@ -217,8 +217,8 @@ op_uncoown(){
 
 	async get(){
 		this._isMounted = true;
-    //  const url = `https://juice-quiz.herokuapp.com/api/platform/quizlist/${this.state.PID}`;
-		 const url= `http://localhost:3001/api/platform/quizlist/${this.state.PID}`;
+      const url = `https://juice-quiz.herokuapp.com/api/platform/quizlist/${this.state.PID}`;
+	//	 const url= `http://localhost:3001/api/platform/quizlist/${this.state.PID}`;
       const res = await Axios.get(url)
       .then(res=>{return res.data})
       .then( result =>{
