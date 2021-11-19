@@ -40,38 +40,17 @@ var con = mysql.createPool({
 });
 
 //Answering
-app.get('/api/get',(req,res)=>{
+app.get('/api/answer/:id',(req,res)=>{
       console.log("Connected!");
+	  const QID = req.params.id;
     con.query(
-		"select count(QuestionID) from quizquestion where QID=1 ;", 
+		`select q.QuestionID,q.Qtext,qo.optionnumber,qo.Optionx,qo.correctness from quizquestion q, quizoptions qo
+		where q.QID=${QID} and q.QID=qo.QID AND q.QuestionID=qo.QuestionID`,
 		function (err1, result) {
-		if (err1) throw err1;
-	    file={};
-		file["count(QuestionID)"]=result[0]["count(QuestionID)"];
-		console.log(file);
-		for(let i = 0; i < result[0]["count(QuestionID)"]; i++){
-			con.query("select Qtext from quizquestion where QID=1 AND QuestionID="+String(i+1)+";", 
-			function (err2, result2) {
-			 if (err2) throw err2;
-			 console.log(result2);
-			 file[i+1]= {};
-			 var str = JSON.stringify(result2[0]);
-             var obj = JSON.parse(str)
-			 file[i+1]['Qtext']=obj['Qtext'];
-			 console.log(file);
-			 });
-			
-			// con.query("select Optionx ,correctness  from quizoptions where QID=1 AND QuestionID="+String(i+1)+";", 
-			// function (err2, result2) {
-			// if (err2) throw err2;
-		    // var str = JSON.stringify(result2);
-            // var obj = JSON.parse(str);
-            // file[i+1]['Optionx']=obj;
-			// });
-	   }
-       }
+			if (err1) throw err1;
+			res.send(result);}
 	  )
-	  res.send(file);
+	 
 	}
   );
 
@@ -88,7 +67,7 @@ app.get ('/api/Platform',(req,res)=>{
 
   app.get ('/api/Platform/:tag',(req,res)=>{
     console.log("Connected!");
-	const tag = req.params.tag
+	const tag = req.params.tag;
     con.query(
 		`SELECT Pcover,p.PID,Pname from platformstyle s,platform p
 		 where s.PID=p.PID AND p.tag='`+tag +`' order BY RAND() limit 3`, 
@@ -307,6 +286,55 @@ app.post('/api/platform/coowner', (req, res) => {
 	  }
 	);
   });
+  app.post('/api/platform/owner', (req, res) => {
+	const PID = req.body.PID;
+	const UID = req.body.UID;  
+	con.query(
+	  `SELECT EXISTS(SELECT UID FROM own WHERE UID=? AND PID=?)`,
+	  [UID,PID],
+	  (err, result) => {
+		//  console.log(result);
+		  var sub =result[0]["EXISTS(SELECT UID FROM own WHERE UID='"+UID+"' AND PID='"+PID+"')"];
+		//  console.log(sub);
+		if (err) {
+		  res.send({ err: err });
+		}
+	    if (sub==1){
+			res.send({owner:true});
+		}else{
+			res.send({owner:false});
+		}
+	  }
+	);
+  });
+
+  app.delete('/api/platform/delSub/:id', (req, res) => {
+	const PID = req.params.id;
+	const UID = req.body.UID;  
+	con.query(
+	  `delete from subscribe where PID=? and UID=?`,
+	  [PID,UID],
+	  (err, result) => {
+		console.log(result);
+		
+	  }
+	);
+  });
+
+  app.delete('/api/platform/delCoown/:id', (req, res) => {
+	const PID = req.params.id;
+	const UID = req.body.UID;  
+	con.query(
+	  `delete from coown where PID=? and UID=?`,
+	  [PID,UID],
+	  (err, result) => {
+		console.log(result);
+		
+	  }
+	);
+  });
+
+
 
 
 app.get('/api/platform/userRep/:id',(req,res)=>{
@@ -369,9 +397,6 @@ app.get('/api/platform/userRep/:id',(req,res)=>{
 
 
   
-
-
-
   app.post('/api/platform/initalR', (req, res) => {
 	const PID = req.body.PID;
 	const UID = req.body.UID;  
@@ -498,7 +523,6 @@ app.put('/api/EditPlatform/replimit/:replimit',(req,res)=>{
 	   }
 	 );
 })
-
 
 
 app.listen(3001,()=>{

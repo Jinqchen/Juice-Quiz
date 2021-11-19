@@ -31,7 +31,15 @@ const IconTab=(props)=>{
 			path: './',  
             icon:<AiIcons.AiFillMessage/>,
 			cName:"nav-text"
-		} ];
+		},
+  {
+    title: 'New platform',
+    path: '/platformCreate',  
+          icon:<AiIcons.AiTwotoneBulb/>,
+    cName:"nav-text"
+  }
+ 
+];
 
     function handleSignout(){
       console.log(props)

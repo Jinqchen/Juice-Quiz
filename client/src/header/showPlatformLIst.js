@@ -80,9 +80,7 @@ import Axios from "axios";
        this.get();
           }
 
-	unsubscribe(){
-
-	}
+	
            
 		  async get(){
 			this._isMounted = true;
@@ -98,7 +96,25 @@ import Axios from "axios";
 		   });
 		}
 
+unsubscribe=(PID)=>{
+		 //const url = `https://juice-quiz.herokuapp.com/api/platform/delSub/${this.state.PID}`;
+	const url= `http://localhost:3001/api/platform/delSub/${PID}`;
+	     
+	Axios.delete(url, { data:{UID: localStorage.getItem("UID")}}).then((response) => { 
+	console.log(response); 
+   
+	}); 
+ this.get();
 
+
+
+
+
+
+
+
+
+	}
 
    
   
@@ -117,7 +133,7 @@ render(){
 	<div class="box-text"> 
 		<h4>{place.Pname}</h4> 
 		
-	<button className="boxbtn" > unsubscribed</button>
+	<button className="boxbtn" onClick={()=>this.unsubscribe(place.PID)}> unsubscribed</button>
 	</div>
 </div>
 
@@ -135,9 +151,9 @@ render(){
 	return (
 		<>
 		
-		<div className='board'>
+		<div className='board-show'>
 
-		<div className="boardTitle">subscribed platform</div>
+		<div className="boardTitle-show">subscribed platform</div>
 		
 		{menu}
 

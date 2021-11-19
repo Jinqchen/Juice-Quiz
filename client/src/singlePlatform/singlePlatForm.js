@@ -13,6 +13,7 @@ export default class singlePlatForm extends Component {
 			//决定是否显示subscribe按钮和订阅按钮
 			subscribed:false,
 			co_owner:false,
+			owner:false,
 			authority:false,
 			logged:localStorage.getItem("Logged"),
 			places: '',
@@ -40,6 +41,7 @@ export default class singlePlatForm extends Component {
 	this.setState({rander:true});
 	this.is_sub();
 	this.is_coowner();
+	this.is_owner();
 	this.get_replimit();
 }
 
@@ -99,10 +101,50 @@ export default class singlePlatForm extends Component {
 	this.inital_reputation()	
 	}
 
+
 unsubscribe(){
- this.setState({subscribed:false});
- this.setState({co_owner:false});
+if(this.state.owner){
+	alert("You can't unsubscribe your own platform!")
 }
+else if(this.state.co_owner){
+	console.log("co");
+this.op_unsub();
+this.op_uncoown();
+}
+else{
+this.op_unsub();
+
+}
+}
+
+
+
+
+op_unsub(){
+    //const url = `https://juice-quiz.herokuapp.com/api/platform/delSub/${this.state.PID}`;
+	const url= `http://localhost:3001/api/platform/delSub/${this.state.PID}`;
+	     
+		  Axios.delete(url, { data:{UID: localStorage.getItem("UID")}}).then((response) => { 
+		  console.log(response); 
+		 
+		  }); 
+	 this.setState({subscribed:false})
+}
+
+op_uncoown(){
+    //const url = `https://juice-quiz.herokuapp.com/api/platform/delCoown/${this.state.PID}`;
+	const url= `http://localhost:3001/api/platform/delCoown/${this.state.PID}`;
+	     
+		  Axios.delete(url, { data:{UID: localStorage.getItem("UID")}
+			
+		  }).then((response) => { 
+		  console.log(response); 
+		  
+		  }); 
+		  this.setState({co_owner:false})
+}
+
+
 
 
 
@@ -225,6 +267,22 @@ unsubscribe(){
 		   this.setState({co_owner: response.data["coowner"]})
 		 });
     };
+
+	is_owner(){
+		console.log("start")
+		// const url = 'https://juice-quiz.herokuapp.com/api/platform/owner';
+		const url= `http://localhost:3001/api/platform/owner`;
+		Axios.post(url, {
+		   PID : this.state.PID,
+		   UID: localStorage.getItem("UID"),
+		 }).then((response) => {
+		   console.log(response.data);
+		   this.setState({owner: response.data["owner"]})
+		 });
+    };
+
+
+
 //Search 
 	handleChangeSearch(e) {  
 		this.setState({searchContent: e.target.value});   
@@ -253,7 +311,10 @@ unsubscribe(){
 		
 	};
 
-
+store=(place)=>{
+	localStorage.setItem('QID',place.QID);
+	
+}
 
 
 
@@ -317,7 +378,7 @@ unsubscribe(){
 		 
 			<div className="item">  
 			 <div className='title'>
-				<Link to={"/platform/"+this.state.PID+"/answer/"+place.QID}> {place.Qname} </Link>
+				<Link to={"/platform/"+this.state.PID+"/answer/"+place.QID } onClick={()=>this.store(place)}> {place.Qname} </Link>
 				<div className='rate'>⭐: {place.ave_rate} 🔥：{place.hot}</div> 
 			 </div >
 			 	<div className='content'> 

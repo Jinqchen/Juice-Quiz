@@ -1,9 +1,8 @@
 import React from 'react';
 import { Component } from 'react';  
 import { Link } from 'react-router-dom';
-
-import { Media } from 'reactstrap';
-import './mangaePlatform.css' 
+import './mangaePlatform.css' ;    
+import { Media } from 'reactstrap'; 
 import Axios from "axios";  
 // const places = 
 // 	[
@@ -99,8 +98,9 @@ import Axios from "axios";
 
 
 store=(place)=>{
-	console.log("clicked");
+	 console.log("clicked");
 	localStorage.setItem('EditPID', place['PID']);
+ 
 }
    
   
@@ -112,11 +112,12 @@ render(){
 		return(
 			
 	<div className="list">   
+	 
 		<div class="box">
 				<div class="box-bg">
 				<img src={"./demo-image.jpg"} />
 				</div>
-		<div class="box-text"> 
+				<div class="box-text"> 
 			<h4>{place.Pname}</h4> 
 			<Link to={'/platformEdit/'+place.Pname} onClick={()=>this.store(place)}>
 			<button className="boxbtn-manage" > manage</button>
@@ -143,9 +144,9 @@ render(){
 	return (
 		<>
 		 
-		<div className='board'>
+		<div className='board-mangage'>
 		
-		<div className="boardTitle">Platform Management
+		<div className="boardTitle-mangage">Platform Management
 		 </div> 
 		 {menu}
 

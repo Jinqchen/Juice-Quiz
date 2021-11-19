@@ -11,7 +11,7 @@
     font-size: 28px;
 }
  
-.board{ 
+.board-show{ 
 
     display: block;
     position: relative; 
@@ -31,7 +31,7 @@
 .repoBar{
     margin-top: 20px;
 }
-.boardTitle{ 
+.boardTitle-show{ 
     font-size: 40px;
     margin: 0 auto; 
     text-align: center;

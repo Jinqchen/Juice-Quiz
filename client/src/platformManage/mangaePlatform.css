@@ -11,7 +11,7 @@
     font-size: 28px;
 }
  
-.board{ 
+.board-mangage{ 
 
     display: block;
     position: relative; 
@@ -31,7 +31,7 @@
 .repoBar{
     margin-top: 20px;
 }
-.boardTitle{ 
+.boardTitle-mangage{ 
     font-size: 40px;
     margin: 0 auto; 
     text-align: center;
@@ -39,8 +39,7 @@
 .box-text   { 
     display: flex;
     width:400px; 
-    text-decoration: black; 
-    z-index:9999999; 
+    text-decoration: black;  
 }
 .box-text h4 { 
             width:200px; 

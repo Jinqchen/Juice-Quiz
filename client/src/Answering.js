@@ -1,12 +1,13 @@
 import React from 'react';
 import { Component } from 'react';
-
+import Axios from "axios";
 
 
 export default class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			data:"",
 			currentQuestion: 0,
 			showScore: false,
 			currentScore: 0,
@@ -17,53 +18,51 @@ export default class App extends Component {
 			opt2: "",
 			opt3: "",
 			opt4: "",
-			answerOptions: []
+			answerOptions: [],
+			QID: localStorage.getItem('QID')
 		};
 	}
 
 	componentDidMount = () => {
-        // const url = 'https://juice-quiz.herokuapp.com/api/get';
-		const url= 'http://localhost:3001/api/get';
+        // const url = `https://juice-quiz.herokuapp.com/api/answer/${this.state.QID}`;
+		const url= `http://localhost:3001/api/answer/${this.state.QID}`;
 		console.log("Component did mount")
-		setTimeout(() => {
-			fetch(url)
-				.then(response => { return response.json() })
-				.then(json => {
-					console.log(json);
-					var myJSON = JSON.stringify(json);
-					var myObj = JSON.parse(myJSON);
-					this.setState({ ques: JSON.stringify(myObj) });
-					console.log("before");
-					this.processData();
-					console.log("after");
+        Axios.get(url)
+		.then(res=>{return res.data})
+		.then( result =>{
+			
+			console.log(result);
+			this.setState({data:result},()=>{console.log(this.state.data);});
+			this.processData()       
+		 });
 
-				})
-		})
-
-
+    
 	}
 
 
 
 
 	processData = () => {
-		var data = JSON.parse(this.state.ques);
-		this.setState({ queslength: data["count(QuestionID)"] });
-		let index = this.state.currentQuestion;
+		console.log(this.state.data);
+		var data= this.state.data
+		this.setState({ queslength: data.length/4 });
+		let index = this.state.currentQuestion*4;
 		console.log(index);
 		console.log(this.state.queslength);
 		console.log("processing");
-		let Optionx = data[index + 1]['Optionx'];
-		var option1 = Optionx[0];
-		var option2 = Optionx[1];
-		var option3 = Optionx[2];
-		var option4 = Optionx[3];
-		this.setState({ quesText: data[index + 1]['Qtext'] });
+		this.setState({ quesText: data[index]['Qtext'] });
+		console.log(this.state.quesText)
+		var option1 = {'text':data[index]['Optionx'],'correctness':data[index]['correctness']};
+		var option2 = {'text':data[index+1]['Optionx'],'correctness':data[index+1]['correctness']};
+		var option3 = {'text':data[index+2]['Optionx'],'correctness':data[index+2]['correctness']};
+		var option4 = {'text':data[index+3]['Optionx'],'correctness':data[index+3]['correctness']};
+		
 		this.setState({ opt1: option1 });
 		this.setState({ opt2: option2 });
 		this.setState({ opt3: option3 });
 		this.setState({ opt4: option4 });
 		this.setState({ answerOptions: [option1, option2, option3, option4] });
+		console.log(this.state.answerOptions);
 	}
 
 
@@ -120,7 +119,7 @@ export default class App extends Component {
 						</div>
 						<div className='answer-section'>
 							{this.state.answerOptions.map((answerOption) =>
-								<button onClick={() => this.handleNextQuestion(answerOption)}>{answerOption['Optionx']}</button>
+								<button onClick={() => this.handleNextQuestion(answerOption)}>{answerOption['text']}</button>
 							)}
 						</div>
 					</>
