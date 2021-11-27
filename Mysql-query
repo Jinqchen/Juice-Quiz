@@ -1,0 +1,794 @@
+backup for database 
+
+
+-- create table users (
+-- UID char(8) unique,
+-- Uname char(10) unique,
+-- Uemail char(35) unique,
+-- Upass char(30),
+-- primary key(UID)
+-- )
+-- create table userstyle(
+-- UID CHAR(8),
+-- pic blob,
+-- primary key(UID),
+-- foreign key(UID) references users(UID)
+-- );
+
+-- create table quiz (
+-- QID INT,
+-- ave_rate float,
+-- primary key (QID)
+-- );
+-- create table quizquestion(
+-- QID int,
+-- QuestionID int,
+-- Qtext text,
+-- primary key (QID,QuestionID),
+-- foreign key (QID) references quiz(QID)
+-- on delete no action
+-- on update cascade
+
+
+-- );
+-- ALTER TABLE quizquestion ADD UNIQUE (QuestionID);
+
+ALTER TABLE `heroku_a8e492587e5e18a`.`users` 
+CHANGE COLUMN `Uname` `Uname` CHAR(10) NOT NULL ,
+CHANGE COLUMN `Uemail` `Uemail` CHAR(35) NOT NULL ,
+CHANGE COLUMN `Upass` `Upass` CHAR(30) NOT NULL ;
+
+
+
+-- drop table platformstyle;
+-- drop table platform;
+-- create table platform (
+-- PID int unique,
+-- Pname char(20) unique,
+
+-- primary key(PID)
+-- );
+-- CREATE table platformstyle(
+-- PID int,
+-- Pcover char(30),
+-- foreign key(PID) references platform(PID)
+-- on delete no action
+-- on update cascade
+-- );
+
+-- insert into  platform(PID,Pname)
+-- value(1,'NASA');
+-- insert into  platform(PID,Pname)
+-- value(2,'MLB');
+-- insert into  platform(PID,Pname)
+-- value(3,'League of Legend');
+-- insert into  platform(PID,Pname)
+-- value(4,'Cowboy Bebop');
+-- insert into  platform(PID,Pname)
+-- value(5,'C++');
+-- insert into  platform(PID,Pname)
+-- value(6,'JAZZ');
+-- insert into  platform(PID,Pname)
+-- value(7,'CALCULUS');
+-- insert into  platform(PID,Pname)
+-- value(8,'Ancient Egypt');
+
+
+-- create table quizoptions(
+-- QID int,
+-- QuestionID int,
+-- Optionx text,
+-- correctness boolean,
+-- foreign key(QID)references quiz(QID)
+-- on delete no action
+-- on update cascade,
+-- foreign key(QuestionID) references quizquestion(QuestionID)
+-- on delete no action
+-- on update cascade
+
+-- )
+
+
+
+
+-- insert into quiz(QID,ave_rate)
+-- value(1,1.0);
+-- insert into quiz(QID,ave_rate)
+-- value(2,1.0);
+-- insert into quizquestion(QID,QuestionID,Qtext)
+-- value(1,1,"How many days are there in a week");
+-- insert into quizquestion(QID,QuestionID,Qtext)
+-- value(1,2,"How many hours are there in a day");
+-- insert into quizquestion(QID,QuestionID,Qtext)
+-- value(1,3,"What is one plus one?");
+-- insert into quizquestion(QID,QuestionID,Qtext)
+-- value(1,4,"how many days May has?");
+-- insert into quizquestion(QID,QuestionID,Qtext)
+-- value(1,5,"how many seconds per minute?");
+
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,1,'7 days',true);
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,1,'2 days',false);
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,1,'12 days',false);
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,1,'14 days',false);
+
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,2,'7',true);
+
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,2,'5',false);
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,2,'6',false);
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,2,'1',false);
+
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,3,'5',false);
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,3,'2',true);
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,3,'1',false);
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,3,'8',false);
+
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,4,'5',false);
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,4,'65',false);
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,4,'31',true);
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,4,'51',false);
+
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,5,'5',false);
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,5,'555',false);
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,5,'60',true);
+-- insert into quizoptions(QID,QuestionID,Optionx,correctness)
+-- value(1,5,'90',false);
+
+-- ALTER TABLE quizoptions
+-- ADD COLUMN optionnumber int AFTER QuestionID;
+
+
+-- truncate table quizoptions;
+-- select * from quizoptions
+
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,1,1,'7 days',true);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,1,2,'2 days',false);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,1,3,'12 days',false);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,1,4,'14 days',false);
+
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,2,1,'24',true);
+
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,2,2,'5',false);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,2,3,'6',false);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,2,4,'1',false);
+
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,3,1,'5',false);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,3,2,'2',true);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,3,3,'1',false);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,3,4,'8',false);
+
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,4,1,'5',false);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,4,2,'65',false);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,4,3,'31',true);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,4,4,'51',false);
+
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,5,1,'5',false);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,5,2,'555',false);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,5,3,'60',true);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- value(1,5,4,'90',false);
+
+
+select * from quizoptions
+
+
+
+in program queries:
+
+
+select optionnumber, Optionx from quizoptions
+where QID=1 AND QuestionID=1 ;
+-- change QID OR QuestionID to select different quiz option number and options
+
+
+select correctness from quizoptions
+where optionnumber=1 and QID=1 and QuestionID=1 ;
+-- change QID OR QuestionID or optionnumber to see different option's corrections
+
+select Optionx ,correctness  from quizoptions
+where QID=1 AND QuestionID=1 and optionnumber=1 ;
+
+
+
+select count(QuestionID) from quizquestion
+where QID=1;
+
+select count(optionnumber) from quizoptions
+where QID=1 and QuestionID=1
+
+
+
+-- insert into users(UID,Uname,Uemail,Upass)
+-- value(1,'firstUser','firstuser@gmail.com','firstuserkey');
+-- insert into userstyle (UID,pic)
+-- value(1,'user_image/1.png');
+ALTER TABLE userstyle MODIFY pic char(30);
+
+select * from users;
+select * from userstyle
+
+create table platform (
+PID char(8) unique,
+Pname char(20) unique,
+
+primary key(PID)
+);
+CREATE table platformstyle(
+PID CHAR(8),
+Pcover char(30),
+foreign key(PID) references platform(PID)
+
+)
+
+
+
+-- insert into platformstyle(PID,Pcover)
+-- value(1,'platform_image/1.jpg');
+-- insert into platformstyle(PID,Pcover)
+-- value(2,'platform_image/2.jpg');
+-- insert into platformstyle(PID,Pcover)
+-- value(3,'platform_image/3.jpg');
+-- insert into platformstyle(PID,Pcover)
+-- value(4,'platform_image/4.jpg');
+-- insert into platformstyle(PID,Pcover)
+-- value(5,'platform_image/5.jpg');
+-- insert into platformstyle(PID,Pcover)
+-- value(6,'platform_image/6.jpg');
+-- insert into platformstyle(PID,Pcover)
+-- value(7,'platform_image/7.jpg');
+-- insert into platformstyle(PID,Pcover)
+-- value(8,'platform_image/8.jpg')
+
+select * from platformstyle;
+
+
+drop table userstyle;
+drop table users;
+
+
+create table users (
+UID int unique not null,
+Uname char(10) unique not null,
+Uemail char(35) unique not null,
+Upass char(30),
+primary key(UID)
+);
+create table userstyle(
+UID int,
+pic char(30),
+primary key(UID),
+foreign key(UID) references users(UID)
+on delete no action
+on update cascade
+);
+insert into users(UID,Uname,Uemail,Upass)
+value(1,'firstUser','firstuser@gmail.com','firstuserkey');
+insert into userstyle (UID,pic)
+value(1,'user_image/1.png');
+
+-- ALTER TABLE platform 
+-- add constraint check (tag in ('Game','Math','Programming','Culture','History','Sport','Tech','Economy','Science','Life hack','Music','Movie','Food'));
+
+-- create table contain (
+-- PID INT,
+-- QID INT,
+-- PRIMARY KEY(PID,QID),
+-- FOREIGN KEY (PID) REFERENCES platform (PID)
+-- ON DELETE NO ACTION
+-- ON UPDATE CASCADE,
+-- FOREIGN KEY (QID) REFERENCES quiz (QID)
+-- ON DELETE NO ACTION
+-- ON UPDATE CASCADE
+
+-- )
+-- select * from users
+
+SELECT Pcover,p.PID,Pname from platformstyle s,platform p
+where p.tag='Game' and s.PID=p.PID;
+
+-- select * from platformstyle
+create table reputation (
+Rpoint int default 0,
+UID INT,
+PID INT,
+PRIMARY KEY(UID,PID),
+FOREIGN KEY (UID) REFERENCES users(UID)
+ON DELETE NO ACTION
+ON UPDATE CASCADE,
+FOREIGN KEY(PID) references platform(PID)
+ON DELETE NO ACTION
+ON UPDATE CASCADE
+
+)
+
+
+-- select Rpoint,PID from reputation 
+-- where UID=4
+
+-- ALTER TABLE quiz
+-- ADD COLUMN hot int AFTER ave_rate;
+
+-- select * from platform;
+-- insert into platform 
+-- value(14,'Math','Math');
+-- insert into platformstyle
+-- value(14,'./platform_image/14.jgp')
+
+-- create table Own(
+-- PID INT unique,
+-- UID INT unique,
+-- PRIMARY KEY(PID,UID),
+-- FOREIGN KEY(PID) REFERENCES platform(PID)
+-- on delete no action
+-- on update cascade,
+
+-- FOREIGN KEY(UID) REFERENCES users(UID)
+-- on delete no action
+-- on update cascade
+
+
+-- );
+-- create table Coown(
+-- PID INT,
+-- UID INT,
+-- PRIMARY KEY(PID,UID),
+-- FOREIGN KEY(PID) REFERENCES platform(PID)
+-- on delete no action
+-- on update cascade,
+
+-- FOREIGN KEY(UID) REFERENCES users(UID)
+-- on delete no action
+-- on update cascade
+
+
+-- );
+-- create table subscribe(
+-- PID INT,
+-- UID INT,
+-- PRIMARY KEY(PID,UID),
+-- FOREIGN KEY(PID) REFERENCES platform(PID)
+-- on delete no action
+-- on update cascade,
+
+-- FOREIGN KEY(UID) REFERENCES users(UID)
+-- on delete no action
+-- on update cascade
+
+
+-- )
+select * from reputation 
+order by PID;
+
+-- insert into Own
+-- value(1,7),
+-- (2,8),
+-- (3,9),
+-- (4,10),
+-- (5,11),
+-- (6,12),
+-- (7,11),
+-- (8,12),
+-- (9,8),
+-- (10,13),
+-- (11,3),
+-- (12,5),
+-- (13,6)
+
+
+
+-- drop table Own;
+-- create table Own(
+-- PID INT unique,
+-- UID INT ,
+-- PRIMARY KEY(PID,UID),
+-- FOREIGN KEY(PID) REFERENCES platform(PID)
+-- on delete no action
+-- on update cascade,
+
+-- FOREIGN KEY(UID) REFERENCES users(UID)
+-- on delete no action
+-- on update cascade
+
+
+-- );
+
+-- insert into coown
+-- value (1,7),
+-- (2,4),
+-- (3,6),
+-- (4,7)
+-- insert into subscribe
+-- value(1,3),
+-- (1,7),
+-- (2,8),
+-- (2,4),(3,9),(3,6),(4,10),
+-- (4,7),
+-- (5,11),
+-- (5,9),
+-- (6,12),
+-- (6,10),
+-- (7,3),
+-- (7,11),(8,12),
+-- (8,5),
+-- (9,8),
+-- (10,13),
+-- (11,3),
+-- (11,4),
+-- (12,5),
+-- (13,6)
+-- select * from quiz;
+-- ALTER TABLE quiz
+-- ADD COLUMN description text AFTER hot;
+select * from quiz;
+
+
+
+
+-- select * from quizquestion where QID=1;
+-- select * from quizoptions where QID=1;
+-- drop table quizquestion;
+-- create table quizquestion(
+-- QID INT,
+-- QuestionID INT,
+-- Qtext TEXT,
+-- PRIMARY KEY(QID,QuestionID),
+-- FOREIGN KEY(QID) references quiz(QID)
+-- ON DELETE NO ACTION
+-- ON UPDATE CASCADE
+
+
+-- );
+
+-- SHOW INDEX FROM quizquestion
+-- ALTER TABLE quizoptions
+-- 	DROP FOREIGN KEY quizoptions_ibfk_2
+-- ALTER TABLE `heroku_a8e492587e5e18a`.`quizquestion` 
+-- DROP INDEX `QuestionID` ;
+-- ;
+
+INSERT INTO quizquestion(QID,QuestionID,Qtext)
+VALUE(2,1,'DEMO QUESTION 1 '),
+(2,2,'DEMO QUESTION 2 '),
+(2,3,'DEMO QUESTION 3 '),
+(2,4,'DEMO QUESTION 4 '),
+(2,5,'DEMO QUESTION 5 '),
+(3,1,'DEMO QUESTION 1,Ancient Egypt'),
+(3,2,'DEMO QUESTION 2,Ancient Egypt'),
+(3,3,'DEMO QUESTION 3,Ancient Egypt'),
+(3,4,'DEMO QUESTION 4,Ancient Egypt'),
+(3,5,'DEMO QUESTION 5,Ancient Egypt'),
+(4,1,'DEMO QUESTION 1,computer scienc'),
+(4,2,'DEMO QUESTION 2computer scienc'),
+(4,3,'DEMO QUESTION 3computer scienc'),
+(4,4,'DEMO QUESTION 4computer scienc'),
+(4,5,'DEMO QUESTION 5computer scienc'),
+(5,1,'DEMO QUESTION 1Cse 416'),
+(5,2,'DEMO QUESTION 2Cse 416'),
+(5,3,'DEMO QUESTION 3Cse 416'),
+(5,4,'DEMO QUESTION 4Cse 416'),
+(5,5,'DEMO QUESTION 5Cse 416'),
+(6,1,'DEMO QUESTION 1AMS basic'),
+(6,2,'DEMO QUESTION 2AMS basic'),
+(6,3,'DEMO QUESTION 3AMS basic'),
+(6,4,'DEMO QUESTION 4AMS basic'),
+(6,5,'DEMO QUESTION 5AMS basic'),
+(7,1,'DEMO QUESTION 1script language'),
+(7,2,'DEMO QUESTION 2script language'),
+(7,3,'DEMO QUESTION 3script language'),
+(7,4,'DEMO QUESTION 4script language'),
+(7,5,'DEMO QUESTION 5script language'),
+(8,1,'DEMO QUESTION 1space ship'),
+(8,2,'DEMO QUESTION 2space ship'),
+(8,3,'DEMO QUESTION 3space ship'),
+(8,4,'DEMO QUESTION 4space ship'),
+(8,5,'DEMO QUESTION 5space ship'),
+(9,1,'DEMO QUESTION 1MLB little quiz'),
+(9,2,'DEMO QUESTION 2MLB little quiz'),
+(9,3,'DEMO QUESTION 3MLB little quiz'),
+(9,4,'DEMO QUESTION 4MLB little quiz'),
+(9,5,'DEMO QUESTION 5MLB little quiz'),
+
+(10,1,'DEMO QUESTION 1'),
+(10,2,'DEMO QUESTION 2'),
+(10,3,'DEMO QUESTION 3'),
+(10,4,'DEMO QUESTION 4'),
+(10,5,'DEMO QUESTION 5'),
+(11,1,'DEMO QUESTION 1 '),
+(11,2,'DEMO QUESTION 2 '),
+(11,3,'DEMO QUESTION 3 '),
+(11,4,'DEMO QUESTION 4 '),
+(11,5,'DEMO QUESTION 5 '),
+(12,1,'DEMO QUESTION 1 '),
+(12,2,'DEMO QUESTION 2 '),
+(12,3,'DEMO QUESTION 3 '),
+(12,4,'DEMO QUESTION 4 '),
+(12,5,'DEMO QUESTION 5 '),
+(13,1,'DEMO QUESTION 1 '),
+(13,2,'DEMO QUESTION 2 '),
+(13,3,'DEMO QUESTION 3 '),
+(13,4,'DEMO QUESTION 4 '),
+(13,5,'DEMO QUESTION 5 '),
+(14,1,'DEMO QUESTION 1 '),
+(14,2,'DEMO QUESTION 2 '),
+(14,3,'DEMO QUESTION 3 '),
+(14,4,'DEMO QUESTION 4 '),
+(14,5,'DEMO QUESTION 5 '),
+(15,1,'DEMO QUESTION 1 '),
+(15,2,'DEMO QUESTION 2 '),
+(15,3,'DEMO QUESTION 3 '),
+(15,4,'DEMO QUESTION 4 '),
+(15,5,'DEMO QUESTION 5 '),
+(16,1,'DEMO QUESTION 1 '),
+(16,2,'DEMO QUESTION 2 '),
+(16,3,'DEMO QUESTION 3 '),
+(16,4,'DEMO QUESTION 4 '),
+(16,5,'DEMO QUESTION 5 '),
+(17,1,'DEMO QUESTION 1 '),
+(17,2,'DEMO QUESTION 2 '),
+(17,3,'DEMO QUESTION 3 '),
+(17,4,'DEMO QUESTION 4 '),
+(17,5,'DEMO QUESTION 5 '),
+(18,1,'DEMO QUESTION 1 '),
+(18,2,'DEMO QUESTION 2 '),
+(18,3,'DEMO QUESTION 3 '),
+(18,4,'DEMO QUESTION 4 '),
+(18,5,'DEMO QUESTION 5 '),
+(19,1,'DEMO QUESTION 1 '),
+(19,2,'DEMO QUESTION 2 '),
+(19,3,'DEMO QUESTION 3 '),
+(19,4,'DEMO QUESTION 4 '),
+(19,5,'DEMO QUESTION 5 '),
+(20,1,'DEMO QUESTION 1 '),
+(20,2,'DEMO QUESTION 2 '),
+(20,3,'DEMO QUESTION 3 '),
+(20,4,'DEMO QUESTION 4 '),
+(20,5,'DEMO QUESTION 5 '),
+(21,1,'DEMO QUESTION 1 '),
+(21,2,'DEMO QUESTION 2 '),
+(21,3,'DEMO QUESTION 3 '),
+(21,4,'DEMO QUESTION 4 '),
+(21,5,'DEMO QUESTION 5 '),
+(22,1,'DEMO QUESTION 1 '),
+(22,2,'DEMO QUESTION 2 '),
+(22,3,'DEMO QUESTION 3 '),
+(22,4,'DEMO QUESTION 4 '),
+(22,5,'DEMO QUESTION 5 '),
+(23,1,'DEMO QUESTION 1 '),
+(23,2,'DEMO QUESTION 2 '),
+(23,3,'DEMO QUESTION 3 '),
+(23,4,'DEMO QUESTION 4 '),
+(23,5,'DEMO QUESTION 5 '),
+(24,1,'DEMO QUESTION 1 '),
+(24,2,'DEMO QUESTION 2 '),
+(24,3,'DEMO QUESTION 3 '),
+(24,4,'DEMO QUESTION 4 '),
+(24,5,'DEMO QUESTION 5 '),
+(25,1,'DEMO QUESTION 1 '),
+(25,2,'DEMO QUESTION 2 '),
+(25,3,'DEMO QUESTION 3 '),
+(25,4,'DEMO QUESTION 4 '),
+(25,5,'DEMO QUESTION 5 '),
+(26,1,'DEMO QUESTION 1 '),
+(26,2,'DEMO QUESTION 2 '),
+(26,3,'DEMO QUESTION 3 '),
+(26,4,'DEMO QUESTION 4 '),
+(26,5,'DEMO QUESTION 5 '),
+(27,1,'DEMO QUESTION 1 '),
+(27,2,'DEMO QUESTION 2 '),
+(27,3,'DEMO QUESTION 3 '),
+(27,4,'DEMO QUESTION 4 '),
+(27,5,'DEMO QUESTION 5 '),
+(28,1,'DEMO QUESTION 1 '),
+(28,2,'DEMO QUESTION 2 '),
+(28,3,'DEMO QUESTION 3 '),
+(28,4,'DEMO QUESTION 4 '),
+(28,5,'DEMO QUESTION 5 '),
+(29,1,'DEMO QUESTION 1 '),
+(29,2,'DEMO QUESTION 2 '),
+(29,3,'DEMO QUESTION 3 '),
+(29,4,'DEMO QUESTION 4 '),
+(29,5,'DEMO QUESTION 5 '),
+(30,1,'DEMO QUESTION 1 '),
+(30,2,'DEMO QUESTION 2 '),
+(30,3,'DEMO QUESTION 3 '),
+(30,4,'DEMO QUESTION 4 '),
+(30,5,'DEMO QUESTION 5 '),
+(31,1,'DEMO QUESTION 1 '),
+(31,2,'DEMO QUESTION 2 '),
+(31,3,'DEMO QUESTION 3 '),
+(31,4,'DEMO QUESTION 4 '),
+(31,5,'DEMO QUESTION 5 '),
+(32,1,'DEMO QUESTION 1 '),
+(32,2,'DEMO QUESTION 2 '),
+(32,3,'DEMO QUESTION 3 '),
+(32,4,'DEMO QUESTION 4 '),
+(32,5,'DEMO QUESTION 5 ');
+
+
+insert into quizoptions (QID,QuestionID,optionnumber,Optionx,correctness)
+value(2,1,1,'option1',1),
+(2,1,2,'option2',0),
+(2,1,3,'option3',0),
+(2,1,4,'option4',0),
+
+(2,2,1,'option1',1),
+(2,2,2,'option2',0),
+(2,2,3,'option3',0),
+(2,2,4,'option4',0),
+
+
+(2,3,1,'option1',1),
+(2,3,2,'option2',0),
+(2,3,3,'option3',0),
+(2,3,4,'option4',0),
+
+(2,4,1,'option1',1),
+(2,4,2,'option2',0),
+(2,4,3,'option3',0),
+(2,4,4,'option4',0),
+
+(2,5,1,'option1',1),
+(2,5,2,'option2',0),
+(2,5,3,'option3',0),
+(2,5,4,'option4',0)
+
+version-5.0
+
+
+(3,1,1,'option1',1),
+(3,1,2,'option2',0),
+(3,1,3,'option3',0),
+(3,1,4,'option4',0),
+
+(3,2,1,'option1',1),
+(3,2,2,'option2',0),
+(3,2,3,'option3',0),
+(3,2,4,'option4',0),
+
+
+(3,3,1,'option1',1),
+(3,3,2,'option2',0),
+(3,3,3,'option3',0),
+(3,3,4,'option4',0),
+(3,4,1,'option1',1),
+(3,4,2,'option2',0),
+(3,4,3,'option3',0),
+(3,4,4,'option4',0),
+
+(3,5,1,'option1',1),
+(3,5,2,'option2',0),
+(3,5,3,'option3',0),
+(3,5,4,'option4',0)
+
+insert into quizoptions (QID,QuestionID,optionnumber,Optionx,correctness)
+value (4,1,1,'option1',1),
+ (4,1,2,'option2',0),
+ (4,1,3,'option3',0),
+ (4,1,4,'option4',0),
+
+ (4,2,1,'option1',1),
+ (4,2,2,'option2',0),
+ (4,2,3,'option3',0),
+ (4,2,4,'option4',0),
+
+
+ (4,3,1,'option1',1),
+ (4,3,2,'option2',0),
+ (4,3,3,'option3',0),
+ (4,3,4,'option4',0),
+ (4,4,1,'option1',1),
+ (4,4,2,'option2',0),
+ (4,4,3,'option3',0),
+ (4,4,4,'option4',0),
+
+ (4,5,1,'option1',1),
+ (4,5,2,'option2',0),
+ (4,5,3,'option3',0),
+ (4,5,4,'option4',0)
+
+
+
+
+
+
+
+
+
+
+insert into quizoptions (QID,QuestionID,optionnumber,Optionx,correctness)
+value  (5,1,1,'option1',1),
+  (5,1,2,'option2',0),
+  (5,1,3,'option3',0),
+  (5,1,4,'option4',0),
+
+  (5,2,1,'option1',1),
+  (5,2,2,'option2',0),
+  (5,2,3,'option3',0),
+  (5,2,4,'option4',0),
+
+
+  (5,3,1,'option1',1),
+  (5,3,2,'option2',0),
+  (5,3,3,'option3',0),
+  (5,3,4,'option4',0),
+  (5,4,1,'option1',1),
+  (5,4,2,'option2',0),
+  (5,4,3,'option3',0),
+  (5,4,4,'option4',0),
+
+  (5,5,1,'option1',1),
+  (5,5,2,'option2',0),
+  (5,5,3,'option3',0),
+  (5,5,4,'option4',0)
+
+
+
+insert into quizoptions (QID,QuestionID,optionnumber,Optionx,correctness)
+value   (6,1,1,'option1',1),
+   (6,1,2,'option2',0),
+   (6,1,3,'option3',0),
+   (6,1,4,'option4',0),
+
+   (6,2,1,'option1',1),
+   (6,2,2,'option2',0),
+   (6,2,3,'option3',0),
+   (6,2,4,'option4',0),
+
+
+   (6,3,1,'option1',1),
+   (6,3,2,'option2',0),
+   (6,3,3,'option3',0),
+   (6,3,4,'option4',0),
+   (6,4,1,'option1',1),
+   (6,4,2,'option2',0),
+   (6,4,3,'option3',0),
+   (6,4,4,'option4',0),
+
+   (6,5,1,'option1',1),
+   (6,5,2,'option2',0),
+   (6,5,3,'option3',0),
+   (6,5,4,'option4',0)
+
+
+
+
+
+
+

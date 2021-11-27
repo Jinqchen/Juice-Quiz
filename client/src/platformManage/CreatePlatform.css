@@ -1,0 +1,74 @@
+
+ 
+.editBoard{ 
+    
+    display: block;
+    position: relative; 
+    padding-top: 100px; 
+    background-color: grey; 
+    margin:0 auto;
+    height: 100%;
+    width: 50%;
+}
+.editForm{
+    padding-bottom: 50px; 
+    font-size: 28px;
+}
+form {
+    margin: 0 auto; 
+    padding: 1em; 
+  }
+
+  
+  form li  {
+    margin-top: 1em;  
+
+  }
+  
+  label { 
+    width: 90px;
+    text-align: right;
+  }
+  
+  input  {
+    font: 1em sans-serif;
+   
+    display: inline-block;
+    box-sizing: border-box;
+   
+    margin-left: 20px;
+  }
+  
+  input:focus,
+  textarea:focus {
+    border-color: #000;
+  }
+  
+ 
+  
+  .button {
+ 
+    padding-left: 90px; }
+  
+  button {
+  
+    margin-left: .5em;
+  }
+  .repNeed{
+      width: 10%
+  }
+  select{
+    color: black;
+  }
+  option{
+    color: black;
+  }
+  .submit{
+    display: block;
+    width: 200px;
+    height: 100px;
+    background-color:#F78223;
+    display: block;
+    margin: 0 auto;
+    font-size: 28px;
+  }
