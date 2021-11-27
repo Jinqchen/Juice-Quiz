@@ -48,16 +48,16 @@ import Axios from "axios";
         }
 
        updateName(){
-        const url = `https://juice-quiz.herokuapp.com/api/EditPlatform/name/${this.state.name}`;
-        //  const url= `http://localhost:3001/api/EditPlatform/name/${this.state.name}`;
+        //const url = `https://juice-quiz.herokuapp.com/api/EditPlatform/name/${this.state.name}`;
+          const url= `http://localhost:3001/api/EditPlatform/name/${this.state.name}`;
         Axios.put(url,{PID:this.state.EPID}).then((response) => { 
       console.log(response); 
       }
       )
     }
     updateTag(){
-      const url = `https://juice-quiz.herokuapp.com/api/EditPlatform/tag/${this.state.tag}`;
-      //  const url= `http://localhost:3001/api/EditPlatform/tag/${this.state.tag}`;
+      // const url = `https://juice-quiz.herokuapp.com/api/EditPlatform/tag/${this.state.tag}`;
+       const url= `http://localhost:3001/api/EditPlatform/tag/${this.state.tag}`;
       
     Axios.put(url,{PID:this.state.EPID}).then((response) => { 
     console.log(response); 
@@ -65,8 +65,8 @@ import Axios from "axios";
     )
   }
   updateRep(){
-    const url = `https://juice-quiz.herokuapp.com/api/EditPlatform/replimit/${this.state.replimit}`;
-    //  const url= `http://localhost:3001/api/EditPlatform/replimit/${this.state.requireReputation}`;
+    //  const url = `https://juice-quiz.herokuapp.com/api/EditPlatform/replimit/${this.state.replimit}`;
+    const url= `http://localhost:3001/api/EditPlatform/replimit/${this.state.requireReputation}`;
     
   Axios.put(url,{PID:this.state.EPID}).then((response) => { 
   console.log(response); 

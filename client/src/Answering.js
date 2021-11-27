@@ -25,8 +25,8 @@ export default class App extends Component {
 	}
 
 	componentDidMount = () => {
-         const url = `https://juice-quiz.herokuapp.com/api/answer/${this.state.QID}`;
-		//const url= `http://localhost:3001/api/answer/${this.state.QID}`;
+        // const url = `https://juice-quiz.herokuapp.com/api/answer/${this.state.QID}`;
+		const url= `http://localhost:3001/api/answer/${this.state.QID}`;
 		console.log("Component did mount")
         Axios.get(url)
 		.then(res=>{return res.data})

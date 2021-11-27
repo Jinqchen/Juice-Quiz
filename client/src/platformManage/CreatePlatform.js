@@ -50,8 +50,8 @@ import Axios from "axios";
         
         submit(){ 
           
-     const url = 'https://juice-quiz.herokuapp.com/api/createplatform';
-     // const url= 'http://localhost:3001/api/createplatform';
+      //const url = 'https://juice-quiz.herokuapp.com/api/createplatform';
+     const url= 'http://localhost:3001/api/createplatform';
       Axios.post(url, { 
              Pname: this.state.name, 
              tag: this.state.tag, 
@@ -71,8 +71,8 @@ import Axios from "axios";
         
     //insert to own 
     own(){
-       const url = `https://juice-quiz.herokuapp.com/api/CreatePlatform/doown`;
-		  //const url= `http://localhost:3001/api/CreatePlatform/doown`;
+      // const url = `https://juice-quiz.herokuapp.com/api/CreatePlatform/doown`;
+		  const url= `http://localhost:3001/api/CreatePlatform/doown`;
 	     
 		  Axios.post(url, { 
 			PID : this.state.PID,
@@ -84,8 +84,8 @@ import Axios from "axios";
     }
 
     inital_reputation(){
-      const url = 'https://juice-quiz.herokuapp.com/api/CreatePlatform/initalR';
-      //const url= 'http://localhost:3001/api/CreatePlatform/initalR';
+      //const url = 'https://juice-quiz.herokuapp.com/api/CreatePlatform/initalR';
+      const url= 'http://localhost:3001/api/CreatePlatform/initalR';
         
        Axios.post(url, { 
        PID : this.state.PID,
