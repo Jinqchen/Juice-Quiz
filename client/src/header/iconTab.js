@@ -16,26 +16,32 @@ const IconTab=(props)=>{
 			 
 			title: 'Subscribed',
 			path: './profile',  
-            icon:<AiIcons.AiFillCheckCircle/>,
+      icon:<AiIcons.AiFillCheckCircle/>,
 			cName:"nav-text"
 		} ,
     {
 			 
 			title: 'My Platforms',
 			path: './managePlatform',  
-            icon:<AiIcons.AiOutlineBlock/>,
+      icon:<AiIcons.AiOutlineBlock/>,
 			cName:"nav-text"
 		} ,
 		{
-            title: 'Message',
+      title: 'Message',
 			path: './',  
-            icon:<AiIcons.AiFillMessage/>,
+       icon:<AiIcons.AiFillMessage/>,
 			cName:"nav-text"
 		},
   {
     title: 'New platform',
     path: '/platformCreate',  
-          icon:<AiIcons.AiTwotoneBulb/>,
+    icon:<AiIcons.AiTwotoneBulb/>,
+    cName:"nav-text"
+  },
+  {
+    title: 'Manage Quiz',
+    path: '/platformCreate',  
+    icon:<AiIcons.AiOutlineBars/>,
     cName:"nav-text"
   }
  

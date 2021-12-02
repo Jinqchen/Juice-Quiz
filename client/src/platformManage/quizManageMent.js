@@ -1,11 +1,10 @@
 import React from 'react';
-import { Component } from 'react';  
-import './singlePlatForm.css'
+import { Component } from 'react';   
 import { Media } from 'reactstrap';
 import Axios from "axios";
 import { Link } from 'react-router-dom';
 
-export default class singlePlatForm extends Component {
+export default class quizManageMent extends Component {
 	_isMounted = false;
 	constructor(props) {
 		super(props);
@@ -301,11 +300,14 @@ op_uncoown(){
 		  })
 		  .then(res=>{return res.data})
 		  .then( result =>{
+			
 			  console.log(result);
 			  this.setState({places:result},()=>{console.log(this.state.places);});
 			  this.setState({renderList:this.state.places});        
 		   });
-		} 
+		
+		}
+		
 	};
 
 store=(place)=>{
@@ -360,13 +362,13 @@ newQuiz(){
             <h className='platFormName'>{this.state.Pname}</h>
 			{!this.state.subscribed&&<button className='platformaccount'  onClick={()=>this.subscribe()}>subscribe</button>||<button className='platformaccount' onClick={()=>this.unsubscribe()} >subscribed √</button>}
 			{!this.state.co_owner&&<button className='platformaccount'  onClick={()=>this.apply()}>Apply to be co-owner</button>||<button className='platformaccount' >Co-Owner</button>}
-			<Link  className='newQuizLink' to={'/quizInit'}>
+			{/* <Link  className='newQuizLink' to={'/quizInit'}>
 			<span>{"Release New Quiz"}</span> 
-                    </Link>
-
-					{/* <Link  className='newQuizLink' to={'/quizEdit'}>
-			<span>{"QuizEdit"}</span> 
                     </Link> */}
+
+					<Link  className='newQuizLink' to={'/quizEdit'}>
+			<span>{"QuizEdit"}</span> 
+                    </Link>
            
             </div>
 			<div className="sort">

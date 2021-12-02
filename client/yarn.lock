@@ -7316,6 +7316,11 @@
     "lower-case" "^2.0.2"
     "tslib" "^2.0.3"
 
+"node-bin-setup@^1.0.0":
+  "integrity" "sha512-uPIxXNis1CRbv1DwqAxkgBk5NFV3s7cMN/Gf556jSw6jBvV7ca4F9lRL/8cALcZecRibeqU+5dFYqFFmzv5a0Q=="
+  "resolved" "https://registry.npmjs.org/node-bin-setup/-/node-bin-setup-1.0.6.tgz"
+  "version" "1.0.6"
+
 "node-forge@^0.10.0":
   "integrity" "sha512-PPmu8eEeG9saEUvI97fm4OYxXVB6bFvyNTyiUOBichBpFG8A1Ljw3bY62+5oOjDEMHRnd0Y7HQ+x7uzxOzC6JA=="
   "resolved" "https://registry.npmjs.org/node-forge/-/node-forge-0.10.0.tgz"
@@ -7375,6 +7380,13 @@
   "integrity" "sha512-rB1DUFUNAN4Gn9keO2K1efO35IDK7yKHCdCaIMvFO7yUYmmZYeDjnGKle26G4rwj+LKRQpjyUUvMkPglwGCYNQ=="
   "resolved" "https://registry.npmjs.org/node-releases/-/node-releases-1.1.77.tgz"
   "version" "1.1.77"
+
+"node@^17.1.0":
+  "integrity" "sha512-1gg810R7sKtFkCYMdIhOyYDCuRJZyLvP+lTX8Z9AMAiUdHPoeNu0KQN59CzBud5L/vMtFPkbsCwWOy1aTYOL8g=="
+  "resolved" "https://registry.npmjs.org/node/-/node-17.1.0.tgz"
+  "version" "17.1.0"
+  dependencies:
+    "node-bin-setup" "^1.0.0"
 
 "normalize-package-data@^2.3.2":
   "integrity" "sha512-/5CMN3T0R4XTj4DcGaexo+roZSdSFW/0AOOTROrjxzCG1wrWXEsGbRKevjlIL+ZDE4sZlJr5ED4YW0yqmkK+eA=="
