@@ -788,7 +788,19 @@ value   (6,1,1,'option1',1),
 
 
 
+insert into releases(UID,PID)
+VALUE(?,?);
+INSERT INTO quiz(QID,Qname,ave_rate,hot,description)
+value(?,?,1.0,0,?);
+insert into quizquestion(QID,QuestionID,Qtext)
+value(?,?,?);
+insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+VALUE(?,?,?,'this is option description',True);
 
+delete from releases where QID=XX AND PID=XX;
+DELETE FROM quiz where QID=XX;
+DELETE FROM quizquestion WHERE QID=XX;
+DELETE FROM quizoptions WHERE QID=XX;
 
 
 
