@@ -40,7 +40,7 @@ const IconTab=(props)=>{
   },
   {
     title: 'Manage Quiz',
-    path: '/platformCreate',  
+    path: '/manageQuiz',  
     icon:<AiIcons.AiOutlineBars/>,
     cName:"nav-text"
   }

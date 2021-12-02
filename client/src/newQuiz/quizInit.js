@@ -18,7 +18,8 @@ import './quizInit.css'
               limitedHour:0,
               limitedMin:0,
               PID:0,
-              success:true
+              success:true,
+              QID:0,
             };    
           }
         
@@ -45,32 +46,12 @@ import './quizInit.css'
         
         submit(){ 
             
-          alert("title "+this.state.name)
-          alert("discription "+this.state.discription)
-          alert("timeLimit? "+this.state.timeLimited)
-          alert("hour "+this.state.limitedHour) 
-          alert("Min "+this.state.limitedMin)
+         
       }
        
         
-    //insert to own 
-    own(){}
-
-    inital_reputation(){
-      //const url = 'https://juice-quiz.herokuapp.com/api/CreatePlatform/initalR';
-      const url= 'http://localhost:3001/api/CreatePlatform/initalR';
-        
-       Axios.post(url, { 
-       PID : this.state.PID,
-       UID: localStorage.getItem("UID"),
-       }).then((response) => { 
-       console.log(response); 
-       
-       }); 
- 
- 
-   }
-
+   
+    
 
 
 
@@ -81,7 +62,7 @@ render(){
 	return (
 		<>
 		 <div className='initQuizeditBoard'>
-         <img src="logo.jpg" className="quizInitIcon"></img> 
+         <img src="./logo.jpg" className="quizInitIcon"></img> 
         <form onSubmit={this.handleSubmit} className="editForm">
             
       <li>
@@ -120,7 +101,10 @@ render(){
           </li>
 
           }
+       <Link to={'/quizEdit/'+this.state.QID}>
       <button  className="submit" onClick={()=>this.submit()} >Create</button>  
+        </Link>
+       
        </form>
          </div>
 			  </>

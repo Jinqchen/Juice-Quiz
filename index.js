@@ -30,7 +30,7 @@ app.use(
   );
   
 
-var con = mysql.createConnection({
+var con = mysql.createPool({
 	host: "us-cdbr-east-04.cleardb.com",
 	user: "b0fb64176d0a67",
 	password: "1322f121",

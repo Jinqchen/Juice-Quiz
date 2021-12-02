@@ -36,12 +36,8 @@ export default class quizManageMent extends Component {
 	
  componentDidMount=()=>{
 	this.get() ;
-	this.get_ranklist();
 	this.setState({rander:true});
-	this.is_sub();
-	this.is_coowner();
-	this.is_owner();
-	this.get_replimit();
+	
 }
 
 
@@ -83,137 +79,7 @@ export default class quizManageMent extends Component {
 	}
  
 
-
-	//申请和订阅在这里
-	subscribe(){
-    //const url = 'https://juice-quiz.herokuapp.com/api/platform/dosubscribe';
-	   const url= 'http://localhost:3001/api/platform/dosubscribe';
-	     
-		  Axios.post(url, { 
-			PID : this.state.PID,
-			UID: localStorage.getItem("UID"),
-		  }).then((response) => { 
-		  console.log(response); 
-		  this.setState({subscribed:true})
-		  }); 
-	 
-	this.inital_reputation()	
-	}
-
-
-unsubscribe(){
-if(this.state.owner){
-	alert("You can't unsubscribe your own platform!")
-}
-else if(this.state.co_owner){
-	console.log("co");
-this.op_unsub();
-this.op_uncoown();
-}
-else{
-this.op_unsub();
-
-}
-}
-
-
-
-
-op_unsub(){
-    //const url = `https://juice-quiz.herokuapp.com/api/platform/delSub/${this.state.PID}`;
-	const url= `http://localhost:3001/api/platform/delSub/${this.state.PID}`;
-	     
-		  Axios.delete(url, { data:{UID: localStorage.getItem("UID")}}).then((response) => { 
-		  console.log(response); 
-		 
-		  }); 
-	 this.setState({subscribed:false})
-}
-
-op_uncoown(){
-    //const url = `https://juice-quiz.herokuapp.com/api/platform/delCoown/${this.state.PID}`;
-	const url= `http://localhost:3001/api/platform/delCoown/${this.state.PID}`;
-	     
-		  Axios.delete(url, { data:{UID: localStorage.getItem("UID")}
-			
-		  }).then((response) => { 
-		  console.log(response); 
-		  
-		  }); 
-		  this.setState({co_owner:false})
-}
-
-
-
-
-
-	
-	inital_reputation(){
-	   //const url = 'https://juice-quiz.herokuapp.com/api/platform/initalR';
-	   const url= 'http://localhost:3001/api/platform/initalR';
-	     
-		  Axios.post(url, { 
-			PID : this.state.PID,
-			UID: localStorage.getItem("UID"),
-		  }).then((response) => { 
-		  console.log(response); 
-		  this.setState({subscribed:true})
-		  }); 
-
-
-	}
-
-// Apply function 
-	do_apply(){
-		//  const url = `https://juice-quiz.herokuapp.com/api/platform/doapply`;
-		  const url= `http://localhost:3001/api/platform/doapply`;
-	     
-		  Axios.post(url, { 
-			PID : this.state.PID,
-			UID: localStorage.getItem("UID"),
-		  }).then((response) => { 
-		  console.log(response); 
-		  this.setState({co_owner:true})
-		  }); 
-	};
-      
-   apply(){
-     if(!this.state.subscribed){
-		 alert("You need to subscribe the platform first!")
-	 }
-	 else{
-		 this.get_Urep();
-		 if(this.state.Urep < this.state.replimit){
-			 alert("You didn't reach the co-owner requirment")
-		 }
-		 else{
-			 this.do_apply();
-		 }
-	 }
-   }
-
-   get_replimit(){
-       // const url = `https://juice-quiz.herokuapp.com/api/platform/${this.state.PID}/replimit`;
-		  const url= `http://localhost:3001/api/platform/${this.state.PID}/replimit`;
-		  Axios.get(url).then(res=>{return res.data})
-		  .then((response) => {   
-		  this.setState({replimit:response[0]['replimit']});
-		  console.log(this.state.replimit)
-		  });
-   };
-
-   get_Urep(){
-	   //const url = `https://juice-quiz.herokuapp.com/api/platform/userRep/${localStorage.getItem("UID")}`;
-	   const url= `http://localhost:3001/api/platform/userRep/${localStorage.getItem("UID")}`;
-	    Axios.get(url,{
-			params:{
-			PID : this.state.PID,}
-	   }).then(res=>{return res.data})
-	   .then((response) => {   
-	   this.setState({Urep:response[0]['Rpoint']});
-	   });
-   };
-
+  
 	async get(){
 		this._isMounted = true;
     //  const url = `https://juice-quiz.herokuapp.com/api/platform/quizlist/${this.state.PID}`;
@@ -228,57 +94,7 @@ op_uncoown(){
        });
     };
 
-    async get_ranklist(){
-	//    const url = `https://juice-quiz.herokuapp.com/api/platform/ranklist/${this.state.PID}`;
-		const url= `http://localhost:3001/api/platform/ranklist/${this.state.PID}`;
-		const res = await Axios.get(url)
-		.then(res=>{return res.data})
-		.then( result =>{
-			if(this._isMounted){
-			console.log(result);
-			this.setState({rank:result},()=>{console.log(this.state.rank);});
-			this.setState({rankList:this.state.rank});}          
-		 });
-	};
-
-	 is_sub(){
-		
-    //   const url = 'https://juice-quiz.herokuapp.com/api/platform/subscribe';
-		 const url= `http://localhost:3001/api/platform/subscribe`;
-         Axios.post(url, {
-			PID : this.state.PID,
-			UID: localStorage.getItem("UID"),
-		  }).then((response) => {
-			console.log(response.data);
-			this.setState({subscribed: response.data["subscribe"]})
-		  });
-	};
-   
-	is_coowner(){
-		console.log("start")
-		// const url = 'https://juice-quiz.herokuapp.com/api/platform/coowner';
-		const url= `http://localhost:3001/api/platform/coowner`;
-		Axios.post(url, {
-		   PID : this.state.PID,
-		   UID: localStorage.getItem("UID"),
-		 }).then((response) => {
-		   console.log(response.data);
-		   this.setState({co_owner: response.data["coowner"]})
-		 });
-    };
-
-	is_owner(){
-		console.log("start")
-		// const url = 'https://juice-quiz.herokuapp.com/api/platform/owner';
-		const url= `http://localhost:3001/api/platform/owner`;
-		Axios.post(url, {
-		   PID : this.state.PID,
-		   UID: localStorage.getItem("UID"),
-		 }).then((response) => {
-		   console.log(response.data);
-		   this.setState({owner: response.data["owner"]})
-		 });
-    };
+  
 
 
 
@@ -314,6 +130,7 @@ store=(place)=>{
 	localStorage.setItem('QID',place.QID);
 	
 }
+
 newQuiz(){
 	alert("!")
 }
@@ -321,34 +138,10 @@ newQuiz(){
 
 
 	render() {     
-		const menu = this.state.rankList.map((place) => {
-			return(
-				
-							<div className="rankList">   
-						
-					<div> 
-					<img src={'../'+place.pic} className="rankIcon" />
-				 
-						<h4 class="rankName">{place.Uname}</h4> 
-						<h4 class="rankRepo">reputation:{place.Rpoint}{}</h4> 
-						
-						<div class="reputationValue"> 
-						 
-				</div>
-				</div>
-	 
-				</div>
-			   
-			);
-		});
 		console.log(this.state.subscribed);
 		return (
            <div>
-				 
-				<div className="rankBoard"> 
-				<div className="rankBoardTitle"> reputation rank  </div>
-				<div>{menu}</div>
-				</div> 
+		
             <div className="header"> 
 			</div> 
 			<div className="search"> 
@@ -356,21 +149,7 @@ newQuiz(){
 			<button className='searchButton'onClick={()=>this.search()}>Search </button>
 			</div>   
             
-			<div className="platFormButton">
-				{/* 此处读取平台的图片！ */}
-                <img src= {'../'+this.state.Pcover}  className='icon'></img> 
-            <h className='platFormName'>{this.state.Pname}</h>
-			{!this.state.subscribed&&<button className='platformaccount'  onClick={()=>this.subscribe()}>subscribe</button>||<button className='platformaccount' onClick={()=>this.unsubscribe()} >subscribed √</button>}
-			{!this.state.co_owner&&<button className='platformaccount'  onClick={()=>this.apply()}>Apply to be co-owner</button>||<button className='platformaccount' >Co-Owner</button>}
-			{/* <Link  className='newQuizLink' to={'/quizInit'}>
-			<span>{"Release New Quiz"}</span> 
-                    </Link> */}
-
-					<Link  className='newQuizLink' to={'/quizEdit'}>
-			<span>{"QuizEdit"}</span> 
-                    </Link>
-           
-            </div>
+			
 			<div className="sort">
 
 			
@@ -386,7 +165,7 @@ newQuiz(){
 		 
 			<div className="item">  
 			 <div className='title'>
-				<Link to={"/platform/"+this.state.PID+"/answer/"+place.QID } onClick={()=>this.store(place)}> {place.Qname} </Link>
+				 {place.Qname} 
 				<div className='rate'>⭐: {place.ave_rate} 🔥：{place.hot}</div> 
 			 </div >
 			 	<div className='content'> 
@@ -396,13 +175,7 @@ newQuiz(){
 			</div>
 			
 		);
-	})}
-			
-			
-			
-			
-			
-			
+	})}			
 			
 			</div>
 			 </div>

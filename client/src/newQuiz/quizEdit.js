@@ -193,7 +193,7 @@ render(){
         <span>
       
 		 <div className='editQuizeditBoard'> 
-         <img src="logo.jpg" className="quizInitIcon"></img>  
+         <img src="/logo.jpg" className="quizInitIcon"></img>  
         <div className="editQuestionList">
         {this.state.questions.map((item, index) => {
                 return ( 
