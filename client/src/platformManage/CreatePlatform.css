@@ -10,6 +10,12 @@
     height: 100%;
     width: 50%;
 }
+.boardTitle{
+  position: relative;
+  font-size: 28px;
+  left: 33%;
+
+}
 .editForm{
     padding-bottom: 50px; 
     font-size: 28px;
@@ -30,7 +36,7 @@ form {
     text-align: right;
   }
   
-  input  {
+  .editInput input  {
     font: 1em sans-serif;
    
     display: inline-block;

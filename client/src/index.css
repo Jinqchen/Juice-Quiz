@@ -16,4 +16,6 @@ body {
     background-color: #EEEEEE; 
     height: 100%;
   }
+  li{
+    list-style-type:none  }
   

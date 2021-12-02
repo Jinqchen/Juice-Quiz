@@ -30,8 +30,7 @@ export default class App extends Component {
 		console.log("Component did mount")
         Axios.get(url)
 		.then(res=>{return res.data})
-		.then( result =>{
-			
+		.then( result =>{ 
 			console.log(result);
 			this.setState({data:result},()=>{console.log(this.state.data);});
 			this.processData()       

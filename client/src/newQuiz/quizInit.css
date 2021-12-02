@@ -1,0 +1,32 @@
+
+.initQuizeditBoard{
+    display: block;
+    position: relative;  
+    background-color: grey; 
+    margin:0 auto; 
+    width: 50%;
+}
+.quizInitIcon{  
+   margin-top: 5%;
+    position: relative;
+    left: 45%;  
+    height: 60px; 
+    width: 120px;
+}
+.initQuizTitle{ 
+    margin-left: 0;
+    width: 100%;
+}
+.quizDiscription{ 
+    size:130; 
+    color: black;
+    font-size: 28px; 
+    
+    width: 100%;
+}
+.LimitedTime{
+    margin-left: 20px;
+}
+.timeQuizInit  {
+    width: 10%
+}

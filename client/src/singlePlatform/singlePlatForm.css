@@ -72,6 +72,13 @@
     font-size: 16px;
     height: 70%;
     width:15%
+} 
+.newQuizLink span{ 
+    color: #e49132;
+    position:absolute;
+    right: 0%; 
+    bottom: 0%;
+  
 }
 .icon{
     width: 100px;

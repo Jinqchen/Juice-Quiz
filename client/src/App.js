@@ -11,6 +11,8 @@ import { BrowserRouter as Router, Route,Routes} from 'react-router-dom';
 import ManagePlatform from './platformManage/mangaePlatform' 
 import EditPlatform from './platformManage/EditPlatform';
 import CreatePlatform from './platformManage/CreatePlatform';
+import QuizInit from './newQuiz/quizInit'
+import QuizEdit from './newQuiz/quizEdit'
 // import showPlatformList from './header/showPlatformLIst';
 
 
@@ -40,6 +42,8 @@ export default class App extends Component {
 					   <Route path='/managePlatform' element ={<ManagePlatform/>}/>
 					   <Route path='/platformEdit/:id' element ={<EditPlatform/>}/>
                        <Route path='/platformCreate' element ={<CreatePlatform/>}/>
+					   <Route path='/quizInit' element ={<QuizInit/>}/> 
+					   <Route path='/quizEdit' element ={<QuizEdit/>}/>
 			      </Routes>
 
                 </Router>	
