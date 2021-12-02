@@ -301,14 +301,11 @@ op_uncoown(){
 		  })
 		  .then(res=>{return res.data})
 		  .then( result =>{
-			
 			  console.log(result);
 			  this.setState({places:result},()=>{console.log(this.state.places);});
 			  this.setState({renderList:this.state.places});        
 		   });
-		
-		}
-		
+		} 
 	};
 
 store=(place)=>{

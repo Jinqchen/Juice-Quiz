@@ -6,9 +6,8 @@ const port =3001;
 var mysql = require("mysql");
 const path = require("path");
 const session = require("express-session");
-// Step 1:
+const cookieParser = require('cookie-parser');
 app.use(express.static(path.resolve(__dirname, "./client/build")));
-// // Step 2:
 app.get("/", function (request, response) {
   response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
 });
@@ -16,22 +15,22 @@ app.get("/", function (request, response) {
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(cors());
+app.use(cookieParser());
 
-// app.use(
-// 	session({
-// 	  key: "userId",
-// 	  secret: "subscribe",
-// 	  resave: false,
-// 	  saveUninitialized: false,
-// 	  cookie: {
-// 		expires: 60 * 60 * 24,
-// 	  },
-// 	})
-//   );
+app.use(
+	session({
+	  key: "userId",
+	  secret: "subscribe",
+	  resave: false,
+	  saveUninitialized: false,
+	  cookie: {
+		expires: 60 * 60 * 24,
+	  },
+	})
+  );
   
 
-
-var con = mysql.createPool({
+var con = mysql.createConnection({
 	host: "us-cdbr-east-04.cleardb.com",
 	user: "b0fb64176d0a67",
 	password: "1322f121",
@@ -57,7 +56,6 @@ app.get('/api/answer/:id',(req,res)=>{
 
  //Get platform list
 app.get ('/api/Platform',(req,res)=>{
-    console.log("Connected!");
     con.query(
 		"SELECT Pcover,p.PID,Pname,tag from platformstyle s,platform p where s.PID=p.PID  order BY RAND() limit 4;", 
 		function (err1, result) {
@@ -66,7 +64,6 @@ app.get ('/api/Platform',(req,res)=>{
   );})
 
   app.get ('/api/Platform/:tag',(req,res)=>{
-    console.log("Connected!");
 	const tag = req.params.tag;
     con.query(
 		`SELECT Pcover,p.PID,Pname from platformstyle s,platform p
@@ -221,8 +218,9 @@ app.post('/api/login', (req, res) => {
 		}
 		if (result.length > 0) {
 			if (result[0]["Upass"] === password) {
-				// req.session.user = result;
-                // console.log(req.session.user);
+				req.session.user = result;
+				
+                console.log(req.session.user);
                 
 			    res.send({message:"Welcome!",success:true,UID:result[0]["UID"]});
 			} 

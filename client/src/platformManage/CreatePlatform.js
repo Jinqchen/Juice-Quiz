@@ -28,7 +28,7 @@ import Axios from "axios";
         handleChangeTag(e) {  
         this.setState({tag: e.target.value});   
         }
-        handleChangeOnwer(e)   {
+        handleChangeOnwer(e){
             this.setState({oneOnwer: e.target.value});  
           if (e.target.value){
             this.setState({replimit:99999})
@@ -48,8 +48,7 @@ import Axios from "axios";
         
         
         
-        submit(){ 
-          
+        submit(){       
       //const url = 'https://juice-quiz.herokuapp.com/api/createplatform';
      const url= 'http://localhost:3001/api/createplatform';
       Axios.post(url, { 
@@ -60,12 +59,14 @@ import Axios from "axios";
         }).then((res)=>{return res.data})
         .then((response) => { 
           this.setState({PID:response['PID']});
-          this.setState({success:true});
+          this.setState({success:response['success']});
         }); 
-      
-       this.own();
+      if (this.state.success){
+        this.own();
        this.inital_reputation();
        alert("Platform Created!") 
+      }
+       
       }
        
         

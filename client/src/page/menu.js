@@ -85,11 +85,12 @@ export default class Menu extends Component {
 		  //console.log(result);
           this.setState({places:result},()=>{console.log(this.state.places);});
           this.setState({renderList:this.state.places});        
-       });
-
-    
+       }); 
     }
  
+
+
+    
 	render() {    
 		return (
             <div>

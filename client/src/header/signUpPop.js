@@ -58,9 +58,7 @@ import Axios from "axios";
      else{
        alert("The password is not the same")
      }
-
-           
-    }
+}
     
       render(){ 
         
