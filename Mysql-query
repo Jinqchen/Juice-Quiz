@@ -802,5 +802,28 @@ DELETE FROM quiz where QID=XX;
 DELETE FROM quizquestion WHERE QID=XX;
 DELETE FROM quizoptions WHERE QID=XX;
 
+-- delete from releases where QID=XX AND PID=XX;
+-- DELETE FROM quiz where QID=XX;
+-- DELETE FROM quizquestion WHERE QID=XX;
+-- DELETE FROM quizoptions WHERE QID=XX;
+-- DELETE FROM quizquestion WHERE QID=XX and QuestionID=xx;
+-- DELETE FROM quizoptions WHERE QID=XX and QuestionID=xx;
+-- -- dlete one sepecific question
+-- DELETE FROM quizoptions WHERE QID=XX and QuestionID=xx and optionnumber=xx;
+-- -- delete one option
+-- ALTER TABLE quiz
+-- ADD COLUMN reputationneed int AFTER description,
+-- ADD COLUMN Taketime int default 300,
+-- ADD COLUMN releasedate datetime  
+
+
+-- insert into releases(UID,PID)
+-- VALUE(?,?);
+-- INSERT INTO quiz(QID,Qname,ave_rate,hot,description,reputationneed,Taketime,releasedate)
+-- value(?,?,1.0,0,?,3,'write in int in seconds',now());
+-- insert into quizquestion(QID,QuestionID,Qtext)
+-- value(?,?,?);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- VALUE(?,?,?,'this is option description',True);
 
 
