@@ -788,7 +788,165 @@ value   (6,1,1,'option1',1),
 
 
 
+insert into releases(UID,PID)
+VALUE(?,?);
+INSERT INTO quiz(QID,Qname,ave_rate,hot,description)
+value(?,?,1.0,0,?);
+insert into quizquestion(QID,QuestionID,Qtext)
+value(?,?,?);
+insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+VALUE(?,?,?,'this is option description',True);
+
+delete from releases where QID=XX AND PID=XX;
+DELETE FROM quiz where QID=XX;
+DELETE FROM quizquestion WHERE QID=XX;
+DELETE FROM quizoptions WHERE QID=XX;
+
+-- delete from releases where QID=XX AND PID=XX;
+-- DELETE FROM quiz where QID=XX;
+-- DELETE FROM quizquestion WHERE QID=XX;
+-- DELETE FROM quizoptions WHERE QID=XX;
+-- DELETE FROM quizquestion WHERE QID=XX and QuestionID=xx;
+-- DELETE FROM quizoptions WHERE QID=XX and QuestionID=xx;
+-- -- dlete one sepecific question
+-- DELETE FROM quizoptions WHERE QID=XX and QuestionID=xx and optionnumber=xx;
+-- -- delete one option
+-- ALTER TABLE quiz
+-- ADD COLUMN reputationneed int AFTER description,
+-- ADD COLUMN Taketime int default 300,
+-- ADD COLUMN releasedate datetime  
+
+
+-- insert into releases(UID,PID)
+-- VALUE(?,?);
+-- INSERT INTO quiz(QID,Qname,ave_rate,hot,description,reputationneed,Taketime,releasedate)
+-- value(?,?,1.0,0,?,3,'write in int in seconds',now());
+-- insert into quizquestion(QID,QuestionID,Qtext)
+-- value(?,?,?);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- VALUE(?,?,?,'this is option description',True);
+
+-- delete from releases where QID=XX AND PID=XX;
+-- DELETE FROM quiz where QID=XX;
+-- DELETE FROM quizquestion WHERE QID=XX;
+-- DELETE FROM quizoptions WHERE QID=XX;
+-- DELETE FROM quizquestion WHERE QID=XX and QuestionID=xx;
+-- DELETE FROM quizoptions WHERE QID=XX and QuestionID=xx;
+-- -- dlete one sepecific question
+-- DELETE FROM quizoptions WHERE QID=XX and QuestionID=xx and optionnumber=xx;
+-- -- delete one option
+-- ALTER TABLE quiz
+-- ADD COLUMN reputationneed int AFTER description,
+-- ADD COLUMN Taketime int default 300,
+-- ADD COLUMN releasedate datetime  
+
+
+-- insert into releases(UID,PID)
+-- VALUE(?,?);
+-- INSERT INTO quiz(QID,Qname,ave_rate,hot,description,reputationneed,Taketime,releasedate)
+-- value(?,?,1.0,0,?,3,'write in int in seconds',now());
+-- insert into quizquestion(QID,QuestionID,Qtext)
+-- value(?,?,?);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- VALUE(?,?,?,'this is option description',True);
+
+-- UPDATE quiz 
+-- SET Qname='?'
+-- WHERE QID=?;
+
+-- UPDATE quiz 
+-- SET vae_rate=2.0
+-- WHERE QID=?;
+
+-- UPDATE quiz 
+-- SET hot=10
+-- WHERE QID=?;
+
+-- UPDATE quiz 
+-- SET description='?'
+-- WHERE QID=?;
+
+-- UPDATE quiz 
+-- SET reputationneed=10
+-- WHERE QID=?;
+
+-- UPDATE quiz 
+-- SET Taketime=300
+-- WHERE QID=?;
+
+-- UPDATE quiz 
+-- SET releasedate=2021-??-?? ??:??:??
+-- WHERE QID=?;
+
+-- UPDATE quizquestion 
+-- SET Qtext='?'
+-- WHERE QID=? and QuestionID=?;
+
+-- UPDATE quizoptions 
+-- SET Optionx='?'
+-- WHERE QID=? and QuestionID=? and optionnumber=?;
+
+-- UPDATE quizoptions 
+-- SET correctness=True
+-- WHERE QID=? and QuestionID=? and optionnumber=?;
 
 
 
+-- select Qname,ave_rate,hot,description,releasedate from quiz where QID=?
+
+-- select max(QID) FROM quiz
+-- select max(QID) FROM releases
+-- delete from releases where QID=33;
+-- delete from contain where QID=33;
+-- delete from contain where QID=33
+-- delete from releases where QID=33;
+-- delete from quiz where QID=33;
+-- INSERT INTO quiz(QID,Qname,ave_rate,hot,description,reputationneed,Taketime,releasedate)
+-- value(33,'',1.0,0,'',3,30,now());
+-- insert into releases(UID,QID)
+-- VALUE(5,33);
+
+-- insert into contain (QID,PID)
+-- VALUE(33,3);
+
+-- insert into quizquestion(QID,QuestionID,Qtext)
+-- value(?,?,?);
+-- insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+-- VALUE(?,?,?,'this is option description',True);
+
+select reputationneed, c.PID from quiz q,contain c where q.QID=1 and q.QID=C.QID;
+update reputation set Rpoint=? where UID=? AND PID=?
+
+UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '1');
+UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '2');
+UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '3');
+UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '4');
+UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '5');
+UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '6');
+UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '7');
+UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '8');
+UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '9');
+UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '11');
+UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '10');
+UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '12');
+UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '14');
+UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '13');
+UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '15');
+UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '16');
+UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '17');
+UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '18');
+UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '19');
+UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '20');
+UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '21');
+UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '22');
+UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '23');
+UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '24');
+UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '25');
+UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '26');
+UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '27');
+UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '28');
+UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '29');
+UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '31');
+UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '30');
+UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '32');
 
