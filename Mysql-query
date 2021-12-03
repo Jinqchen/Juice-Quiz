@@ -950,3 +950,22 @@ UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` =
 UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '30');
 UPDATE `heroku_a8e492587e5e18a`.`quiz` SET `reputationneed` = '2' WHERE (`QID` = '32');
 
+-- show global variables like '%connections%'; 
+-- SET GLOBAL max_user_connections=100;
+
+-- GRANT ALL ON *.* to 'b0fb64176d0a67' IDENTIFIED BY '1322f121';
+-- SET GLOBAL max_user_connections=100;
+delete from releases where QID=33 OR QID=34 OR QID=35 OR QID=36 OR
+QID=37 OR QID=38;
+
+delete from contain where QID=33 OR QID=34 OR QID=35 OR QID=36 OR
+QID=37 OR QID=38;
+delete from quizoptions where QID=33 OR QID=34 OR QID=35 OR QID=36 OR
+QID=37 OR QID=38;
+delete from quizquestion where QID=33 OR QID=34 OR QID=35 OR QID=36 OR
+QID=37 OR QID=38;
+delete from quiz where QID=33 OR QID=34 OR QID=35 OR QID=36 OR
+QID=37 OR QID=38;
+
+
+
