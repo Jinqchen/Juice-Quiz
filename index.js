@@ -685,16 +685,105 @@ app.post('/api/quizsetCreate', (req, res) => {
 
 });
 
+app.post('/api/quizsetEdit/insert', (req, res) => {
+	const QID = req.body.QID;
+	const questions = req.body.questions;  
+	 console.log("insert");
+	// console.log(questions);
+    for (var i=0;i<questions.length;i++){
+		con.query(
+	  `insert into quizquestion(QID,QuestionID,Qtext)
+	  value(?,?,?);`,
+	  [QID,questions[i]['key'],questions[i]['questionText']] 
+	);
+     var options=questions[i]['answerOptions']
+	 for (var j=0;j<options.length;j++){
+     con.query(
+		`insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+		VALUE(?,?,?,?,?);`,
+		[QID,questions[i]['key'],j+1,options[j]['questionText'],options[j]['isCorrect']],
+		(err, result) => {
+			console.log(err);
+			connection.release();
+			
+		  }
+	 );
+	 }
+
+	}
+
+
+});
+
+
+app.delete('/api/quizsetEdit/delete', (req, res) => {
+	const QID = req.body.QID;
+	const del = req.body.del;  
+	console.log(QID);
+	console.log(del);
+    for (var i=0;i<del.length;i++){
+		con.query(
+	  `DELETE FROM quizquestion WHERE QID=${QID} and QuestionID=${del[i]};`,
+	  );
+	  con.query(
+		`DELETE FROM quizoptions WHERE QID=${QID} and QuestionID=${del[i]};`,
+		);
+	}
+});
+
+app.put('/api/quizsetEdit/change', (req, res) => {
+	const QID = req.body.QID;
+	const questions = req.body.question;  
+	console.log(QID);
+	console.log(questions);
+    for (var i=0;i<questions.length;i++){
+		console.log(questions[i]['questionText'])
+		con.query(
+	  `UPDATE quizquestion 
+	  SET Qtext=?
+	  WHERE QID=? and QuestionID=?;`,[questions[i]['questionText'],QID,i+1],
+	  (err, result) => {
+		console.log(err);
+		
+	  }
+	  );
+	  var options=questions[i]['answerOptions']
+	 for (var j=0;j<options.length;j++){
+     con.query(
+		`UPDATE quizoptions 
+		SET Optionx=?
+		WHERE QID=? and QuestionID=? and optionnumber=?;`,
+		[options[j]['questionText'],QID,i+1,j+1],
+	 );
+	 
+
+    con.query(`UPDATE quizoptions 
+	SET correctness=?
+	WHERE QID=? and QuestionID=? and optionnumber=?;`),[options[j]['isCorrect'],QID,i+1,j+1]
+	}
+}
+});
+
+
+
+app.put('/api/answer/rating', (req, res) => {
+	const QID = req.body.QID;
+	const rate = req.body.rating;  
+	console.log(QID);
+	console.log(rate);
+    
+   con.query(
+	   `UPDATE quiz set ave_rate=? where QID=?`,[rate/10,QID]
+);
+   })
 
 
 
 
-
-
-app.listen(3001,()=>{
-	  console.log("running");
-	})
+// app.listen(3001,()=>{
+// 	  console.log("running");
+// 	})
 	
-// app.listen(process.env.PORT || 3001,()=>{
-//   console.log('listening for requests on port'+ process.env.PORT);
-// })
+app.listen(process.env.PORT || 3001,()=>{
+  console.log('listening for requests on port'+ process.env.PORT);
+})

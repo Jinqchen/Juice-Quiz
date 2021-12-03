@@ -2,8 +2,10 @@ import React from 'react';
 import { Component } from 'react';
 import Axios from "axios";
 import './answer_question.css';
-import quizRate from './quizRate'
+
+import {Link  } from "react-router-dom";
 export default class App extends Component {
+	
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -20,14 +22,13 @@ export default class App extends Component {
 			opt4: "",
 			answerOptions: [],
 			QID: localStorage.getItem('QID'),
-			is_Mount:false,
-			PID:localStorage.getItem('PID')
+			is_Mount:false
 		};
 	}
 
 	componentDidMount = () => {
-        // const url = `https://juice-quiz.herokuapp.com/api/answer/${this.state.QID}`;
-		const url= `http://localhost:3001/api/answer/${this.state.QID}`;
+         const url = `https://juice-quiz.herokuapp.com/api/answer/${this.state.QID}`;
+		//const url= `http://localhost:3001/api/answer/${this.state.QID}`;
 		console.log("Component did mount")
         Axios.get(url)
 		.then(res=>{return res.data})
@@ -68,60 +69,77 @@ export default class App extends Component {
 
 
 	handleNextQuestion = (answerOption) => {
-		var is_Mount=false;
-		var currentQuestion = this.state.currentQuestion;
-		console.log('handler');
-		var isCorrect = false;
-		if (answerOption["correctness"] === 1) { isCorrect = true; }
 
-		var currentScore = this.state.currentScore;
-		var questlen = this.state.queslength;
 
-		
-		const nextQuestion = currentQuestion+1;
-		console.log('nextQuestion');
-		console.log('questlen');
-		this.setState({ currentQuestion: nextQuestion },()=>{;
-		if (nextQuestion < questlen) {
-			if (isCorrect) {
-				currentScore = currentScore + 1;
-				this.setState({ currentScore: currentScore });
-				this.processData()
-			}
-
+	
+		 
+			var is_Mount=false;
+			var currentQuestion = this.state.currentQuestion;
+			console.log('handler');
+			var isCorrect = false;
+			if (answerOption["correctness"] === 1) { isCorrect = true; }
+	
+			var currentScore = this.state.currentScore;
+			var questlen = this.state.queslength;
+	
 			
-		} else {
-			if (isCorrect) {
-				currentScore = currentScore + 1;
-				this.setState({ currentScore: currentScore })
+			const nextQuestion = currentQuestion+1;
+			console.log('nextQuestion');
+			console.log('questlen');
+			this.setState({ currentQuestion: nextQuestion },()=>{;
+			if (nextQuestion < questlen) {
+				if (isCorrect) {
+					currentScore = currentScore + 1;
+					this.setState({ currentScore: currentScore });
+					this.processData()
+				}
+	
+				
+			} else {
+				if (isCorrect) {
+					currentScore = currentScore + 1;
+					this.setState({ currentScore: currentScore })
+				}
+				this.setState({ showScore: true });
+			};
+			
+			});
+			if(this.state.currentQuestion==this.state.queslength-1){
+				this.handleRate()
+			console.log("ss")
 			}
-			this.setState({ showScore: true });
-			this.addRep();
-		};
 		
-		});
 		
 	}
+	handleRate = () => {
+		 
+    }
 
 
+	addRep=()=>{
+		 const url = `https://juice-quiz.herokuapp.com/api/answer/updateRep/${this.state.QID}`;
+		 //  const url= `http://localhost:3001/api/answer/updateRep/${this.state.QID}`;
+			Axios.put(url,{
+				PID:this.state.PID,
+				UID:localStorage.getItem('UID')
+		  }).then((response) => { 
+			console.log(response); 
+		 })
+		 }
 
-   addRep=()=>{
-  // const url = `https://juice-quiz.herokuapp.com/api/EditPlatform/tag/${this.state.tag}`;
-     const url= `http://localhost:3001/api/answer/updateRep/${this.state.QID}`;
-      Axios.put(url,{
-		  PID:this.state.PID,
-		  UID:localStorage.getItem('UID')
-	}).then((response) => { 
-      console.log(response); 
-   })
-   }
 
 	render() {
 		return (
 			<div className='answering'>
 				{this.state.showScore ? (
-					<div className='score-section'>You scored  out of {this.state.currentScore}</div>
-					
+					<div>
+
+<div className='score-section'>Finished</div>
+							
+							<Link to={'/quizRate'}  onClick={()=>this.addRep()}> 
+							Submit
+			</Link>
+					</div>
 				) : (
 					<>
 						<div className='question-section'>
@@ -134,9 +152,11 @@ export default class App extends Component {
 							{this.state.answerOptions.map((answerOption) =>
 								<button classname='answering_Btn' onClick={() => this.handleNextQuestion(answerOption)}>{answerOption['text']}</button>
 							)}
+							
 						</div>
 					</>
 				)}
+				
 			</div>
 		);
 	}

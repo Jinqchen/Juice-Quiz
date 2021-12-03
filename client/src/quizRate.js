@@ -87,8 +87,24 @@ const initQuestions=   [
      )
    }
    setRate(rate){
-       this.setState({rating:rate})
-       console.log(this.state.rating)
+       console.log(rate)
+       this.setState({rating:rate},()=>{
+    const url = `https://juice-quiz.herokuapp.com/api/answer/rating`;
+		 //  const url= `http://localhost:3001/api/answer/rating`;
+       Axios.put(url,{QID:localStorage.getItem('QID'),
+      rating:rate  
+}).then((response) => { 
+ console.log(response); 
+ }
+ )
+
+
+
+       })
+  
+
+
+
    }
    starBoard(){ 
        return(<div className="starBoard">

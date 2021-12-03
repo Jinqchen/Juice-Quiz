@@ -51,8 +51,8 @@ import './quizInit.css'
         
         
         submit(){ 
-            //const url = 'https://juice-quiz.herokuapp.com/api/initQuiz';
-     const url= 'http://localhost:3001/api/initQuiz';
+            const url = 'https://juice-quiz.herokuapp.com/api/initQuiz';
+    // const url= 'http://localhost:3001/api/initQuiz';
      Axios.post(url, { 
             title: this.state.name, 
             description: this.state.description, 

@@ -45,8 +45,8 @@ const initQuestions=   [
         
       
           componentDidMount = () => {
-            // const url = `https://juice-quiz.herokuapp.com/api/answer/${this.state.QID}`;
-        const url= `http://localhost:3001/api/answer/${this.state.QID}`;
+             const url = `https://juice-quiz.herokuapp.com/api/answer/${this.state.QID}`;
+        //const url= `http://localhost:3001/api/answer/${this.state.QID}`;
             Axios.get(url)
         .then(res=>{return res.data})
         .then( result =>{ 
@@ -89,7 +89,7 @@ const initQuestions=   [
       this.setState({questions:[...this.state.questions,q]})
     }
       this.setState({questions:this.state.questions.slice(1)})
-      this.setState({origin:this.state.questions.slice(1)})
+      this.setState({origin:this.state.questions})
       }
     
     
@@ -153,26 +153,81 @@ const initQuestions=   [
         
         
         //sun
-        submit(){   
-          //const url = 'https://juice-quiz.herokuapp.com/api/register';
-           const url= 'http://localhost:3001/api/quizsetCreate';
-      
-         Axios.post(url, { 
-              QID: localStorage.getItem('QID'), 
-              questions:this.state.questions 
-         }).then((response) => { 
-         console.log(response); 
-         alert("create success")
-         }); 
+        submit(){  
+          
+            if (this.state.origin.length<this.state.questions.length){
+              this.insert();
+            }
+            else if(this.state.origin.length>this.state.questions.length){
+             this.delete();
+            }
+           
+            this.update();        
     
     }
 
 
 
+         insert(){
+           var question=[]
+          for(var i= this.state.origin.length+1; i<=this.state.questions.length; i++){
+            question.push({
+              questionText: ' ',
+              answerOptions: [
+                  { answerText: ' ', isCorrect: true },
+                  { answerText: ' ', isCorrect: false },
+                  { answerText: ' ', isCorrect: false },
+                  { answerText: ' ', isCorrect: false },
+              ],
+              key:i
+          })
+          }
+          console.log(question);
+        
+            const url = 'https://juice-quiz.herokuapp.com/quizsetEdit/insert';
+           // const url= 'http://localhost:3001/api/quizsetEdit/insert';
+                  
+            Axios.post(url, { 
+                QID: localStorage.getItem('QID'), 
+                questions:question 
+})
+}
+
+
+            delete(){
+              var del=[]
+              for(var i= this.state.questions.length+1; i<=this.state.origin.length; i++){
+                del.push(i)
+              }
+              console.log(del);
+                const url = 'https://juice-quiz.herokuapp.com/quizsetEdit/delete';
+               // const url= 'http://localhost:3001/api/quizsetEdit/delete';
+                      
+                Axios.delete(url, { data:{
+                  QID: localStorage.getItem('QID'), 
+                  del:del }
+                    
+    })             
+            }
+
+ 
+       update(){
+  const url = `https://juice-quiz.herokuapp.com/api/EditPlatform/replimit/${this.state.replimit}`;
+// const url= `http://localhost:3001/api/quizsetEdit/change`;
+    console.log(this.state.questions);
+ Axios.put(url,{QID:localStorage.getItem('QID'),
+  question:this.state.questions
+  
+}).then((response) => { 
+ console.log(response); 
+ }
+ )
 
 
 
 
+      }
+            
       switchQuestion(index){  
        this.setState({currentQuestion:index})
         console.log(this.state.questions[this.state.currentQuestion].key)

@@ -84,8 +84,8 @@ import Axios from "axios";
            
 		  async get(){
 			this._isMounted = true;
-		  // const url = `https://juice-quiz.herokuapp.com/api/user/subscribed/${this.state.UID}`;
-			 const url= `http://localhost:3001/api/user/subscribed/${this.state.UID}`;
+		  const url = `https://juice-quiz.herokuapp.com/api/user/subscribed/${this.state.UID}`;
+			 // const url= `http://localhost:3001/api/user/subscribed/${this.state.UID}`;
 		  const res = await Axios.get(url)
 		  .then(res=>{return res.data})
 		  .then( result =>{
@@ -97,8 +97,8 @@ import Axios from "axios";
 		}
 
 unsubscribe=(PID)=>{
-//		 const url = `https://juice-quiz.herokuapp.com/api/platform/delSub/${PID}`;
-	const url= `http://localhost:3001/api/platform/delSub/${PID}`;
+		 const url = `https://juice-quiz.herokuapp.com/api/platform/delSub/${PID}`;
+//	const url= `http://localhost:3001/api/platform/delSub/${PID}`;
 	     
 	Axios.delete(url, { data:{UID: localStorage.getItem("UID")}}).then((response) => { 
 	console.log(response); 

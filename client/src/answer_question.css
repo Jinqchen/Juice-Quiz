@@ -31,6 +31,7 @@
   display: flex;
   font-size: 24px;
   align-items: center;
+  margin-bottom: 200px;
 }
 
 /* QUESTION/TIMER/LEFT SECTION */
@@ -78,4 +79,14 @@
 .incorrect {
   background-color: #ff3333;
 }
-
+.answer-submit{ 
+  display: block; 
+  margin: 0 auto;  
+  width: 40%;
+}
+.answer-submit label{
+  display: block; 
+  margin: 0 auto;
+  color:white;
+  border-style: none;
+}
