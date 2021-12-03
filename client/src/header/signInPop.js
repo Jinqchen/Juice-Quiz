@@ -3,6 +3,7 @@ import { Component } from 'react';
 import './signInPop.css' 
 import Axios from "axios";
 
+// Axios.defaults.withCredentials=true;
 export default class signIn extends Component {
       constructor(props) {
           super(props);
@@ -25,9 +26,9 @@ export default class signIn extends Component {
       }   
     
 
-
+ 
     signIn(){
-      //Axios.defaults.withCredentials=true;
+     
     //const url = 'https://juice-quiz.herokuapp.com/api/login';
     const url= 'http://localhost:3001/api/login';
         Axios.post(url, {

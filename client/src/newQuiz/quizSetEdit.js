@@ -7,7 +7,7 @@ import Axios from "axios";
 import './quizInit.css'
 
 
-    export default class CreateNewQuiz extends Component {
+    export default class EditNewQuiz extends Component {
         constructor(props) {
             super(props);
             this.state = { 
@@ -17,11 +17,10 @@ import './quizInit.css'
               timeLimited:true,
               limitedHour:0,
               limitedMin:0,
-              PID:localStorage.getItem('PID'),
+              QID:localStorage.getItem('QID'),
               UID:localStorage.getItem('UID'),
               success:false,
               Repoint:0,
-              QID:0,
             };    
           }
         
@@ -51,33 +50,18 @@ import './quizInit.css'
         
         
         submit(){ 
-            //const url = 'https://juice-quiz.herokuapp.com/api/initQuiz';
-     const url= 'http://localhost:3001/api/initQuiz';
-     Axios.post(url, { 
-            title: this.state.name, 
-            description: this.state.description, 
-            timelimit:this.state.limitedHour*3600+this.state.limitedMin*60,
-            Repoint:this.state.Repoint,
-            PID:this.state.PID,
-            UID:this.state.UID
-            
-       }).then((res)=>{return res.data})
-       .then((response) => { 
-         console.log(response);
-         this.setState({QID:response['QID']});
-         localStorage.setItem('QID',response['QID'])
-         this.setState({success:response['success']});
-       }); 
-     if (this.state.success){
-      alert("Quiz Created! Please start to edit quiz!") 
-     }
-         
+            //const url = `https://juice-quiz.herokuapp.com/api/updateQuizdes/${this.state.description}`;
+     const url= `http://localhost:3001/api/updateQuizdes/${this.state.description}`;
+     Axios.put(url,{QID:this.state.QID}).then((response) => { 
+      console.log(response); 
+      }
+      )
       }
        
         
    
     
-
+      
 
 
 render(){ 
@@ -90,13 +74,13 @@ render(){
          <img src="./logo.jpg" className="quizInitIcon"></img> 
         <form onSubmit={this.handleSubmit} className="editForm">
             
-      <li>
+      {/* <li>
       <label className='editInput'>  Title
         </label>  
       </li>
       <li> 
         <input  className="initQuizTitle" required onChange={this.handleChangeName.bind(this)}></input> 
-      </li>
+      </li> */}
 
         <li>
       <label className='editInput'>  Discription
@@ -106,7 +90,7 @@ render(){
       <textarea className="quizDiscription" rows="5" cols="50" required onChange={this.handleChangeDiscription.bind(this)}> 
   </textarea>
         </li>
-        <li>
+        {/* <li>
         <label> Limited Time
         <select value={this.state.value} onChange={this.handleTimeLimited.bind(this)} className="LimitedTime">
             <option value="true">On</option>
@@ -133,12 +117,12 @@ render(){
       </li>
       <li> 
         <input  className="initQuizTitle" required onChange={this.handleChangeRep.bind(this)}></input> 
-      </li>
+      </li> */}
 
 
 
        <Link to={'/quizEdit/'+this.state.QID}>
-      <button  className="submit" onClick={()=>this.submit()} >Create</button>  
+      <button  className="submit" onClick={()=>this.submit()} >UPDATE</button>  
         </Link>
        
        </form>

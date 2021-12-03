@@ -7,6 +7,7 @@ var mysql = require("mysql");
 const path = require("path");
 const session = require("express-session");
 const cookieParser = require('cookie-parser');
+const { Console } = require('console');
 app.use(express.static(path.resolve(__dirname, "./client/build")));
 app.get("/", function (request, response) {
   response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
@@ -17,17 +18,17 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(cors());
 app.use(cookieParser());
 
-app.use(
-	session({
-	  key: "userId",
-	  secret: "subscribe",
-	  resave: false,
-	  saveUninitialized: false,
-	  cookie: {
-		expires: 60 * 60 * 24,
-	  },
-	})
-  );
+// app.use(
+// 	session({
+// 	  key: "userId",
+// 	  secret: "subscribe",
+// 	  resave: false,
+// 	  saveUninitialized: false,
+// 	  cookie: {
+// 		expires: 60 * 60 * 24,
+// 	  },
+// 	})
+//   );
   
 
 var con = mysql.createPool({
@@ -53,7 +54,44 @@ app.get('/api/answer/:id',(req,res)=>{
 	}
   );
 
+app.put('/api/answer/updateRep/:id',(req,res)=>{
+     const QID = req.params.id;
+	 const PID = req.body.PID;
+	 const UID = req.body.UID;
+	 con.query(
+		`select reputationneed, c.PID from quiz q,contain c where q.QID=${QID} and q.QID=C.QID;`, 
+		function (err1, result) {
+		if (err1) throw err1;
+	    
+		var repoint = result[0]['reputationneed'];
+		console.log(repoint);
+	con.query(
+		`select Rpoint from reputation where UID=? AND PID=?`,
+		[UID,PID],
+		(err, result1) => {
+			console.log(result1);
+		  repoint+= result1[0]['Rpoint']
+		  console.log(repoint);
+		  con.query(
+			"update reputation set Rpoint=? where UID=? AND PID=?", 
+			[repoint,UID,PID],
+			function (err1, result) {
+			if (err1) throw err1;
+			res.send(result);}
+	  )
+		}
+		
+	  );
+	
+	}
+  )
 
+
+
+
+
+     
+})
  //Get platform list
 app.get ('/api/Platform',(req,res)=>{
     con.query(
@@ -77,8 +115,7 @@ app.get ('/api/Platform',(req,res)=>{
 // Get quizlist
   app.get ('/api/platform/quizlist/:id',(req,res)=>{
     console.log("quiz Connected!");
-	const PID = req.params.id;
-	
+	const PID = req.params.id;	
     con.query(
 		`SELECT q.QID,q.Qname,q.ave_rate,q.hot,q.description ,u.Uname AS Releaser, pic 
 		FROM quiz q,contain c,releases r,users u, userstyle us
@@ -88,6 +125,37 @@ app.get ('/api/Platform',(req,res)=>{
 		console.log(result);
 	    res.send(result);}
   );})
+
+  app.get ('/api/manageQuiz/quizlist_total/:id',(req,res)=>{
+	const UID = req.params.id;
+    con.query(
+		`select QID from releases where UID=${UID}`, 
+		function (err1, result) {
+		if (err1) throw err1;
+        res.send(result)		
+	}
+  );
+}
+)
+app.get ('/api/manageQuiz/quizlist/:id',(req,res)=>{
+    console.log("manage Connected!");
+	const QID = req.params.id;
+    con.query(
+		`select Qname,ave_rate,hot,description,releasedate from quiz where QID=${QID}`, 
+		function (err1, result) {
+		if (err1) throw err1;
+        res.send(result)		
+	}
+  );
+}
+)
+
+
+
+
+
+
+
 
   app.get ('/api/user/subscribed/:id',(req,res)=>{
     console.log("uer Connected!");
@@ -218,9 +286,9 @@ app.post('/api/login', (req, res) => {
 		}
 		if (result.length > 0) {
 			if (result[0]["Upass"] === password) {
-				req.session.user = result;
+				// req.session.user = result;
 				
-                console.log(req.session.user);
+                // console.log(req.session.user);
                 
 			    res.send({message:"Welcome!",success:true,UID:result[0]["UID"]});
 			} 
@@ -521,6 +589,106 @@ app.put('/api/EditPlatform/replimit/:replimit',(req,res)=>{
 	   }
 	 );
 })
+
+
+
+
+//Create quiz
+app.post('/api/initQuiz', (req, res) => {
+	const title = req.body.title;
+	const description = req.body.description;
+    const timelimit  = req.body.timelimit;
+    const Repoint = req.body.Repoint;
+    const PID = req.body.PID;
+	const UID = req.body.UID;
+	     
+	con.query('select max(QID) FROM releases',function(err,result){
+		console.log(result)
+		var index = result[0]["max(QID)"]
+		console.log("index:"+index);
+		var id =index+1;
+		console.log(id);
+
+	
+	   con.query(
+		  `INSERT INTO quiz(QID,Qname,ave_rate,hot,description,reputationneed,Taketime,releasedate)
+		  value(?,?,0.0,0,?,?,?,now());`,
+	      [id,title,description,Repoint,timelimit],
+	      (err, result) => {
+	       console.log(err);  
+	}
+  );
+		con.query(
+					`insert into releases(UID,QID)
+					VALUE(?,?)`,
+				[UID,id],
+				(err, result) => {
+				console.log(err);  
+				}
+			);
+			con.query(
+			`insert into contain(PID,QID)
+			VALUE(?,?)`,
+			[PID,id],
+		(err, result) => {
+		console.log(err);  
+		}
+	);
+		res.send({QID:id,success:true})
+});	
+		
+  
+}); 
+
+app.put('/api/updateQuizdes/:description',(req,res)=>{
+	const description = req.params.description;
+	const QID = req.body.QID;
+	con.query(
+	   `UPDATE quiz 
+	   SET description=?
+	   where QID=?`,
+	   [description,QID],
+	   (err, result) => {
+		console.log(err); 
+		
+	   }
+	 );
+})
+
+
+app.post('/api/quizsetCreate', (req, res) => {
+	const QID = req.body.QID;
+	const questions = req.body.questions;  
+	console.log(QID);
+	console.log(questions);
+    for (var i=0;i<questions.length;i++){
+		con.query(
+	  `insert into quizquestion(QID,QuestionID,Qtext)
+	  value(?,?,?);`,
+	  [QID,i+1,questions[i]['questionText']] 
+	);
+     var options=questions[i]['answerOptions']
+	 for (var j=0;j<options.length;j++){
+     con.query(
+		`insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+		VALUE(?,?,?,'this is option description',True);`,
+		[QID,i+1,j+1,options[j]['questionText'],options[j]['isCorrect']],
+		(err, result) => {
+			console.log(err);
+			
+		  }
+	 );
+	 }
+
+	}
+
+
+});
+
+
+
+
+
 
 
 app.listen(3001,()=>{

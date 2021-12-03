@@ -14,8 +14,8 @@ import CreatePlatform from './platformManage/CreatePlatform';
 import QuizInit from './newQuiz/quizInit';
 import QuizEdit from './newQuiz/quizEdit';
 import QuizManageMent from './platformManage/quizManageMent';
-
-
+import QuizSetEdit from './newQuiz/quizSetEdit';
+import QuizEditAfter from './newQuiz/quizEditAfter';
 
 
 export default class App extends Component {
@@ -42,6 +42,8 @@ export default class App extends Component {
                        <Route path='/platformCreate' element ={<CreatePlatform/>}/>
 					   <Route path='/quizInit' element ={<QuizInit/>}/> 
 					   <Route path='/quizEdit/:id' element ={<QuizEdit/>}/>
+					   <Route path='/quizEditAfter/:id' element ={<QuizEditAfter/>}/>
+					   <Route path='/quizSetEdit/:id' element ={<QuizSetEdit/>}/>
 			      </Routes>
 
                 </Router>	

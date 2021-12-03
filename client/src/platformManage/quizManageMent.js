@@ -10,24 +10,18 @@ export default class quizManageMent extends Component {
 		super(props);
 		this.state = {
 			//决定是否显示subscribe按钮和订阅按钮
-			subscribed:false,
-			co_owner:false,
-			owner:false,
-			authority:false,
 			logged:localStorage.getItem("Logged"),
-			places: '',
+			places: [],
             renderList:[{}],
 			hotac:true,
 			rateac:true,
-			Pname :localStorage.getItem('Pname'),
-			Pcover:localStorage.getItem('Pcover'),
+			UID:localStorage.getItem('UID'),
 			PID: localStorage.getItem('PID'),
 			rander:false,
 			searchContent:"",
 			rankList:[{}],
 			rank:'',
-			replimit:0,
-			Urep:0
+			quiznum:0,
 		};
         
 	}
@@ -35,7 +29,9 @@ export default class quizManageMent extends Component {
 
 	
  componentDidMount=()=>{
-	this.get() ;
+	this.getnumber();
+	
+	
 	this.setState({rander:true});
 	
 }
@@ -80,22 +76,47 @@ export default class quizManageMent extends Component {
  
 
   
-	async get(){
+	async getnumber(){
 		this._isMounted = true;
-    //  const url = `https://juice-quiz.herokuapp.com/api/platform/quizlist/${this.state.PID}`;
-		 const url= `http://localhost:3001/api/platform/quizlist/${this.state.PID}`;
+    //  const url = `https://juice-quiz.herokuapp.com/api/manageQuiz/quizlist_total/${this.state.UID}`;
+		 const url= `http://localhost:3001/api/manageQuiz/quizlist_total/${this.state.UID}`;
       const res = await Axios.get(url)
       .then(res=>{return res.data})
       .then( result =>{
-		  if(this._isMounted){
-		  //console.log(result);
-          this.setState({places:result},()=>{console.log(this.state.places);});
-          this.setState({renderList:this.state.places});}          
+		  this.setState({quiznum: result},()=>{
+			  console.log(this.state.quiznum)
+			  if(this.state.quiznum.length!=0){
+		        this.get() ;}
+		
+		});
+          
        });
     };
 
   
+  
+	async get(){
 
+		this._isMounted = true;
+		for(var i=0;i<this.state.quiznum.length;i++){ 
+	//  const url = `https://juice-quiz.herokuapp.com/api/manageQuiz/quizlist/${this.state.UID}`;
+		 const url= `http://localhost:3001/api/manageQuiz/quizlist/${this.state.quiznum[i]['QID']}`;
+      const res = await Axios.get(url)
+      .then(res=>{return res.data})
+      .then( result =>{
+		  if(this._isMounted){
+			  result[0]['QID']=this.state.quiznum[i]['QID'];
+		  this.state.places.push(result[0]);
+          console.log(this.state.places)
+          this.setState({renderList:this.state.places});}          
+       });}
+   
+
+
+
+
+
+    };
 
 
 //Search 
@@ -128,7 +149,6 @@ export default class quizManageMent extends Component {
 
 store=(place)=>{
 	localStorage.setItem('QID',place.QID);
-	
 }
 
 newQuiz(){
@@ -138,7 +158,7 @@ newQuiz(){
 
 
 	render() {     
-		console.log(this.state.subscribed);
+	
 		return (
            <div>
 		
@@ -165,7 +185,7 @@ newQuiz(){
 		 
 			<div className="item">  
 			 <div className='title'>
-				 {place.Qname} 
+				<Link to={'/quizEditAfter/'+place.QID} onClick={()=>this.store(place)}> {place.Qname}</Link> 
 				<div className='rate'>⭐: {place.ave_rate} 🔥：{place.hot}</div> 
 			 </div >
 			 	<div className='content'> 

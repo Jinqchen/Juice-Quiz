@@ -2,7 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 import Axios from "axios";
 import './answer_question.css';
-
+import quizRate from './quizRate'
 export default class App extends Component {
 	constructor(props) {
 		super(props);
@@ -20,7 +20,8 @@ export default class App extends Component {
 			opt4: "",
 			answerOptions: [],
 			QID: localStorage.getItem('QID'),
-			is_Mount:false
+			is_Mount:false,
+			PID:localStorage.getItem('PID')
 		};
 	}
 
@@ -95,6 +96,7 @@ export default class App extends Component {
 				this.setState({ currentScore: currentScore })
 			}
 			this.setState({ showScore: true });
+			this.addRep();
 		};
 		
 		});
@@ -103,14 +105,23 @@ export default class App extends Component {
 
 
 
-
-
+   addRep=()=>{
+  // const url = `https://juice-quiz.herokuapp.com/api/EditPlatform/tag/${this.state.tag}`;
+     const url= `http://localhost:3001/api/answer/updateRep/${this.state.QID}`;
+      Axios.put(url,{
+		  PID:this.state.PID,
+		  UID:localStorage.getItem('UID')
+	}).then((response) => { 
+      console.log(response); 
+   })
+   }
 
 	render() {
 		return (
 			<div className='answering'>
 				{this.state.showScore ? (
 					<div className='score-section'>You scored  out of {this.state.currentScore}</div>
+					
 				) : (
 					<>
 						<div className='question-section'>

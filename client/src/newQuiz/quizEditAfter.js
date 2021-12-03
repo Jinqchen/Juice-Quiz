@@ -26,18 +26,19 @@ const initQuestions=   [
               trigger:false,   
               name:"Description",
               description:"",
-              timeLimited:true,
-              limitedHour:0,
-              limitedMin:0,
               PID:0,
               QID:localStorage.getItem('QID'),
               success:true,
               currentQuestion:0,
               questions:initQuestions , 
+              origin:initQuestions,
               option1:"",
               option2:"",
               option3:"",
               option4:"",
+              add:[],
+              delete:[],
+              modify:[]
             };    
            
           }
@@ -87,8 +88,8 @@ const initQuestions=   [
       };
       this.setState({questions:[...this.state.questions,q]})
     }
-      //this.setState({questions:this.state.questions.slice(1)})
-      console.log(this.state.questions);
+      this.setState({questions:this.state.questions.slice(1)})
+      this.setState({origin:this.state.questions.slice(1)})
       }
     
     

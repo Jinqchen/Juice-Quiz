@@ -360,9 +360,11 @@ newQuiz(){
             <h className='platFormName'>{this.state.Pname}</h>
 			{!this.state.subscribed&&<button className='platformaccount'  onClick={()=>this.subscribe()}>subscribe</button>||<button className='platformaccount' onClick={()=>this.unsubscribe()} >subscribed √</button>}
 			{!this.state.co_owner&&<button className='platformaccount'  onClick={()=>this.apply()}>Apply to be co-owner</button>||<button className='platformaccount' >Co-Owner</button>}
+			{this.state.co_owner&&
 			<Link  className='newQuizLink' to={'/quizInit'}>
 			<span>{"Release New Quiz"}</span> 
-                    </Link>
+            </Link>}
+			
 
 					{/* <Link  className='newQuizLink' to={'/quizEdit'}>
 			<span>{"QuizEdit"}</span> 
