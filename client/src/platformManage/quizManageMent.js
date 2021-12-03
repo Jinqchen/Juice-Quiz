@@ -99,7 +99,7 @@ export default class quizManageMent extends Component {
 
 		this._isMounted = true;
 		for(var i=0;i<this.state.quiznum.length;i++){ 
-	  const url = `https://juice-quiz.herokuapp.com/api/manageQuiz/quizlist/${this.state.UID}`;
+	  const url = `https://juice-quiz.herokuapp.com/api/manageQuiz/quizlist/${this.state.quiznum[i]['QID']}`;
 	//	 const url= `http://localhost:3001/api/manageQuiz/quizlist/${this.state.quiznum[i]['QID']}`;
       const res = await Axios.get(url)
       .then(res=>{return res.data})

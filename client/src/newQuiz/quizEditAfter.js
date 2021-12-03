@@ -212,7 +212,7 @@ const initQuestions=   [
 
  
        update(){
-  const url = `https://juice-quiz.herokuapp.com/api/EditPlatform/replimit/${this.state.replimit}`;
+  const url = `https://juice-quiz.herokuapp.com/api/quizsetEdit/change`;
 // const url= `http://localhost:3001/api/quizsetEdit/change`;
     console.log(this.state.questions);
  Axios.put(url,{QID:localStorage.getItem('QID'),
