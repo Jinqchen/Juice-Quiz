@@ -22,6 +22,7 @@ export default class App extends Component {
 			opt4: "",
 			answerOptions: [],
 			QID: localStorage.getItem('QID'),
+			PID: localStorage.getItem('PID'),
 			is_Mount:false
 		};
 	}
@@ -36,9 +37,7 @@ export default class App extends Component {
 			console.log(result);
 			this.setState({data:result},()=>{console.log(this.state.data);});
 			this.processData()       
-		 });
-
-    
+		 });    
 	}
 
 
@@ -68,11 +67,7 @@ export default class App extends Component {
 	}
 
 
-	handleNextQuestion = (answerOption) => {
-
-
-	
-		 
+	handleNextQuestion = (answerOption) => { 
 			var is_Mount=false;
 			var currentQuestion = this.state.currentQuestion;
 			console.log('handler');
@@ -105,16 +100,14 @@ export default class App extends Component {
 			
 			});
 			if(this.state.currentQuestion==this.state.queslength-1){
-				this.handleRate()
+				
 			console.log("ss")
 			}
 		
 		
 	}
-	handleRate = () => {
-		 
-    }
 
+	
 
 	addRep=()=>{
 		 //const url = `https://juice-quiz.herokuapp.com/api/answer/updateRep/${this.state.QID}`;

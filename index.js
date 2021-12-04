@@ -48,7 +48,9 @@ app.get('/api/answer/:id',(req,res)=>{
 		where q.QID=${QID} and q.QID=qo.QID AND q.QuestionID=qo.QuestionID`,
 		function (err1, result) {
 			if (err1) throw err1;
-			res.send(result);}
+			res.send(result);
+			con.release();
+		}
 	  )
 	 
 	}
@@ -58,11 +60,14 @@ app.put('/api/answer/updateRep/:id',(req,res)=>{
      const QID = req.params.id;
 	 const PID = req.body.PID;
 	 const UID = req.body.UID;
+	 console.log("update rep")
+	 console.log(QID);
+	 console.log(PID);
+	 console.log(UID);
 	 con.query(
 		`select reputationneed, c.PID from quiz q,contain c where q.QID=${QID} and q.QID=C.QID;`, 
 		function (err1, result) {
 		if (err1) throw err1;
-	    
 		var repoint = result[0]['reputationneed'];
 		console.log(repoint);
 	con.query(
@@ -77,10 +82,10 @@ app.put('/api/answer/updateRep/:id',(req,res)=>{
 			[repoint,UID,PID],
 			function (err1, result) {
 			if (err1) throw err1;
-			res.send(result);}
+			res.send(result);
+			con.release();}
 	  )
-		}
-		
+		}		
 	  );
 	
 	}
@@ -95,7 +100,7 @@ app.put('/api/answer/updateRep/:id',(req,res)=>{
  //Get platform list
 app.get ('/api/Platform',(req,res)=>{
     con.query(
-		"SELECT Pcover,p.PID,Pname,tag from platformstyle s,platform p where s.PID=p.PID  order BY RAND() limit 4;", 
+		"SELECT Pcover,p.PID,Pname,tag from platformstyle s,platform p where s.PID=p.PID  order BY RAND() limit 8;", 
 		function (err1, result) {
 		if (err1) throw err1;
 	    res.send(result);}
@@ -774,7 +779,7 @@ app.put('/api/answer/rating', (req, res) => {
     
    con.query(
 	   `UPDATE quiz set ave_rate=? where QID=?`,[rate/10,QID]
-);
+  );
 })
 
 
