@@ -64,19 +64,7 @@ const initQuestions=   [
     //insert to own 
     own(){}
 
-    inital_reputation(){ 
-      const url= 'http://localhost:3001/api/CreatePlatform/initalR';
-        
-       Axios.post(url, { 
-       PID : this.state.PID,
-       UID: localStorage.getItem("UID"),
-       }).then((response) => { 
-       console.log(response); 
-       
-       }); 
- 
- 
-   }
+
 
    discriptionContent(){
      let discription=this.state.questions[this.state.currentQuestion].questionText

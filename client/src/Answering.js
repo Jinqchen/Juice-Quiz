@@ -117,8 +117,8 @@ export default class App extends Component {
 
 
 	addRep=()=>{
-		 const url = `https://juice-quiz.herokuapp.com/api/answer/updateRep/${this.state.QID}`;
-		 //  const url= `http://localhost:3001/api/answer/updateRep/${this.state.QID}`;
+		 //const url = `https://juice-quiz.herokuapp.com/api/answer/updateRep/${this.state.QID}`;
+		   const url= `http://localhost:3001/api/answer/updateRep/${this.state.QID}`;
 			Axios.put(url,{
 				PID:this.state.PID,
 				UID:localStorage.getItem('UID')

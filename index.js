@@ -775,15 +775,15 @@ app.put('/api/answer/rating', (req, res) => {
    con.query(
 	   `UPDATE quiz set ave_rate=? where QID=?`,[rate/10,QID]
 );
-   })
-
-
-
-
-// app.listen(3001,()=>{
-// 	  console.log("running");
-// 	})
-	
-app.listen(process.env.PORT || 3001,()=>{
-  console.log('listening for requests on port'+ process.env.PORT);
 })
+
+
+
+
+app.listen(3001,()=>{
+	  console.log("running");
+	})
+	
+// app.listen(process.env.PORT || 3001,()=>{
+//   console.log('listening for requests on port'+ process.env.PORT);
+// })
