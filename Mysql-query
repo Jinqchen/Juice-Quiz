@@ -968,4 +968,19 @@ delete from quiz where QID=33 OR QID=34 OR QID=35 OR QID=36 OR
 QID=37 OR QID=38;
 
 
+-- create table history (
+-- UID int,
+-- QID INT,
+-- whendo datetime default now(),
+-- rate double,
+-- score double,
+-- primary key(UID,QID,whendo),
+-- foreign key (UID) references users(UID)
+-- ON DELETE NO ACTION
+-- ON UPDATE CASCADE,
+-- foreign key (QID) references quiz(QID)
+-- ON DELETE NO ACTION
+-- ON UPDATE CASCADE
+-- )
+
 
