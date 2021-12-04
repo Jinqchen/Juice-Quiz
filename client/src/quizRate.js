@@ -64,7 +64,19 @@ const initQuestions=   [
     //insert to own 
     own(){}
 
-
+    inital_reputation(){ 
+      const url= 'http://localhost:3001/api/CreatePlatform/initalR';
+        
+       Axios.post(url, { 
+       PID : this.state.PID,
+       UID: localStorage.getItem("UID"),
+       }).then((response) => { 
+       console.log(response); 
+       
+       }); 
+ 
+ 
+   }
 
    discriptionContent(){
      let discription=this.state.questions[this.state.currentQuestion].questionText
@@ -77,10 +89,10 @@ const initQuestions=   [
    setRate(rate){
        console.log(rate)
        this.setState({rating:rate},()=>{
-     //const url = `https://juice-quiz.herokuapp.com/api/answer/rating`;
-	   const url= `http://localhost:3001/api/answer/rating`;
+    //  const url = `https://juice-quiz.herokuapp.com/api/answer/rating`;
+		 const url= `http://localhost:3001/api/answer/rating`;
        Axios.put(url,{QID:localStorage.getItem('QID'),
-       rating:rate  
+      rating:rate  
 }).then((response) => { 
  console.log(response); 
  }

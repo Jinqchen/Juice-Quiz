@@ -79,10 +79,10 @@ const IconTab=(props)=>{
               })}
               
               <li className="nav-text" onClick={handleSignout} >
-               
+              <Link to={"/"}>
                     <AiIcons.AiFillCaretLeft/>
                     <span onClick={props.signOutCallback}>{"Sign out"}</span >
-                     
+                    </Link>
               </li>
             </ul>
             

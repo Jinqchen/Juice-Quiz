@@ -1,4 +1,4 @@
-.signUpBoard{
+/* .signUpBoard{
 
   background-color: orange;
   width: 700px;
@@ -49,6 +49,7 @@
   float: right;
   
 }
+*/
 .SignUp{ 
   position: relative;
   display: block;
@@ -61,9 +62,11 @@
   margin: 0 auto;
   font-size: 16px;
   color: #ffffff;
-  background-color: black; 
+  background-color:#918f8f;; 
   align-items: center;
   border: none;
   cursor: pointer;  
-  bottom: 70px;
-}
+  border-radius: 15px;
+  border-color: #918f8f;; 
+  margin-top: 100px;
+} 

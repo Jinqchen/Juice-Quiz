@@ -78,7 +78,7 @@ export default class quizManageMent extends Component {
   
 	async getnumber(){
 		this._isMounted = true;
-    //  const url = `https://juice-quiz.herokuapp.com/api/manageQuiz/quizlist_total/${this.state.UID}`;
+     // const url = `https://juice-quiz.herokuapp.com/api/manageQuiz/quizlist_total/${this.state.UID}`;
 		 const url= `http://localhost:3001/api/manageQuiz/quizlist_total/${this.state.UID}`;
       const res = await Axios.get(url)
       .then(res=>{return res.data})
@@ -128,7 +128,7 @@ export default class quizManageMent extends Component {
 		if (this.state.searchContent===""){
 			this.get();
 		}else{
-		//	const url= `https://juice-quiz.herokuapp.com/api/quiz/${this.state.searchContent}`;
+			//const url= `https://juice-quiz.herokuapp.com/api/quiz/${this.state.searchContent}`;
 		const url= `http://localhost:3001/api/quiz/${this.state.searchContent}`;
 		  const res = await Axios.get(url,{
 			params: {

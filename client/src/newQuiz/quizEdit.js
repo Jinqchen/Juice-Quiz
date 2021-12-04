@@ -153,8 +153,8 @@ const initQuestions=   [
         
         //sun
         submit(){   
-         // const url = 'https://juice-quiz.herokuapp.com/api/quizsetCreate';
-           const url= 'http://localhost:3001/api/quizsetCreate';
+          // const url = 'https://juice-quiz.herokuapp.com/api/quizsetCreate';
+          const url= 'http://localhost:3001/api/quizsetCreate';
       
          Axios.post(url, { 
               QID: localStorage.getItem('QID'), 

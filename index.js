@@ -30,7 +30,6 @@ app.use(cookieParser());
 // 	})
 //   );
   
-
 var con = mysql.createPool({
 	host: "us-cdbr-east-04.cleardb.com",
 	user: "b0fb64176d0a67",
@@ -49,7 +48,7 @@ app.get('/api/answer/:id',(req,res)=>{
 		function (err1, result) {
 			if (err1) throw err1;
 			res.send(result);
-			con.release();
+			connection.release();
 		}
 	  )
 	 
@@ -83,28 +82,35 @@ app.put('/api/answer/updateRep/:id',(req,res)=>{
 			function (err1, result) {
 			if (err1) throw err1;
 			res.send(result);
-			con.release();}
+			connection.release();}
 	  )
 		}		
 	  );
 	
 	}
   )
-
-
-
-
-
      
 })
  //Get platform list
 app.get ('/api/Platform',(req,res)=>{
+	
     con.query(
 		"SELECT Pcover,p.PID,Pname,tag from platformstyle s,platform p where s.PID=p.PID  order BY RAND() limit 8;", 
 		function (err1, result) {
 		if (err1) throw err1;
-	    res.send(result);}
-  );})
+	    res.send(result);
+		
+		
+	}
+  );
+   
+})
+
+
+
+
+
+
 
   app.get ('/api/Platform/:tag',(req,res)=>{
 	const tag = req.params.tag;
@@ -113,9 +119,10 @@ app.get ('/api/Platform',(req,res)=>{
 		 where s.PID=p.PID AND p.tag='`+tag +`' order BY RAND() limit 3`, 
 		function (err1, result) {
 		if (err1) throw err1;
-	    res.send(result);}
+	    res.send(result);
+		con.release;
+	}
   );})
-
 
 // Get quizlist
   app.get ('/api/platform/quizlist/:id',(req,res)=>{
@@ -128,7 +135,9 @@ app.get ('/api/Platform',(req,res)=>{
 		function (err1, result) {
 		if (err1) throw err1;
 		console.log(result);
-	    res.send(result);}
+	    res.send(result);
+		con.release;
+	}
   );})
 
   app.get ('/api/manageQuiz/quizlist_total/:id',(req,res)=>{
@@ -137,7 +146,8 @@ app.get ('/api/Platform',(req,res)=>{
 		`select QID from releases where UID=${UID}`, 
 		function (err1, result) {
 		if (err1) throw err1;
-        res.send(result)		
+        res.send(result)
+		con.release;		
 	}
   );
 }
@@ -149,14 +159,12 @@ app.get ('/api/manageQuiz/quizlist/:id',(req,res)=>{
 		`select Qname,ave_rate,hot,description,releasedate from quiz where QID=${QID}`, 
 		function (err1, result) {
 		if (err1) throw err1;
-        res.send(result)		
+        res.send(result);
+		con.release;		
 	}
   );
 }
 )
-
-
-
 
 
 
@@ -174,7 +182,9 @@ app.get ('/api/manageQuiz/quizlist/:id',(req,res)=>{
 		function (err1, result) {
 		if (err1) throw err1;
 		console.log(result);
-	    res.send(result);}
+	    res.send(result);
+		con.release;
+	}
   );})
 
   app.get ('/api/user/owned/:id',(req,res)=>{
@@ -187,7 +197,9 @@ app.get ('/api/manageQuiz/quizlist/:id',(req,res)=>{
 		function (err1, result) {
 		if (err1) throw err1;
 		console.log(result);
-	    res.send(result);}
+	    res.send(result);
+	    con.release;
+	}
   );})
 
 
@@ -209,7 +221,9 @@ app.get ('/api/manageQuiz/quizlist/:id',(req,res)=>{
 		function (err1, result) {
 		if (err1) throw err1;
 		console.log(result);
-	    res.send(result);}
+	    res.send(result);
+		con.release;
+	}
   );})
 
   app.get ('/api/platform/:id/replimit',(req,res)=>{
@@ -221,7 +235,9 @@ app.get ('/api/manageQuiz/quizlist/:id',(req,res)=>{
 		function (err1, result) {
 		if (err1) throw err1;
 		console.log(result);
-	    res.send(result);}
+	    res.send(result);
+		con.release;
+	}
   );})
 
 //Search
@@ -332,6 +348,7 @@ app.post('/api/platform/subscribe', (req, res) => {
 		}else{
 			res.send({subscribe:false});
 		}
+		con.release;
 	  }
 	);
   });

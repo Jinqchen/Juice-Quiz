@@ -24,12 +24,12 @@ class PlatFormList extends React.Component {
 	       
 			return(
 			    <Link to={'/platform/'+place.Pname} onClick={()=>this.store(place)}>
-                <div className="list">  
+                <div className="PlatFormlist">  
                 
                 <Media left>
 			 	<Media object src={place.Pcover} alt={place.Pname} />
-                 
-                 <div className="platFormName">{place.Pname}</div>
+                 <label className="PFLplatFormName"> {place.Pname}</label>
+                 {/* <div className="platFormName">{place.Pname}</div> */}
 				 		</Media>   
                 </div>
                 </Link>

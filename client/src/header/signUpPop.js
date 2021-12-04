@@ -40,8 +40,8 @@ import Axios from "axios";
 
     //这里传参给后端  
     signUp(){
-//const url = 'https://juice-quiz.herokuapp.com/api/register';
-      const url= 'http://localhost:3001/api/register';
+   // const url = 'https://juice-quiz.herokuapp.com/api/register';
+            const url= 'http://localhost:3001/api/register';
       if(this.state.password===this.state.conformPassword){   
          Axios.post(url, { 
               username: this.state.userName, 
@@ -88,8 +88,8 @@ import Axios from "axios";
                     <input type="password" placeholder="Confirm your password" name="confirmPassword" required onChange={this.handleChangeConfirmPassword.bind(this)}></input>
                   </div>
                  
-                  </div>
             <button className="SignUp" onClick={()=>this.signUp()} >Sign in</button>
+                  </div>
 
                   
                   </div>

@@ -3,8 +3,7 @@
   background-color: #EEEEEE;
   position: sticky; /* Set the navbar to fixed position */
   top: 0; /* Position the navbar at the top of the page */
-  width: 100%; /* Full width */
-  
+  width: 100%; /* Full width */ 
   z-index: 101;
 }
 
@@ -30,10 +29,7 @@
   display: block;
   margin: 0 auto;
   position: relative;
-  align-self: center;
-  margin-top: 100px;  
-  width: 700px;
-  height: 500px;
+  align-self: center; 
   z-index: 100;
 }
 .account {

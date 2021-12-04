@@ -45,7 +45,7 @@ const initQuestions=   [
         
       
           componentDidMount = () => {
-         //    const url = `https://juice-quiz.herokuapp.com/api/answer/${this.state.QID}`;
+          //   const url = `https://juice-quiz.herokuapp.com/api/answer/${this.state.QID}`;
         const url= `http://localhost:3001/api/answer/${this.state.QID}`;
             Axios.get(url)
         .then(res=>{return res.data})
@@ -184,8 +184,8 @@ const initQuestions=   [
           }
           console.log(question);
         
-           // const url = 'https://juice-quiz.herokuapp.com/api/quizsetEdit/insert';
-            const url= 'http://localhost:3001/api/quizsetEdit/insert';
+           //  const url = 'https://juice-quiz.herokuapp.com/api/quizsetEdit/insert';
+           const url= 'http://localhost:3001/api/quizsetEdit/insert';
                   
             Axios.post(url, { 
                 QID: localStorage.getItem('QID'), 
@@ -200,7 +200,7 @@ const initQuestions=   [
                 del.push(i)
               }
               console.log(del);
-                //const url = 'https://juice-quiz.herokuapp.com/quizsetEdit/delete';
+               // const url = 'https://juice-quiz.herokuapp.com/quizsetEdit/delete';
                 const url= 'http://localhost:3001/api/quizsetEdit/delete';
                       
                 Axios.delete(url, { data:{
@@ -212,7 +212,7 @@ const initQuestions=   [
 
  
        update(){
-//  const url = `https://juice-quiz.herokuapp.com/api/quizsetEdit/change`;
+ // const url = `https://juice-quiz.herokuapp.com/api/quizsetEdit/change`;
  const url= `http://localhost:3001/api/quizsetEdit/change`;
     console.log(this.state.questions);
  Axios.put(url,{QID:localStorage.getItem('QID'),

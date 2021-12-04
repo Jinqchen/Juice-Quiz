@@ -48,8 +48,8 @@ import Axios from "axios";
         }
 
        updateName(){
-         // const url = `https://juice-quiz.herokuapp.com/api/EditPlatform/name/${this.state.name}`;
-        const url= `http://localhost:3001/api/EditPlatform/name/${this.state.name}`;
+       // const url = `https://juice-quiz.herokuapp.com/api/EditPlatform/name/${this.state.name}`;
+          const url= `http://localhost:3001/api/EditPlatform/name/${this.state.name}`;
         Axios.put(url,{PID:this.state.EPID}).then((response) => { 
       console.log(response); 
       }

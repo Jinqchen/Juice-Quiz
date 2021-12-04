@@ -60,8 +60,8 @@ export default class Menu extends Component {
 	} 
  
     async process(){
-       // const url = 'https://juice-quiz.herokuapp.com/api/Platform';
-       const url= 'http://localhost:3001/api/Platform';
+       //const url = 'https://juice-quiz.herokuapp.com/api/Platform';
+        const url= 'http://localhost:3001/api/Platform';
       const res = await Axios.get(url)
       .then(res=>{return res.data})
       .then( result =>{
@@ -76,7 +76,7 @@ export default class Menu extends Component {
     //在这里进行qurey
     async search(){
     alert(this.state.searchContent)
-    //const url=`https://juice-quiz.herokuapp.com/api/platform/${this.state.searchContent}`;
+   // const url=`https://juice-quiz.herokuapp.com/api/platform/${this.state.searchContent}`;
     const url= `http://localhost:3001/api/platform/${this.state.searchContent}`;
       const res = await Axios.get(url)
       .then(res=>{return res.data})
@@ -96,7 +96,7 @@ export default class Menu extends Component {
             <div>
 			<div className="menu">
                 
-            <div className="tagFilter">
+            { <div className="tagFilter">
                 
                  <button onClick={()=>this.process()}    type="button"  className="tag"> General</button>
                  <button onClick={()=>this.filter("Music")}    type="button"  className="tag">Music</button>
@@ -106,13 +106,13 @@ export default class Menu extends Component {
                  <button onClick={()=>this.filter("Food")}    type="button"  className="tag">Food</button>
                  <button onClick={()=>this.filter("Movie")}    type="button"  className="tag">Movie</button>
                  <button onClick={()=>this.filter("Life")}    type="button" className="tag">Life</button>
-            </div>
+            </div> }
             
             
-            <div className="search"> 
-			<input className='searchContent' required onChange={this.handleChangeSearch.bind(this)}></input>
-			<button className='searchButton'onClick={()=>this.search()}>Search </button>
-			</div>
+            { <div className="search"> 
+			 <input type="text" className='searchContent' required onChange={this.handleChangeSearch.bind(this)}></input>
+			{  <button className='searchButton'onClick={()=>this.search()}>Search </button>   }
+			</div> }
 
 			<div className="item">
             <PlatFormList places={this.state.renderList} /> 

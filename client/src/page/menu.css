@@ -1,7 +1,6 @@
 .menu{ 
     display: block;
-    position: absolute;
-    top:100px;
+    position: absolute; 
     left: 0%;
     height: 100%;
     width: 100%;
@@ -10,10 +9,10 @@
  }
  .item{
      position: relative;
-     display: block;
-     background-color: #EEEEEE; 
-     width:100%; 
-     float:left;
+     display: block; 
+     
+    padding-left: 4%;
+
  }
  .tagFilter{
      width: 100%; 
@@ -22,20 +21,16 @@
  }
  .search{
      margin-top: 30px;
-     color: black;
-     display: flex;
-     position: relative;
-     left: 25%;
+     color: black; 
+     position: relative;  
  
  }
- .searchContent{
-     margin: 0px;
-     width: 800px;
+ .searchContent{   
  }
  .searchButton{
+     margin-left: -1px;
      color: #F78223;
-     background-color: #EEEEEE;
-     float: right;
+     background-color: #EEEEEE; 
      
      text-align: center;
      text-decoration: #ffffff;  
@@ -47,4 +42,5 @@
      cursor: pointer;
      width: 100px;
      border-radius: 5px;
+     height: 49.8px;
  }
