@@ -152,7 +152,7 @@ const initQuestions=   [
         
         
         
-        //sun
+        
         submit(){  
           
             if (this.state.origin.length<this.state.questions.length){

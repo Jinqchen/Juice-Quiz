@@ -8,15 +8,27 @@ const path = require("path");
 const session = require("express-session");
 const cookieParser = require('cookie-parser');
 const { Console } = require('console');
-app.use(express.static(path.resolve(__dirname, "./client/build")));
-app.get("/", function (request, response) {
-  response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
-});
+const aws = require('aws-sdk');
+
+// S3
+const fs = require('fs')
+const util = require('util')
+const unlinkFile = util.promisify(fs.unlink)
+const multer = require('multer')
+const upload = multer({ dest: 'uploads/' })
+const { uploadFile, getFileStream } = require('./server/s3')
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(cors());
 app.use(cookieParser());
+
+app.use(express.static(path.resolve(__dirname, "./client/build")));
+app.get("/", function (request, response) {
+  response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+});
+
+
 
 // app.use(
 // 	session({
@@ -38,6 +50,28 @@ var con = mysql.createPool({
 	port:3306,
 });
 
+
+
+
+
+  
+app.post('/images', upload.single('image'), async (req, res) => {
+	const file = req.file
+	console.log(file)
+  
+  
+	const result = await uploadFile(file)
+	await unlinkFile(file.path)
+	console.log(result)
+	const description = req.body.description
+	res.send({imagePath: `/images/${result.Key}`})
+  })
+
+
+
+
+
+
 //Answering
 app.get('/api/answer/:id',(req,res)=>{
       console.log("Connected!");
@@ -48,7 +82,7 @@ app.get('/api/answer/:id',(req,res)=>{
 		function (err1, result) {
 			if (err1) throw err1;
 			res.send(result);
-			connection.release();
+			
 		}
 	  )
 	 
@@ -106,21 +140,15 @@ app.get ('/api/Platform',(req,res)=>{
    
 })
 
-
-
-
-
-
-
   app.get ('/api/Platform/:tag',(req,res)=>{
 	const tag = req.params.tag;
     con.query(
-		`SELECT Pcover,p.PID,Pname from platformstyle s,platform p
-		 where s.PID=p.PID AND p.tag='`+tag +`' order BY RAND() limit 3`, 
+		`select p.PID,p.Pname, ps.Pcover
+		from platform p, platformstyle ps
+		where p.PID=ps.PID and p.Pname LIKE '%${tag}%'  order BY RAND() limit 4`, 
 		function (err1, result) {
 		if (err1) throw err1;
 	    res.send(result);
-		con.release;
 	}
   );})
 
@@ -152,6 +180,8 @@ app.get ('/api/Platform',(req,res)=>{
   );
 }
 )
+
+
 app.get ('/api/manageQuiz/quizlist/:id',(req,res)=>{
     console.log("manage Connected!");
 	const QID = req.params.id;
@@ -565,6 +595,48 @@ app.post('/api/CreatePlatform/doown', (req, res) => {
 	);
   });
 
+  app.post('/images/:id', upload.single('image'), async (req, res) => {
+	const PID = req.params.id;
+	const file = req.file
+	console.log(file);
+	console.log("start")
+	const result = await uploadFile(file);
+	console.log("phase1")
+	await unlinkFile(file.path);
+	console.log(result.Location);
+	var link = result.Location;
+	link = link.slice(38)
+	console.log(link)
+	con.query(`insert into platformstyle(PID,Pcover) value(?,?);`,
+	[PID,link],
+	(err, result) => {
+		console.log(result);
+	  if (err) {
+		res.send({ err: err });
+	  }
+	}
+	
+	
+	)
+
+
+
+	
+
+  })
+
+
+
+
+
+
+
+
+
+
+
+
+
 //Edit platform
 app.put('/api/EditPlatform/name/:name',(req,res)=>{
      const name = req.params.name;
@@ -693,7 +765,7 @@ app.post('/api/quizsetCreate', (req, res) => {
 	 for (var j=0;j<options.length;j++){
      con.query(
 		`insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
-		VALUE(?,?,?,'this is option description',True);`,
+		VALUE(?,?,?,?,True);`,
 		[QID,i+1,j+1,options[j]['questionText'],options[j]['isCorrect']],
 		(err, result) => {
 			console.log(err);

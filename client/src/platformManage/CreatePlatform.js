@@ -16,8 +16,9 @@ import Axios from "axios";
               tag:"",
               oneOnwer:false,
               requireReputation:0,
-              PID:0,
-              success:false
+              PID:21,
+              success:false,
+              file:''
             };    
           }
         
@@ -41,16 +42,39 @@ import Axios from "axios";
             this.setState({requireReputation: e.target.value});  
          
         }
-        
-        uploadIcon(){
 
+        handlefileSelected (event){
+          const files = event.target.files[0]
+          this.setState({file:files})
+        }
+
+
+
+        
+        uploadIcon(event){
+          console.log("working")
+          event.preventDefault()
+          const result =  this.postImage(this.state.file, this.state.name)
         }
         
+
+        postImage(image, name) {
+          const formData = new FormData();
+          formData.append("image", image)
+          formData.append("name", name)
+        
+          const result = Axios.post(`http://localhost:3001/images/${this.state.PID}`, formData, { headers: {'Content-Type': 'multipart/form-data'}})
+          return result.data
+        }
+
+
+
         
         
-        submit(){       
+        submit(e){       
     //  const url = 'https://juice-quiz.herokuapp.com/api/createplatform';
      const url= 'http://localhost:3001/api/createplatform';
+    
       Axios.post(url, { 
              Pname: this.state.name, 
              tag: this.state.tag, 
@@ -62,6 +86,7 @@ import Axios from "axios";
           this.setState({success:response['success']});
         }); 
       if (this.state.success){
+        this.uploadIcon(e)
         this.own();
        this.inital_reputation();
        alert("Platform Created!") 
@@ -95,8 +120,6 @@ import Axios from "axios";
        console.log(response); 
        
        }); 
- 
- 
    }
 
 
@@ -131,13 +154,14 @@ render(){
           </select>
         </label>
         </li>
-        {/* <li>
-        <label className='editInput' >  Upload paltform icon
-          <button onClick={()=>this.uploadIcon()}>Upload</button>
- 
+        <li>
+
+        <label className='editInput' >  Upload platform icon
+         
+           <input onChange={this.handlefileSelected.bind(this)} type="file" accept="image/*"></input>
         </label>
 
-        </li> */}
+        </li>
 
         <li>
         <label> Allow co-owenr application
@@ -158,7 +182,7 @@ render(){
       </form>
 
       
-      <button  className="submit" onClick={()=>this.submit()} >Submit</button>
+      <button  className="submit" onClick={(e)=>this.submit(e)} >Submit</button>
 			 
 			</div>
 

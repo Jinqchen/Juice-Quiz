@@ -27,10 +27,10 @@ class PlatFormList extends React.Component {
                 <div className="PlatFormlist">  
                 
                 <Media left>
-			 	<Media object src={place.Pcover} alt={place.Pname} />
+			 	<img object src={'https://juicequiztest.s3.amazonaws.com'+place.Pcover} alt={place.Pname} />
                  <label className="PFLplatFormName"> {place.Pname}</label>
                  {/* <div className="platFormName">{place.Pname}</div> */}
-				 		</Media>   
+				</Media>   
                 </div>
                 </Link>
 			);
