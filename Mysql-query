@@ -984,3 +984,92 @@ QID=37 OR QID=38;
 -- )
 
 
+-- select r.Rpoint, p.Pname,r.PID,r.UID
+-- FROM reputation r,platform p
+-- where r.UID=5 and p.PID=r.PID
+-- SELECT * FROM reputation
+-- select r.Rpoint,r.UID,u.Uname
+-- FROM reputation r,platform p,users u
+-- where  r.PID=1 AND r.UID=u.UID AND r.PID=p.PID
+-- order by r.Rpoint
+-- select * from platform;
+
+-- insert into users(UID,Uname,Uemail,Upass)
+-- value(18,'demo18','demo18@gamil.com','123')
+
+
+-- insert into quiz
+-- value(3,3,243,'This is a quiz about basic indian culture'),
+-- (4,4,433,'This is a quiz about basic computer science'),
+-- (5,2,43,'This is a quiz about basic cse416'),
+-- (6,1,13,'This is a quiz about basic AMS'),
+-- (7,3,3,'This is a quiz about basic script language');
+-- select * from quiz;
+-- insert into subcribe
+-- value(15,3)
+
+-- update platform
+-- set Pname='Classic Muisc'
+-- where PID=13
+-- select Pname, PID from platform
+-- WHERE tag='Music'
+-- limit 2;
+-- select * from platform;
+-- INSERT INTO REPUTATION
+-- value (0,3,4),
+-- (0,3,12);
+-- insert into subscribe
+-- value(11,3)
+
+
+
+-- update platformstyle set Pcover='/9.jpg' where PID=9;
+-- update platformstyle set Pcover='/10.jpg' where PID=10;
+-- update platformstyle set Pcover='/11.jpg' where PID=11;
+-- update platformstyle set Pcover='/12.jpg' where PID=12;
+-- update platformstyle set Pcover='/13.jpg' where PID=13;
+-- update platformstyle set Pcover='/14.jpg' where PID=14;
+
+-- alter table platform add allowco boolean default true 
+-- insert into platformstyle(PID,Pcover)
+-- value(?,?);
+-- select count(*) from platform
+-- insert into platform (PID,Pname,tag,replimit,allowco)
+-- value(?,?,?,?,?)
+-- insert into own(PID,UID)
+-- value(?,?)
+-- delete from platformstyle where PID=21;
+-- delete from own where PID=21;
+-- delete from reputation where PID=21;
+-- delete from platform where PID=21
+
+-- insert into history(UID,QID,whendo,rate,score)
+-- value(?,?,now(),?,?);
+-- -- HOT 
+-- SELECT COUNT(*) FROM history WHERE QID=1;
+-- SELECT AVG(rate) FROM history WHERE QID=1 group by QID;
+-- update quiz set ave_rate =?,hot=? where QID=?;
+
+
+-- select PID from contain WHERE QID=?;
+-- update reputation set Rpoint=? WHERE UID=? AND PID=?
+
+-- select q.QID, q.Qname,q.description,h.whendo,h.score,h.rate,q.ave_rate from quiz q,history h
+-- where 
+-- SELECT whendo FROM history where UID=3 AND QID=13 GROUP BY whendo desc limit 1
+-- SELECT whendo FROM history where UID=3 AND QID=13 GROUP BY whendo desc limit 1;
+-- update history set rate = 1.5 
+
+-- where QID=13 and UID=3 and whendo='2021-12-10 04:14:59'
+-- update history set rate = 1.5 where UID=3 AND QID=13 
+-- SET GLOBAL time_zone = 'EST';
+-- select now()
+
+-- SELECT whendo FROM history where UID=3 AND QID=13 GROUP BY whendo desc limit 1
+-- update history set rate = 1.5
+
+--  where QID=13 and UID=3 and whendo= (select max(whendo) from (select * from history))
+ 
+ -- select * from history where whendo= (select max(whendo) from history)
+--  SELECT max(whendo) FROM history where UID=3 AND QID=13 
+SELECT AVG(rate) FROM history WHERE QID=13 group by QID;
