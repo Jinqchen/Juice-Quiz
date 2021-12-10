@@ -1,12 +1,14 @@
 .rank{
     display: relative;
     padding-left: 35%;
-    margin-top: 50%; 
+    margin-top: 10%; 
+    width: 200px;
 }
 .rateBoard{ 
     display: block;
 margin: 0 auto;
 margin-top: 100px; 
+
 } 
  * {
     font-family: "Verdana", cursive, sans-serif;
@@ -17,5 +19,14 @@ label{
 }
 .starBoard{
     display: relative;
-margin-left: 30%;}
- 
+margin-left: 35%;}
+ .howYouLike{
+    margin-left: 15%;
+    display: block; 
+   font-size: 28px;
+ }
+ .rateContent{
+width: 100%;
+text-align:left;
+font-size: 42px;
+ }

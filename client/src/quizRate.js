@@ -124,21 +124,42 @@ render(){
       
 		 <div className='editQuizeditBoard'> 
          <img src="logo.jpg" className="quizInitIcon"></img>  
-        <div className="editQuestionList" style={{backgroundColor: "rgb(52, 63, 73)"}}>
+        { <div className="editQuestionList"  >
         {this.state.questions.map((item, index) => {
                 return ( 
-                    item.correct&& <button  type="button" style={{backgroundColor: "green"}}  >{item.key+1}</button> ||<button  type="button"  style={{backgroundColor: "red"}} >{item.key+1}</button>
+                    item.correct&& <button  type="button" style={{color: "green"}}  >{item.key+1}</button> ||<button  type="button"  style={{color: "red"}} >{item.key+1}</button>
                 );
               })}
         </div>
-        
+         }
 
-         <div className="editContent">
+
+          { <div className="editContent">
+        <form onSubmit={this.handleSubmit} className="rateEditForm">
+          <label className='rateContent'>Congratulations, you got:
+          <label className='rateContent'   style={{color: "orange",fontSize:"60px", marginLeft:"40%"}}>{this.state.score } Points 
+          </label>
+
+
+          <label style={{fontSize:"30px",marginBottom:"50px", width:"100%"}}>in <label  style={{color: "orange",fontSize:"50px",width:"50px"}}>{this.state.limitedHour } </label> hour and <label  style={{color: "orange",fontSize:"50px",width:"50px"}}>{this.state.limitedMin } </label>  minutes
+        </label>  
+            
+          </label>
+
+          {/* <label   className="rank">You defeated <label  style={{color: "orange",fontSize:"48px "}}>{this.state.rank }% 
+       </label> users in juice quiz</label> */}
+       <label style={{ textAlign:"left", width:"100%"}}>You defeated  <label style={{ textAlign:"left", width:"100%",color: "orange"}}>{this.state.rank }%  </label>
+       users of juice quiz</label>
+
+       </form>
+       
+       </div>  }
+
+         {/* <div className="editContent">
         <form onSubmit={this.handleSubmit} className="editForm">
-             
-        <li>
-      <label className='editInput'  style={{fontSize:"50px"}} > Congratulations,<br/> You got <br/> <label  style={{color: "orange",fontSize:"80px", marginLeft:"40%"}}>{this.state.score }
-       </label> points <br/> 
+              
+      <label className='editInput'  style={{fontSize:"50px"}} > Congratulations,<br/> You got   <label  style={{color: "orange",fontSize:"80px", marginLeft:"40%"}}>{this.state.score }
+       </label> points  
        <label style={{fontSize:"30px",marginBottom:"50px"}}>
        in <label  style={{color: "orange",fontSize:"50px"}}>{this.state.limitedHour } </label> hour and <label  style={{color: "orange",fontSize:"50px"}}>{this.state.limitedMin } </label>  minutes
         </label>  
@@ -146,22 +167,18 @@ render(){
 
         <label className="rank">You defeated <label  style={{color: "orange",fontSize:"48px "}}>{this.state.rank }% 
        </label> users in juice quiz</label>
-      </li> 
-
-
- 
- 
-
- 
-
-     
+    
          
        </form>
        <div className="rateBoard">
         <label> How you like this quiz </label>
        
  {this.starBoard()}</div>
-       </div>
+       </div> */}
+       <div className="rateBoard">   
+       <div className="howYouLike">
+         How you like this quiz</div>
+ {this.starBoard()}</div> 
          </div>
          
          </span>
