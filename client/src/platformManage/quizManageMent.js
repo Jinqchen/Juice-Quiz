@@ -4,6 +4,8 @@ import { Media } from 'reactstrap';
 import Axios from "axios";
 import { Link } from 'react-router-dom';
 
+import {Button, Card} from 'react-bootstrap';
+
 export default class quizManageMent extends Component {
 	_isMounted = false;
 	constructor(props) {
@@ -110,12 +112,6 @@ export default class quizManageMent extends Component {
           console.log(this.state.places)
           this.setState({renderList:this.state.places});}          
        });}
-   
-
-
-
-
-
     };
 
 
@@ -128,7 +124,7 @@ export default class quizManageMent extends Component {
 		if (this.state.searchContent===""){
 			this.get();
 		}else{
-			//const url= `https://juice-quiz.herokuapp.com/api/quiz/${this.state.searchContent}`;
+		//	const url= `https://juice-quiz.herokuapp.com/api/quiz/${this.state.searchContent}`;
 		const url= `http://localhost:3001/api/quiz/${this.state.searchContent}`;
 		  const res = await Axios.get(url,{
 			params: {
@@ -159,45 +155,46 @@ newQuiz(){
 
 	render() {     
 	
+		const menu = this.state.renderList.map((place) => {
+			return( 
+				<div style={{paddingLeft : '18px' ,paddingTop : '18px' }}  >   
+				<Card className="managePlatFormSingleItem" style={{width : '18rem' }}  >
+		<Card.Img  src="./demo-image.jpg" />
+		<Card.Body>
+			<Card.Title>{place.Qname}</Card.Title>
+			<Card.Text  style={{fontSize:"12px",textOverflow:"ellipsis", height:"28px",whiteSpace:"nowrap",overflow:"hidden"}}>
+			Quiz DescriptionQuiz DescriptionQuiz DescriptionQuiz DescriptionQuiz DescriptionQuiz DescriptionQuiz Description
+			</Card.Text >  
+			<div className="quizMngBtn"  style={{marginLeft:"-5%"}}>
+			<Link   to={'/quizEditAfter/'+place.QID}  onClick={()=>this.store(place)}>
+			<Button variant="primary" onClick>Edit</Button>
+					</Link>
+		<Button  variant="primary" onClick>Delete</Button>
+		
+		</div>
+		</Card.Body>
+
+		</Card>  
+	</div>
+			   
+			);
+		});
 		return (
            <div>
 		
             <div className="header"> 
 			</div> 
-			<div className="search"> 
-			<input className='searchContent' required onChange={this.handleChangeSearch.bind(this)}></input>
-			<button className='searchButton'onClick={()=>this.search()}>Search </button>
-			</div>   
-            
-			
-			<div className="sort">
-
-			
-			<button className='sortButton'onClick={()=>this.sortByRate()}>⭐ Rate </button>
-            <button className='sortButton' onClick={()=>this.sortByHot()}>🔥 Hot </button>
-			</div>
- 
-			<div className='platFormlist'> 
+			  <div className="singlePlatformsearch"> 
+			<input className='singlePlatformsearchContent' required onChange={this.handleChangeSearch.bind(this)}></input>
+			<button className='singlePlatformsearchButton'onClick={()=>this.search()}>Search </button>
+			</div>     
+             
+  
 			<div>
-			{this.state.rander&&this.state.renderList.map((place) => {
-		//console.log(this.state.places)	
-		return(
-		 
-			<div className="item">  
-			 <div className='title'>
-				<Link to={'/quizEditAfter/'+place.QID} onClick={()=>this.store(place)}> {place.Qname}</Link> 
-				<div className='rate'>⭐: {place.ave_rate} 🔥：{place.hot}</div> 
-			 </div >
-			 	<div className='content'> 
-				 <div className='discription'>{place.description}</div>
-			 	<Media object src={'../'+place.pic} alt={place.Releaser} className='userIcon'/> 
-				 </div>
-			</div>
-			
-		);
-	})}			
-			
-			</div>
+			{this.state.rander&&<div className="ManagePlatFormList">
+{menu}</div>
+	  }			
+			 
 			 </div>
 		</div>
 		)

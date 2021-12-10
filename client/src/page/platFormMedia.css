@@ -1,17 +1,14 @@
-#unit{
-	background-color: #EEEEEE; 
-	font-family: Papyrus;
-	font-size: 20px;
-	padding-top: 100px;
-	width: 500px;
-	height: 400px;
-	border: 10px;
-	border-color:#EEEEEE; 
+#unit{ 
 }  
 
 
-.container{  
-	background-color: #EEEEEE; 
+.PLFcontainer{  
+	background-color: #EEEEEE;  
+	padding-top: 40px;
+	display: flex;
+	margin: 0 auto; 
+	position: relative; 
+	padding-left: 10%;
 }
 .media{ 
 	display: flex;
@@ -51,15 +48,11 @@ img{
 	
 }
 .PFLplatFormName{ 
-	color: rgb(245, 138, 39);  
-	font-size: 21px;
+	color: rgb(245, 138, 39);   
+	padding-bottom: 20px;
 }
-.PlatFormlist{
-	position: relative;
-	width: 300px;
-	height: 200px;
-	padding-right: 50px;
-	padding-left: 50px;
-	
-	padding-bottom: 100px;
+.PFLPlatFormlist{  
+	display: inline-block; 
+}.signlePFLlink{
+    padding-right: 30px
 }

@@ -14,7 +14,7 @@
     margin-bottom: 20px;   
     height: 100px;
 }.rankBoard{
-    border-color: grey;
+    border-color: rgb(177, 174, 174);
     border-style: solid;
     border-radius: 5px;
     position: absolute;
@@ -33,11 +33,13 @@
     width: 50px;
     height: 40px;
 }
-.rankBoardTitle{
-    height: 40px;
-    background-color: grey;
+.rankBoardTitle{ 
+    background-color: rgb(177, 174, 174);
+    font-size: 25px;
     text-align: center;
     padding-top: 20px;
+    color:white;
+    margin-bottom: 20px;
 }
 .header{
     background-color: aliceblue;
@@ -52,17 +54,17 @@
     position: relative;
     display: flex; 
     width: 100%;
-    height: 70px;
-    background-color: #ffffff;   
+    height: 100%;
+    background-color: rgb(177, 174, 174);
 }
 .platFormName{
-    font-size:40px;
+    font-size:30px;
     margin-right: 100px;
     margin-left:100px；
 }
 .platformaccount{
-    margin-right:50px; 
-    height: auto;
+    margin-top: 10px;
+    margin-right:50px;  
     background-color:#e49132; 
     border: none;
     color: white;
@@ -70,8 +72,10 @@
     text-align: center; 
     display: inline-block;
     font-size: 16px;
-    height: 70%;
-    width:15%
+    height: 40%;
+    width:20%;
+    margin-bottom: 10px;
+    margin-left: 100px;
 } 
 .newQuizLink span{ 
     color: #e49132;
@@ -108,33 +112,39 @@
     width: 70%;
     font-size: 50px;
 }
-.item{ 
+.SinglePlatformitem{ 
     margin-top: 50px;
     background-color:#eeeeec;
     text-decoration: black;
-    height: 300px; 
+    height: 100%;
     font-size: 50px;
 }
- .title{
-    text-decoration: white;
-    background-color: grey;
-    height: 50px;
+ .SinglePlatformtitle{
+     color:white;
+    background-color: rgb(177, 174, 174);
+    height: 100%;
     font-size: 50px;
     display: flex;
+    border-bottom: none;
+}
+.SinglePlatformtitle a{
+    color:white;
+    font-size: 40px;
 }
 .rate{
     position: absolute;
-    right: 200px;
+    right: 300px;
     font-size: 30px;
 }
  
  
 .userIcon{
-    position:absolute;
-    bottom: 0;
-    right: 0;
-    height: 100px;
-    width: 100px;
+    position:relative;  
+    height: 10%;
+    width: 10%;
+    margin-left: 90%; 
+    margin-top: 11%;
+
 }
 .discription{
    color: black;
@@ -142,3 +152,38 @@
    font-size: 19px;
 }
 
+.singlePlatformsearch{ 
+    display: block;  
+    position: relative;   
+    margin: 0 auto; 
+    padding-top: 30px;
+}
+.singlePlatformsearchContent{ 
+
+    margin-left: 25%;
+}.singlePlatformsearchButton{ 
+    margin-left: -1px;
+    color: #F78223;
+    background-color: #EEEEEE; 
+    
+    text-align: center;
+    text-decoration: #ffffff;  
+    
+    color: #ffffff;
+    background-color:#F78223;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    width: 100px;
+    border-radius: 5px;
+    height: 49.8px; 
+}
+.notOwnerBar{ 
+    display:relative;
+}
+.singlePlatFormName{
+    font-size: 40px;
+}
+.SinglePlatformtitle{
+    border-bottom:none
+} 

@@ -87,7 +87,7 @@ export default class singlePlatForm extends Component {
 
 	//申请和订阅在这里
 	subscribe(){
-    //const url = 'https://juice-quiz.herokuapp.com/api/platform/dosubscribe';
+   // const url = 'https://juice-quiz.herokuapp.com/api/platform/dosubscribe';
 	   const url= 'http://localhost:3001/api/platform/dosubscribe';
 	     
 		  Axios.post(url, { 
@@ -121,7 +121,7 @@ this.op_unsub();
 
 
 op_unsub(){
-   // const url = `https://juice-quiz.herokuapp.com/api/platform/delSub/${this.state.PID}`;
+  //  const url = `https://juice-quiz.herokuapp.com/api/platform/delSub/${this.state.PID}`;
 	const url= `http://localhost:3001/api/platform/delSub/${this.state.PID}`;
 	     
 		  Axios.delete(url, { data:{UID: localStorage.getItem("UID")}}).then((response) => { 
@@ -132,7 +132,7 @@ op_unsub(){
 }
 
 op_uncoown(){
-   // const url = `https://juice-quiz.herokuapp.com/api/platform/delCoown/${this.state.PID}`;
+  //  const url = `https://juice-quiz.herokuapp.com/api/platform/delCoown/${this.state.PID}`;
 	const url= `http://localhost:3001/api/platform/delCoown/${this.state.PID}`;
 	     
 		  Axios.delete(url, { data:{UID: localStorage.getItem("UID")}
@@ -150,8 +150,8 @@ op_uncoown(){
 
 	
 	inital_reputation(){
-	   //const url = 'https://juice-quiz.herokuapp.com/api/platform/initalR';
-	   const url= 'http://localhost:3001/api/platform/initalR';
+	 //   const url = 'https://juice-quiz.herokuapp.com/api/platform/initalR';
+	  const url= 'http://localhost:3001/api/platform/initalR';
 	     
 		  Axios.post(url, { 
 			PID : this.state.PID,
@@ -166,7 +166,7 @@ op_uncoown(){
 
 // Apply function 
 	do_apply(){
-		// const url = `https://juice-quiz.herokuapp.com/api/platform/doapply`;
+	//	 const url = `https://juice-quiz.herokuapp.com/api/platform/doapply`;
 		   const url= `http://localhost:3001/api/platform/doapply`;
 	     
 		  Axios.post(url, { 
@@ -194,8 +194,8 @@ op_uncoown(){
    }
 
    get_replimit(){
-      //  const url = `https://juice-quiz.herokuapp.com/api/platform/${this.state.PID}/replimit`;
-		  const url= `http://localhost:3001/api/platform/${this.state.PID}/replimit`;
+     //    const url = `https://juice-quiz.herokuapp.com/api/platform/${this.state.PID}/replimit`;
+		 const url= `http://localhost:3001/api/platform/${this.state.PID}/replimit`;
 		  Axios.get(url).then(res=>{return res.data})
 		  .then((response) => {   
 		  this.setState({replimit:response[0]['replimit']});
@@ -204,8 +204,8 @@ op_uncoown(){
    };
 
    get_Urep(){
-	  // const url = `https://juice-quiz.herokuapp.com/api/platform/userRep/${localStorage.getItem("UID")}`;
-	   const url= `http://localhost:3001/api/platform/userRep/${localStorage.getItem("UID")}`;
+	  //    const url = `https://juice-quiz.herokuapp.com/api/platform/userRep/${localStorage.getItem("UID")}`;
+	const url= `http://localhost:3001/api/platform/userRep/${localStorage.getItem("UID")}`;
 	    Axios.get(url,{
 			params:{
 			PID : this.state.PID,}
@@ -217,8 +217,8 @@ op_uncoown(){
 
 	async get(){
 		this._isMounted = true;
-    //  const url = `https://juice-quiz.herokuapp.com/api/platform/quizlist/${this.state.PID}`;
-		 const url= `http://localhost:3001/api/platform/quizlist/${this.state.PID}`;
+    	//  const url = `https://juice-quiz.herokuapp.com/api/platform/quizlist/${this.state.PID}`;
+	 const url= `http://localhost:3001/api/platform/quizlist/${this.state.PID}`;
       const res = await Axios.get(url)
       .then(res=>{return res.data})
       .then( result =>{
@@ -230,7 +230,7 @@ op_uncoown(){
     };
 
     async get_ranklist(){
-	 //   const url = `https://juice-quiz.herokuapp.com/api/platform/ranklist/${this.state.PID}`;
+	   // const url = `https://juice-quiz.herokuapp.com/api/platform/ranklist/${this.state.PID}`;
 		const url= `http://localhost:3001/api/platform/ranklist/${this.state.PID}`;
 		const res = await Axios.get(url)
 		.then(res=>{return res.data})
@@ -244,8 +244,8 @@ op_uncoown(){
 
 	 is_sub(){
 		
-     //  const url = 'https://juice-quiz.herokuapp.com/api/platform/subscribe';
-		 const url= `http://localhost:3001/api/platform/subscribe`;
+    //	   const url = 'https://juice-quiz.herokuapp.com/api/platform/subscribe';
+	 const url= `http://localhost:3001/api/platform/subscribe`;
          Axios.post(url, {
 			PID : this.state.PID,
 			UID: localStorage.getItem("UID"),
@@ -270,7 +270,7 @@ op_uncoown(){
 
 	is_owner(){
 		console.log("start")
-		 //const url = 'https://juice-quiz.herokuapp.com/api/platform/owner';
+	//	 const url = 'https://juice-quiz.herokuapp.com/api/platform/owner';
 		const url= `http://localhost:3001/api/platform/owner`;
 		Axios.post(url, {
 		   PID : this.state.PID,
@@ -345,26 +345,31 @@ newQuiz(){
 				 
 				<div className="rankBoard"> 
 				<div className="rankBoardTitle"> reputation rank  </div>
-				<div>{menu}</div>
+				<div className="rankMenu">{menu}</div>
 				</div> 
             <div className="header"> 
 			</div> 
-			<div className="search"> 
-			<input className='searchContent' required onChange={this.handleChangeSearch.bind(this)}></input>
-			<button className='searchButton'onClick={()=>this.search()}>Search </button>
-			</div>   
+			  <div className="singlePlatformsearch"> 
+			<input className='singlePlatformsearchContent' required onChange={this.handleChangeSearch.bind(this)}></input>
+			<button className='singlePlatformsearchButton'onClick={()=>this.search()}>Search </button>
+			</div>     
             
-			<div className="platFormButton">
-				{/* 此处读取平台的图片！ */}
-                <img src= {'../'+this.state.Pcover}  className='icon'></img> 
-            <h className='platFormName'>{this.state.Pname}</h>
+			<div className="platFormButton"> 
+                <img src= {'https://juicequiztest.s3.amazonaws.com'+this.state.Pcover}  className='icon'></img> 
+            <label className='singlePlatFormName'>{this.state.Pname}</label>
+			
+			
+		 
 			{!this.state.subscribed&&<button className='platformaccount'  onClick={()=>this.subscribe()}>subscribe</button>||<button className='platformaccount' onClick={()=>this.unsubscribe()} >subscribed √</button>}
 			{!this.state.co_owner&&<button className='platformaccount'  onClick={()=>this.apply()}>Apply to be co-owner</button>||<button className='platformaccount' >Co-Owner</button>}
-			{this.state.co_owner&&
+		
 			<Link  className='newQuizLink' to={'/quizInit'}>
 			<span>{"Release New Quiz"}</span> 
-            </Link>}
-			
+            </Link>
+			{/* {this.state.co_owner&&
+			<Link  className='newQuizLink' to={'/quizInit'}>
+			<span>{"Release New Quiz"}</span> 
+            </Link>}  */}
 
 					{/* <Link  className='newQuizLink' to={'/quizEdit'}>
 			<span>{"QuizEdit"}</span> 
@@ -384,11 +389,12 @@ newQuiz(){
 		//console.log(this.state.places)	
 		return(
 		 
-			<div className="item">  
-			 <div className='title'>
-				<Link to={"/platform/"+this.state.PID+"/answer/"+place.QID } onClick={()=>this.store(place)}> {place.Qname} </Link>
+			<div className="SinglePlatformitem">  
+			 <div >
+				<Link className='SinglePlatformtitle' style={{textDecoration: "none"}} to={"/platform/"+this.state.PID+"/answer/"+place.QID } onClick={()=>this.store(place)}>  {place.Qname}  
 				<div className='rate'>⭐: {place.ave_rate} 🔥：{place.hot}</div> 
-			 </div >
+			
+				</Link> </div >
 			 	<div className='content'> 
 				 <div className='discription'>{place.description}</div>
 			 	<Media object src={'../'+place.pic} alt={place.Releaser} className='userIcon'/> 

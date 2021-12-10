@@ -16,7 +16,7 @@ import Axios from "axios";
               tag:"",
               oneOnwer:false,
               requireReputation:0,
-              PID:21,
+              PID:0,
               success:false,
               file:''
             };    
@@ -42,6 +42,7 @@ import Axios from "axios";
             this.setState({requireReputation: e.target.value});  
          
         }
+        
 
         handlefileSelected (event){
           const files = event.target.files[0]
@@ -50,14 +51,14 @@ import Axios from "axios";
 
 
 
-        
+
+
         uploadIcon(event){
           console.log("working")
           event.preventDefault()
           const result =  this.postImage(this.state.file, this.state.name)
         }
         
-
         postImage(image, name) {
           const formData = new FormData();
           formData.append("image", image)
@@ -67,14 +68,10 @@ import Axios from "axios";
           return result.data
         }
 
-
-
-        
         
         submit(e){       
-    //  const url = 'https://juice-quiz.herokuapp.com/api/createplatform';
+   //   const url = 'https://juice-quiz.herokuapp.com/api/createplatform';
      const url= 'http://localhost:3001/api/createplatform';
-    
       Axios.post(url, { 
              Pname: this.state.name, 
              tag: this.state.tag, 
@@ -86,8 +83,8 @@ import Axios from "axios";
           this.setState({success:response['success']});
         }); 
       if (this.state.success){
-        this.uploadIcon(e)
-        this.own();
+       this.uploadIcon(e)
+       this.own();
        this.inital_reputation();
        alert("Platform Created!") 
       }
@@ -97,7 +94,7 @@ import Axios from "axios";
         
     //insert to own 
     own(){
-       //const url = `https://juice-quiz.herokuapp.com/api/CreatePlatform/doown`;
+    //   const url = `https://juice-quiz.herokuapp.com/api/CreatePlatform/doown`;
 		  const url= `http://localhost:3001/api/CreatePlatform/doown`;
 	     
 		  Axios.post(url, { 
@@ -110,8 +107,8 @@ import Axios from "axios";
     }
 
     inital_reputation(){
-      // const url = 'https://juice-quiz.herokuapp.com/api/CreatePlatform/initalR';
-     const url= 'http://localhost:3001/api/CreatePlatform/initalR';
+    //  const url = 'https://juice-quiz.herokuapp.com/api/CreatePlatform/initalR';
+      const url= 'http://localhost:3001/api/CreatePlatform/initalR';
         
        Axios.post(url, { 
        PID : this.state.PID,
@@ -120,8 +117,9 @@ import Axios from "axios";
        console.log(response); 
        
        }); 
+ 
+ 
    }
-
 
 
 
@@ -134,7 +132,7 @@ render(){
 		 
 		<div className='editBoard'>
 		
-		<div className="boardTitle">Platform Management</div> 
+		<div className="boardTitle">Platform Management?</div> 
         <form onSubmit={this.handleSubmit} className="editForm">
       <li>
       <label className='editInput'>   Platform Name
@@ -155,10 +153,9 @@ render(){
         </label>
         </li>
         <li>
-
-        <label className='editInput' >  Upload platform icon
-         
-           <input onChange={this.handlefileSelected.bind(this)} type="file" accept="image/*"></input>
+        <label className='editInput' >  Upload paltform icon
+        <input onChange={this.handlefileSelected.bind(this)} type="file" accept="image/*"></input>
+ 
         </label>
 
         </li>

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Component } from 'react';
-import './App.css' 
+import { Component } from 'react';  
+//import "bootstrap/dist/css/bootstrap.min.css"
 import Header from './header/header';
 import Menu from './page/menu';
 import ShowPlatformList from'./header/showPlatformLIst';

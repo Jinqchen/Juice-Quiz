@@ -91,11 +91,11 @@ export default class header extends Component {
             { !this.state.login&&<button onClick={()=>this.setState({SignupVisible:true,display:"block"})}  type="button" className='account'>Sign up</button>||<Link to='/profile'><img src="account.jpg" className='accountIcon'  onClick={()=>this.userIcon()} ></img></Link>} */}
            
          
+           <div>   {!this.state.login&&<button onClick={()=>this.setState({SignInVisible:true,display:"block"})}  type="button" className='HeaderAccount'>Sign in</button>}
+            { !this.state.login&&<button onClick={()=>this.setState({SignupVisible:true,display:"block"})}  type="button" className='HeaderAccount'>Sign up</button>}
+            </div>
            
-           
-            {!this.state.login&&<button onClick={()=>this.setState({SignInVisible:true,display:"block"})}  type="button" className='account'>Sign in</button>}
-            { !this.state.login&&<button onClick={()=>this.setState({SignupVisible:true,display:"block"})}  type="button" className='account'>Sign up</button>}
-            
+          
             {this.state.login&&<IconTab  signOutcallback={this.signOut.bind(this)}></IconTab>}
        
              </div>

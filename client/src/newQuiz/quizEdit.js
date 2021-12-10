@@ -3,8 +3,7 @@ import { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Media } from 'reactstrap'; 
-import Axios from "axios";  
-import './quizEdit.css'
+import Axios from "axios";   
 const initQuestions=   [
   {
       questionText: '',
@@ -153,8 +152,8 @@ const initQuestions=   [
         
         //sun
         submit(){   
-          // const url = 'https://juice-quiz.herokuapp.com/api/quizsetCreate';
-          const url= 'http://localhost:3001/api/quizsetCreate';
+         // const url = 'https://juice-quiz.herokuapp.com/api/quizsetCreate';
+           const url= 'http://localhost:3001/api/quizsetCreate';
       
          Axios.post(url, { 
               QID: localStorage.getItem('QID'), 
@@ -238,31 +237,28 @@ render(){
          <img src="/logo.jpg" className="quizInitIcon"></img>  
         <div className="editQuestionList">
         {this.state.questions.map((item, index) => {
-                return ( 
-                     <button  type="button" onClick={()=>this.switchQuestion(item.key)}>{item.key+1}</button> 
-                );
-              })}
-        </div>
-        
+                return (  
+                  this.state.currentQuestion==index&&  <button style={{color:"black"}} type="button" onClick={()=>this.switchQuestion(item.key)}>{item.key+1}</button> || <button style={{color:"white"}} type="button" onClick={()=>this.switchQuestion(item.key)}>{item.key+1}</button> 
+               );
+             })}
+              <button  style={{color:"white"}} type="button" onClick={()=>this.addNewQuestion()} >+</button> 
+       </div>
 
          <div className="editContent">
-        <form onSubmit={this.handleSubmit} className="editForm">
-             
-        <li>
+        <form onSubmit={this.handleSubmit} className="QEAeditForm">
+              
       <label className='editInput'  > {this.state.name}
-        </label>  
-      </li>
-      <li> 
+        </label>   
+       
  
 
       {  this.discriptionContent()
               } 
  
 
+ 
 
-        </li>
-
-        <li> 
+        {/* <li> 
         <input value={this.state.questions[this.state.currentQuestion].answerOptions[0].answerText} type="text"   className="editQuizOption" required onChange={this.handleChangeAnswerText1.bind(this)}>
      
           </input>  
@@ -294,11 +290,35 @@ render(){
      </input> 
            {!this.state.questions[this.state.currentQuestion].answerOptions[3].isCorrect&&<button type="button" className="editButton" onClick={()=>this.setAsAnswer(3)} >set as answer</button> 
       } 
-        </li>
+        </li> */}
+      
+      <input value={this.state.questions[this.state.currentQuestion].answerOptions[0].answerText} type="text"   className="editQuizOption" required onChange={this.handleChangeAnswerText1.bind(this)}>
+     
+     </input>  
+ {!this.state.questions[this.state.currentQuestion].answerOptions[0].isCorrect&&<button type="button" className="editButton" onClick={()=>this.setAsAnswer(0)} >set as answer</button>  ||<label style={{display:"inline-block"}}>√</label>
+ }  
+
+   <input value={this.state.questions[this.state.currentQuestion].answerOptions[1].answerText} type="text"   className="editQuizOption" required onChange={this.handleChangeAnswerText2.bind(this)}>
+
+</input>  
+   {!this.state.questions[this.state.currentQuestion].answerOptions[1].isCorrect&&<button type="button" className="editButton" onClick={()=>this.setAsAnswer(1)} >set as answer</button> ||<label>√</label>
+ } 
+  
+
+   <input value={this.state.questions[this.state.currentQuestion].answerOptions[2].answerText} type="text"   className="editQuizOption" required onChange={this.handleChangeAnswerText3.bind(this)}>
+
+</input> 
+       {!this.state.questions[this.state.currentQuestion].answerOptions[2].isCorrect&&<button type="button" className="editButton" onClick={()=>this.setAsAnswer(2)} >set as answer</button>  ||<label>√</label>
+ }  
+
+   <input value={this.state.questions[this.state.currentQuestion].answerOptions[3].answerText} type="text"   className="editQuizOption" required onChange={this.handleChangeAnswerText4.bind(this)}>
+
+</input> 
+      {!this.state.questions[this.state.currentQuestion].answerOptions[3].isCorrect&&<button type="button" className="editButton" onClick={()=>this.setAsAnswer(3)} >set as answer</button>  ||<label>√</label>
+ }  
 
 
-       <div className="editListButton">
-       <button  type="button" onClick={()=>this.addNewQuestion()} >new</button> 
+       <div className="editListButton"> 
        <button  type="button"  onClick={()=>this.deleteCurrentQuestion()} >delete</button> 
        </div>
         

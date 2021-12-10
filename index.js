@@ -116,7 +116,8 @@ app.put('/api/answer/updateRep/:id',(req,res)=>{
 			function (err1, result) {
 			if (err1) throw err1;
 			res.send(result);
-			connection.release();}
+		
+		}
 	  )
 		}		
 	  );
@@ -862,15 +863,109 @@ app.put('/api/quizsetEdit/change', (req, res) => {
 
 app.put('/api/answer/rating', (req, res) => {
 	const QID = req.body.QID;
+	const UID = req.body.UID;
 	const rate = req.body.rating;  
 	console.log(QID);
+	console.log(UID);
 	console.log(rate);
     
    con.query(
-	   `UPDATE quiz set ave_rate=? where QID=?`,[rate/10,QID]
-  );
+	   `SELECT max(whendo) FROM history where UID=${UID} AND QID=${QID};`,
+	   (err, result) => {
+		console.log(result); 
+		var whendo=result[0]['max(whendo)'];
+	    whendo =  new Date(Date.UTC(whendo.getFullYear(), 
+		                            whendo.getMonth(),
+		                            whendo.getDate(),  
+									whendo.getHours(), 
+									whendo.getMinutes(), 
+									whendo.getSeconds())).toISOString().slice(0, 19).replace('T', ' ');
+		console.log(whendo)
+		con.query(
+			`update history set rate = ${rate} 
+             where QID=${QID} and UID=${UID} and whendo='${whendo}'`,
+			(err, result) => {
+			 console.log(result); 
+			 con.query(
+				`SELECT AVG(rate) FROM history WHERE QID=${QID} group by QID;`,
+				(err,result)=>{
+					console.log(result[0]['AVG(rate)']);
+					var avg_rate = result[0]['AVG(rate)'];
+					con.query(
+				   `update quiz set ave_rate =${avg_rate} where QID=${QID};`,
+				   (err1,res)=>{
+					   console.log(res)
+				   }
+					)
+				}
+			)
+
+
+
+
+
+
+
+
+			}
+		 );
+
+	   }
+
+
+
+	   
+	   );
+
+       
+
+
+
+
+
+
 })
 
+
+
+
+app.post('/api/answer/updateHIS/:id', (req, res) => {
+	const QID = req.params.id;
+	const UID= req.body.UID;  
+	const score = req.body.Score;
+	console.log(QID);
+	console.log(UID);
+    console.log(score);
+    con.query(
+	   `insert into history(UID,QID,whendo,rate,score)
+	   value(?,?,now(),?,?);`,
+	   [UID,QID,null,score],
+	   (err, result) => {
+		console.log(err); 
+		
+	   }
+    );
+	con.query(
+		`SELECT COUNT(*) FROM history WHERE QID=${QID};`,
+		(err, result) => {
+		 console.log(result[0]['COUNT(*)'])
+         var hot = result[0]['COUNT(*)'];
+		 hot = hot + 1;
+		 con.query(
+			`update quiz set hot=${hot} where QID=${QID};`,
+			(err, result) => {
+			 console.log(err); 
+			 
+			}
+		 );
+		 
+		}
+	 );
+ 
+
+
+
+})
 
 
 

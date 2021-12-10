@@ -1,14 +1,17 @@
 
  
-.editBoard{ 
+.EPeditBoard{ 
     
     display: block;
     position: relative; 
-    padding-top: 100px; 
+    margin-top: 200px; 
     background-color: grey; 
     margin:0 auto;
     height: 100%;
-    width: 50%;
+    width: 80%;
+    border-radius: 25px;
+}
+.EPeditInput{ 
 }
 .editForm{
     padding-bottom: 50px; 
@@ -71,4 +74,4 @@ form {
     display: block;
     margin: 0 auto;
     font-size: 28px;
-  }
+  } 

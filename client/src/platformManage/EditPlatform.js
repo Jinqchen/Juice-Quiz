@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Media } from 'reactstrap';
 import './EditPlatform.css'; 
 import Axios from "axios";  
+import { Card } from 'reactstrap';
 
 
     export default class EditPlatform extends Component {
@@ -48,7 +49,7 @@ import Axios from "axios";
         }
 
        updateName(){
-       // const url = `https://juice-quiz.herokuapp.com/api/EditPlatform/name/${this.state.name}`;
+    //    const url = `https://juice-quiz.herokuapp.com/api/EditPlatform/name/${this.state.name}`;
           const url= `http://localhost:3001/api/EditPlatform/name/${this.state.name}`;
         Axios.put(url,{PID:this.state.EPID}).then((response) => { 
       console.log(response); 
@@ -56,7 +57,7 @@ import Axios from "axios";
       )
     }
     updateTag(){
-     // const url = `https://juice-quiz.herokuapp.com/api/EditPlatform/tag/${this.state.tag}`;
+    //  const url = `https://juice-quiz.herokuapp.com/api/EditPlatform/tag/${this.state.tag}`;
         const url= `http://localhost:3001/api/EditPlatform/tag/${this.state.tag}`;
       
     Axios.put(url,{PID:this.state.EPID}).then((response) => { 
@@ -65,8 +66,8 @@ import Axios from "axios";
     )
   }
   updateRep(){
-    //  const url = `https://juice-quiz.herokuapp.com/api/EditPlatform/replimit/${this.state.replimit}`;
-    const url= `http://localhost:3001/api/EditPlatform/replimit/${this.state.requireReputation}`;
+     // const url = `https://juice-quiz.herokuapp.com/api/EditPlatform/replimit/${this.state.replimit}`;
+     const url= `http://localhost:3001/api/EditPlatform/replimit/${this.state.requireReputation}`;
     
   Axios.put(url,{PID:this.state.EPID}).then((response) => { 
   console.log(response); 
@@ -104,15 +105,17 @@ render(){
 	return (
 		<>
 		 
-		<div className='editBoard'>
-		
+		<div className='EPeditBoard'>
+
+  
 		<div className="boardTitle">Platform Management</div> 
         <form onSubmit={this.handleSubmit} className="editForm">
-      <li>
-      <label className='editInput'>   Platform Name
-          <input   required onChange={this.handleChangeName.bind(this)}></input> 
+      <div style={{display:"inline-block"}}>
+      <label className='EPeditInput'>Platform Names  
+          
         </label> 
-      </li>
+        <input   required onChange={this.handleChangeName.bind(this)}></input> 
+      </div>
       <li>
         <label className='editInput'>  Select tag:
           <select value={this.state.value} onChange={this.handleChangeTag.bind(this)}>

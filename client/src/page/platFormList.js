@@ -23,21 +23,21 @@ class PlatFormList extends React.Component {
 		const menu = this.props.places.map((place) => {
 	       
 			return(
-			    <Link to={'/platform/'+place.Pname} onClick={()=>this.store(place)}>
-                <div className="PlatFormlist">  
+			    <Link className="signlePFLlink" to={'/platform/'+place.Pname} onClick={()=>this.store(place)}>
+                <div className="PFLPlatFormlist">  
                 
                 <Media left>
-			 	<img object src={'https://juicequiztest.s3.amazonaws.com'+place.Pcover} alt={place.Pname} />
-                 <label className="PFLplatFormName"> {place.Pname}</label>
-                 {/* <div className="platFormName">{place.Pname}</div> */}
-				</Media>   
+			 	<Media object src={'https://juicequiztest.s3.amazonaws.com'+place.Pcover} alt={place.Pname} />
+                 <h4 className="PFLplatFormName"> {place.Pname}</h4>
+               
+				 		</Media>   
                 </div>
                 </Link>
 			);
 		});
 		
 		return(
-			<div className="container">
+			<div className="PLFcontainer">
 				<div className="row">
 					<Media>
 						{menu}

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { Media } from 'reactstrap'; 
 import Axios from "axios";  
-import './quizEdit.css'
+import './quizEditAfter.css'
 const initQuestions=   [
   {
       questionText: '',
@@ -45,12 +45,12 @@ const initQuestions=   [
         
       
           componentDidMount = () => {
-          //   const url = `https://juice-quiz.herokuapp.com/api/answer/${this.state.QID}`;
+         //    const url = `https://juice-quiz.herokuapp.com/api/answer/${this.state.QID}`;
         const url= `http://localhost:3001/api/answer/${this.state.QID}`;
             Axios.get(url)
         .then(res=>{return res.data})
         .then( result =>{ 
-          console.log(result);
+          // console.log(result);
           this.setState({data:result},()=>{console.log(this.state.data);});
           this.processData()       
          });
@@ -60,17 +60,17 @@ const initQuestions=   [
 
       processData = () => {
         this._isMounted = true;
-        console.log(this.state.data);
+        // console.log(this.state.data);
         var data= this.state.data
         this.setState({ queslength: data.length/4 });
         let index = this.state.currentQuestion*4;
-        console.log(index);
-        console.log(this.state.queslength);
-        console.log("processing");
+        // console.log(index);
+        // console.log(this.state.queslength);
+        // console.log("processing");
 
         for (var i=0; i< (data.length/4) ;i++){
         this.setState({ quesText: data[index]['Qtext'] });
-        console.log(this.state.quesText)
+        // console.log(this.state.quesText)
         var option1 = {'answerText':data[index]['Optionx'],'isCorrect':data[index]['correctness']==1};
         var option2 = {'answerText':data[index+1]['Optionx'],'isCorrect':data[index+1]['correctness']==1};
         var option3 = {'answerText':data[index+2]['Optionx'],'isCorrect':data[index+2]['correctness']==1};
@@ -147,12 +147,12 @@ const initQuestions=   [
         
         tmp[this.state.currentQuestion].answerOptions[index].isCorrect = true;  
           this.setState({ tmp });    
-        console.log(tmp[this.state.currentQuestion].answerOptions[index].isCorrect)     
+        // console.log(tmp[this.state.currentQuestion].answerOptions[index].isCorrect)     
         }
         
         
         
-        
+        //sun
         submit(){  
           
             if (this.state.origin.length<this.state.questions.length){
@@ -182,10 +182,10 @@ const initQuestions=   [
               key:i
           })
           }
-          console.log(question);
+          // console.log(question);
         
-           //  const url = 'https://juice-quiz.herokuapp.com/api/quizsetEdit/insert';
-           const url= 'http://localhost:3001/api/quizsetEdit/insert';
+           // const url = 'https://juice-quiz.herokuapp.com/api/quizsetEdit/insert';
+            const url= 'http://localhost:3001/api/quizsetEdit/insert';
                   
             Axios.post(url, { 
                 QID: localStorage.getItem('QID'), 
@@ -199,9 +199,9 @@ const initQuestions=   [
               for(var i= this.state.questions.length+1; i<=this.state.origin.length; i++){
                 del.push(i)
               }
-              console.log(del);
-               // const url = 'https://juice-quiz.herokuapp.com/quizsetEdit/delete';
-                const url= 'http://localhost:3001/api/quizsetEdit/delete';
+              // console.log(del);
+                //  const url = 'https://juice-quiz.herokuapp.com/quizsetEdit/delete';
+              const url= 'http://localhost:3001/api/quizsetEdit/delete';
                       
                 Axios.delete(url, { data:{
                   QID: localStorage.getItem('QID'), 
@@ -214,12 +214,12 @@ const initQuestions=   [
        update(){
  // const url = `https://juice-quiz.herokuapp.com/api/quizsetEdit/change`;
  const url= `http://localhost:3001/api/quizsetEdit/change`;
-    console.log(this.state.questions);
+    // console.log(this.state.questions);
  Axios.put(url,{QID:localStorage.getItem('QID'),
   question:this.state.questions
   
 }).then((response) => { 
- console.log(response); 
+//  console.log(response); 
  }
  )
 
@@ -230,7 +230,7 @@ const initQuestions=   [
             
       switchQuestion(index){  
        this.setState({currentQuestion:index})
-        console.log(this.state.questions[this.state.currentQuestion].key)
+        // console.log(this.state.currentQuestion)
         
         // console.log(this.state.questions[this.state.currentQuestion].questionText+"index1")
         
@@ -242,7 +242,7 @@ const initQuestions=   [
   
 
    discriptionContent(){
-     console.log(this.state.questions)
+    //  console.log(this.state.questions)
      let description=this.state.questions[this.state.currentQuestion].questionText
      return(
       <textarea    value={description}
@@ -278,7 +278,7 @@ const initQuestions=   [
   
     for (let i = 0; i <  tmp.length; i++) {
     tmp[i].key=i 
-    console.log(tmp[i].key)
+    // console.log(tmp[i].key)
     } 
      this.setState({ questions:tmp})  
     this.setState({ currentQuestion:0})
@@ -294,71 +294,61 @@ render(){
          <img src="/logo.jpg" className="quizInitIcon"></img>  
         <div className="editQuestionList">
         {this.state.questions.map((item, index) => {
-                return ( 
-                     <button  type="button" onClick={()=>this.switchQuestion(item.key)}>{item.key+1}</button> 
+           console.log( this.state.currentQuestion==index)
+                return (  
+                   this.state.currentQuestion==index&&  <button style={{color:"black"}} type="button" onClick={()=>this.switchQuestion(item.key)}>{item.key+1}</button> || <button style={{color:"white"}} type="button" onClick={()=>this.switchQuestion(item.key)}>{item.key+1}</button> 
                 );
               })}
+               <button  style={{color:"white"}} type="button" onClick={()=>this.addNewQuestion()} >+</button> 
         </div>
         
 
          <div className="editContent">
-        <form onSubmit={this.handleSubmit} className="editForm">
+        <form onSubmit={this.handleSubmit} className="QEAeditForm">
              
-        <li>
+     
       <label className='editInput'  > {this.state.name}
-        </label>  
-      </li>
-      <li> 
+        </label>   
  
 
       {  this.discriptionContent()
               } 
  
 
-
-        </li>
-
-        <li> 
+  
         <input value={this.state.questions[this.state.currentQuestion].answerOptions[0].answerText} type="text"   className="editQuizOption" required onChange={this.handleChangeAnswerText1.bind(this)}>
      
           </input>  
-      {!this.state.questions[this.state.currentQuestion].answerOptions[0].isCorrect&&<button type="button" className="editButton" onClick={()=>this.setAsAnswer(0)} >set as answer</button> 
-      } 
-      
-        </li>
-
-        <li> 
+      {!this.state.questions[this.state.currentQuestion].answerOptions[0].isCorrect&&<button type="button" className="editButton" onClick={()=>this.setAsAnswer(0)} >set as answer</button>  ||<label style={{display:"inline-block"}}>√</label>
+      }  
+ 
         <input value={this.state.questions[this.state.currentQuestion].answerOptions[1].answerText} type="text"   className="editQuizOption" required onChange={this.handleChangeAnswerText2.bind(this)}>
      
      </input>  
-        {!this.state.questions[this.state.currentQuestion].answerOptions[1].isCorrect&&<button type="button" className="editButton" onClick={()=>this.setAsAnswer(1)} >set as answer</button> 
+        {!this.state.questions[this.state.currentQuestion].answerOptions[1].isCorrect&&<button type="button" className="editButton" onClick={()=>this.setAsAnswer(1)} >set as answer</button> ||<label>√</label>
       } 
-      
-        </li>
-
-        <li> 
+       
+ 
         <input value={this.state.questions[this.state.currentQuestion].answerOptions[2].answerText} type="text"   className="editQuizOption" required onChange={this.handleChangeAnswerText3.bind(this)}>
      
      </input> 
-            {!this.state.questions[this.state.currentQuestion].answerOptions[2].isCorrect&&<button type="button" className="editButton" onClick={()=>this.setAsAnswer(2)} >set as answer</button> 
-      } 
-        </li> 
-
-        <li> 
+            {!this.state.questions[this.state.currentQuestion].answerOptions[2].isCorrect&&<button type="button" className="editButton" onClick={()=>this.setAsAnswer(2)} >set as answer</button>  ||<label>√</label>
+      }  
+ 
         <input value={this.state.questions[this.state.currentQuestion].answerOptions[3].answerText} type="text"   className="editQuizOption" required onChange={this.handleChangeAnswerText4.bind(this)}>
      
      </input> 
-           {!this.state.questions[this.state.currentQuestion].answerOptions[3].isCorrect&&<button type="button" className="editButton" onClick={()=>this.setAsAnswer(3)} >set as answer</button> 
-      } 
-        </li>
+           {!this.state.questions[this.state.currentQuestion].answerOptions[3].isCorrect&&<button type="button" className="editButton" onClick={()=>this.setAsAnswer(3)} >set as answer</button>  ||<label>√</label>
+      }  
 
 
        <div className="editListButton">
-       <button  type="button" onClick={()=>this.addNewQuestion()} >new</button> 
-       <button  type="button"  onClick={()=>this.deleteCurrentQuestion()} >delete</button> 
+       {/* <button className="QEAedit" type="button" onClick={()=>this.addNewQuestion()} >new</button>  */}
+       <button className="QEAedit" type="button"  onClick={()=>this.deleteCurrentQuestion()} >delete</button>
+       
+      <button type="button" className="QEAsubmit" onClick={()=>this.submit()} >Submit</button>   
        </div>
         
-      <button type="button" className="submit" onClick={()=>this.submit()} >Create</button>  
        </form>
        </div>
          </div>

@@ -76,7 +76,7 @@ export default class Menu extends Component {
     //在这里进行qurey
     async search(){
     alert(this.state.searchContent)
-   // const url=`https://juice-quiz.herokuapp.com/api/platform/${this.state.searchContent}`;
+    //const url=`https://juice-quiz.herokuapp.com/api/platform/${this.state.searchContent}`;
     const url= `http://localhost:3001/api/platform/${this.state.searchContent}`;
       const res = await Axios.get(url)
       .then(res=>{return res.data})
@@ -113,10 +113,8 @@ export default class Menu extends Component {
 			 <input type="text" className='searchContent' required onChange={this.handleChangeSearch.bind(this)}></input>
 			{  <button className='searchButton'onClick={()=>this.search()}>Search </button>   }
 			</div> }
-
-			<div className="item">
-            <PlatFormList places={this.state.renderList} /> 
-            </div>
+ 
+            <PlatFormList places={this.state.renderList} />  
             {/* <div>
                 <button onClick={()=>this.process()} type="button">Refresh</button>
             </div> */}

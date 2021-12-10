@@ -1,11 +1,6 @@
 
-.list{  
-    position: relative;
-    display: block; 
-    height: auto;
-    width: auto;
-    border-color: rgb(255, 255, 255);
-    border-style: solid; 
+.ManagePlatFormList{   
+    padding-left: 10px;
 }
 .repName{ 
     font-size: 28px;
@@ -65,4 +60,8 @@
     display: block;
     top: 0; 
     right: 0;
+}
+.ManagePlatFormList{
+    display: flex;
+    
 }
