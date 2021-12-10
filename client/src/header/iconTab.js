@@ -27,8 +27,8 @@ const IconTab=(props)=>{
 			cName:"nav-text"
 		} ,
 		{
-      title: 'Message',
-			path: './',  
+      title: 'Quiz History',
+			path: './quizHistory',  
        icon:<AiIcons.AiFillMessage/>,
 			cName:"nav-text"
 		},

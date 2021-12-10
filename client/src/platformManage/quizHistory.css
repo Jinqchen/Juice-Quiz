@@ -1,0 +1,8 @@
+.redoBtn{
+    position:absolute; right:0px; bottom:0px;
+}
+.quizHistoryList{
+    display: block;
+   float: right;
+    margin:  auto 0
+}

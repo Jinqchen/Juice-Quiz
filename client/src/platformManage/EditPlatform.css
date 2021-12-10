@@ -7,11 +7,12 @@
     margin-top: 200px; 
     background-color: grey; 
     margin:0 auto;
-    height: 100%;
-    width: 80%;
+    height: 100%; 
     border-radius: 25px;
 }
 .EPeditInput{ 
+  margin-left: 20px;
+  white-space: nowrap;
 }
 .editForm{
     padding-bottom: 50px; 
@@ -66,12 +67,11 @@ form {
   option{
     color: black;
   }
-  .submit{
-    display: block;
-    width: 200px;
-    height: 100px;
+  .EPsubmit{ 
+    width: 160px;
+    height: 80px;
     background-color:#F78223;
     display: block;
-    margin: 0 auto;
-    font-size: 28px;
+    margin: 0 auto; 
+    bottom: 40px;
   } 

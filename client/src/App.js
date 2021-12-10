@@ -17,7 +17,7 @@ import QuizManageMent from './platformManage/quizManageMent';
 import QuizSetEdit from './newQuiz/quizSetEdit';
 import QuizEditAfter from './newQuiz/quizEditAfter';
 import QuizRate from './quizRate'
-
+import QuizHistory from './platformManage/quizHistory'
 export default class App extends Component {
 	constructor(props) {
 		super(props);
@@ -45,6 +45,7 @@ export default class App extends Component {
 					   <Route path='/quizEditAfter/:id' element ={<QuizEditAfter/>}/>
 					   <Route path='/quizSetEdit/:id' element ={<QuizSetEdit/>}/>
 					   <Route path='/quizRate' element ={<QuizRate/>}/>
+					   <Route path='/quizHistory' element ={<QuizHistory/>}/>
 			      </Routes>
 
                 </Router>	

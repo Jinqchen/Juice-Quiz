@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 
 import { Media } from 'reactstrap';
 import './EditPlatform.css'; 
-import Axios from "axios";  
-import { Card } from 'reactstrap';
+import Axios from "axios";   
 
+import {Button, Card} from 'react-bootstrap';
 
     export default class EditPlatform extends Component {
         constructor(props) {
@@ -21,7 +21,8 @@ import { Card } from 'reactstrap';
               requireReputation:0,
               repchange:false,
               EPID:localStorage.getItem('EditPID'),
-              success:false
+              success:false,
+              file:''
             };    
           }
         handleChangeName(e) {  
@@ -79,24 +80,48 @@ import { Card } from 'reactstrap';
 
 
 
-        submit(){ 
-        if(this.state.namechange){
-          this.updateName()
-        }
-        if(this.state.tagchange){
-          this.updateTag()
-        }
-        if(this.state.repchange){
-          this.updateRep()
-        }
-        alert("Change updated!")
-        }
-        // uploadIcon(){
+       
+handlefileSelected (event){
+  const files = event.target.files[0]
+  this.setState({file:files})
+}
 
-        // }
-        // create(){
-          
-        // }
+
+postImage(image, name) {
+  const formData = new FormData();
+  formData.append("image", image)
+  formData.append("name", name)
+
+  const result = Axios.post(`http://localhost:3001/images/${this.state.PID}`, formData, { headers: {'Content-Type': 'multipart/form-data'}})
+  return result.data
+}
+uploadIcon(event){
+  console.log("working")
+  event.preventDefault()
+  const result =  this.postImage(this.state.file, this.state.name)
+}
+
+submit(e){       
+  //   const url = 'https://juice-quiz.herokuapp.com/api/createplatform';
+    const url= 'http://localhost:3001/api/createplatform';
+     Axios.post(url, { 
+            Pname: this.state.name, 
+            tag: this.state.tag, 
+            replimit:this.state.requireReputation,
+            
+       }).then((res)=>{return res.data})
+       .then((response) => { 
+         this.setState({PID:response['PID']});
+         this.setState({success:response['success']});
+       }); 
+     if (this.state.success){
+      this.uploadIcon(e)
+      this.own();
+      this.inital_reputation();
+      alert("Platform Created!") 
+     }
+      
+     }
     
 render(){ 
         
@@ -106,57 +131,75 @@ render(){
 		<>
 		 
 		<div className='EPeditBoard'>
+    <div>
+            
+            <div className='signUpBoard'>
+            <Link to='/'>
+            <button className="cancel"   >X</button> </Link>
+                 
 
+            <label className='SIGNUP'>Manage Platform</label> 
+                <div className="userInput">    
+                <label className='EPeditInput'>Platform Name:  
+                <input style={{width:"480px"}} onChange={this.handleChangeName.bind(this)}></input>
+          </label> 
+                  </div>
+                   
+                
+                   
+                  <div className="userInput">    
+                        <label className='EPeditInput'>  Select tag:
+                        <select value={this.state.value} onChange={this.handleChangeTag.bind(this)}>
+                          <option value="music">music</option>
+                          <option value="sport">sport</option>
+                          <option value="programing">programing</option>
+                          <option value="science">science</option>
+                          <option value="food">food</option>
+                          <option value="movie">movie</option>
+                          <option value="life">life</option>
+                        </select>
+                      </label>
+                </div>
+                <div className="userInput">    
+                        
+                        <label  className='EPeditInput'> Allow co-owenr application
+                
+                <select value={this.state.value} onChange={this.handleChangeOnwer.bind(this)}>
+                    <option value="true">Yes</option>
+                    <option value="false">no</option> 
+                  </select>
+                  </label>
+                                </div>
+
+
+{
+ !this.state.oneOnwer&& <div className="userInput">    
+                                <label className='EPeditInput'>  reputation need
+          <input style={{width:"180px"}} onChange={this.handleReputation.bind(this)}></input>
+ 
+        </label>
+
+
+          </div>
+
+}
+               
+
+                <div className="userInput">     
+                <input onChange={this.handlefileSelected.bind(this)} type="file" accept="image/*"></input> </div>
+
+                <div className="userInput">     
+                <Button className='EPsubmit' style={{background:'white',color:"#F78223",border:"none"}} onClick={(e)=>this.submit(e)}>Save</Button>
+                </div>
+              
+        
+               
+                  </div>
+
+                 
+                  </div>
   
-		<div className="boardTitle">Platform Management</div> 
-        <form onSubmit={this.handleSubmit} className="editForm">
-      <div style={{display:"inline-block"}}>
-      <label className='EPeditInput'>Platform Names  
-          
-        </label> 
-        <input   required onChange={this.handleChangeName.bind(this)}></input> 
-      </div>
-      <li>
-        <label className='editInput'>  Select tag:
-          <select value={this.state.value} onChange={this.handleChangeTag.bind(this)}>
-            <option value="music">music</option>
-            <option value="sport">sport</option>
-            <option value="programing">programing</option>
-            <option value="science">science</option>
-            <option value="food">food</option>
-            <option value="movie">movie</option>
-            <option value="life">life</option>
-          </select>
-        </label>
-        </li>
-        {/* <li>
-        <label className='editInput' >  Upload paltform icon
-          <button onClick={()=>this.uploadIcon()}>Upload</button>
- 
-        </label>
-
-        </li> */}
-
-        <li>
-        <label> Allow co-owenr application
-        <select value={this.state.value} onChange={this.handleChangeOnwer.bind(this)}>
-            <option value="true">Yes</option>
-            <option value="false">no</option> 
-          </select>
-          </label>
-
-          </li>
-         {!this.state.oneOnwer&& <li>
-        <label>  reputation need
-          <input className="repNeed" onChange={this.handleReputation.bind(this)}></input>
- 
-        </label>
-        </li>
-     }
-      </form>
-
-      <button  className="submit" onClick={()=>this.submit()} >Submit</button>
-			 
+	 
 			  </div>
 
 			  </>
