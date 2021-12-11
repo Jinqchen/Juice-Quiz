@@ -157,7 +157,7 @@ export default class App extends Component {
 					<>
 						<div className='question-section'>
 							<div className='question-count'>
-								<span>Question {this.state.currentQuestion + 1} </span>/{this.state.queslength}
+								<span style={{color:"black"}}>Question {this.state.currentQuestion + 1} </span>/{this.state.queslength}
 							</div>
 							<div className='question-text'>{this.state.quesText}</div>
 						</div>
