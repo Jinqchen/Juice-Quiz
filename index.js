@@ -831,6 +831,81 @@ app.delete('/api/quizsetEdit/delete', (req, res) => {
 	}
 });
 
+
+
+app.delete('/api/quiz/delete/:id', (req, res) => {
+	const QID = req.params.id;
+	console.log(QID);
+	con.getConnection(function(err, connection){
+		connection.query(
+		`delete from releases where QID=${QID};`, 
+		function (err1, result) {
+		if (err1) throw err1;
+        console.log(result)
+		connection.destroy();	
+		
+		con.getConnection(function(err, connection){
+			connection.query(
+			`delete from contain where QID=${QID};`, 
+			function (err1, result) {
+			if (err1) throw err1;
+			console.log(result)
+			connection.destroy();	
+			
+			
+			con.getConnection(function(err, connection){
+				connection.query(
+				`delete from quizoptions  where QID=${QID};`, 
+				function (err1, result) {
+				if (err1) throw err1;
+				console.log(result)
+				connection.destroy();
+
+				con.getConnection(function(err, connection){
+					connection.query(
+					`delete from quizquestion where QID=${QID};`, 
+					function (err1, result) {
+					if (err1) throw err1;
+					console.log(result)
+					connection.destroy();	
+					
+					con.getConnection(function(err, connection){
+						connection.query(
+						`delete from quiz where QID=${QID};`, 
+						function (err1, result) {
+						if (err1) throw err1;
+						console.log(result)
+						connection.destroy();					
+						
+					}
+					);   
+				  })
+					
+					
+				}
+				);   
+			  })
+				
+				
+			}
+			);   
+		  })
+		}
+		);   
+	  })
+
+
+
+	}
+    );   
+  })
+});
+
+
+
+
+
+
 app.put('/api/quizsetEdit/change', (req, res) => {
 	const QID = req.body.QID;
 	const questions = req.body.question;  

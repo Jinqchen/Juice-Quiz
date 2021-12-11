@@ -18,6 +18,7 @@ export default class quizManageMent extends Component {
 			hotac:true,
 			rateac:true,
 			UID:localStorage.getItem('UID'),
+			QID:0,
 			PID: localStorage.getItem('PID'),
 			rander:false,
 			searchContent:"",
@@ -31,9 +32,7 @@ export default class quizManageMent extends Component {
 
 	
  componentDidMount=()=>{
-	this.getnumber();
-	
-	
+	this.getnumber();	
 	this.setState({rander:true});
 	
 }
@@ -41,43 +40,6 @@ export default class quizManageMent extends Component {
 
 
 
-
-// Sort function 
-	sortByHot(){ 
-		var places = this.state.places
-		if(this.state.hotac){
-          places.sort(function(a, b){return -a.hot + b.hot});
-		   this.setState({hotac:false});
-		}
-		else{
-		 places.sort(function(a, b){return a.hot - b.hot}); 
-		 this.setState({hotac:true});
-		}
-		
-		this.setState({rateac:true})
-		console.log(places)
-		
-		this.setState({renderList: places })
-	}
-	
-	sortByRate(){
-		var places = this.state.places
-		if(this.state.rateac){
-			places.sort(function(a, b){return -a.ave_rate + b.ave_rate}); 
-			this.setState({rateac:false})
-		  }
-		  else{
-		   places.sort(function(a, b){return a.ave_rate - b.ave_rate}); 
-		   this.setState({rateac:true})
-		  }
-		  this.setState({hotac:true})
-		console.log(places)
-		this.setState({renderList: places })
-
-	}
- 
-
-  
 	async getnumber(){
 		this._isMounted = true;
       const url = `https://juice-quiz.herokuapp.com/api/manageQuiz/quizlist_total/${this.state.UID}`;
@@ -115,7 +77,7 @@ export default class quizManageMent extends Component {
     };
 
 
-//Search 
+    //Search 
 	handleChangeSearch(e) {  
 		this.setState({searchContent: e.target.value});   
 	} ;
@@ -133,24 +95,26 @@ export default class quizManageMent extends Component {
 		  })
 		  .then(res=>{return res.data})
 		  .then( result =>{
-			
 			  console.log(result);
 			  this.setState({places:result},()=>{console.log(this.state.places);});
 			  this.setState({renderList:this.state.places});        
 		   });
-		
 		}
-		
 	};
 
 store=(place)=>{
 	localStorage.setItem('QID',place.QID);
 }
+ 
 
-newQuiz(){
-	alert("!")
+delete_quiz(quizID){
+//  const url = `https://juice-quiz.herokuapp.com/api/platform/delCoown/${this.state.PID}`;
+    const url= `http://localhost:3001/api/quiz/delete/${quizID}`;	     
+    Axios.delete(url).then((response) => { 
+    console.log(response);
+	this.get() 
+    }); 
 }
-
 
 
 	render() {     
@@ -168,8 +132,8 @@ newQuiz(){
 			<div className="quizMngBtn"  style={{marginLeft:"-5%"}}>
 			<Link   to={'/quizEditAfter/'+place.QID}  onClick={()=>this.store(place)}>
 			<Button variant="primary" onClick>Edit</Button>
-					</Link>
-		<Button  variant="primary" onClick>Delete</Button>
+			</Link>
+		<Button  variant="primary" onClick={()=>this.delete_quiz(place.QID)}>Delete</Button>
 		
 		</div>
 		</Card.Body>
@@ -191,11 +155,11 @@ newQuiz(){
              
   
 			<div>
-			{this.state.rander&&<div className="ManagePlatFormList">
-{menu}</div>
-	  }			
-			 
-			 </div>
+			{
+			this.state.rander&&<div className="ManagePlatFormList">
+            {menu}</div>
+	        }			
+			</div>
 		</div>
 		)
 	}

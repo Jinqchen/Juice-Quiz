@@ -105,9 +105,9 @@ unsubscribe=(PID)=>{
 	     
 	Axios.delete(url, { data:{UID: localStorage.getItem("UID")}}).then((response) => { 
 	console.log(response); 
-   
+    this.get();
 	}); 
- this.get();
+   
 
 
 
