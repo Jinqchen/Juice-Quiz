@@ -128,30 +128,35 @@ app.put('/api/answer/updateRep/:id',(req,res)=>{
 })
  //Get platform list
 app.get ('/api/Platform',(req,res)=>{
-	
-    con.query(
+	con.getConnection(function(err, connection){
+		connection.query(
 		"SELECT Pcover,p.PID,Pname,tag from platformstyle s,platform p where s.PID=p.PID  order BY RAND() limit 8;", 
 		function (err1, result) {
 		if (err1) throw err1;
 	    res.send(result);
-		
-		
+		connection.destroy();			
 	}
-  );
-   
+    );   
+  })
 })
 
-  app.get ('/api/Platform/:tag',(req,res)=>{
+app.get ('/api/Platform/:tag',(req,res)=>{
 	const tag = req.params.tag;
-    con.query(
+	console.log(tag)
+	con.getConnection(function(err, connection){
+    connection.query(
 		`select p.PID,p.Pname, ps.Pcover
-		from platform p, platformstyle ps
-		where p.PID=ps.PID and p.Pname LIKE '%${tag}%'  order BY RAND() limit 4`, 
+        from platform p, platformstyle ps
+        where p.PID=ps.PID AND p.tag ='${tag}'  order BY RAND() limit 4`, 
 		function (err1, result) {
 		if (err1) throw err1;
+		console.log(result)
 	    res.send(result);
+		connection.destroy();
 	}
-  );})
+  );
+	})
+})
 
 // Get quizlist
   app.get ('/api/platform/quizlist/:id',(req,res)=>{
@@ -933,16 +938,17 @@ app.post('/api/answer/updateHIS/:id', (req, res) => {
 	const QID = req.params.id;
 	const UID= req.body.UID;  
 	const score = req.body.Score;
+	console.log("update history")
 	console.log(QID);
 	console.log(UID);
     console.log(score);
+	console.log("end")
     con.query(
-	   `insert into history(UID,QID,whendo,rate,score)
-	   value(?,?,now(),?,?);`,
-	   [UID,QID,null,score],
+	   `insert into history(UID,QID,whendo,rate,score,timespend)
+	   value(?,?,now(),?,?,?);`,
+	   [UID,QID,null,score,10],
 	   (err, result) => {
-		console.log(err); 
-		
+		console.log(result); 		
 	   }
     );
 	con.query(
@@ -966,7 +972,6 @@ app.post('/api/answer/updateHIS/:id', (req, res) => {
 
 
 })
-
 
 
 app.listen(3001,()=>{

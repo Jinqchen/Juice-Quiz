@@ -117,7 +117,7 @@ export default class App extends Component {
 			   const url= `http://localhost:3001/api/answer/updateHIS/${this.state.QID}`;
 				Axios.post(url,{
 					UID:localStorage.getItem('UID'),
-					Score: this.state.currentScore,
+					Score: this.state.currentScore/this.state.queslength,
 			  }).then((response) => { 
 				console.log(response); 
 			 })
@@ -129,14 +129,15 @@ export default class App extends Component {
 
 	addRep=()=>{
 		 	 // const url = `https://juice-quiz.herokuapp.com/api/answer/updateRep/${this.state.QID}`;
-	 const url= `http://localhost:3001/api/answer/updateRep/${this.state.QID}`;
+	     const url= `http://localhost:3001/api/answer/updateRep/${this.state.QID}`;
 			Axios.put(url,{
 				PID:this.state.PID,
 				UID:localStorage.getItem('UID')
 		  }).then((response) => { 
-			console.log(response); 
+			console.log(response);  
+			
 		 })
-		 this.addHistory()
+		this.addHistory()
 		 }
 
 

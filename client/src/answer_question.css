@@ -1,9 +1,10 @@
-
-.answering {
+.answering { 
  
-  background-color: #252d4a;
-   
-  margin-top: 300px;
+  background-color: #F78223;
+   position: absolute;
+   left: 25%;
+   top:20%;
+  margin-top: 400px;
   width: 50%;
   border-radius: 15px;
   padding: 20px;
@@ -11,20 +12,24 @@
   display: block;
   margin: 0 auto;
   justify-content: space-evenly;
+  color: black;
 }
 .answering button{
-  width: 100%;
+  width: 40%;
   font-size: 16px;
-  color: #ffffff;
-  background-color: #252d4a;
+  color: black;
+  background-color: rgb(236, 233, 233);
   border-radius: 15px;
   display: flex;
   padding: 5px;
   justify-content: flex-start;
   align-items: center;
-  border: 5px solid #234668;
-  cursor: pointer;  
-  margin-bottom: 30px;
+  border: 5px solid rgb(236, 233, 233);
+  cursor: pointer;   
+  color: black;
+ 
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
 
 .score-section {
@@ -36,12 +41,13 @@
 
 /* QUESTION/TIMER/LEFT SECTION */
 .question-section {
-  width: 100%;
-  position: relative;
+   top: 50px;
+  width: 100%; 
 }
 
 .question-count {
   margin-bottom: 20px;
+  color: black;
 }
 
 .question-count span {
@@ -50,6 +56,8 @@
 
 .question-text {
   margin-bottom: 12px;
+  
+  color: black; 
 }
 
 .timer-text {
@@ -67,7 +75,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-between; 
 }
 
 
@@ -89,4 +97,4 @@
   margin: 0 auto;
   color:white;
   border-style: none;
-}
+} 
