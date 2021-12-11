@@ -14,7 +14,7 @@ export default class quizManageMent extends Component {
 			//决定是否显示subscribe按钮和订阅按钮
 			logged:localStorage.getItem("Logged"),
 			places: [],
-            renderList:[{}],
+            renderList:[],
 			hotac:true,
 			rateac:true,
 			UID:localStorage.getItem('UID'),
@@ -22,7 +22,6 @@ export default class quizManageMent extends Component {
 			PID: localStorage.getItem('PID'),
 			rander:false,
 			searchContent:"",
-			rankList:[{}],
 			rank:'',
 			quiznum:0,
 		};
@@ -42,8 +41,8 @@ export default class quizManageMent extends Component {
 
 	async getnumber(){
 		this._isMounted = true;
-      const url = `https://juice-quiz.herokuapp.com/api/manageQuiz/quizlist_total/${this.state.UID}`;
-	//	 const url= `http://localhost:3001/api/manageQuiz/quizlist_total/${this.state.UID}`;
+     // const url = `https://juice-quiz.herokuapp.com/api/manageQuiz/quizlist_total/${this.state.UID}`;
+		 const url= `http://localhost:3001/api/manageQuiz/quizlist_total/${this.state.UID}`;
       const res = await Axios.get(url)
       .then(res=>{return res.data})
       .then( result =>{
@@ -63,8 +62,8 @@ export default class quizManageMent extends Component {
 
 		this._isMounted = true;
 		for(var i=0;i<this.state.quiznum.length;i++){ 
-	  const url = `https://juice-quiz.herokuapp.com/api/manageQuiz/quizlist/${this.state.quiznum[i]['QID']}`;
-	//	 const url= `http://localhost:3001/api/manageQuiz/quizlist/${this.state.quiznum[i]['QID']}`;
+	 // const url = `https://juice-quiz.herokuapp.com/api/manageQuiz/quizlist/${this.state.quiznum[i]['QID']}`;
+		 const url= `http://localhost:3001/api/manageQuiz/quizlist/${this.state.quiznum[i]['QID']}`;
       const res = await Axios.get(url)
       .then(res=>{return res.data})
       .then( result =>{
@@ -112,8 +111,9 @@ delete_quiz(quizID){
     const url= `http://localhost:3001/api/quiz/delete/${quizID}`;	     
     Axios.delete(url).then((response) => { 
     console.log(response);
-	this.get() 
+	
     }); 
+	this.get() 
 }
 
 
@@ -127,7 +127,7 @@ delete_quiz(quizID){
 		<Card.Body>
 			<Card.Title>{place.Qname}</Card.Title>
 			<Card.Text  style={{fontSize:"12px",textOverflow:"ellipsis", height:"28px",whiteSpace:"nowrap",overflow:"hidden"}}>
-			Quiz DescriptionQuiz DescriptionQuiz DescriptionQuiz DescriptionQuiz DescriptionQuiz DescriptionQuiz Description
+			{place.description}
 			</Card.Text >  
 			<div className="quizMngBtn"  style={{marginLeft:"-5%"}}>
 			<Link   to={'/quizEditAfter/'+place.QID}  onClick={()=>this.store(place)}>
