@@ -23,10 +23,50 @@ export default class App extends Component {
 			answerOptions: [],
 			QID: localStorage.getItem('QID'),
 			PID: localStorage.getItem('PID'),
-			is_Mount:false
+			is_Mount:false,
+			hour:1,
+			minute:0,
+      		second:5,
+			TimeLimitFlag:true
 		};
+		this.start = this.start.bind(this)
+    this.no = this.no.bind(this) 
 	}
+	start(){
 
+		if(this.state.second>0){
+	
+		  this.setState({
+			minute:this.state.minute,
+			second:this.state.second - 1
+		  }) 
+	
+		}
+	
+		else{
+	
+		   this.setState({
+			minute:this.state.minute - 1,
+			second:this.state.second + 60
+		  }) 
+	
+		}
+	
+	  }
+	
+	  no(){
+		  if(this.state.TimeLimitFlag){
+
+			this.id = setInterval(this.start,1000)
+		  }
+		
+	  } 
+	  checkTime(){
+		   
+		  if(!this.state.showScore&&this.state.minute+this.state.second<=0){
+			  this.setState({showScore:true})
+		  }
+	  }
 	componentDidMount = () => {
         // const url = `https://juice-quiz.herokuapp.com/api/answer/${this.state.QID}`;
 		const url= `http://localhost:3001/api/answer/${this.state.QID}`;
@@ -66,6 +106,7 @@ export default class App extends Component {
 		this.setState({ opt4: option4 });
 		this.setState({ answerOptions: [option1, option2, option3, option4] });
 		console.log(this.state.answerOptions);
+		this.no()
 	}
 
 
@@ -142,6 +183,7 @@ export default class App extends Component {
 
 
 	render() {
+		this.checkTime();
 		return (
 			<div className='answering'>
 				{this.state.showScore ? (
@@ -167,6 +209,18 @@ export default class App extends Component {
 							)}
 							
 						</div>
+
+						<div>
+							
+
+								{this.state.TimeLimitFlag&&	<div className="Timer_container">
+								Time remain: {this.state.minute}m : {this.state.second}s
+								</div>
+ }
+							
+
+								</div>
+ 
 					</>
 				)}
 				

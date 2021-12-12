@@ -38,8 +38,9 @@ import {Button, Card} from 'react-bootstrap';
         }
 
         handleTimeLimited(e)   {
-            this.setState({timeLimited: e.target.value});    
-            this.render()
+            this.setState({timeLimited: !this.state.timeLimited});    
+            // alert(this.state.timeLimited)
+         //   this.render()
           }
          handleTimeHour(e){
             this.setState({limitedHour: e.target.value});           

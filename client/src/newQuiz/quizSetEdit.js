@@ -35,9 +35,8 @@ import './quizInit.css'
         this.setState({description: e.target.value});   
         }
 
-        handleTimeLimited(e)   {
-            this.setState({timeLimited: e.target.value});    
-            this.render()
+        handleTimeLimited(e)   { 
+          this.setState({timeLimited: !this.state.timeLimited});    
           }
          handleTimeHour(e){
             this.setState({limitedHour: e.target.value});    
