@@ -15,25 +15,41 @@
     font-size: 38px;  
     padding-left: 20px;
  } 
-  input{  
+ input{  
+  background-color: white;
+  display: block;
+  margin: 0 auto;
+  outline-style: none ;
+  border: 1px solid #ccc; 
+  border-radius: 3px;
+  padding: 13px 14px;
+  width: 620px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: "Microsoft soft"; 
+  color: black;
+  
+}
+ .userInput input{  
     background-color: white;
-    display: block;
-    margin: 0 auto;
+    display: flex; 
     outline-style: none ;
     border: 1px solid #ccc; 
     border-radius: 3px;
     padding: 13px 14px;
-    width: 620px;
+    width: 95%;
     font-size: 14px;
     font-weight: 700;
     font-family: "Microsoft soft"; 
-    color: black;
+    color: black;  
     
 }
 .userInput{
     top:100px;
-    position: relative;   
+    position: block;   
      padding: 10px;
+     
+    margin: 0 auto;
 }
 .cancel{ 
   position: relative;

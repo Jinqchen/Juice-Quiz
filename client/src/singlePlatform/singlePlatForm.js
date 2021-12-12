@@ -361,10 +361,19 @@ store=(place)=>{
 			   
 			);
 		});
-		console.log(this.state.subscribed);
+		console.log("owener-status" );
+		
+		console.log((this.state.owner));
+
+		console.log("co_owener-status" );
+		
+		console.log((this.state.co_owner));
+
+		console.log("result")
+		 
+		console.log(((!this.state.owner)||(!this.state.co_owner)));
 		return (
            <div>
-				 
 				<div className="rankBoard"> 
 				<div className="rankBoardTitle"> reputation rank  </div>
 				<div className="rankMenu">{menu}</div>
@@ -382,20 +391,12 @@ store=(place)=>{
 			
 			
 		 
-			{!this.state.subscribed&&<button className='platformaccount'  onClick={()=>this.subscribe()}>subscribe</button>||<button className='platformaccount' onClick={()=>this.unsubscribe()} >subscribed √</button>}
-			{!this.state.co_owner&&<button className='platformaccount'  onClick={()=>this.apply()}>Apply to be co-owner</button>||<button className='platformaccount' >Co-Owner</button>}
-		
-			<Link  className='newQuizLink' to={'/quizInit'}>
+			{(!this.state.subscribed)&&<button className='platformaccount'  onClick={()=>this.subscribe()}>subscribe</button>||<button className='platformaccount'   >subscribed √</button>}
+			{((!this.state.owner)&&(!this.state.co_owner))&&<button className='platformaccount'  onClick={()=>this.apply()}>Apply to be co-owner</button>}
+			{(this.state.owner||this.state.co_owner)&&<Link  className='newQuizLink' to={'/quizInit'}>
 			<span>{"Release New Quiz"}</span> 
-            </Link>
-			{/* {this.state.co_owner&&
-			<Link  className='newQuizLink' to={'/quizInit'}>
-			<span>{"Release New Quiz"}</span> 
-            </Link>}  */}
-
-					{/* <Link  className='newQuizLink' to={'/quizEdit'}>
-			<span>{"QuizEdit"}</span> 
-                    </Link> */}
+            </Link>}
+	 
            
             </div>
 			<div className="sort">

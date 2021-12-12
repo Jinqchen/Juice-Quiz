@@ -62,9 +62,7 @@ export default class signIn extends Component {
                  
 
             <label className='SIGNUP'>Login Your account</label> 
-                <div className="userInput">    
-
-                 
+                <div className="userInput">     
                     <input type="text" placeholder="Enter Email" name="email" required onChange={this.handleChangeEmail.bind(this)}></input>
                   </div>
                    
