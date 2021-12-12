@@ -45,9 +45,9 @@ export default class singlePlatForm extends Component {
 	this.is_allowCown();
 	this.is_owner();
 	this.get_replimit();
-}
+	this.get_Urep();
 
-
+ }
 
 
 
