@@ -1073,3 +1073,9 @@ QID=37 OR QID=38;
  -- select * from history where whendo= (select max(whendo) from history)
 --  SELECT max(whendo) FROM history where UID=3 AND QID=13 
 SELECT AVG(rate) FROM history WHERE QID=13 group by QID;
+
+
+-- update history set QID=0 WHERE UID=3 AND QID=13
+
+-- SELECT * FROM history WHERE UID=3
+delete from history where UID=3 

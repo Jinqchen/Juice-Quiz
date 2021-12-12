@@ -83,7 +83,7 @@ render(){
       </li> */}
 
         <li>
-      <label className='editInput'>  Discription
+      <label className='editInput'>  Description
         </label>  
       </li>
       <li> 
