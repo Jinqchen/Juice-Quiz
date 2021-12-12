@@ -105,7 +105,9 @@ export default class Menu extends Component {
                  <button onClick={()=>this.filter("Science")}   type="button"  className="tag">Science</button>
                  <button onClick={()=>this.filter("Food")}    type="button"  className="tag">Food</button>
                  <button onClick={()=>this.filter("Movie")}    type="button"  className="tag">Movie</button>
-                 <button onClick={()=>this.filter("Life")}    type="button" className="tag">Life</button>
+                 <button onClick={()=>this.filter("Culture")}    type="button" className="tag">Culture</button>
+                 <button onClick={()=>this.filter("Math")}    type="button" className="tag">Math</button> 
+                 <button onClick={()=>this.filter("Game")}    type="button" className="tag">Game</button>
             </div> }
             
             

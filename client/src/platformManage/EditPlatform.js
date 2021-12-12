@@ -35,12 +35,8 @@ import {Button, Card} from 'react-bootstrap';
         this.setState({tagchange:true}); 
         }
 
-        handleChangeOnwer(e)   {
-            this.setState({oneOnwer: e.target.value}); 
-            if (e.target.value){
-              this.setState({replimit:99999});
-              this.setState({repchange:true}); 
-            }    
+        handleChangeOnwer(e)   { 
+          this.setState({oneOnwer:!this.state.oneOnwer}); 
         }
 
         handleReputation(e){
@@ -91,6 +87,7 @@ postImage(image, name) {
   const formData = new FormData();
   formData.append("image", image)
   formData.append("name", name)
+   
 
   const result = Axios.post(`http://localhost:3001/images/${this.state.PID}`, formData, { headers: {'Content-Type': 'multipart/form-data'}})
   return result.data
@@ -103,12 +100,13 @@ uploadIcon(event){
 
 submit(e){       
   //   const url = 'https://juice-quiz.herokuapp.com/api/createplatform';
-    const url= 'http://localhost:3001/api/createplatform';
+    if(this.state.name==''||this.state.option==''||this.state.requireReputation<=0){
+      alert("!")
+    }else{const url= 'http://localhost:3001/api/createplatform';
      Axios.post(url, { 
             Pname: this.state.name, 
             tag: this.state.tag, 
-            replimit:this.state.requireReputation,
-            
+            replimit:this.state.requireReputation, 
        }).then((res)=>{return res.data})
        .then((response) => { 
          this.setState({PID:response['PID']});
@@ -119,7 +117,7 @@ submit(e){
       this.own();
       this.inital_reputation();
       alert("Platform Created!") 
-     }
+     }}
       
      }
     
@@ -141,7 +139,7 @@ render(){
             <label className='SIGNUP'>Manage Platform</label> 
                 <div className="userInput">    
                 <label className='EPeditInput'>Platform Name:  
-                <input style={{width:"480px"}} onChange={this.handleChangeName.bind(this)}></input>
+                <input style={{width:"480px",marginLeft:'0px'}} value={this.state.name} onChange={this.handleChangeName.bind(this)}></input>
           </label> 
                   </div>
                    
@@ -149,14 +147,16 @@ render(){
                    
                   <div className="userInput">    
                         <label className='EPeditInput'>  Select tag:
-                        <select value={this.state.value} onChange={this.handleChangeTag.bind(this)}>
-                          <option value="music">music</option>
+                        <select value={this.state.tag} onChange={this.handleChangeTag.bind(this)}>
+                        <option value="music">music</option>
                           <option value="sport">sport</option>
                           <option value="programing">programing</option>
                           <option value="science">science</option>
                           <option value="food">food</option>
-                          <option value="movie">movie</option>
-                          <option value="life">life</option>
+                          <option value="movie">movie</option> 
+                          <option value="game">game</option>
+                          <option value="culture">culture</option>  
+                          <option value="math">math</option> 
                         </select>
                       </label>
                 </div>
@@ -175,16 +175,12 @@ render(){
 {
  !this.state.oneOnwer&& <div className="userInput">    
                                 <label className='EPeditInput'>  reputation need
-          <input style={{width:"180px"}} onChange={this.handleReputation.bind(this)}></input>
+          <input type="number" value={this.state.requireReputation} style={{width:"180px",marginLeft:'0px'}} onChange={this.handleReputation.bind(this)}></input>
  
-        </label>
-
-
-          </div>
-
+        </label> 
+          </div> 
 }
-               
-
+                
                 <div className="userInput">     
                 <input onChange={this.handlefileSelected.bind(this)} type="file" accept="image/*"></input> </div>
 

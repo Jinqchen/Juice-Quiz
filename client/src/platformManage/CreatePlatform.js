@@ -39,12 +39,8 @@ import {Button, Card} from 'react-bootstrap';
         }
 
         handleChangeOnwer(e)   {
-            this.setState({oneOnwer: e.target.value}); 
-            if (e.target.value){
-              this.setState({replimit:99999});
-              this.setState({repchange:true}); 
-            }
-            this.setState({renderFlag:this.state.oneOnwer})
+            
+          this.setState({oneOnwer:!this.state.oneOnwer}); 
         }
 
         handleReputation(e){
@@ -100,26 +96,32 @@ uploadIcon(event){
   const result =  this.postImage(this.state.file, this.state.name)
 }
 
-submit(e){       
-  //   const url = 'https://juice-quiz.herokuapp.com/api/createplatform';
-    const url= 'http://localhost:3001/api/createplatform';
-     Axios.post(url, { 
-            Pname: this.state.name, 
-            tag: this.state.tag, 
-            replimit:this.state.requireReputation,
-            
-       }).then((res)=>{return res.data})
-       .then((response) => { 
-         this.setState({PID:response['PID']});
-         this.setState({success:response['success']});
-       }); 
-     if (this.state.success){
-      this.uploadIcon(e)
-      this.own();
-      this.inital_reputation();
-      alert("Platform Created!") 
-     }
-      
+submit(e){      
+  
+  if(this.state.name==''||this.state.option==''||this.state.requireReputation<=0){
+    alert("!")
+  }else{
+ //   const url = 'https://juice-quiz.herokuapp.com/api/createplatform';
+ const url= 'http://localhost:3001/api/createplatform';
+ Axios.post(url, { 
+        Pname: this.state.name, 
+        tag: this.state.tag, 
+        replimit:this.state.requireReputation,
+        
+   }).then((res)=>{return res.data})
+   .then((response) => { 
+     this.setState({PID:response['PID']});
+     this.setState({success:response['success']});
+   }); 
+ if (this.state.success){
+  this.uploadIcon(e)
+  this.own();
+  this.inital_reputation();
+  alert("Platform Created!") 
+ }
+  
+  }
+ 
      }
     
 render(){ 
@@ -154,8 +156,10 @@ render(){
                           <option value="programing">programing</option>
                           <option value="science">science</option>
                           <option value="food">food</option>
-                          <option value="movie">movie</option>
-                          <option value="life">life</option>
+                          <option value="movie">movie</option> 
+                          <option value="game">game</option>
+                          <option value="culture">culture</option>  
+                          <option value="math">math</option> 
                         </select>
                       </label>
                 </div>
@@ -172,7 +176,7 @@ render(){
 
 
                                     {
-    !this.state.renderFlag&& <div className="CPuserInput">    
+    !this.state.oneOnwer&& <div className="CPuserInput">    
                                     <div className='EPeditInput' style={{ color:'white',marginLeft:'30px'}}>  reputation need
               <input style={{width:"50%"}} onChange={this.handleReputation.bind(this)}></input>
     
