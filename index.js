@@ -16,7 +16,8 @@ const util = require('util')
 const unlinkFile = util.promisify(fs.unlink)
 const multer = require('multer')
 const upload = multer({ dest: 'uploads/' })
-const { uploadFile, getFileStream } = require('./server/s3')
+const { uploadFile, getFileStream } = require('./server/s3');
+const { connect } = require('http2');
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
@@ -430,15 +431,32 @@ app.post('/api/platform/coowner', (req, res) => {
   app.delete('/api/platform/delSub/:id', (req, res) => {
 	const PID = req.params.id;
 	const UID = req.body.UID;  
-	con.query(
+	con.getConnection(function (err, connection) {
+		connection.query(
 	  `delete from subscribe where PID=? and UID=?`,
 	  [PID,UID],
 	  (err, result) => {
 		console.log(result);
-		
-	  }
+		connection.destroy();
+		  }
+	);
+	})
+	
+  });
+
+  app.delete('/api/platform/delRep/:id', (req, res) => {
+	const PID = req.params.id;
+	const UID = req.body.UID;  
+	con.query(
+	  `delete from reputation where UID=${UID} AND PID=${PID}`,
+	  [PID,UID],
+	  (err, result) => {
+		console.log(result);
+			
+		  }
 	);
   });
+
 
   app.delete('/api/platform/delCoown/:id', (req, res) => {
 	const PID = req.params.id;

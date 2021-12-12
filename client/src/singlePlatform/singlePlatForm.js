@@ -107,14 +107,18 @@ if(this.state.owner){
 	alert("You can't unsubscribe your own platform!")
 }
 else if(this.state.co_owner){
-	console.log("co");
-this.op_unsub();
-this.op_uncoown();
+	console.log("co"); 
+	this.op_delrep();
+    this.op_uncoown();
+	this.op_unsub();
+   
 }
 else{
-this.op_unsub();
+	this.op_delrep();   
+    this.op_unsub();
 
 }
+this.get_ranklist();
 }
 
 
@@ -144,7 +148,16 @@ op_uncoown(){
 		  this.setState({co_owner:false})
 }
 
-
+op_delrep(){
+	//  const url = `https://juice-quiz.herokuapp.com/api/platform/delCoown/${this.state.PID}`;
+	  const url= `http://localhost:3001/api/platform/delRep/${this.state.PID}`;
+		   
+			Axios.delete(url, { data:{UID: localStorage.getItem("UID")}  
+			}).then((response) => { 
+			console.log(response); 
+			}); 
+			
+  }
 
 
 
