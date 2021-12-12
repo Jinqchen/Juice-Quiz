@@ -378,7 +378,7 @@ store=(place)=>{
 				<div className="rankBoardTitle"> reputation rank  </div>
 				<div className="rankMenu">{menu}</div>
 				</div> 
-{/* 
+
 				 <div className="detailBoard"> 
 				<div className="detailTitle"> Platform Information </div>  
 				<h4 class="detailRepo">Allowed to be co-owner of this platform:{this.state.allow_coowner&&<h4 class="detialText">Yes</h4>||<h4 class="detialText">No</h4> }</h4> 
@@ -386,7 +386,7 @@ store=(place)=>{
 				
 				<h4 class="detailRepo">Current reputation:<h4 class="detialText">{this.state.Urep}</h4></h4> 
 
-				</div>   */}
+				</div>  
 
 
             <div className="header"> 

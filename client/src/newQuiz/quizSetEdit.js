@@ -74,13 +74,7 @@ render(){
          <img src="./logo.jpg" className="quizInitIcon"></img> 
         <form onSubmit={this.handleSubmit} className="editForm">
             
-      {/* <li>
-      <label className='editInput'>  Title
-        </label>  
-      </li>
-      <li> 
-        <input  className="initQuizTitle" required onChange={this.handleChangeName.bind(this)}></input> 
-      </li> */}
+    
 
         <li>
       <label className='editInput'>  Description
