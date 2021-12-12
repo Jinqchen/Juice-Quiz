@@ -116,6 +116,17 @@ delete_quiz(quizID){
 	this.get() 
     }); 
 	
+	let tmp=[];
+	console.log(this.state.renderList) 
+	console.log(tmp)
+	this.state.renderList.forEach(element => {
+		if(element.QID!=quizID){ 
+			tmp=[...tmp,element]
+		}
+	}); 
+	this.setState({renderList:tmp})
+	console.log(this.state.renderList) 
+	console.log(tmp)
 }
 
 
