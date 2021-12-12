@@ -3,6 +3,17 @@
     margin-top: 0px;
     margin-bottom: 0px;
 }
+.detailRepo{
+    color: #F78223;
+    width: 100%; 
+    font-size: 15px;
+    margin-left: 5%;
+    /* text-align: center; */
+}
+.detialText{
+    font-size: 15px;
+    color: grey;
+}
 .reputationValue{
     color:red;
     position: absolute;
@@ -20,6 +31,28 @@
     position: absolute;
     display: block;
     right:20px;
+    top:50%;
+    width: 200px; 
+    background-color:aliceblue; 
+}
+
+.detailTitle{ 
+    background-color: rgb(177, 174, 174);
+    font-size: 25px;
+    text-align: center;
+    padding-top: 20px;
+    color:white;
+    margin-bottom: 20px;
+}
+
+
+.detailBoard{
+    border-color: rgb(177, 174, 174);
+    border-style: solid;
+    border-radius: 5px;
+    position: absolute;
+    display: block;
+    left:20px;
     top:50%;
     width: 200px; 
     background-color:aliceblue; 
@@ -64,7 +97,7 @@
 }
 .platformaccount{
     margin-top: 10px;
-    margin-right:50px;  
+    margin-right:20px;  
     background-color:#e49132; 
     border: none;
     color: white;
@@ -73,9 +106,8 @@
     display: inline-block;
     font-size: 16px;
     height: 40%;
-    width:20%;
-    margin-bottom: 10px;
-    margin-left: 100px;
+    /* width:20%; */
+    margin-bottom: 10px; 
 } 
 .newQuizLink span{ 
     color: #e49132;
@@ -181,8 +213,13 @@
 .notOwnerBar{ 
     display:relative;
 }
-.singlePlatFormName{
-    font-size: 40px;
+.singlePlatFormName{ 
+    font-size: 40px; 
+    text-align:left;
+    color: white;
+    margin-right: 100px;
+    
+    margin-left: 20px;
 }
 .SinglePlatformtitle{
     border-bottom:none

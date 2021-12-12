@@ -52,15 +52,13 @@ render(){
 	const menu = this.state.renderList.map((place) => {
 		return(
 			
-	<div style={{paddingLeft : '18px' ,paddingTop : '18px'}}  >   
-	 	<Card className="managePlatFormSingleItem" style={{width : '18rem' }}  >
+	<div style={{paddingLeft : '5%' ,paddingTop : '5%' }}  >   
+	 	<Card className="managePlatFormSingleItem" style={{width : '25rem' }}  >
 		<Card.Img  src={'https://juicequiztest.s3.amazonaws.com'+place.Pcover} />
   
   <Card.Body>
     <Card.Title>{place.Pname}</Card.Title>
-    <Card.Text>
-      Platform discription
-    </Card.Text> 
+  
 
 	<Link to={'/platformEdit/'+place.Pname} onClick={()=>this.store(place)}>
 	<Button variant="primary" onClick>Manage</Button>

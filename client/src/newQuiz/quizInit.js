@@ -6,6 +6,7 @@ import { Media } from 'reactstrap';
 import Axios from "axios";  
 import './quizInit.css'
 
+import {Button, Card} from 'react-bootstrap';
 
     export default class CreateNewQuiz extends Component {
         constructor(props) {
@@ -85,61 +86,52 @@ render(){
    
 	return (
 		<>
+
+    
 		 <div className='initQuizeditBoard'>
+     <Link to='/'>
+            <button className="cancel"   >X</button> </Link>
          <img src="./logo.jpg" className="quizInitIcon"></img> 
         <form onSubmit={this.handleSubmit} className="editForm">
             
-      <li>
-      <label className='editInput'>  Title
-        </label>  
-      </li>
-      <li> 
-        <input  className="initQuizTitle" required onChange={this.handleChangeName.bind(this)}></input> 
-      </li>
-
-        <li>
-      <label className='editInput'>  Discription
-        </label>  
-      </li>
-      <li> 
+      <div className='initeditInput'>  Title
+        <input  className="initQuizTitle" required onChange={this.handleChangeName.bind(this)}></input>  
+        </div>   
+ 
+      <div className='initeditInput'>  Discription   
       <textarea className="quizDiscription" rows="5" cols="50" required onChange={this.handleChangeDiscription.bind(this)}> 
   </textarea>
-        </li>
-        <li>
-        <label> Limited Time
+        </div>
+
+ 
+        <div style={{color:'white'}}> Limited Time
         <select value={this.state.value} onChange={this.handleTimeLimited.bind(this)} className="LimitedTime">
             <option value="true">On</option>
             <option value="false">Off</option> 
         </select>
-          </label> 
-          </li>
+          </div>  
         
-        {  this.state.timeLimited&&<li>
-        <label> Hour
+        {  this.state.timeLimited&& 
+        <div style={{display:'flex',color:'white',marginTop:'20px'}}> 
+        <div className='timeInit'> Hour
              
-        <input  className="timeQuizInit" required onChange={this.handleTimeHour.bind(this)}></input> 
-          </label> 
-          <label> Min
-        <input  className="timeQuizInit" required onChange={this.handleTimeMin.bind(this)}></input> 
-          </label> 
-          </li>
-
+        <input maxLength={2} className="timeQuizInit" required onChange={this.handleTimeHour.bind(this)}></input> 
+          </div> 
+           <div  className='timeInit'> Min
+        <input maxLength={2} className="timeQuizInit" required onChange={this.handleTimeMin.bind(this)}></input> 
+          </div>  
+          </div>
           }
+ 
+      <div className='initeditInput' >  Reputation Point
+        <input  className="initQuizTitle" style={{width:'50%',marginLeft:'20px'}} required onChange={this.handleChangeRep.bind(this)}></input>  
+        </div>    
 
-      <li>
-      <label className='editInput'>  Reputation Point
-        </label>  
-      </li>
-      <li> 
-        <input  className="initQuizTitle" required onChange={this.handleChangeRep.bind(this)}></input> 
-      </li>
+ 
+        <Link to={'/quizEdit/'+this.state.QID}>
+      <Button style={{backgroundColor:'white',color:"#fc7e18",border:'none',marginLeft:'40%',width:'10%',height:'50px',marginTop:'20px'}} className="initSumbit" onClick={()=>this.submit()} >Create</Button>  
+        </Link>        
 
-
-
-       <Link to={'/quizEdit/'+this.state.QID}>
-      <button  className="submit" onClick={()=>this.submit()} >Create</button>  
-        </Link>
-       
        </form>
          </div>
 			  </>

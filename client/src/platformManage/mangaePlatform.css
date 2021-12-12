@@ -1,6 +1,9 @@
 
 .ManagePlatFormList{   
-    padding-left: 10px;
+    padding-left: 3%; 
+    display: flex;
+    width: 100%;  
+    flex-wrap: wrap;
 }
 .repName{ 
     font-size: 28px;
@@ -60,8 +63,4 @@
     display: block;
     top: 0; 
     right: 0;
-}
-.ManagePlatFormList{
-    display: flex;
-    
-}
+} 

@@ -4,7 +4,6 @@
     position: relative;  
     background-color: grey; 
     margin:0 auto; 
-    width: 50%;
 }
 .quizInitIcon{  
    margin-top: 5%;
@@ -30,3 +29,4 @@
 .timeQuizInit  {
     width: 10%
 }
+ 
