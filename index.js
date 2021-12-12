@@ -803,12 +803,17 @@ app.post('/api/quizsetCreate', (req, res) => {
 	console.log(QID);
 	console.log(questions[0]['answerOptions']);
     for (var i=0;i<questions.length;i++){
-		con.query(
-	  `insert into quizquestion(QID,QuestionID,Qtext)
-	  value(?,?,?);`,
-	  [QID,i+1,questions[i]['questionText']] 
-	);
-     var options=questions[i]['answerOptions']
+		console.log(i)
+		console.log(questions[i]['questionText'])
+		
+			con.query(
+	     `insert into quizquestion(QID,QuestionID,Qtext)
+	     value(?,?,?);`,
+	     [QID,i+1,questions[i]['questionText']],
+		
+	     );
+		
+	 var options=questions[i]['answerOptions']
 	 for (var j=0;j<options.length;j++){
      con.query(
 		`insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
@@ -841,7 +846,7 @@ app.post('/api/quizsetEdit/insert', (req, res) => {
      con.query(
 		`insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
 		VALUE(?,?,?,?,?);`,
-		[QID,questions[i]['key'],j+1,options[j]['questionText'],options[j]['isCorrect']],
+		[QID,questions[i]['key'],j+1,options[j]['answerText'],options[j]['isCorrect']],
 		(err, result) => {
 			console.log(err);
 			connection.release();
@@ -863,8 +868,9 @@ app.delete('/api/quizsetEdit/delete', (req, res) => {
 	console.log(del);
     for (var i=0;i<del.length;i++){
 		con.query(
-	  `DELETE FROM quizquestion WHERE QID=${QID} and QuestionID=${del[i]};`,
-	  );
+	   `DELETE FROM quizquestion WHERE QID=${QID} and QuestionID=${del[i]};`,
+	    );
+
 	  con.query(
 		`DELETE FROM quizoptions WHERE QID=${QID} and QuestionID=${del[i]};`,
 		);
@@ -980,7 +986,7 @@ app.put('/api/quizsetEdit/change', (req, res) => {
 		`UPDATE quizoptions 
 		SET Optionx=?
 		WHERE QID=? and QuestionID=? and optionnumber=?;`,
-		[options[j]['questionText'],QID,i+1,j+1],
+		[options[j]['answerText'],QID,i+1,j+1],
 	 );
 	 
 
