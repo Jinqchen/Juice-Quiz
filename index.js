@@ -89,7 +89,20 @@ app.get('/api/answer/:id',(req,res)=>{
 	 
 	}
   );
-
+  app.get('/api/getusername/:id',(req,res)=>{
+	console.log("Connected!");
+	const UID = req.params.id;
+  con.query(
+	  `select Uname from users where UID=${UID}`,
+	  function (err1, result) {
+		  if (err1) throw err1;
+		  res.send(result);
+		  
+	  }
+	)
+   
+  }
+);
 app.put('/api/answer/updateRep/:id',(req,res)=>{
      const QID = req.params.id;
 	 const PID = req.body.PID;

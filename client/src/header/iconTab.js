@@ -1,15 +1,15 @@
-import React,{useState} from 'react';
+
+import React, { useEffect, useState } from "react";
 //import { Component } from 'react';
 import './iconTab.css' ;    
 import {Link } from 'react-router-dom';
 //import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai"
+import Axios from "axios";
 
-const IconTab=(props)=>{
-  
-  
+function IconTab(props){
     const [sidebar, setSidebar]=useState(false)
-
+    const [name,setName] = useState()
     const showSidebar=()=>setSidebar(!sidebar)
     const SidebarData=[
 		{
@@ -47,6 +47,19 @@ const IconTab=(props)=>{
  
 ];
 
+
+useEffect(() => {
+   //    const url = `https://juice-quiz.herokuapp.com/api/platform/${this.state.PID}/replimit`;
+   const url= `http://localhost:3001/api/getusername/${localStorage.getItem('UID')}`;
+   Axios.get(url).then(res=>{return res.data})
+   .then((response) => { 
+     console.log(response[0]['Uname'])  
+    setName(response[0]['Uname'])
+   console.log(name)
+   });
+});
+
+
     function handleSignout(){
       console.log(props)
       props.signOutcallback(); 
@@ -59,7 +72,7 @@ const IconTab=(props)=>{
               <img src="account.jpg" onClick={showSidebar} className="iconClick" />
               <br/>
               
-            <h4 className="userNameHeader" style={{color:'#F78223'}}>userName</h4>
+            <h4 className="userNameHeader" style={{color:'#F78223'}}>{name}</h4>
             </Link>
           
           </div>
