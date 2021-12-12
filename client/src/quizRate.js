@@ -6,6 +6,9 @@ import { Media } from 'reactstrap';
 import Axios from "axios";  
 import './quizRate.css'
 import {FaStar} from "react-icons/fa"
+
+import {Button, Card} from 'react-bootstrap';
+
 const initQuestions=   [
   {
       questionText: 'What is the capital of France?',
@@ -111,6 +114,10 @@ const initQuestions=   [
         
        )
    }
+   confirm(){
+     //sumbit rate here
+     alert("submit")
+   }
 
    
 
@@ -122,8 +129,10 @@ render(){
 		<>
         <span>
       
-		 <div className='editQuizeditBoard'> 
-         <img src="logo.jpg" className="quizInitIcon"></img>  
+		 <div className='rateBoardlayOut'> 
+     <Link to='/'>
+            <button className="cancel"   >X</button> </Link>
+         <img src="logo.jpg" className="quizInitIcon" style={{marginBottom:'20px'}}></img>  
         { <div className="editQuestionList"  >
         {this.state.questions.map((item, index) => {
                 return ( 
@@ -145,41 +154,25 @@ render(){
         </label>  
             
           </label>
-
-          {/* <label   className="rank">You defeated <label  style={{color: "orange",fontSize:"48px "}}>{this.state.rank }% 
-       </label> users in juice quiz</label> */}
+ 
        <label style={{ textAlign:"left", width:"100%"}}>You defeated  <label style={{ textAlign:"left", width:"100%",color: "orange"}}>{this.state.rank }%  </label>
        users of juice quiz</label>
 
        </form>
        
        </div>  }
-
-         {/* <div className="editContent">
-        <form onSubmit={this.handleSubmit} className="editForm">
-              
-      <label className='editInput'  style={{fontSize:"50px"}} > Congratulations,<br/> You got   <label  style={{color: "orange",fontSize:"80px", marginLeft:"40%"}}>{this.state.score }
-       </label> points  
-       <label style={{fontSize:"30px",marginBottom:"50px"}}>
-       in <label  style={{color: "orange",fontSize:"50px"}}>{this.state.limitedHour } </label> hour and <label  style={{color: "orange",fontSize:"50px"}}>{this.state.limitedMin } </label>  minutes
-        </label>  
-            </label> <br/> 
-        <label className="rank">You defeated <label  style={{color: "orange",fontSize:"48px "}}>{this.state.rank }% 
-       </label> users in juice quiz</label>
-    
-         
-       </form>
-       <div className="rateBoard">
-        <label> How you like this quiz </label>
-       
- {this.starBoard()}</div>
-       </div> */}
+ 
        <div className="rateBoard">   
        <div className="howYouLike">
          How you like this quiz</div>
  {this.starBoard()}</div> 
+
+ 
+ <div>
+          <Button className='rateConfirm' onClick={()=>this.confirm()}>Confirm</Button>
+        </div>
+        <div></div>
          </div>
-         
          </span>
          
 			  </>

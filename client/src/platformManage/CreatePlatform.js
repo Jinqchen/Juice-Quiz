@@ -24,7 +24,8 @@ import {Button, Card} from 'react-bootstrap';
               repchange:false,
               EPID:localStorage.getItem('EditPID'),
               success:false,
-              file:''
+              file:'',
+              renderFlag:false
             };    
           }
         handleChangeName(e) {  
@@ -42,7 +43,8 @@ import {Button, Card} from 'react-bootstrap';
             if (e.target.value){
               this.setState({replimit:99999});
               this.setState({repchange:true}); 
-            }    
+            }
+            this.setState({renderFlag:this.state.oneOnwer})
         }
 
         handleReputation(e){
@@ -121,7 +123,7 @@ submit(e){
      }
     
 render(){ 
-        
+       // this.setState({oneOnwer:this.state.renderFlag})
 	
    
 	return (
@@ -130,16 +132,16 @@ render(){
 		<div className='EPeditBoard'>
     <div>
             
-            <div className='signUpBoard'>
+            <div className='signUpBoard' style={{height:'500px'}}>
             <Link to='/'>
             <button className="cancel"   >X</button> </Link>
                  
 
             <label className='SIGNUP'>New Platform</label> 
-                <div className="userInput">    
-                <label className='EPeditInput'>Platform Name:  
-                <input style={{width:"480px"}} onChange={this.handleChangeName.bind(this)}></input>
-          </label> 
+                <div className="CPuserInput">    
+                <div className='EPeditInput' style={{ color:'white',marginLeft:'30px'}}>Platform Name:  
+                <input style={{width:"50%"}} onChange={this.handleChangeName.bind(this)}></input>
+          </div> 
                   </div>
                    
                 
@@ -170,11 +172,11 @@ render(){
 
 
                                     {
-    !this.state.oneOnwer&& <div className="userInput">    
-                                    <label className='EPeditInput'>  reputation need
-              <input style={{width:"180px"}} onChange={this.handleReputation.bind(this)}></input>
+    !this.state.renderFlag&& <div className="CPuserInput">    
+                                    <div className='EPeditInput' style={{ color:'white',marginLeft:'30px'}}>  reputation need
+              <input style={{width:"50%"}} onChange={this.handleReputation.bind(this)}></input>
     
-            </label>
+            </div>
 
 
               </div>

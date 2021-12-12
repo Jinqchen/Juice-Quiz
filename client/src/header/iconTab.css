@@ -6,16 +6,20 @@
     right:10px;
   }
   
-  .menu-bars { 
-    margin-left: 2rem;
+  .menu-bars {  
     font-size: 2rem;
-    background: none;
+    background: none;   
   }
   .iconClick{
-      width:45px;
+      width:60px; 
+    height: 60px;
       height: 100%;
   }
-  
+  .userNameHeader{
+    position: absolute;
+    bottom: -16px;
+    font-size: 16px;
+  }
   .nav-menu {
     color: white;
     background-color: #F78223;

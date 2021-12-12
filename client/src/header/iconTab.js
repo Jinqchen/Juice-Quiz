@@ -57,7 +57,11 @@ const IconTab=(props)=>{
           <div className='navbar-icon'>
             <Link to='#' className='menu-bars'>
               <img src="account.jpg" onClick={showSidebar} className="iconClick" />
+              <br/>
+              
+            <h4 className="userNameHeader" style={{color:'#F78223'}}>userName</h4>
             </Link>
+          
           </div>
           <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
             <ul className='nav-menu-items' onClick={showSidebar}>

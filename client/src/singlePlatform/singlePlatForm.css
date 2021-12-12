@@ -110,10 +110,11 @@
     margin-bottom: 10px; 
 } 
 .newQuizLink span{ 
-    color: #e49132;
+    color:white;
     position:absolute;
     right: 0%; 
     bottom: 0%;
+    font-size: 22px;
   
 }
 .icon{

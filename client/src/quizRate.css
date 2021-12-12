@@ -30,3 +30,19 @@ width: 100%;
 text-align:left;
 font-size: 42px;
  }
+ .rateConfirm{
+     display: block;
+     margin:0 auto;
+     width: 200px;
+     height: 60px;
+     margin-top: 50px; 
+     margin-bottom: 50px;
+ }
+ .rateBoardlayOut{
+    display: block;
+    position: relative;  
+    background-color: rgb(180, 177, 177); 
+    margin:0 auto; 
+    width: 90%;
+    border-radius: 25px;
+ }
