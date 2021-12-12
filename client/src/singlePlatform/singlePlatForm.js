@@ -378,6 +378,17 @@ store=(place)=>{
 				<div className="rankBoardTitle"> reputation rank  </div>
 				<div className="rankMenu">{menu}</div>
 				</div> 
+{/* 
+				 <div className="detailBoard"> 
+				<div className="detailTitle"> Platform Information </div>  
+				<h4 class="detailRepo">Allowed to be co-owner of this platform:{this.state.allow_coowner&&<h4 class="detialText">Yes</h4>||<h4 class="detialText">No</h4> }</h4> 
+				<h4 class="detailRepo">Reputation need to be cowoner:<h4 class="detialText">{this.state.replimit}</h4></h4> 
+				
+				<h4 class="detailRepo">Current reputation:<h4 class="detialText">{this.state.Urep}</h4></h4> 
+
+				</div>   */}
+
+
             <div className="header"> 
 			</div> 
 			  <div className="singlePlatformsearch"> 
@@ -387,7 +398,7 @@ store=(place)=>{
             
 			<div className="platFormButton"> 
                 <img src= {'https://juicequiztest.s3.amazonaws.com'+this.state.Pcover}  className='icon'></img> 
-            <label className='singlePlatFormName'>{this.state.Pname}</label>
+            <div className='singlePlatFormName'>{this.state.Pname}</div>
 			
 			
 		 
