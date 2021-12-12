@@ -77,7 +77,7 @@ export default class Menu extends Component {
     async search(){
     alert(this.state.searchContent)
     //const url=`https://juice-quiz.herokuapp.com/api/platform/${this.state.searchContent}`;
-    const url= `http://localhost:3001/api/platform/${this.state.searchContent}`;
+    const url= `http://localhost:3001/api/platformSearch/${this.state.searchContent}`;
       const res = await Axios.get(url)
       .then(res=>{return res.data})
       .then( result =>{

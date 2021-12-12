@@ -273,7 +273,7 @@ app.get ('/api/manageQuiz/quizlist/:id',(req,res)=>{
   );})
 
 //Search
-  app.get ('/api/platform/:name',(req,res)=>{
+  app.get ('/api/platformSearch/:name',(req,res)=>{
     console.log("platform Connected!");
 	const name = req.params.name;
 	console.log(name);
@@ -743,40 +743,42 @@ app.post('/api/initQuiz', (req, res) => {
     const PID = req.body.PID;
 	const UID = req.body.UID;
 	     
-	con.query('select max(QID) FROM releases',function(err,result){
-		console.log(result)
-		var index = result[0]["max(QID)"]
-		console.log("index:"+index);
-		var id =index+1;
-		console.log(id);
+// 	con.query('select max(QID) FROM releases',function(err,result){
+// 		console.log(result)
+// 		var index = result[0]["max(QID)"]
+// 		console.log("index:"+index);
+// 		var id =index+1;
+// 		console.log(id);
 
 	
-	   con.query(
-		  `INSERT INTO quiz(QID,Qname,ave_rate,hot,description,reputationneed,Taketime,releasedate)
-		  value(?,?,0.0,0,?,?,?,now());`,
-	      [id,title,description,Repoint,timelimit],
-	      (err, result) => {
-	       console.log(err);  
-	}
-  );
-		con.query(
-					`insert into releases(UID,QID)
-					VALUE(?,?)`,
-				[UID,id],
-				(err, result) => {
-				console.log(err);  
-				}
-			);
-			con.query(
-			`insert into contain(PID,QID)
-			VALUE(?,?)`,
-			[PID,id],
-		(err, result) => {
-		console.log(err);  
-		}
-	);
-		res.send({QID:id,success:true})
-});	
+// 	   con.query(
+// 		  `INSERT INTO quiz(QID,Qname,ave_rate,hot,description,reputationneed,Taketime,releasedate)
+// 		  value(?,?,0.0,0,?,?,?,now());`,
+// 	      [id,title,description,Repoint,timelimit],
+// 	      (err, result) => {
+// 	       console.log(err);  
+//             con.query(
+// 				`insert into releases(UID,QID)
+// 					VALUE(?,?)`,
+// 				[UID,id],
+// 				(err, result) => {
+// 				console.log(err); 
+// 				con.query(
+// 			   `insert into contain(PID,QID)
+// 			    VALUE(?,?)`,
+// 			    [PID,id],
+// 		        (err, result) => {
+// 		       console.log(err);  
+// 		       }
+// 	);
+// 				}
+// 			);
+// 	}
+//   );
+		
+			
+// 		res.send({QID:id,success:true})
+// });	
 		
   
 }); 
@@ -876,7 +878,19 @@ app.delete('/api/quizsetEdit/delete', (req, res) => {
 
 app.delete('/api/quiz/delete/:id', (req, res) => {
 	const QID = req.params.id;
+	const UID = req.body.UID;
 	console.log(QID);
+	con.getConnection(function(err, connection){
+		connection.query(
+		`update history set QID=0 WHERE UID=${UID} AND QID=${QID};`, 
+		function (err1, result) {
+		if (err1) throw err1;
+		console.log(result)
+		connection.destroy();					
+		
+	}
+	);   
+  })
 	con.getConnection(function(err, connection){
 		connection.query(
 		`delete from releases where QID=${QID};`, 
