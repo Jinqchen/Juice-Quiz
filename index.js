@@ -228,8 +228,8 @@ app.get ('/api/manageQuiz/quizlist/:id',(req,res)=>{
 	const UID = req.params.id;
 	console.log("UID:"+UID);
     con.query(
-		`select o.PID,p.Pname from own o, platform p
-		where UID=${UID} and o.PID=p.PID `, 
+		`select Pcover, o.PID,p.Pname from own o, platform p,platformstyle s
+		where UID=${UID} and o.PID=p.PID AND o.PID=s.PID`, 
 		function (err1, result) {
 		if (err1) throw err1;
 		console.log(result);
@@ -237,11 +237,6 @@ app.get ('/api/manageQuiz/quizlist/:id',(req,res)=>{
 	    con.release;
 	}
   );})
-
-
-
-
-
 
 
 

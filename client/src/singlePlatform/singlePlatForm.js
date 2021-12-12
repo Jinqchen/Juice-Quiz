@@ -312,9 +312,7 @@ store=(place)=>{
 	localStorage.setItem('QID',place.QID);
 	
 }
-newQuiz(){
-	alert("!")
-}
+
 
 
 

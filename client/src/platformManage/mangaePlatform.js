@@ -54,7 +54,8 @@ render(){
 			
 	<div style={{paddingLeft : '18px' ,paddingTop : '18px'}}  >   
 	 	<Card className="managePlatFormSingleItem" style={{width : '18rem' }}  >
-  <Card.Img  src="./demo-image.jpg" />
+		<Card.Img  src={'https://juicequiztest.s3.amazonaws.com'+place.Pcover} />
+  
   <Card.Body>
     <Card.Title>{place.Pname}</Card.Title>
     <Card.Text>
