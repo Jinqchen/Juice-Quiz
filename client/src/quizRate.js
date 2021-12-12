@@ -115,8 +115,7 @@ const initQuestions=   [
        )
    }
    confirm(){
-     //sumbit rate here
-     alert("submit")
+     this.setRate();
    }
 
    
