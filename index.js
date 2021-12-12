@@ -380,7 +380,7 @@ app.post('/api/platform/subscribe', (req, res) => {
 		}else{
 			res.send({subscribe:false});
 		}
-		con.release;
+	
 	  }
 	);
   });
@@ -427,6 +427,34 @@ app.post('/api/platform/coowner', (req, res) => {
 	  }
 	);
   });
+
+  app.post('/api/platform/allow_co', (req, res) => {
+	const PID = req.body.PID;
+	
+    con.getConnection(function(err,connection){
+    connection.query(
+	  `select allowco from platform where PID=?`,
+	  [PID],
+	  (err, result) => {
+		  var allow =result[0]["allowco"];
+		if (err) {
+		  res.send({ err: err });
+		}
+	    if (allow==1){
+			res.send({allow_co:true});
+		}else{
+			res.send({allow_co:false});
+		}
+		connection.destroy();
+	  }
+	);
+	
+	})
+
+	
+  });
+
+
 
   app.delete('/api/platform/delSub/:id', (req, res) => {
 	const PID = req.params.id;
@@ -478,14 +506,14 @@ app.get('/api/platform/userRep/:id',(req,res)=>{
 	console.log("User:");
 	const UID = req.params.id;
 	const PID = req.query.PID;
-	console.log(PID);
+	//console.log(PID);
 	con.query(
 		`select Rpoint 
 		from reputation r
 		where r.UID=${UID} AND r.PID=${PID};`, 
 		function (err1, result) {
 		if (err1) throw err1;
-		console.log(result);
+		//console.log(result);
 	    res.send(result);}
   )
 }

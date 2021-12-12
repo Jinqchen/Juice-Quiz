@@ -28,7 +28,8 @@ export default class singlePlatForm extends Component {
 			rankList:[{}],
 			rank:'',
 			replimit:0,
-			Urep:0
+			Urep:0,
+			allow_coowner:true
 		};
         
 	}
@@ -41,6 +42,7 @@ export default class singlePlatForm extends Component {
 	this.setState({rander:true});
 	this.is_sub();
 	this.is_coowner();
+	this.is_allowCown();
 	this.is_owner();
 	this.get_replimit();
 }
@@ -255,46 +257,55 @@ op_delrep(){
 		 });
 	};
 
-	 is_sub(){
-		
+	is_sub(){		
     //	   const url = 'https://juice-quiz.herokuapp.com/api/platform/subscribe';
 	 const url= `http://localhost:3001/api/platform/subscribe`;
          Axios.post(url, {
 			PID : this.state.PID,
 			UID: localStorage.getItem("UID"),
 		  }).then((response) => {
-			console.log(response.data);
+			//console.log(response.data);
 			this.setState({subscribed: response.data["subscribe"]})
 		  });
 	};
    
 	is_coowner(){
-		console.log("start")
+		
 		// const url = 'https://juice-quiz.herokuapp.com/api/platform/coowner';
 		const url= `http://localhost:3001/api/platform/coowner`;
 		Axios.post(url, {
 		   PID : this.state.PID,
 		   UID: localStorage.getItem("UID"),
 		 }).then((response) => {
-		   console.log(response.data);
+		   //console.log(response.data);
 		   this.setState({co_owner: response.data["coowner"]})
 		 });
     };
 
 	is_owner(){
-		console.log("start")
+		
 	//	 const url = 'https://juice-quiz.herokuapp.com/api/platform/owner';
 		const url= `http://localhost:3001/api/platform/owner`;
 		Axios.post(url, {
 		   PID : this.state.PID,
 		   UID: localStorage.getItem("UID"),
 		 }).then((response) => {
-		   console.log(response.data);
+		   //console.log(response.data);
 		   this.setState({owner: response.data["owner"]})
 		 });
     };
 
-
+    is_allowCown(){
+		console.log("start")
+//	 const url = 'https://juice-quiz.herokuapp.com/api/platform/allow_co';
+     const url= `http://localhost:3001/api/platform/allow_co`;
+    Axios.post(url, {
+      PID : this.state.PID,
+    }).then((response) => {
+      console.log(response.data);
+      this.setState({allow_coowner: response.data["allow_co"]})
+ });
+	}
 
 //Search 
 	handleChangeSearch(e) {  
