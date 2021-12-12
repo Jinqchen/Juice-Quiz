@@ -81,16 +81,16 @@ export default class App extends Component {
 	
 			
 			const nextQuestion = currentQuestion+1;
-			console.log('nextQuestion');
+			console.log(nextQuestion);
 			console.log('questlen');
 			this.setState({ currentQuestion: nextQuestion },()=>{;
 			if (nextQuestion < questlen) {
 				if (isCorrect) {
 					currentScore = currentScore + 1;
 					this.setState({ currentScore: currentScore });
-					this.processData()
+					
 				}
-	
+	            this.processData()
 				
 			} else {
 				if (isCorrect) {

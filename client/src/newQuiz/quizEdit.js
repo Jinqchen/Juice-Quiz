@@ -29,7 +29,7 @@ const initQuestions=   [
               limitedHour:0,
               limitedMin:0,
               PID:0,
-              QID:localStorage.getItem('QID'),
+              QID:-1,
               success:true,
               currentQuestion:0,
               questions:initQuestions , 
@@ -43,14 +43,18 @@ const initQuestions=   [
         
       
           componentDidMount = () => {
+            
          //    const url = `https://juice-quiz.herokuapp.com/api/answer/${this.state.QID}`;
         const url= `http://localhost:3001/api/answer/${this.state.QID}`;
             Axios.get(url)
         .then(res=>{return res.data})
         .then( result =>{ 
+          console.log("first fetch")
           console.log(result);
+          console.log("end of first fetch")
           this.setState({data:result},()=>{console.log(this.state.data);});
-          this.processData()       
+          this.processData()  ;
+          this.setState({QID:localStorage.getItem("QID")})     
          });
     
         
@@ -58,10 +62,12 @@ const initQuestions=   [
 
       processData = () => {
         this._isMounted = true;
+        console.log("start to process data")
         console.log(this.state.data);
         var data= this.state.data
         this.setState({ queslength: data.length/4 });
-        let index = this.state.currentQuestion*4;
+        var index = this.state.currentQuestion*4;
+        console.log()
         console.log(index);
         console.log(this.state.queslength);
         console.log("processing");
@@ -185,7 +191,9 @@ const initQuestions=   [
   
 
    discriptionContent(){
+     console.log('description')
      console.log(this.state.questions)
+     console.log("end of description")
      let description=this.state.questions[this.state.currentQuestion].questionText
      return(
       <textarea    value={description}
@@ -252,8 +260,7 @@ render(){
        
  
 
-      {  this.discriptionContent()
-              } 
+      {  this.discriptionContent()} 
  
 
  
