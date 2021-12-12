@@ -113,9 +113,9 @@ delete_quiz(quizID){
 		{UID: localStorage.getItem("UID")}  
 }).then((response) => { 
     console.log(response);
-	
-    }); 
 	this.get() 
+    }); 
+	
 }
 
 
