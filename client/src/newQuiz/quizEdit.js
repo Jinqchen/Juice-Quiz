@@ -53,8 +53,7 @@ const initQuestions=   [
           console.log(result);
           console.log("end of first fetch")
           this.setState({data:result},()=>{console.log(this.state.data);});
-          this.processData()  ;
-          this.setState({QID:localStorage.getItem("QID")})     
+          this.processData()  ;this.setState({QID:localStorage.getItem("QID")})     
          });
     
         

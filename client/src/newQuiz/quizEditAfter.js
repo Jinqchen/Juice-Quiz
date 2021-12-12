@@ -63,18 +63,18 @@ const initQuestions=   [
         // console.log(this.state.data);
         var data= this.state.data
         this.setState({ queslength: data.length/4 });
-        let index = this.state.currentQuestion*4;
+        
         // console.log(index);
         // console.log(this.state.queslength);
         // console.log("processing");
 
-        for (var i=0; i< (data.length/4) ;i++){
-        this.setState({ quesText: data[index]['Qtext'] });
+        for (var index=0; index< (data.length/4) ;index++){
+        this.setState({ quesText: data[index*4]['Qtext'] });
         // console.log(this.state.quesText)
-        var option1 = {'answerText':data[index]['Optionx'],'isCorrect':data[index]['correctness']==1};
-        var option2 = {'answerText':data[index+1]['Optionx'],'isCorrect':data[index+1]['correctness']==1};
-        var option3 = {'answerText':data[index+2]['Optionx'],'isCorrect':data[index+2]['correctness']==1};
-        var option4 = {'answerText':data[index+3]['Optionx'],'isCorrect':data[index+3]['correctness']==1};
+        var option1 = {'answerText':data[index*4]['Optionx'],'isCorrect':data[index*4]['correctness']==1};
+        var option2 = {'answerText':data[index*4+1]['Optionx'],'isCorrect':data[index*4+1]['correctness']==1};
+        var option3 = {'answerText':data[index*4+2]['Optionx'],'isCorrect':data[index*4+2]['correctness']==1};
+        var option4 = {'answerText':data[index*4+3]['Optionx'],'isCorrect':data[index*4+3]['correctness']==1};
         
         this.setState({ opt1: option1 });
         this.setState({ opt2: option2 });
@@ -84,7 +84,7 @@ const initQuestions=   [
         var q= {
           questionText: this.state.quesText,
           answerOptions: this.state.answerOptions,
-          key:i
+          key:index
       };
       this.setState({questions:[...this.state.questions,q]})
     }
@@ -114,7 +114,6 @@ const initQuestions=   [
             this.setState({ tmp });      
           
         }
-
 
         handleChangeAnswerText3(e) {    
           let tmp = [...this.state.questions];       
@@ -214,7 +213,7 @@ const initQuestions=   [
        update(){
  // const url = `https://juice-quiz.herokuapp.com/api/quizsetEdit/change`;
  const url= `http://localhost:3001/api/quizsetEdit/change`;
-    // console.log(this.state.questions);
+     console.log(this.state.questions);
  Axios.put(url,{QID:localStorage.getItem('QID'),
   question:this.state.questions
   
