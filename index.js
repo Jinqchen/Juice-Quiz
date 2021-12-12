@@ -436,7 +436,7 @@ app.post('/api/platform/coowner', (req, res) => {
 	  `select allowco from platform where PID=?`,
 	  [PID],
 	  (err, result) => {
-		  var allow =result[0]["allowco"];
+		var allow =result[0]["allowco"];
 		if (err) {
 		  res.send({ err: err });
 		}
@@ -743,42 +743,41 @@ app.post('/api/initQuiz', (req, res) => {
     const PID = req.body.PID;
 	const UID = req.body.UID;
 	     
-// 	con.query('select max(QID) FROM releases',function(err,result){
-// 		console.log(result)
-// 		var index = result[0]["max(QID)"]
-// 		console.log("index:"+index);
-// 		var id =index+1;
-// 		console.log(id);
+	con.query('select max(QID) FROM releases',function(err,result){
+		console.log(result)
+		var index = result[0]["max(QID)"]
+		console.log("index:"+index);
+		var id =index+1;
+		console.log(id);
 
 	
-// 	   con.query(
-// 		  `INSERT INTO quiz(QID,Qname,ave_rate,hot,description,reputationneed,Taketime,releasedate)
-// 		  value(?,?,0.0,0,?,?,?,now());`,
-// 	      [id,title,description,Repoint,timelimit],
-// 	      (err, result) => {
-// 	       console.log(err);  
-//             con.query(
-// 				`insert into releases(UID,QID)
-// 					VALUE(?,?)`,
-// 				[UID,id],
-// 				(err, result) => {
-// 				console.log(err); 
-// 				con.query(
-// 			   `insert into contain(PID,QID)
-// 			    VALUE(?,?)`,
-// 			    [PID,id],
-// 		        (err, result) => {
-// 		       console.log(err);  
-// 		       }
-// 	);
-// 				}
-// 			);
-// 	}
-//   );
-		
+	   con.query(
+		  `INSERT INTO quiz(QID,Qname,ave_rate,hot,description,reputationneed,Taketime,releasedate)
+		  value(?,?,0.0,0,?,?,?,now());`,
+	      [id,title,description,Repoint,timelimit],
+	      (err, result) => {
+	       console.log(err);  
+            con.query(
+				`insert into releases(UID,QID)
+					VALUE(?,?)`,
+				[UID,id],
+				(err, result) => {
+				console.log(err); 
+				con.query(
+			   `insert into contain(PID,QID)
+			    VALUE(?,?)`,
+			    [PID,id],
+		        (err, result) => {
+		       console.log(err);  
+		       }
+	           );
+			}
+		);
+	}
+  );
 			
-// 		res.send({QID:id,success:true})
-// });	
+		res.send({QID:id,success:true})
+});	
 		
   
 }); 
@@ -798,12 +797,11 @@ app.put('/api/updateQuizdes/:description',(req,res)=>{
 	 );
 })
 
-
 app.post('/api/quizsetCreate', (req, res) => {
 	const QID = req.body.QID;
 	const questions = req.body.questions;  
 	console.log(QID);
-	console.log(questions);
+	console.log(questions[0]['answerOptions']);
     for (var i=0;i<questions.length;i++){
 		con.query(
 	  `insert into quizquestion(QID,QuestionID,Qtext)
@@ -814,8 +812,8 @@ app.post('/api/quizsetCreate', (req, res) => {
 	 for (var j=0;j<options.length;j++){
      con.query(
 		`insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
-		VALUE(?,?,?,?,True);`,
-		[QID,i+1,j+1,options[j]['questionText'],options[j]['isCorrect']],
+		VALUE(?,?,?,?,?);`,
+		[QID,i+1,j+1,options[j]['answerText'],options[j]['isCorrect']],
 		(err, result) => {
 			console.log(err);
 			
@@ -824,8 +822,7 @@ app.post('/api/quizsetCreate', (req, res) => {
 	 }
 
 	}
-
-
+    res.send({success:true})
 });
 
 app.post('/api/quizsetEdit/insert', (req, res) => {
