@@ -30,25 +30,25 @@ import {Button, Card} from 'react-bootstrap';
         constructor(props) {
             super(props);
             this.state = { 
-              trigger:false, 
+                trigger:false, 
                 UID:localStorage.getItem("UID"),
 				place:"",
                 renderList:[]
             };   
-       this.get();
+           this.get();
           }
 
 	
            
 		  async get(){
 			this._isMounted = true;
-		  const url = `https://juice-quiz.herokuapp.com/api/user/subscribed/${this.state.UID}`;
-			 // const url= `http://localhost:3001/api/user/subscribed/${this.state.UID}`;
+		  // const url = `https://juice-quiz.herokuapp.com/api/user/history/${this.state.UID}`;
+			 const url= `http://localhost:3001/api/user/history/${this.state.UID}`;
 		  const res = await Axios.get(url)
 		  .then(res=>{return res.data})
 		  .then( result =>{
 			  if(this._isMounted){
-			  //console.log(result);
+			  console.log(result);
 			  this.setState({places:result},()=>{console.log(this.state.places);});
 			  this.setState({renderList:this.state.places});}          
 		   });

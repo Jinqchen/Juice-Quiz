@@ -32,6 +32,9 @@ export default class App extends Component {
 		this.start = this.start.bind(this)
     this.no = this.no.bind(this) 
 	}
+
+
+	
 	start(){
 
 		if(this.state.second>0){
@@ -61,6 +64,7 @@ export default class App extends Component {
 		  }
 		
 	  } 
+	  
 	  checkTime(){
 		   
 		  if(!this.state.showScore&&this.state.minute+this.state.second<=0){

@@ -233,9 +233,44 @@ app.get ('/api/manageQuiz/quizlist/:id',(req,res)=>{
 		if (err1) throw err1;
 		console.log(result);
 	    res.send(result);
-		con.release;
+		
 	}
   );})
+
+
+
+  app.get ('/api/user/history/:id',(req,res)=>{
+    console.log("history");
+	const UID = req.params.id;
+    
+	con.query(
+		`select q.Qname,q.ave_rate,q.hot,q.description,q.reputationneed,q.Taketime,q.releasedate,
+		h.whendo,h.rate,h.score,h.timespend from history h,quiz q where q.QID=h.QID AND UID=${UID};`, 
+		function (err1, result) {
+		if (err1) throw err1;
+		console.log(result);
+	    con.query(
+        `SELECT * FROM history WHERE UID=${UID} AND QID=0`,
+		function (err, result0) {
+			var list = result.concat(result0);
+			res.send(list)
+		}
+
+
+		)
+		
+
+
+
+	}
+  );})
+
+
+
+
+
+
+
 
   app.get ('/api/user/owned/:id',(req,res)=>{
     console.log("owned Connected!");
