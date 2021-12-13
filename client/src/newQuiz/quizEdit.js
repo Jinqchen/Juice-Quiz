@@ -327,8 +327,9 @@ render(){
        <div className="editListButton"> 
        <button  type="button"  onClick={()=>this.deleteCurrentQuestion()} >delete</button> 
        </div>
-        
-      <button type="button" className="submit" onClick={()=>this.submit()} >Create</button>  
+      <Link to='/'>
+      <button type="button" className="submit" onClick={()=>this.submit()} >Create</button> 
+      </Link> 
        </form>
        </div>
          </div>

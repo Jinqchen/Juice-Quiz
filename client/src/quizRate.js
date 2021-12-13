@@ -108,7 +108,7 @@ get(){
          }}).then((response) => { 
            console.log(response.data)
         console.log(response.data[0]['score']);
-        this.setState({score:response.data[0]['score']});
+        this.setState({score:response.data[0]['score']*100});
         this.setState({timetaken:response.data[0]['timespend']});
 
   }
