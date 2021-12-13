@@ -3,7 +3,7 @@ import { Component } from 'react';
 import Axios from "axios";
 import './answer_question.css';
 
-import {Link  } from "react-router-dom";
+import {Link} from "react-router-dom";
 export default class App extends Component {
 	
 	constructor(props) {
@@ -27,26 +27,24 @@ export default class App extends Component {
 			hour:1,
 			minute:0,
       		second:5,
-			TimeLimitFlag:true
+			TimeLimitFlag:true,
+			timeSpend:0
 		};
 		this.start = this.start.bind(this)
-    this.no = this.no.bind(this) 
+        this.no = this.no.bind(this) 
 	}
 
 
 	
 	start(){
-
-		if(this.state.second>0){
-	
-		  this.setState({
+         if(this.state.second>0){
+	       this.setState({
 			minute:this.state.minute,
 			second:this.state.second - 1
 		  }) 
 	
 		}
-	
-		else{
+	 else{
 	
 		   this.setState({
 			minute:this.state.minute - 1,
@@ -54,17 +52,16 @@ export default class App extends Component {
 		  }) 
 	
 		}
-	
+	   this.setState({timeSpend: this.state.timeSpend+1})
 	  }
 	
 	  no(){
 		  if(this.state.TimeLimitFlag){
-
-			this.id = setInterval(this.start,1000)
+          this.id = setInterval(this.start,1000)
 		  }
 		
 	  } 
-	  
+
 	  checkTime(){
 		   
 		  if(!this.state.showScore&&this.state.minute+this.state.second<=0){
@@ -163,6 +160,7 @@ export default class App extends Component {
 				Axios.post(url,{
 					UID:localStorage.getItem('UID'),
 					Score: this.state.currentScore/this.state.queslength,
+					timeSpend: this.state.timeSpend
 			  }).then((response) => { 
 				console.log(response); 
 			 })

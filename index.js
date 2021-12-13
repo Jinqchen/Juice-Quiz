@@ -71,8 +71,6 @@ app.post('/images', upload.single('image'), async (req, res) => {
 
 
 
-
-
 //Answering
 app.get('/api/answer/:id',(req,res)=>{
       console.log("Connected!");
@@ -82,13 +80,13 @@ app.get('/api/answer/:id',(req,res)=>{
 		where q.QID=${QID} and q.QID=qo.QID AND q.QuestionID=qo.QuestionID`,
 		function (err1, result) {
 			if (err1) throw err1;
-			res.send(result);
-			
+			res.send(result);			
 		}
 	  )
 	 
 	}
   );
+
   app.get('/api/getusername/:id',(req,res)=>{
 	console.log("Connected!");
 	const UID = req.params.id;
@@ -255,13 +253,7 @@ app.get ('/api/manageQuiz/quizlist/:id',(req,res)=>{
 			var list = result.concat(result0);
 			res.send(list)
 		}
-
-
 		)
-		
-
-
-
 	}
   );})
 
@@ -346,7 +338,6 @@ app.get ('/api/manageQuiz/quizlist/:id',(req,res)=>{
 		where q.QID=c.QID and c.PID=`+PID+` and q.Qname  LIKE '%`+name+`%'`, 
 		function (err1, result) {
 		if (err1) throw err1;
-		
 	    res.send(result);}
   );})
 
@@ -1053,8 +1044,7 @@ app.put('/api/answer/rating', (req, res) => {
 	const rate = req.body.rating;  
 	console.log(QID);
 	console.log(UID);
-	console.log(rate);
-    
+	console.log(rate);   
    con.query(
 	   `SELECT max(whendo) FROM history where UID=${UID} AND QID=${QID};`,
 	   (err, result) => {
@@ -1085,33 +1075,41 @@ app.put('/api/answer/rating', (req, res) => {
 					)
 				}
 			)
-
-
-
-
-
-
-
-
 			}
 		 );
-
-	   }
-
-
-
-	   
+	   }	   
 	   );
-
-       
-
-
-
-
-
-
 })
 
+
+app.get('/api/answer/result/:id', (req, res) => {
+	const QID = req.params.id;
+	const UID = req.query.UID;
+	console.log("start rating ")
+	console.log(QID);
+	console.log(UID);   
+   con.query(
+	   `SELECT max(whendo) FROM history where UID=${UID} AND QID=${QID};`,
+	   (err, result) => {
+		console.log(result); 
+		var whendo=result[0]['max(whendo)'];
+	    whendo =  new Date(Date.UTC(whendo.getFullYear(), 
+		                            whendo.getMonth(),
+		                            whendo.getDate(),  
+									whendo.getHours(), 
+									whendo.getMinutes(), 
+									whendo.getSeconds())).toISOString().slice(0, 19).replace('T', ' ');
+		console.log(whendo)
+		con.query(
+			`select score,timespend from history  where UID=${UID} AND whendo='${whendo}';`,
+			(err, result1) => {
+			 console.log(result1); 
+			 res.send(result1)
+			}
+		 );
+	   }	   
+	   );
+})
 
 
 
@@ -1119,6 +1117,7 @@ app.post('/api/answer/updateHIS/:id', (req, res) => {
 	const QID = req.params.id;
 	const UID= req.body.UID;  
 	const score = req.body.Score;
+	const timespend = req.body.timeSpend;
 	console.log("update history")
 	console.log(QID);
 	console.log(UID);
@@ -1127,7 +1126,7 @@ app.post('/api/answer/updateHIS/:id', (req, res) => {
     con.query(
 	   `insert into history(UID,QID,whendo,rate,score,timespend)
 	   value(?,?,now(),?,?,?);`,
-	   [UID,QID,null,score,10],
+	   [UID,QID,null,score,timespend],
 	   (err, result) => {
 		console.log(result); 		
 	   }
@@ -1148,10 +1147,6 @@ app.post('/api/answer/updateHIS/:id', (req, res) => {
 		 
 		}
 	 );
- 
-
-
-
 })
 
 

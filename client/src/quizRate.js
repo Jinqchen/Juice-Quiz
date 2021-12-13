@@ -9,6 +9,7 @@ import {FaStar} from "react-icons/fa"
 
 import {Button, Card} from 'react-bootstrap';
 
+
 const initQuestions=   [
   {
       questionText: 'What is the capital of France?',
@@ -35,6 +36,7 @@ const initQuestions=   [
 
 
 ]
+
     export default class quizEdit extends Component {
 
  
@@ -47,6 +49,7 @@ const initQuestions=   [
               timeLimited:true,
               limitedHour:0,
               limitedMin:0,
+              timetaken:0,
               PID:0,
               score:90,
               success:true,
@@ -56,7 +59,7 @@ const initQuestions=   [
               rating:null,
               hover:null
             };    
-           
+           this.get()
           }
         
       
@@ -74,6 +77,9 @@ const initQuestions=   [
  </textarea>
      )
    }
+
+
+
    setRate(rate){
        console.log(rate)
        this.setState({rating:rate},()=>{
@@ -87,15 +93,40 @@ const initQuestions=   [
  console.log(response); 
  }
  )
-
-
-
        })
-  
-
-
-
    }
+
+
+
+get(){
+  console.log("result start ")
+     //const url = `https://juice-quiz.herokuapp.com/api/answer/result`;
+		  const url= `http://localhost:3001/api/answer/result/${localStorage.getItem('QID')}`;
+       Axios.get(url,{
+         params:{
+            UID: localStorage.getItem('UID')  
+         }}).then((response) => { 
+           console.log(response.data)
+        console.log(response.data[0]['score']);
+        this.setState({score:response.data[0]['score']});
+        this.setState({timetaken:response.data[0]['timespend']});
+
+  }
+ )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
    starBoard(){ 
        return(<div className="starBoard">
  
