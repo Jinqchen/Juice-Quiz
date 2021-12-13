@@ -53,49 +53,61 @@ import {Button, Card} from 'react-bootstrap';
 			  this.setState({renderList:this.state.places});}          
 		   });
 		}
+		store=(place)=>{
+			localStorage.setItem('QID',place.QID);
+			
+		}
+		redo(){
 
-unsubscribe=(PID)=>{
-		 const url = `https://juice-quiz.herokuapp.com/api/platform/delSub/${PID}`;
-//	const url= `http://localhost:3001/api/platform/delSub/${PID}`;
-	     
-	Axios.delete(url, { data:{UID: localStorage.getItem("UID")}}).then((response) => { 
-	console.log(response); 
-   
-	}); 
- this.get();
+		}
 
-
-
-
-
-
-
-
-
-	}
-
+ 
    
   
 //在这里保证点击每个图片可以转到对应的platform
     
 render(){ 
         
-	const menu = places.map((place) => {
+	const menu = this.state.renderList.map((place) => {
 		return(
 			  
 <div style={{ marginLeft:"10%", paddingTop : '18px',width : '80%' }}  >   
-				<Card className="quizHistoryList" style={{}}  > 
-		<Card.Body>
-			<Card.Title>{place.Pname}</Card.Title>
+{	place.QID!=0&&<Card className="quizHistoryList" style={{}}  > 
+		<Card.Body style={{color:'grey'}}>
+			<Card.Title>{place.Qname}</Card.Title>
 			<Card.Text  style={{fontSize:"24px"}}>
-			Quiz Description score:xx reputation earned:xx 
-            <Button classname="redoBtn"style={{background:"red", border:"none",marginLeft:"50%"}} variant="primary" onClick={()=>this.unsubscribe(place.PID)}>Redo</Button> 
-
-			</Card.Text >   
+			{place.description} 
+			<h4>Score: {place.score}  </h4> 
+			<h4>Finished at: {place.whendo}</h4> 
+			<h4>Reputation earned: {place.reputationneed}</h4>
+			{/* <Link className='SinglePlatformtitle' style={{textDecoration: "none"}} to={"/platform/"+place.PID+"/answer/"+place.QID } onClick={()=>this.store(place)}>    */}
+            <Button classname="redoBtn"style={{background:"red", border:"none",marginLeft:"90%"}} variant="primary" 
+		   onClick={()=>this.redo(place.PID)}>Redo</Button>  
+				{/* </Link>  */}
+ 		</Card.Text >   
          
 		</Card.Body>
         
-		</Card>  
+		</Card> 
+		||
+
+		<Card className="quizHistoryList" style={{}}  > 
+		<Card.Body style={{color:'grey'}}>
+			<Card.Title>Deleted quiz</Card.Title>
+			<Card.Text  style={{fontSize:"24px"}}>
+				
+			<h4>Score: {place.score}  </h4>  
+			<h4>Finished at: {place.whendo}</h4>  
+		 
+ 		</Card.Text >   
+         
+		</Card.Body>
+        
+		</Card> 
+		}
+			
+
+
 	</div>
 		   
 		);
