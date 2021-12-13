@@ -1079,3 +1079,11 @@ SELECT AVG(rate) FROM history WHERE QID=13 group by QID;
 
 -- SELECT * FROM history WHERE UID=3
 delete from history where UID=3 
+
+
+user history
+
+select q.Qname,q.ave_rate,q.hot,q.description,q.reputationneed,q.Taketime,q.releasedate,
+h.whendo,h.rate,h.score,h.timespend from history h,quiz q where q.QID=h.QID AND UID=3;
+
+SELECT * FROM history WHERE UID=3 AND QID=0
