@@ -37,6 +37,7 @@ const initQuestions=   [
               option2:"",
               option3:"",
               option4:"",
+              validFlag:false
             };    
            
           }
@@ -74,10 +75,10 @@ const initQuestions=   [
         for (var i=0; i< (data.length/4) ;i++){
         this.setState({ quesText: data[index]['Qtext'] });
         console.log(this.state.quesText)
-        var option1 = {'answerText':data[index]['Optionx'],'isCorrect':data[index]['correctness']==1};
-        var option2 = {'answerText':data[index+1]['Optionx'],'isCorrect':data[index+1]['correctness']==1};
-        var option3 = {'answerText':data[index+2]['Optionx'],'isCorrect':data[index+2]['correctness']==1};
-        var option4 = {'answerText':data[index+3]['Optionx'],'isCorrect':data[index+3]['correctness']==1};
+        var option1 = {'answerText':data[index]['Optionx'],'isCorrect':data[index]['correctness']===1};
+        var option2 = {'answerText':data[index+1]['Optionx'],'isCorrect':data[index+1]['correctness']===1};
+        var option3 = {'answerText':data[index+2]['Optionx'],'isCorrect':data[index+2]['correctness']===1};
+        var option4 = {'answerText':data[index+3]['Optionx'],'isCorrect':data[index+3]['correctness']===1};
         
         this.setState({ opt1: option1 });
         this.setState({ opt2: option2 });
@@ -98,7 +99,34 @@ const initQuestions=   [
     
 
 
-
+      checkBoard(){ 
+          
+        let tmp=false
+       
+         this.state.questions.forEach(element => {
+           console.log( element.questionText +", "+
+           element.answerOptions[0].answerText +", "+
+           element.answerOptions[1].answerText+", "+
+           element.answerOptions[2].answerText +", "+
+           element.answerOptions[3].answerText)
+           console.log( element.questionText===""||
+           element.answerOptions[0].answerText===""||
+           element.answerOptions[1].answerText===""||
+           element.answerOptions[2].answerText===""||
+           element.answerOptions[3].answerText==="")
+         tmp= tmp||element.questionText===""||
+          element.answerOptions[0].answerText===""||
+          element.answerOptions[1].answerText===""||
+          element.answerOptions[2].answerText===""||
+          element.answerOptions[3].answerText===""
+          if( tmp
+         ) {  
+          // alert("empty field in questions!")  
+         } 
+        });
+        console.log("tmp: "+tmp)
+        return tmp
+      }
 
 
 
@@ -176,13 +204,13 @@ const initQuestions=   [
 
 
 
-      switchQuestion(index){  
+      switchQuestion(index){   
+    
        this.setState({currentQuestion:index})
-        console.log(this.state.questions[this.state.currentQuestion].key)
-        
+        console.log(this.state.questions[this.state.currentQuestion].key)}
+       
         // console.log(this.state.questions[this.state.currentQuestion].questionText+"index1")
         
-      }
        
         
     
@@ -190,9 +218,7 @@ const initQuestions=   [
   
 
    discriptionContent(){
-     console.log('description')
-     console.log(this.state.questions)
-     console.log("end of description")
+     
      let description=this.state.questions[this.state.currentQuestion].questionText
      return(
       <textarea    value={description}
@@ -204,12 +230,12 @@ const initQuestions=   [
 
    addNewQuestion(){
   this.setState({ questions: [...this.state.questions, {
-    questionText: ' ',
+    questionText: '',
     answerOptions: [
-        { answerText: ' ', isCorrect: true },
-        { answerText: ' ', isCorrect: false },
-        { answerText: ' ', isCorrect: false },
-        { answerText: ' ', isCorrect: false },
+        { answerText: '', isCorrect: true },
+        { answerText: '', isCorrect: false },
+        { answerText: '', isCorrect: false },
+        { answerText: '', isCorrect: false },
     ],
     key:this.state.questions.length
 }] })  
@@ -218,7 +244,8 @@ const initQuestions=   [
    }
 
    deleteCurrentQuestion(){ 
-     let tmp=[]; 
+     if(this.state.questions.length>1)
+   {  let tmp=[]; 
      for (let i = 0; i <  this.state.questions.length; i++) {
 
       if(this.state.questions[i].key!=this.state.currentQuestion){ 
@@ -231,7 +258,7 @@ const initQuestions=   [
     console.log(tmp[i].key)
     } 
      this.setState({ questions:tmp})  
-    this.setState({ currentQuestion:0})
+    this.setState({ currentQuestion:0})}
    }
 
 render(){  
@@ -327,9 +354,9 @@ render(){
        <div className="editListButton"> 
        <button  type="button"  onClick={()=>this.deleteCurrentQuestion()} >delete</button> 
        </div>
-      <Link to='/'>
-      <button type="button" className="submit" onClick={()=>this.submit()} >Create</button> 
-      </Link> 
+     {!this.checkBoard()&&  <Link to='/'>  
+      <button type="button" className="QEAsubmit" onClick={()=>this.submit()} >Create</button> 
+        </Link> }  
        </form>
        </div>
          </div>

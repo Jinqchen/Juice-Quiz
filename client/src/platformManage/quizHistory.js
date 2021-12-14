@@ -81,8 +81,13 @@ render(){
 			<h4>Finished at: {place.whendo}</h4> 
 			<h4>Reputation earned: {place.reputationneed}</h4>
 			{/* <Link className='SinglePlatformtitle' style={{textDecoration: "none"}} to={"/platform/"+place.PID+"/answer/"+place.QID } onClick={()=>this.store(place)}>    */}
-            <Button classname="redoBtn"style={{background:"red", border:"none",marginLeft:"90%"}} variant="primary" 
+           
+		  
+
+<Link  style={{textDecoration: "none"}} to={"/platform/"+this.state.PID+"/answer/"+place.QID } onClick={()=>this.store(place)}>   
+<Button classname="redoBtn"style={{background:"red", border:"none",marginLeft:"90%"}} variant="primary" 
 		   onClick={()=>this.redo(place.PID)}>Redo</Button>  
+				</Link> 
 				{/* </Link>  */}
  		</Card.Text >   
          
@@ -96,7 +101,7 @@ render(){
 			<Card.Title>Deleted quiz</Card.Title>
 			<Card.Text  style={{fontSize:"24px"}}>
 				
-			<h4>Score: {place.score}  </h4>  
+			<h4>Score: { parseInt(place.score*100) }  </h4>  
 			<h4>Finished at: {place.whendo}</h4>  
 		 
  		</Card.Text >   
