@@ -54,8 +54,6 @@ var con = mysql.createPool({
 
 
 
-
-  
 app.post('/images', upload.single('image'), async (req, res) => {
 	const file = req.file
 	console.log("test file")
@@ -65,10 +63,8 @@ app.post('/images', upload.single('image'), async (req, res) => {
 	const result = await uploadFile(file)
 	await unlinkFile(file.path)
 	console.log(result)
-	const description = req.body.description
 	res.send({imagePath: `/images/${result.Key}`})
   })
-
 
 
 
@@ -663,8 +659,8 @@ app.post('/api/createplatform', (req, res) => {
 	const Pname = req.body.Pname;
 	const tag = req.body.tag;
     const replimit  = req.body.replimit;
-	con.query('select COUNT(*)from platform',function(err,result){
-		var index = result[0]["COUNT(*)"]
+	con.query('SELECT MAX(PID) FROM platform',function(err,result){
+		var index = result[0]["MAX(PID)"]
 		console.log("index:"+index);
 		var id =index+1;
 		console.log(id);
@@ -725,11 +721,6 @@ app.post('/api/CreatePlatform/doown', (req, res) => {
 	
 	
 	)
-
-
-
-	
-
   })
 
 
@@ -753,7 +744,6 @@ app.put('/api/EditPlatform/name/:name',(req,res)=>{
 		where PID=?;`,
 		[PID],
 		(err, result) => {
-			console.log(result);
 		  if (err) {
 			res.send({ err: err });
 		  }

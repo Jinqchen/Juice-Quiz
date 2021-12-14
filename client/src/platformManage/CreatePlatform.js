@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { Component } from 'react';  
 import { Link } from 'react-router-dom';
@@ -23,6 +21,7 @@ import {Button, Card} from 'react-bootstrap';
               requireReputation:0,
               repchange:false,
               EPID:localStorage.getItem('EditPID'),
+              PID:'',
               success:false,
               file:'',
               renderFlag:false
@@ -87,7 +86,7 @@ postImage(image, name) {
   formData.append("image", image)
   formData.append("name", name);
   // const url=`https://juice-quiz.herokuapp.com/images/${this.state.PID}`;
- const url=`http://localhost:3001/images/${this.state.PID}`;
+  const url=`http://localhost:3001/images/${this.state.PID}`;
   const result = Axios.post(url, formData, { headers: {'Content-Type': 'multipart/form-data'}})
   return result.data
 }
@@ -98,7 +97,7 @@ uploadIcon(event){
 }
 
 submit(e){      
-   this.uploadIcon(e)
+ 
   if(this.state.name==''||this.state.option==''||this.state.requireReputation<=0){
     alert("!")
   }else{
@@ -113,17 +112,65 @@ submit(e){
    .then((response) => { 
      this.setState({PID:response['PID']});
      this.setState({success:response['success']});
+     console.log(response['success']);
+//     if (response['success']){
+//        this.subscribe();
+//        this.inital_reputation();
+//        this.own();
+      
+//        alert("Platform Created!") 
+//  }
+
+      this.uploadIcon(e);
    }); 
- if (this.state.success){
- 
-  this.own();
-  this.inital_reputation();
-  alert("Platform Created!") 
- }
+        // this.subscribe();
+        // this.inital_reputation();
+        // this.own();
+       
   
   }
  
      }
+
+     own(){
+     // const url = `https://juice-quiz.herokuapp.com/api/CreatePlatform/doown`;
+     const url= `http://localhost:3001/api/CreatePlatform/doown`;      
+     Axios.post(url, { 
+     PID : this.state.PID,
+     UID: localStorage.getItem("UID"),
+     }).then((response) => { 
+     console.log(response); 
+     
+     }); 
+   }
+
+   inital_reputation(){
+    // const url = 'https://juice-quiz.herokuapp.com/api/CreatePlatform/initalR';
+     const url= 'http://localhost:3001/api/CreatePlatform/initalR';  
+      Axios.post(url, { 
+      PID : this.state.PID,
+      UID: localStorage.getItem("UID"),
+      }).then((response) => { 
+      console.log(response); 
+      
+      }); 
+
+
+  }
+
+
+  subscribe(){
+    // const url = 'https://juice-quiz.herokuapp.com/api/platform/dosubscribe';
+      const url= 'http://localhost:3001/api/platform/dosubscribe';
+        
+       Axios.post(url, { 
+       PID : this.state.PID,
+       UID: localStorage.getItem("UID"),
+       }).then((response) => { 
+       console.log(response); 
+       }); 
+   }
+
     
 render(){ 
        // this.setState({oneOnwer:this.state.renderFlag})
