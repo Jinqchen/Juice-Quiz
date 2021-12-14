@@ -1109,3 +1109,9 @@ delete from REPUTATION where UID=13 AND PID=4;
 select * from subscribe;
 
 
+select q.Qname,q.ave_rate,q.hot,q.description,q.reputationneed,q.Taketime,q.releasedate,
+        h.whendo,h.rate,h.score,h.timespend
+        from history h,quiz q where q.QID=h.QID AND UID=3 ;
+select q.Qname,q.ave_rate,q.hot,q.description,q.reputationneed,q.Taketime,q.releasedate,
+        h.whendo,h.rate,h.score,h.timespend,c.PID
+        from history h,quiz q,contain c where q.QID=h.QID AND UID=3 AND q.QID=C.QID
