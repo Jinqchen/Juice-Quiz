@@ -1087,3 +1087,25 @@ select q.Qname,q.ave_rate,q.hot,q.description,q.reputationneed,q.Taketime,q.rele
 h.whendo,h.rate,h.score,h.timespend from history h,quiz q where q.QID=h.QID AND UID=3;
 
 SELECT * FROM history WHERE UID=3 AND QID=0
+
+
+select s.PID,r.Rpoint,ps.Pcover,p.Pname
+        from subscribe s, reputation r,platform p,platformstyle ps
+        where  r.UID=s.UID AND s.UID=3 and p.PID= s.PID AND p.PID= r.PID AND ps.PID=p.PID 
+        ORDER BY r.Rpoint desc;
+        
+delete from reputation where UID=3 AND (PID!=11 OR PID!=7 OR PID!=14 OR PID!=12)
+
+-- insert into subscribe(PID,UID)
+-- value(14,2);
+-- delete from subscribe where UID=4 AND PID=5;
+-- delete from REPUTATION where UID=4 AND PID=3;
+-- delete from subscribe where UID=5 AND PID=4;
+-- delete from REPUTATION where UID=5 AND PID=4;
+-- delete from subscribe where UID=8 AND PID=5;
+-- delete from REPUTATION where UID=10 AND PID=3;
+delete from REPUTATION where UID=13 AND PID=4;
+
+select * from subscribe;
+
+

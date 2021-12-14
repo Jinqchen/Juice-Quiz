@@ -24,6 +24,7 @@ export default class quizManageMent extends Component {
 			searchContent:"",
 			rank:'',
 			quiznum:0,
+			constList:[]
 		};
         
 	}
@@ -73,6 +74,9 @@ export default class quizManageMent extends Component {
           console.log(this.state.places)
           this.setState({renderList:this.state.places});}          
        });}
+
+	   
+	this.setState({constList:this.state.renderList})
     };
 
 
@@ -81,24 +85,17 @@ export default class quizManageMent extends Component {
 		this.setState({searchContent: e.target.value});   
 	} ;
 
-	async search(){
-		if (this.state.searchContent===""){
-			this.get();
-		}else{
-			const url= `https://juice-quiz.herokuapp.com/api/quiz/${this.state.searchContent}`;
-		//const url= `http://localhost:3001/api/quiz/${this.state.searchContent}`;
-		  const res = await Axios.get(url,{
-			params: {
-			  PID: this.state.PID			  
+	 search(){
+		this.setState({renderList:this.state.constList})
+		console.log(this.state.constList)
+	let tmp=[];
+		this.state.constList.forEach(element => {
+			if(element.Qname.toUpperCase().includes(this.state.searchContent.toUpperCase())){
+				tmp=[...tmp,element]
 			}
-		  })
-		  .then(res=>{return res.data})
-		  .then( result =>{
-			  console.log(result);
-			  this.setState({places:result},()=>{console.log(this.state.places);});
-			  this.setState({renderList:this.state.places});        
-		   });
-		}
+		});
+
+		this.setState({renderList:tmp})
 	};
 
 store=(place)=>{
@@ -135,11 +132,11 @@ delete_quiz(quizID){
 		const menu = this.state.renderList.map((place) => {
 			return( 
 				<div style={{paddingLeft : '18px' ,paddingTop : '18px' }}  >   
-				<Card className="managePlatFormSingleItem" style={{width : '18rem' }}  >
-		<Card.Img  src="./demo-image.jpg" />
+				<Card className="managePlatFormSingleItem"    >
+ 
 		<Card.Body>
 			<Card.Title>{place.Qname}</Card.Title>
-			<Card.Text  style={{fontSize:"12px",textOverflow:"ellipsis", height:"28px",whiteSpace:"nowrap",overflow:"hidden"}}>
+			<Card.Text  style={{fontSize:"12px",textOverflow:"ellipsis", height:"100px",whiteSpace:"nowrap",overflow:"hidden"}}>
 			{place.description}
 			</Card.Text >  
 			<div className="quizMngBtn"  style={{marginLeft:"-5%"}}>

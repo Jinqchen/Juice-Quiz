@@ -16,7 +16,7 @@ import {Button, Card} from 'react-bootstrap';
             this.state = { 
               trigger:false,   
               name:"",
-              tag:"",
+              tag:"music",
               namechange:false,
               tagchange:false,
               oneOnwer:false,
@@ -179,7 +179,7 @@ render(){
                                     {
     !this.state.oneOnwer&& <div className="CPuserInput">    
                                     <div className='EPeditInput' style={{ color:'white',marginLeft:'30px'}}>  reputation need
-              <input style={{width:"50%"}} onChange={this.handleReputation.bind(this)}></input>
+              <input type="number" value={this.state.requireReputation}  style={{width:"50%"}} onChange={this.handleReputation.bind(this)}></input>
     
             </div>
 
@@ -194,7 +194,13 @@ render(){
                 </div>
 
                 <div className="userInput">     
+
+               
+                <Link to='/' > 
+        
                 <Button className='EPsubmit' style={{background:'white',color:"#F78223",border:"none"}} onClick={(e)=>this.submit(e)}>Create</Button>
+                        </Link>
+               
                 </div>
               
                   </div>
