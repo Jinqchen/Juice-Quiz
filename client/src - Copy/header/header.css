@@ -1,0 +1,93 @@
+.navbar {
+  overflow: hidden;
+  background-color: #EEEEEE;
+  position: sticky; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */ 
+  z-index: 101;
+}
+
+/* Links inside the navbar */
+.navbar a {
+  float: left;
+  display: flex;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change background on mouse-over */
+.navbar a:hover {
+  background: #ddd;
+  color: black;
+}
+
+/* Main content */
+.main {
+
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  align-self: center; 
+  z-index: 100;
+}
+.HeaderAccount {
+  float: right;
+  display: block;
+  color: black;
+  text-align: center; 
+  text-decoration: #F78223;
+  width: auto;
+  height: 100%;
+ 
+  font-size: 16px;
+  color: #F78223;
+  background-color:#EEEEEE; 
+  align-items: center;
+  border: none;
+  cursor: pointer;
+}
+.board{
+  position: relative;
+  top:100px;
+  width: auto; 
+  padding-top: 50px;
+  z-index: -1;
+}
+.accountIcon{ 
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: 40px;
+  height: 40px; 
+
+}
+.juiceIcon{ 
+  position: relative;
+  display: block;
+  width: 50%;
+  height: 50%;
+  cursor:default
+}
+.iconTab{
+  position:absolute; 
+  display: block;
+  z-index:900;
+}
+
+.create{
+  position: relative;
+  float: right;
+  margin-right:50px; 
+  height: auto;
+  background-color:#e49132; 
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center; 
+  display: inline-block;
+  font-size: 16px;
+  height: 70%;
+  width:15%
+}

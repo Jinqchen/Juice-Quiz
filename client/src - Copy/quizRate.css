@@ -1,0 +1,48 @@
+.rank{
+    display: relative;
+    padding-left: 35%;
+    margin-top: 10%; 
+    width: 200px;
+}
+.rateBoard{ 
+    display: block;
+margin: 0 auto;
+margin-top: 100px; 
+
+} 
+ * {
+    font-family: "Verdana", cursive, sans-serif;
+   color: none;
+  }
+label{
+    color: white;
+}
+.starBoard{
+    display: relative;
+margin-left: 35%;}
+ .howYouLike{
+    margin-left: 15%;
+    display: block; 
+   font-size: 28px;
+ }
+ .rateContent{
+width: 100%;
+text-align:left;
+font-size: 42px;
+ }
+ .rateConfirm{
+     display: block;
+     margin:0 auto;
+     width: 200px;
+     height: 60px;
+     margin-top: 50px; 
+     margin-bottom: 50px;
+ }
+ .rateBoardlayOut{
+    display: block;
+    position: relative;  
+    background-color: rgb(180, 177, 177); 
+    margin:0 auto; 
+    width: 90%;
+    border-radius: 25px;
+ }

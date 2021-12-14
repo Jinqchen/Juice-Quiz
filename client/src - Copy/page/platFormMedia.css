@@ -1,0 +1,58 @@
+#unit{ 
+}  
+
+
+.PLFcontainer{  
+	background-color: #EEEEEE;  
+	padding-top: 40px;
+	display: flex;
+	margin: 0 auto; 
+	position: relative; 
+	padding-left: 10%;
+}
+.media{ 
+	display: flex;
+	justify-content:start;
+	flex-flow: wrap;
+	
+
+
+}
+
+
+
+img{  
+	width: 300px;
+	height: 200px; 
+	
+
+}
+.tag{ 
+	 
+	color: #0099CC;  
+      background: transparent;  
+      border: 2px solid #EEEEEE;  
+      border-radius: 6px;  
+      border: none;
+      color: white;
+      padding: 16px 32px;
+      text-align: center;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px; 
+      transition-duration: 0.4s;
+      cursor: pointer;
+      text-decoration: none;
+      text-transform: uppercase;
+	  z-index: 100;
+	
+}
+.PFLplatFormName{ 
+	color: rgb(245, 138, 39);   
+	padding-bottom: 20px;
+}
+.PFLPlatFormlist{  
+	display: inline-block; 
+}.signlePFLlink{
+    padding-right: 30px
+}

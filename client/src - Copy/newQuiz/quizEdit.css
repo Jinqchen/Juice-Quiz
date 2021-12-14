@@ -1,0 +1,49 @@
+/* .editQuizeditBoard{
+    display: block;
+    position: relative;  
+    background-color: grey; 
+    margin:0 auto; 
+    width: 90%;
+}
+.editContent{
+    display: block;
+    width: 60%;
+    background-color: grey; 
+    margin:0 auto; 
+    
+}
+.questionDiscription{
+    size:130; 
+    color: black;
+    font-size: 28px;  
+    width: 100%;
+}
+.editButton  { 
+    background-color: transparent;
+    margin:0 auto;   
+    margin-left: 20px;
+    border: none;
+    cursor:pointer;
+} 
+.editListButton button{ 
+    background-color: orange;
+}
+.editQuizOption{
+    margin-left: 0;
+    width: 80%;
+}
+.editQuestionList{
+    width: 200px;
+    height: 200px;
+    background-color: orange;
+    position: absolute;
+    top:20%;
+    opacity: 0.7;
+    margin-left: 20px;
+}
+.editQuestionList button{
+   display: inline-block;
+   direction: ltr;
+   background-color: grey;
+   margin-top: 20px;
+} */

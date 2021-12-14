@@ -1,0 +1,44 @@
+.menu{ 
+    display: block;
+    position: absolute; 
+    left: 0%;
+    height: 100%;
+    width: 100%;
+    background-color: #EEEEEE; 
+    text-align: center;
+ }
+ .item{
+     position: relative;
+     display: block; 
+     
+    padding-left: 4%;
+
+ }
+ .tagFilter{
+     width: 100%; 
+     background-color: #918f8f;  
+      
+ }
+ .search{
+     margin-top: 30px;
+     color: black; 
+     position: relative;  
+ 
+ }
+ .searchContent{   
+ }
+ .searchButton{
+     margin-left: -1px;
+     color: #F78223;
+     background-color: #EEEEEE;  
+     text-align: center;
+     text-decoration: #ffffff;   
+     color: #ffffff;
+     background-color:#F78223;
+     align-items: center;
+     border: none;
+     cursor: pointer;
+     width: 100px;
+     border-radius: 5px;
+     height: 49.8px;
+ }

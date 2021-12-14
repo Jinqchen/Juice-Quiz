@@ -1,0 +1,95 @@
+.signUpBoard{
+
+  background-color: #fc7e18;;
+  width: 40%;
+  height: 600px;
+  display: block; 
+  position: absolute;   
+  left:30%;
+  top:80px;
+  border-style: solid;
+  border-radius: 25px;
+  border-color:#fc7e18;;
+}
+.SIGNUP{
+    font-size: 38px;  
+    padding-left: 20px;
+ } 
+ input{  
+  background-color: white;
+  display: block;
+  margin: 0 auto;
+  outline-style: none ;
+  border: 1px solid #ccc; 
+  border-radius: 3px;
+  padding: 13px 14px;
+  width: 620px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: "Microsoft soft"; 
+  color: black;
+  
+}
+ .userInput input{  
+    background-color: white;
+    display: flex; 
+    outline-style: none ;
+    border: 1px solid #ccc; 
+    border-radius: 3px;
+    padding: 13px 14px;
+    width: 95%;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: "Microsoft soft"; 
+    color: black;  
+    
+}
+.userInput{
+    top:100px;
+    position: block;   
+     padding: 10px;
+     
+    margin: 0 auto;
+}
+.cancel{ 
+  position: relative;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 12px,16px;
+  text-decoration: white;
+  width: 30px;
+  height:  30px;
+  border-radius: 25px;
+  border-color:#F78223;;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: #918f8f;; 
+  align-items: center;
+  border: none;
+  cursor: pointer; 
+  float: right;
+  left:10px;
+  bottom: 10px;
+  
+}
+.SignIn{ 
+  position: relative;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 12px,16px;
+  text-decoration: white;
+  width: 200px;
+  height: 50px;
+  margin: 0 auto;
+  font-size: 16px;
+  color: #ffffff;
+  background-color:#918f8f;; 
+  align-items: center;
+  border: none;
+  cursor: pointer;  
+  border-radius: 15px;
+  border-color: #918f8f;; 
+  top:  500px;
+}

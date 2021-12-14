@@ -89,8 +89,8 @@ export default class singlePlatForm extends Component {
 
 	//申请和订阅在这里
 	subscribe(){
-   const url = 'https://juice-quiz.herokuapp.com/api/platform/dosubscribe';
-	  //  const url= 'http://localhost:3001/api/platform/dosubscribe';
+    const url = 'https://juice-quiz.herokuapp.com/api/platform/dosubscribe';
+	 //  const url= 'http://localhost:3001/api/platform/dosubscribe';
 	     
 		  Axios.post(url, { 
 			PID : this.state.PID,
@@ -131,8 +131,7 @@ op_unsub(){
 	// const url= `http://localhost:3001/api/platform/delSub/${this.state.PID}`;
 	     
 		  Axios.delete(url, { data:{UID: localStorage.getItem("UID")}}).then((response) => { 
-		  console.log(response); 
-		 
+		  console.log(response);	 
 		  }); 
 	 this.setState({subscribed:false})
 }
@@ -217,10 +216,10 @@ op_delrep(){
 		  console.log(this.state.replimit)
 		  });
    };
-
+   
    get_Urep(){
-	    const url = `https://juice-quiz.herokuapp.com/api/platform/userRep/${localStorage.getItem("UID")}`;
-	 // const url= `http://localhost:3001/api/platform/userRep/${localStorage.getItem("UID")}`;
+	     const url = `https://juice-quiz.herokuapp.com/api/platform/userRep/${localStorage.getItem("UID")}`;
+	// const url= `http://localhost:3001/api/platform/userRep/${localStorage.getItem("UID")}`;
 	    Axios.get(url,{
 			params:{
 			PID : this.state.PID,}

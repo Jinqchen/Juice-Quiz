@@ -1,0 +1,77 @@
+
+ 
+.EPeditBoard{ 
+    
+    display: block;
+    position: relative; 
+    margin-top: 200px; 
+    background-color: grey; 
+    margin:0 auto;
+    height: 100%; 
+    border-radius: 25px;
+}
+.EPeditInput{ 
+  margin-left: 20px;
+  white-space: nowrap;
+}
+.editForm{
+    padding-bottom: 50px; 
+    font-size: 28px;
+}
+form {
+    margin: 0 auto; 
+    padding: 1em; 
+  }
+
+  
+  form li  {
+    margin-top: 1em;  
+
+  }
+  
+  label { 
+    width: 90px;
+    text-align: right;
+  }
+  
+  input  {
+    font: 1em sans-serif;
+   
+    display: inline-block;
+    box-sizing: border-box;
+   
+    margin-left: 20px;
+  }
+  
+  input:focus,
+  textarea:focus {
+    border-color: #000;
+  }
+  
+ 
+  
+  .button {
+ 
+    padding-left: 90px; }
+  
+  button {
+  
+    margin-left: .5em;
+  }
+  .repNeed{
+      width: 10%
+  }
+  select{
+    color: black;
+  }
+  option{
+    color: black;
+  }
+  .EPsubmit{ 
+    width: 160px;
+    height: 80px;
+    background-color:#F78223;
+    display: block;
+    margin: 0 auto; 
+    bottom: 40px;
+  } 

@@ -1,0 +1,46 @@
+
+.initQuizeditBoard{
+    display: block;
+    position: relative;  
+    background-color: #fc7e18;;
+    margin:0 auto;  
+    width: 60%; 
+    margin-top: 5%;
+    border-style: solid;
+  border-radius: 25px;
+  border-color:#fc7e18;;
+
+}
+.initeditInput{
+    color:white;
+    margin-top: 20px;
+
+
+}
+.timeInit{
+    width: 20%;
+}
+.quizInitIcon{  
+   margin-top: 5%;
+    position: relative;
+    left: 45%;  
+    height: 60px; 
+    width: 120px;
+}
+.initQuizTitle{  
+    width: 100%;
+    margin-left: 0;
+}
+.quizDiscription{ 
+    size:130; 
+    color: black;
+    font-size: 28px; 
+    
+    width: 100%;
+}
+.LimitedTime{
+    margin-left: 20px;
+}
+.timeQuizInit  {
+    width: 40%
+}

@@ -1,0 +1,227 @@
+.rankRepo{
+    color: rgb(255, 0, 0);
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.detailRepo{
+    color: #F78223;
+    width: 100%; 
+    font-size: 15px;
+    margin-left: 5%;
+    /* text-align: center; */
+}
+.detialText{
+    font-size: 15px;
+    color: grey;
+}
+.reputationValue{
+    color:red;
+    position: absolute;
+    right:0;
+    height: 0
+}
+.rankList{
+    margin-top: 20px;
+    margin-bottom: 20px;   
+    height: 100px;
+}.rankBoard{
+    border-color: rgb(177, 174, 174);
+    border-style: solid;
+    border-radius: 5px;
+    position: absolute;
+    display: block;
+    right:20px;
+    top:50%;
+    width: 200px; 
+    background-color:aliceblue; 
+}
+
+.detailTitle{ 
+    background-color: rgb(177, 174, 174);
+    font-size: 25px;
+    text-align: center;
+    padding-top: 20px;
+    color:white;
+    margin-bottom: 20px;
+}
+
+
+.detailBoard{
+    border-color: rgb(177, 174, 174);
+    border-style: solid;
+    border-radius: 5px;
+    position: absolute;
+    display: block;
+    left:20px;
+    top:50%;
+    width: 200px; 
+    background-color:aliceblue; 
+}
+.rankName{
+    color:  #e49132; 
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.rankIcon{
+    width: 50px;
+    height: 40px;
+}
+.rankBoardTitle{ 
+    background-color: rgb(177, 174, 174);
+    font-size: 25px;
+    text-align: center;
+    padding-top: 20px;
+    color:white;
+    margin-bottom: 20px;
+}
+.header{
+    background-color: aliceblue;
+    
+    width: 100%;
+    background-color: #e49132; 
+    padding-top: 80px;
+}
+.platFormButton{
+    
+    margin-top: 20px;
+    position: relative;
+    display: flex; 
+    width: 100%;
+    height: 100%;
+    background-color: rgb(177, 174, 174);
+}
+.platFormName{
+    font-size:30px;
+    margin-right: 100px;
+    margin-left:100px；
+}
+.platformaccount{
+    margin-top: 10px;
+    margin-right:20px;  
+    background-color:#e49132; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center; 
+    display: inline-block;
+    font-size: 16px;
+    height: 40%;
+    /* width:20%; */
+    margin-bottom: 10px; 
+} 
+.newQuizLink span{ 
+    color:white;
+    position:absolute;
+    right: 0%; 
+    bottom: 0%;
+    font-size: 22px;
+  
+}
+.icon{
+    width: 100px;
+    height: 100px;
+    border-radius:100%;
+    margin-top: -50px;  
+    margin-left: 100px;
+}
+.sort{
+    display: block;
+    margin: 0 auto;
+    margin-top: 10px;
+    background-color: white;
+    width:70%; 
+}
+.sortButton{
+    font-size: 40px; 
+    color: black;
+    background-color: white;
+    margin-right: 50px;
+    border: transparent;
+}
+.platFormlist{
+    display: block;
+    margin: 0 auto; 
+    background-color: aliceblue;
+    width: 70%;
+    font-size: 50px;
+}
+.SinglePlatformitem{ 
+    margin-top: 50px;
+    background-color:#eeeeec;
+    text-decoration: black;
+    height: 100%;
+    font-size: 50px;
+}
+ .SinglePlatformtitle{
+     color:white;
+    background-color: rgb(177, 174, 174);
+    height: 100%;
+    font-size: 50px;
+    display: flex;
+    border-bottom: none;
+}
+.SinglePlatformtitle a{
+    color:white;
+    font-size: 40px;
+}
+.rate{
+    position: absolute;
+    right: 300px;
+    font-size: 30px;
+}
+ 
+ 
+.userIcon{
+    position:relative;  
+    height: 10%;
+    width: 10%;
+    margin-left: 90%; 
+    margin-top: 11%;
+
+}
+.discription{
+   color: black;
+   width: 70%; 
+   font-size: 19px;
+}
+
+.singlePlatformsearch{ 
+    display: block;  
+    position: relative;   
+    margin: 0 auto; 
+    padding-top: 30px;
+}
+.singlePlatformsearchContent{ 
+
+    margin-left: 25%;
+}.singlePlatformsearchButton{ 
+    margin-left: -1px;
+    color: #F78223;
+    background-color: #EEEEEE; 
+    
+    text-align: center;
+    text-decoration: #ffffff;  
+    
+    color: #ffffff;
+    background-color:#F78223;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    width: 100px;
+    border-radius: 5px;
+    height: 49.8px; 
+}
+.notOwnerBar{ 
+    display:relative;
+}
+.singlePlatFormName{ 
+    font-size: 40px; 
+    text-align:left;
+    color: white;
+    margin-right: 100px;
+    
+    margin-left: 20px;
+}
+.SinglePlatformtitle{
+    border-bottom:none
+} 
