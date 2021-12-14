@@ -27,7 +27,7 @@ import {Button, Card} from 'react-bootstrap';
             };    
           }
         handleChangeName(e) {   
-	this.checkValid()
+	      this.checkValid()
             this.setState({name: e.target.value}); 
             this.setState({namechange:true});  
         }

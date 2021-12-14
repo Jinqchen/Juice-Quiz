@@ -115,7 +115,6 @@ submit(e){
      this.setState({success:response['success']});
    }); 
  if (this.state.success){
- 
   this.own();
   this.inital_reputation();
   alert("Platform Created!") 

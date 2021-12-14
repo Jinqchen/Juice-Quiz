@@ -62,7 +62,7 @@ render(){
 
 	<Link to={'/platformEdit/'+place.Pname} onClick={()=>this.store(place)}>
 	<Button variant="primary" onClick>Manage</Button>
-			</Link>
+	</Link>
   </Card.Body>
 </Card>  
 			</div>
