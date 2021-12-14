@@ -89,8 +89,8 @@ export default class singlePlatForm extends Component {
 
 	//申请和订阅在这里
 	subscribe(){
-   const url = 'https://juice-quiz.herokuapp.com/api/platform/dosubscribe';
-	  //  const url= 'http://localhost:3001/api/platform/dosubscribe';
+//    const url = 'https://juice-quiz.herokuapp.com/api/platform/dosubscribe';
+	   const url= 'http://localhost:3001/api/platform/dosubscribe';
 	     
 		  Axios.post(url, { 
 			PID : this.state.PID,
@@ -127,19 +127,18 @@ this.get_ranklist();
 
 
 op_unsub(){
-   const url = `https://juice-quiz.herokuapp.com/api/platform/delSub/${this.state.PID}`;
-	// const url= `http://localhost:3001/api/platform/delSub/${this.state.PID}`;
+//    const url = `https://juice-quiz.herokuapp.com/api/platform/delSub/${this.state.PID}`;
+	const url= `http://localhost:3001/api/platform/delSub/${this.state.PID}`;
 	     
 		  Axios.delete(url, { data:{UID: localStorage.getItem("UID")}}).then((response) => { 
-		  console.log(response); 
-		 
+		  console.log(response);	 
 		  }); 
 	 this.setState({subscribed:false})
 }
 
 op_uncoown(){
-    const url = `https://juice-quiz.herokuapp.com/api/platform/delCoown/${this.state.PID}`;
-	//const url= `http://localhost:3001/api/platform/delCoown/${this.state.PID}`;
+    // const url = `https://juice-quiz.herokuapp.com/api/platform/delCoown/${this.state.PID}`;
+	const url= `http://localhost:3001/api/platform/delCoown/${this.state.PID}`;
 	     
 		  Axios.delete(url, { data:{UID: localStorage.getItem("UID")}
 			
@@ -151,8 +150,8 @@ op_uncoown(){
 }
 
 op_delrep(){
-	  const url = `https://juice-quiz.herokuapp.com/api/platform/delRep/${this.state.PID}`;
-	 // const url= `http://localhost:3001/api/platform/delRep/${this.state.PID}`;
+	 // const url = `https://juice-quiz.herokuapp.com/api/platform/delRep/${this.state.PID}`;
+	  const url= `http://localhost:3001/api/platform/delRep/${this.state.PID}`;
 		   
 			Axios.delete(url, { data:{UID: localStorage.getItem("UID")}  
 			}).then((response) => { 
@@ -165,8 +164,8 @@ op_delrep(){
 
 	
 	inital_reputation(){
-	   const url = 'https://juice-quiz.herokuapp.com/api/platform/initalR';
-	   //const url= 'http://localhost:3001/api/platform/initalR';
+	   // const url = 'https://juice-quiz.herokuapp.com/api/platform/initalR';
+	  const url= 'http://localhost:3001/api/platform/initalR';
 	     
 		  Axios.post(url, { 
 			PID : this.state.PID,
@@ -181,8 +180,8 @@ op_delrep(){
 
 // Apply function 
 	do_apply(){
-		 const url = `https://juice-quiz.herokuapp.com/api/platform/doapply`;
-		//   const url= `http://localhost:3001/api/platform/doapply`;
+		//  const url = `https://juice-quiz.herokuapp.com/api/platform/doapply`;
+		  const url= `http://localhost:3001/api/platform/doapply`;
 	     
 		  Axios.post(url, { 
 			PID : this.state.PID,
@@ -209,31 +208,32 @@ op_delrep(){
    }
 
    get_replimit(){
-        const url = `https://juice-quiz.herokuapp.com/api/platform/${this.state.PID}/replimit`;
-	 //	 const url= `http://localhost:3001/api/platform/${this.state.PID}/replimit`;
+        //	  const url = `https://juice-quiz.herokuapp.com/api/platform/${this.state.PID}/replimit`;
+	const url= `http://localhost:3001/api/platform/${this.state.PID}/replimit`;
 		  Axios.get(url).then(res=>{return res.data})
 		  .then((response) => {   
 		  this.setState({replimit:response[0]['replimit']});
 		  console.log(this.state.replimit)
 		  });
    };
-
+   
    get_Urep(){
-	    const url = `https://juice-quiz.herokuapp.com/api/platform/userRep/${localStorage.getItem("UID")}`;
-	 // const url= `http://localhost:3001/api/platform/userRep/${localStorage.getItem("UID")}`;
+	   //  const url = `https://juice-quiz.herokuapp.com/api/platform/userRep/${localStorage.getItem("UID")}`;
+	 const url= `http://localhost:3001/api/platform/userRep/${localStorage.getItem("UID")}`;
 	    Axios.get(url,{
 			params:{
 			PID : this.state.PID,}
 	   }).then(res=>{return res.data})
 	   .then((response) => {   
-	   this.setState({Urep:response[0]['Rpoint']});
+		   if(this.state.subscribed){
+	   this.setState({Urep:response[0]['Rpoint']});}
 	   });
    };
 
 	async get(){
 		this._isMounted = true;
-    	 const url = `https://juice-quiz.herokuapp.com/api/platform/quizlist/${this.state.PID}`;
-	  // const url= `http://localhost:3001/api/platform/quizlist/${this.state.PID}`;
+    	// const url = `https://juice-quiz.herokuapp.com/api/platform/quizlist/${this.state.PID}`;
+	   const url= `http://localhost:3001/api/platform/quizlist/${this.state.PID}`;
       const res = await Axios.get(url)
       .then(res=>{return res.data})
       .then( result =>{
@@ -245,8 +245,8 @@ op_delrep(){
     };
 
     async get_ranklist(){
-	    const url = `https://juice-quiz.herokuapp.com/api/platform/ranklist/${this.state.PID}`;
-		//const url= `http://localhost:3001/api/platform/ranklist/${this.state.PID}`;
+	   // const url = `https://juice-quiz.herokuapp.com/api/platform/ranklist/${this.state.PID}`;
+		const url= `http://localhost:3001/api/platform/ranklist/${this.state.PID}`;
 		const res = await Axios.get(url)
 		.then(res=>{return res.data})
 		.then( result =>{
@@ -258,8 +258,8 @@ op_delrep(){
 	};
 
 	is_sub(){		
-       const url = 'https://juice-quiz.herokuapp.com/api/platform/subscribe';
-	 //	const url= `http://localhost:3001/api/platform/subscribe`;
+      // const url = 'https://juice-quiz.herokuapp.com/api/platform/subscribe';
+	 	const url= `http://localhost:3001/api/platform/subscribe`;
          Axios.post(url, {
 			PID : this.state.PID,
 			UID: localStorage.getItem("UID"),
@@ -271,8 +271,8 @@ op_delrep(){
    
 	is_coowner(){
 		
-		 const url = 'https://juice-quiz.herokuapp.com/api/platform/coowner';
-		//const url= `http://localhost:3001/api/platform/coowner`;
+		// const url = 'https://juice-quiz.herokuapp.com/api/platform/coowner';
+		const url= `http://localhost:3001/api/platform/coowner`;
 		Axios.post(url, {
 		   PID : this.state.PID,
 		   UID: localStorage.getItem("UID"),
@@ -284,8 +284,8 @@ op_delrep(){
 
 	is_owner(){
 		
-		 const url = 'https://juice-quiz.herokuapp.com/api/platform/owner';
-	//	 const url= `http://localhost:3001/api/platform/owner`;
+	//		 const url = 'https://juice-quiz.herokuapp.com/api/platform/owner';
+	 const url= `http://localhost:3001/api/platform/owner`;
 		Axios.post(url, {
 		   PID : this.state.PID,
 		   UID: localStorage.getItem("UID"),
@@ -297,8 +297,8 @@ op_delrep(){
 
     is_allowCown(){
 		console.log("start")
-	 const url = 'https://juice-quiz.herokuapp.com/api/platform/allow_co';
-   //const url= `http://localhost:3001/api/platform/allow_co`;
+	// const url = 'https://juice-quiz.herokuapp.com/api/platform/allow_co';
+   const url= `http://localhost:3001/api/platform/allow_co`;
     Axios.post(url, {
       PID : this.state.PID,
     }).then((response) => {
@@ -316,8 +316,8 @@ op_delrep(){
 		if (this.state.searchContent===""){
 			this.get();
 		}else{
-		    const url= `https://juice-quiz.herokuapp.com/api/quiz/${this.state.searchContent}`;
-		//	const url= `http://localhost:3001/api/quiz/${this.state.searchContent}`;
+		  //  const url= `https://juice-quiz.herokuapp.com/api/quiz/${this.state.searchContent}`;
+			const url= `http://localhost:3001/api/quiz/${this.state.searchContent}`;
 		  const res = await Axios.get(url,{
 			params: {
 			  PID: this.state.PID			  

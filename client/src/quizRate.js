@@ -48,17 +48,19 @@ const initQuestions=   [
               name:"Congratulations, You got ",
               discription:"",
               timeLimited:true,
-              limitedHour:0,
               limitedMin:0,
+              limitedSec:0,
               timetaken:0,
               PID:0,
-              score:90,
+              score:0,
               success:true,
               currentQuestion:0,
               questions:initQuestions ,
               rank:80,
               rating:null,
-              hover:null
+              hover:null,
+              timetaken:0
+
             };    
            this.get()
           }
@@ -101,8 +103,8 @@ const initQuestions=   [
 
 get(){
   console.log("result start ")
-    const url = `https://juice-quiz.herokuapp.com/api/answer/result/${localStorage.getItem('QID')}`;
-		  // const url= `http://localhost:3001/api/answer/result/${localStorage.getItem('QID')}`;
+    // const url = `https://juice-quiz.herokuapp.com/api/answer/result/${localStorage.getItem('QID')}`;
+		   const url= `http://localhost:3001/api/answer/result/${localStorage.getItem('QID')}`;
        Axios.get(url,{
          params:{
             UID: localStorage.getItem('UID')  
@@ -111,6 +113,11 @@ get(){
         console.log(response.data[0]['score']);
         this.setState({score:response.data[0]['score']*100});
         this.setState({timetaken:response.data[0]['timespend']});
+        //h
+        this.setState({limitedMin:  parseInt((this.state.timetaken)/60)})
+        
+        //s
+        this.setState({limitedSec:  parseInt((this.state.timetaken-this.state.limitedMin*60))})
 
   }
  )
@@ -165,14 +172,14 @@ render(){
      <Link to='/' >
             <button className="cancel"    >X</button> </Link>
          <img src="logo.jpg" className="quizInitIcon" style={{marginBottom:'20px'}}></img>  
-        { <div className="editQuestionList"  >
-        {this.state.questions.map((item, index) => {
+        {/* { <div className="editQuestionList"  >
+        {/* {this.state.questions.map((item, index) => {
                 return ( 
                     item.correct&& <button  type="button" style={{color: "green"}}  >{item.key+1}</button> ||<button  type="button"  style={{color: "red"}} >{item.key+1}</button>
                 );
-              })}
-        </div>
-         }
+              })} */}
+        {/* </div>
+         } */}  
 
 
           { <div className="editContent">
@@ -182,7 +189,7 @@ render(){
           </label>
 
 
-          <label style={{fontSize:"30px",marginBottom:"50px", width:"100%"}}>in <label  style={{color: "orange",fontSize:"50px",width:"50px"}}>{this.state.limitedHour } </label> hour and <label  style={{color: "orange",fontSize:"50px",width:"50px"}}>{this.state.limitedMin } </label>  minutes
+          <label style={{fontSize:"30px",marginBottom:"50px", width:"100%"}}>in <label  style={{color: "orange",fontSize:"50px",width:"50px"}}>{this.state.limitedMin } </label> Mins and <label  style={{color: "orange",fontSize:"50px",width:"50px"}}>{this.state.limitedSec } </label>  Sec
         </label>  
             
           </label>

@@ -155,6 +155,8 @@ render(){
           </label> 
                   </div>
                    
+                
+                   
                   <div className="userInput">    
                         <label className='EPeditInput'>  Select tag:
                         <select value={this.state.tag} onChange={this.handleChangeTag.bind(this)}>

@@ -18,6 +18,7 @@ const multer = require('multer')
 const upload = multer({ dest: 'uploads/' })
 const { uploadFile, getFileStream } = require('./server/s3');
 const { connect } = require('http2');
+const Connection = require('mysql/lib/Connection');
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
@@ -54,6 +55,8 @@ var con = mysql.createPool({
 
 
 
+
+  
 app.post('/images', upload.single('image'), async (req, res) => {
 	const file = req.file
 	console.log("test file")
@@ -63,8 +66,10 @@ app.post('/images', upload.single('image'), async (req, res) => {
 	const result = await uploadFile(file)
 	await unlinkFile(file.path)
 	console.log(result)
+	const description = req.body.description
 	res.send({imagePath: `/images/${result.Key}`})
   })
+
 
 
 
@@ -113,6 +118,7 @@ app.get('/api/answer/:id',(req,res)=>{
    
   }
 );
+
 app.put('/api/answer/updateRep/:id',(req,res)=>{
      const QID = req.params.id;
 	 const PID = req.body.PID;
@@ -127,7 +133,7 @@ app.put('/api/answer/updateRep/:id',(req,res)=>{
 		if (err1) throw err1;
 		var repoint = result[0]['reputationneed'];
 		console.log(repoint);
-	con.query(
+	   con.query(
 		`select Rpoint from reputation where UID=? AND PID=?`,
 		[UID,PID],
 		(err, result1) => {
@@ -186,7 +192,8 @@ app.get ('/api/Platform/:tag',(req,res)=>{
   app.get ('/api/platform/quizlist/:id',(req,res)=>{
     console.log("quiz Connected!");
 	const PID = req.params.id;	
-    con.query(
+	con.getConnection(function(err, connection){
+    connection.query(
 		`SELECT q.QID,q.Qname,q.ave_rate,q.hot,q.description ,u.Uname AS Releaser, pic 
 		FROM quiz q,contain c,releases r,users u, userstyle us
 		WHERE q.QID=c.QID AND q.QID=r.QID and r.UID = U.UID and r.UID=us.UID and c.PID=`+PID, 
@@ -194,20 +201,26 @@ app.get ('/api/Platform/:tag',(req,res)=>{
 		if (err1) throw err1;
 		console.log(result);
 	    res.send(result);
-		con.release;
+		connection.destroy();
 	}
-  );})
+  );
+
+	})
+    })
 
   app.get ('/api/manageQuiz/quizlist_total/:id',(req,res)=>{
 	const UID = req.params.id;
-    con.query(
+	con.getConnection(function(err, connection){
+		connection.query(
 		`select QID from releases where UID=${UID}`, 
 		function (err1, result) {
 		if (err1) throw err1;
         res.send(result)
-		con.release;		
+		connection.destroy();		
 	}
   );
+	})
+    
 }
 )
 
@@ -215,14 +228,17 @@ app.get ('/api/Platform/:tag',(req,res)=>{
 app.get ('/api/manageQuiz/quizlist/:id',(req,res)=>{
     console.log("manage Connected!");
 	const QID = req.params.id;
-    con.query(
+	con.getConnection(function(err, connection){
+		connection.query(
 		`select Qname,ave_rate,hot,description,releasedate from quiz where QID=${QID}`, 
 		function (err1, result) {
 		if (err1) throw err1;
         res.send(result);
-		con.release;		
+		connection.destroy();		
 	}
   );
+	})
+    
 }
 )
 
@@ -233,27 +249,31 @@ app.get ('/api/manageQuiz/quizlist/:id',(req,res)=>{
   app.get ('/api/user/subscribed/:id',(req,res)=>{
     console.log("uer Connected!");
 	const UID = req.params.id;
-	
-    con.query(
-		`select s.PID,r.Rpoint,ps.Pcover,p.Pname
-		from subscribe s, reputation r,platform p,platformstyle ps
-		where  r.UID=s.UID AND s.UID=`+UID+ ` and p.PID= s.PID AND p.PID= r.PID AND ps.PID=p.PID 
-		ORDER BY r.Rpoint desc`, 
-		function (err1, result) {
-		if (err1) throw err1;
-		console.log(result);
-	    res.send(result);
-		
-	}
-  );})
+	con.getConnection(function(err, connection){
+		con.query(
+				`select s.PID,r.Rpoint,ps.Pcover,p.Pname
+				from subscribe s, reputation r,platform p,platformstyle ps
+				where  r.UID=s.UID AND s.UID=`+UID+ ` and p.PID= s.PID AND p.PID= r.PID AND ps.PID=p.PID 
+				ORDER BY r.Rpoint desc`, 
+				function (err1, result) {
+				if (err1) throw err1;
+				console.log(result);
+				res.send(result);
+				connection.destroy();
+			}
+		);
+
+	})
+    
+})
 
 
 
   app.get ('/api/user/history/:id',(req,res)=>{
     console.log("history");
 	const UID = req.params.id;
-    
-	con.query(
+ 
+		con.query(
 		`select q.Qname,q.ave_rate,q.hot,q.description,q.reputationneed,q.Taketime,q.releasedate,
         h.whendo,h.rate,h.score,h.timespend,c.PID
         from history h,quiz q,contain c where q.QID=h.QID AND UID=${UID} AND q.QID=C.QID;`, 
@@ -264,11 +284,16 @@ app.get ('/api/manageQuiz/quizlist/:id',(req,res)=>{
         `SELECT * FROM history WHERE UID=${UID} AND QID=0`,
 		function (err, result0) {
 			var list = result.concat(result0);
-			res.send(list)
+			res.send(list);
+			
 		}
 		)
 	}
-  );})
+  );
+	
+	
+}
+)
 
 
 
@@ -281,16 +306,20 @@ app.get ('/api/manageQuiz/quizlist/:id',(req,res)=>{
     console.log("owned Connected!");
 	const UID = req.params.id;
 	console.log("UID:"+UID);
-    con.query(
+	con.getConnection(function(err, connection){
+		connection.query(
 		`select Pcover, o.PID,p.Pname from own o, platform p,platformstyle s
 		where UID=${UID} and o.PID=p.PID AND o.PID=s.PID`, 
 		function (err1, result) {
 		if (err1) throw err1;
 		console.log(result);
 	    res.send(result);
-	    con.release;
+	    connection.destroy();
 	}
-  );})
+  );
+	})
+    
+})
 
 
 
@@ -298,7 +327,8 @@ app.get ('/api/manageQuiz/quizlist/:id',(req,res)=>{
   app.get ('/api/platform/ranklist/:id',(req,res)=>{
     console.log("rank Connected!");
 	const PID = req.params.id;
-    con.query(
+	con.getConnection(function(err, connection){
+		connection.query(
 		`select U.UID,U.Uname,Rpoint,pic
 		from users U,platform P,reputation R,userstyle us
 		where P.PID=`+PID+` AND P.PID= R.PID AND U.UID=R.UID and U.UID=us.UID
@@ -307,52 +337,69 @@ app.get ('/api/manageQuiz/quizlist/:id',(req,res)=>{
 		if (err1) throw err1;
 		console.log(result);
 	    res.send(result);
-		con.release;
+		connection.destroy();
 	}
-  );})
+  );
+	})
+    })
 
   app.get ('/api/platform/:id/replimit',(req,res)=>{
 	const PID = req.params.id;
-    con.query(
-		`select  replimit
-		from platform p
-		where  p.PID=${PID}`, 
-		function (err1, result) {
-		if (err1) throw err1;
-		console.log(result);
-	    res.send(result);
-		con.release;
-	}
-  );})
+	con.getConnection(function(err, connection){
+		connection.query(
+			`select  replimit
+			from platform p
+			where  p.PID=${PID}`, 
+			function (err1, result) {
+			if (err1) throw err1;
+			console.log(result);
+			res.send(result);
+			connection.destroy();
+		}
+	);
+
+	})
+    })
 
 //Search
   app.get ('/api/platformSearch/:name',(req,res)=>{
     console.log("platform Connected!");
 	const name = req.params.name;
 	console.log(name);
-    con.query(
+	con.getConnection(function(err, connection){
+		connection.query(
 		`select p.PID,p.Pname, ps.Pcover
 		from platform p, platformstyle ps
 		where p.Pname LIKE '%`+name+`%' and p.PID=ps.PID`, 
 		function (err1, result) {
 		if (err1) throw err1;
 		
-	    res.send(result);}
-  );})
+	    res.send(result);
+		connection.destroy();
+	}
+  );	
+	})
+    })
 
   app.get ('/api/quiz/:name',(req,res)=>{
     console.log("platform Connected!");
 	const name = req.params.name;
 	const PID = req.query.PID;
 	console.log(PID);
-    con.query(
+	con.getConnection(function(err, connection){
+ connection.query(
 		`select q.QID,q.Qname,q.ave_rate,q.hot,q.description 
 		from quiz q,contain c
 		where q.QID=c.QID and c.PID=`+PID+` and q.Qname  LIKE '%`+name+`%'`, 
 		function (err1, result) {
 		if (err1) throw err1;
-	    res.send(result);}
-  );})
+	    res.send(result);
+	    connection.destroy();
+	}
+  );
+	})
+   
+})
 
 
 
@@ -415,6 +462,7 @@ app.post('/api/platform/subscribe', (req, res) => {
 	const UID = req.body.UID;  
 //	console.log(PID);
 	//console.log("sub");
+	
 	con.query(
 	  `SELECT EXISTS(
 		SELECT *
@@ -642,7 +690,8 @@ app.get('/api/platform/userRep/:id',(req,res)=>{
 	const UID = req.body.UID;  
 	console.log(PID);
 	console.log("subed");
-	con.query(
+	con.getConnection(function (err, connection) {
+		connection.query(
 	  `insert into reputation (Rpoint,PID,UID)
 	  value(0,?,?);`,
 	  [PID,UID],
@@ -651,16 +700,19 @@ app.get('/api/platform/userRep/:id',(req,res)=>{
 		if (err) {
 		  res.send({ err: err });
 		}
+		connection.destroy();
 	  }
 	);
+	})
+	
   });
 
 app.post('/api/createplatform', (req, res) => {
 	const Pname = req.body.Pname;
 	const tag = req.body.tag;
     const replimit  = req.body.replimit;
-	con.query('SELECT MAX(PID) FROM platform',function(err,result){
-		var index = result[0]["MAX(PID)"]
+	con.query('select COUNT(*)from platform',function(err,result){
+		var index = result[0]["COUNT(*)"]
 		console.log("index:"+index);
 		var id =index+1;
 		console.log(id);
@@ -721,6 +773,11 @@ app.post('/api/CreatePlatform/doown', (req, res) => {
 	
 	
 	)
+
+
+
+	
+
   })
 
 
@@ -744,6 +801,7 @@ app.put('/api/EditPlatform/name/:name',(req,res)=>{
 		where PID=?;`,
 		[PID],
 		(err, result) => {
+			console.log(result);
 		  if (err) {
 			res.send({ err: err });
 		  }
@@ -852,28 +910,35 @@ app.post('/api/quizsetCreate', (req, res) => {
 	const questions = req.body.questions;  
 	console.log(QID);
 	console.log(questions[0]['answerOptions']);
+	console.log(questions.length);
     for (var i=0;i<questions.length;i++){
 		console.log(i)
 		console.log(questions[i]['questionText'])
-		
-			con.query(
+		con.getConnection(function (err,connection) {
+			connection.query(
 	     `insert into quizquestion(QID,QuestionID,Qtext)
 	     value(?,?,?);`,
 	     [QID,i+1,questions[i]['questionText']],
-		
+		 (err,res)=>{connection.destroy();}
 	     );
+		})
+		
 		
 	 var options=questions[i]['answerOptions']
+	 console.log(options)
 	 for (var j=0;j<options.length;j++){
-     con.query(
+		 con.getConnection(function (err,connection) {
+			 connection.query(
 		`insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
 		VALUE(?,?,?,?,?);`,
 		[QID,i+1,j+1,options[j]['answerText'],options[j]['isCorrect']],
 		(err, result) => {
 			console.log(err);
-			
+			connection.destroy();	
 		  }
-	 );
+	    ); 
+		})
+    
 	 }
 
 	}
@@ -886,11 +951,15 @@ app.post('/api/quizsetEdit/insert', (req, res) => {
 	 console.log("insert");
 	// console.log(questions);
     for (var i=0;i<questions.length;i++){
+		con.getConnection(function (err,connection) {
 		con.query(
 	  `insert into quizquestion(QID,QuestionID,Qtext)
 	  value(?,?,?);`,
 	  [QID,questions[i]['key'],questions[i]['questionText']] 
-	);
+	);	
+		})
+		
+	
      var options=questions[i]['answerOptions']
 	 for (var j=0;j<options.length;j++){
      con.query(
@@ -1099,7 +1168,7 @@ app.get('/api/answer/result/:id', (req, res) => {
 	console.log("start rating ")
 	console.log(QID);
 	console.log(UID);   
-   con.query(
+    con.query(
 	   `SELECT max(whendo) FROM history where UID=${UID} AND QID=${QID};`,
 	   (err, result) => {
 		console.log(result); 
@@ -1135,15 +1204,19 @@ app.post('/api/answer/updateHIS/:id', (req, res) => {
 	console.log(UID);
     console.log(score);
 	console.log("end")
-    con.query(
+	con.getConnection(function (err,connection) {
+		connection.query(
 	   `insert into history(UID,QID,whendo,rate,score,timespend)
 	   value(?,?,?,?,?,?);`,
 	   [UID,QID,whendo,null,score,timespend],
 	   (err, result) => {
-		console.log(result); 		
+		console.log(result);
+		connection.destroy(); 		
 	   }
     );
-	con.query(
+	})
+    con.getConnection(function (err,connection) {
+	connection.query(
 		`SELECT COUNT(*) FROM history WHERE QID=${QID};`,
 		(err, result) => {
 		 console.log(result[0]['COUNT(*)'])
@@ -1153,12 +1226,14 @@ app.post('/api/answer/updateHIS/:id', (req, res) => {
 			`update quiz set hot=${hot} where QID=${QID};`,
 			(err, result) => {
 			 console.log(err); 
-			 
+			 connection.destroy();
 			}
 		 );
 		 
 		}
-	 );
+	 );	
+	})
+	
 })
 
 

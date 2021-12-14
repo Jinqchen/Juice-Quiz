@@ -45,8 +45,8 @@ const initQuestions=   [
       
           componentDidMount = () => {
             
-            const url = `https://juice-quiz.herokuapp.com/api/answer/${this.state.QID}`;
-        // const url= `http://localhost:3001/api/answer/${this.state.QID}`;
+            // const url = `https://juice-quiz.herokuapp.com/api/answer/${this.state.QID}`;
+          const url= `http://localhost:3001/api/answer/${this.state.QID}`;
             Axios.get(url)
         .then(res=>{return res.data})
         .then( result =>{ 
@@ -185,8 +185,8 @@ const initQuestions=   [
         
         //sun
         submit(){   
-        const url = 'https://juice-quiz.herokuapp.com/api/quizsetCreate';
-          //   const url= 'http://localhost:3001/api/quizsetCreate';
+        //  const url = 'https://juice-quiz.herokuapp.com/api/quizsetCreate';
+           const url= 'http://localhost:3001/api/quizsetCreate';
       
          Axios.post(url, { 
               QID: localStorage.getItem('QID'), 

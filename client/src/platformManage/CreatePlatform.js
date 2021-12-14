@@ -25,14 +25,12 @@ import {Button, Card} from 'react-bootstrap';
               EPID:localStorage.getItem('EditPID'),
               success:false,
               file:'',
-              renderFlag:false,
-              validFlag:false
+              renderFlag:false
             };    
           }
         handleChangeName(e) {  
             this.setState({name: e.target.value}); 
             this.setState({namechange:true});  
-            this.checkValid()
         }
      
         handleChangeTag(e) {  
@@ -46,7 +44,6 @@ import {Button, Card} from 'react-bootstrap';
         }
 
         handleReputation(e){
-          this.checkValid()
             this.setState({requireReputation: e.target.value}); 
             console.log(this.state.requireReputation)
             this.setState({repchange:true});  
@@ -60,15 +57,6 @@ import {Button, Card} from 'react-bootstrap';
       }
       )
     }
-
-    checkValid(){
-      console.log(this.state.checkValid)
-      if(this.state.name==''||this.state.option==''||this.state.requireReputation<=0){
-      return false
-      }else{
-        this.setState({validFlag:true})
-        return true
-      }}
     updateTag(){
      const url = `https://juice-quiz.herokuapp.com/api/EditPlatform/tag/${this.state.tag}`;
        //  const url= `http://localhost:3001/api/EditPlatform/tag/${this.state.tag}`;
@@ -98,8 +86,8 @@ postImage(image, name) {
   const formData = new FormData();
   formData.append("image", image)
   formData.append("name", name);
-  const url=`https://juice-quiz.herokuapp.com/images/${this.state.PID}`;
-  //const url=`http://localhost:3001/images/${this.state.PID}`;
+  // const url=`https://juice-quiz.herokuapp.com/images/${this.state.PID}`;
+ const url=`http://localhost:3001/images/${this.state.PID}`;
   const result = Axios.post(url, formData, { headers: {'Content-Type': 'multipart/form-data'}})
   return result.data
 }
@@ -109,15 +97,13 @@ uploadIcon(event){
   const result =  this.postImage(this.state.file, this.state.name)
 }
 
-
-
 submit(e){      
-  
+   this.uploadIcon(e)
   if(this.state.name==''||this.state.option==''||this.state.requireReputation<=0){
     alert("!")
   }else{
-    const url = 'https://juice-quiz.herokuapp.com/api/createplatform';
- //const url= 'http://localhost:3001/api/createplatform';
+   // const url = 'https://juice-quiz.herokuapp.com/api/createplatform';
+ const url= 'http://localhost:3001/api/createplatform';
  Axios.post(url, { 
         Pname: this.state.name, 
         tag: this.state.tag, 
@@ -129,7 +115,7 @@ submit(e){
      this.setState({success:response['success']});
    }); 
  if (this.state.success){
-  this.uploadIcon(e)
+ 
   this.own();
   this.inital_reputation();
   alert("Platform Created!") 
@@ -156,7 +142,7 @@ render(){
 
             <label className='SIGNUP'>New Platform</label> 
                 <div className="CPuserInput">    
-                <div className='EPeditInput' type="text" style={{ color:'white',marginLeft:'30px'}}>Platform Name:  
+                <div className='EPeditInput' style={{ color:'white',marginLeft:'30px'}}>Platform Name:  
                 <input style={{width:"50%"}} onChange={this.handleChangeName.bind(this)}></input>
           </div> 
                   </div>
@@ -203,14 +189,17 @@ render(){
 }
 
                 <div className="userInput">     
-                <input  onChange={this.handlefileSelected.bind(this)} type="file" accept="image/*"></input>
+                <input onChange={this.handlefileSelected.bind(this)} type="file" accept="image/*"></input>
  
                 </div>
 
-                <div className="userInput">      
-                        { this.state.validFlag&&<Link to='/' > 
-                        <Button className='EPsubmit' style={{background:'white',color:"#F78223",border:"none"}} onClick={(e)=>this.submit(e)}>Create</Button>
-                        </Link>}
+                <div className="userInput">     
+
+               
+                <Link to='/' > 
+        
+                <Button className='EPsubmit' style={{background:'white',color:"#F78223",border:"none"}} onClick={(e)=>this.submit(e)}>Create</Button>
+                        </Link>
                
                 </div>
               

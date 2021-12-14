@@ -24,17 +24,17 @@ export default class App extends Component {
 			QID: localStorage.getItem('QID'),
 			PID: localStorage.getItem('PID'),
 			is_Mount:false,
-			hour:1,
-			minute:0,
-      		second:5,
-			TimeLimitFlag:true, 
+			hour:0,
+			minute:10,
+      		second:0,
+			time:0,
+			TimeLimitFlag:true,
 			timeSpend:0,
-			date:"",
+			date:"?",
 			confirmFlag:false
 		};
 		this.start = this.start.bind(this)
         this.no = this.no.bind(this) 
-		
 	}
 
 
@@ -64,20 +64,17 @@ export default class App extends Component {
 		  }
 		
 	  } 
-	 
-	  checkTime(){ 
-		
+
+	  checkTime(){
+		   
 		  if(!this.state.showScore&&this.state.minute+this.state.second<=0){
 			  this.setState({showScore:true})
-			 
-			
 		  }
-
-		  
 	  }
 	componentDidMount = () => {
-         const url = `https://juice-quiz.herokuapp.com/api/answer/${this.state.QID}`;
-		//const url= `http://localhost:3001/api/answer/${this.state.QID}`;
+		this.get_time();
+        // const url = `https://juice-quiz.herokuapp.com/api/answer/${this.state.QID}`;
+		const url= `http://localhost:3001/api/answer/${this.state.QID}`;
 		console.log("Component did mount")
         Axios.get(url)
 		.then(res=>{return res.data})
@@ -89,13 +86,33 @@ export default class App extends Component {
 
     
 	}
+    
 
- 
+	get_time(){
+		//const url = `https://juice-quiz.herokuapp.com/api/answer/time/${this.state.QID}`;
+		const url= `http://localhost:3001/api/answer/time/${this.state.QID}`;
+        Axios.get(url)
+		.then(res=>{return res.data})
+		.then( result =>{ 
+			console.log(result[0]['TakeTime']);
+			var time =result[0]['TakeTime'];
+			var min=parseInt(time / 60);
+			var sec = time-min*60;
+
+			
+			this.setState({time:result[0]['TakeTime']});	
+			this.setState({second:sec})	 
+			this.setState({minute:min})	 
+			console.log(this.state.minute)
+			console.log(this.state.second)     
+		 });
+
+
+	}
+
 
 
 	processData = () => {
-
-	
 		console.log(this.state.data);
 		var data= this.state.data
 		this.setState({ queslength: data.length/4 });
@@ -162,15 +179,15 @@ export default class App extends Component {
    
 
 
-	addHistory() {
-	
-
-		 const url = `https://juice-quiz.herokuapp.com/api/answer/updateHIS/${this.state.QID}`;
-		//	   const url= `http://localhost:3001/api/answer/updateHIS/${this.state.QID}`;
+	addHistory(date) {
+		 console.log(date)
+		//	 const url = `https://juice-quiz.herokuapp.com/api/answer/updateHIS/${this.state.QID}`;
+		   const url= `http://localhost:3001/api/answer/updateHIS/${this.state.QID}`;
 				Axios.post(url,{
 					UID:localStorage.getItem('UID'),
 					Score: this.state.currentScore/this.state.queslength,
-					timeSpend: this.state.timeSpend
+					timeSpend: this.state.timeSpend,
+					date: date
 			  }).then((response) => { 
 				console.log(response); 
 			 })
@@ -179,25 +196,25 @@ export default class App extends Component {
 
 
 
-
-	addRep=()=>{
+		addRep=()=>{
 		
-		 const timestamp = Date.now();
-		 const record=new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(timestamp);
-		 this.setState({date:record})
-	 	console.log(this.state.date) 
- 
-		 	 const url = `https://juice-quiz.herokuapp.com/api/answer/updateRep/${this.state.QID}`;
-	      //const url= `http://localhost:3001/api/answer/updateRep/${this.state.QID}`;
-			Axios.put(url,{
-				PID:this.state.PID,
-				UID:localStorage.getItem('UID')
-		  }).then((response) => {  
-			
-		 })
-		this.addHistory()
-		this.setState({confirmFlag:true})
-		 }
+			const timestamp = Date.now();
+			const record=new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(timestamp);
+			this.setState({date:timestamp})
+			console.log(this.state.date) 
+	
+				//  const url = `https://juice-quiz.herokuapp.com/api/answer/updateRep/${this.state.QID}`;
+			  const url= `http://localhost:3001/api/answer/updateRep/${this.state.QID}`;
+			   Axios.put(url,{
+				   PID:this.state.PID,
+				   UID:localStorage.getItem('UID')
+
+			 }).then((response) => {  
+			   
+			})
+		   this.addHistory(record)
+		   this.setState({confirmFlag:true})
+			}
 
 
 	render() {
@@ -213,7 +230,6 @@ export default class App extends Component {
 							Submit<button  onClick={()=>this.addRep()>Submit</button>
 			</Link> */}
 
-  
 {!this.state.confirmFlag&&<button onClick={()=>this.addRep()}>confirm</button>}
 {this.state.confirmFlag&&<Link   to ={{
     pathname: "/quizRate", 
@@ -236,8 +252,12 @@ export default class App extends Component {
 							{this.state.answerOptions.map((answerOption) =>
 								<button classname='answering_Btn' onClick={() => this.handleNextQuestion(answerOption)}>{answerOption['text']}</button>
 							)}
+							
 						</div>
+
 						<div>
+							
+
 								{this.state.TimeLimitFlag&&	<div className="Timer_container">
 								Time remain: {this.state.minute}m : {this.state.second}s
 								</div>
