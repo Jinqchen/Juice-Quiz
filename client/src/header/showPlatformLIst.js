@@ -16,17 +16,16 @@ import {Button, Card} from 'react-bootstrap';
                 UID:localStorage.getItem("UID"),
 				place:"",
                 renderList:[],
-				oriList:[]
+				oriList:[],
+				co_owner:'',
             };   
        this.get();
           }
-
-	
   
 		  async get(){
 			this._isMounted = true;
-		  const url = `https://juice-quiz.herokuapp.com/api/user/subscribed/${this.state.UID}`;
-			 // const url= `http://localhost:3001/api/user/subscribed/${this.state.UID}`;
+		  //const url = `https://juice-quiz.herokuapp.com/api/user/subscribed/${this.state.UID}`;
+			  const url= `http://localhost:3001/api/user/subscribed/${this.state.UID}`;
 		  const res = await Axios.get(url)
 		  .then(res=>{return res.data})
 		  .then( result =>{
@@ -38,9 +37,26 @@ import {Button, Card} from 'react-bootstrap';
 		    
 		}
 
-   unsubscribe=(PID)=>{
-	   const url = `https://juice-quiz.herokuapp.com/platform/delSub/${PID}`;
-	//const url= `http://localhost:3001/api/platform/delSub/${PID}`;
+
+		 is_coowner(PID){
+		
+			//const url = 'https://juice-quiz.herokuapp.com/api/platform/coowner';
+		   const url= `http://localhost:3001/api/platform/coowner`;
+		   var result =  Axios.post(url, {
+			  PID : PID,
+			  UID: localStorage.getItem("UID"),
+			}).then((response) => {
+				return response.data["coowner"]
+			  //console.log(response.data);
+			  this.setState({co_owner: response.data["coowner"]})
+			});
+		  
+	   };
+   
+
+   op_subscribe=(PID)=>{
+	 //  const url = `https://juice-quiz.herokuapp.com/platform/delSub/${PID}`;
+	const url= `http://localhost:3001/api/platform/delSub/${PID}`;
 	     
 	Axios.delete(url, { data:{UID: localStorage.getItem("UID")}}).then((response) => {  
     this.get();
@@ -55,10 +71,73 @@ import {Button, Card} from 'react-bootstrap';
 	this.setState({renderList:tmp})
 }
 
-   
+op_uncoown=(PID)=>{
+   // const url = `https://juice-quiz.herokuapp.com/api/platform/delCoown/${this.state.PID}`;
+	const url= `http://localhost:3001/api/platform/delCoown/${PID}`;
+		  Axios.delete(url, { data:{UID: localStorage.getItem("UID")}			
+		  }).then((response) => { 
+		  console.log(response); 		  
+		  }); 		
+}
+
+op_delrep=(PID)=>{
+	 // const url = `https://juice-quiz.herokuapp.com/api/platform/delRep/${this.state.PID}`;
+	  const url= `http://localhost:3001/api/platform/delRep/${PID}`;
+		   
+			Axios.delete(url, { data:{UID: localStorage.getItem("UID")}  
+			}).then((response) => { 
+			console.log(response); 
+			}); 
+			
+  }  	
   
+
+ unsubscribe=(PID)=>{
+	 console.log(PID)
+   // const url = 'https://juice-quiz.herokuapp.com/api/platform/owner';
+		 const url= `http://localhost:3001/api/platform/owner`;
+		Axios.post(url, {
+		   PID : PID,
+		   UID: localStorage.getItem("UID"),
+		 }).then((response) => {
+		   //console.log(response.data);
+		   this.setState({owner: response.data["owner"]})
+           var owner = response.data["owner"];
+			//const url = 'https://juice-quiz.herokuapp.com/api/platform/coowner';
+			const url= `http://localhost:3001/api/platform/coowner`;
+			var result =  Axios.post(url, {
+			PID : PID,
+			UID: localStorage.getItem("UID"),
+			}).then((response) => {
+			var co_owner = response.data["coowner"]
+			console.log(co_owner) 
+			console.log(owner) 
+			if (owner){
+				alert("You can't unsubscribe your own platform!")
+			}
+			else {
+				// if (co_owner){
+				// this.op_delrep(PID);
+				// this.op_uncoown(PID);	
+			    // }
+			    // else{
+				// this.op_delrep(PID);
+			    // }
+			    // this.op_subscribe(PID)
+			    }
+			});
+
+
+		       
+		});
+
+}
+
 //在这里保证点击每个图片可以转到对应的platform
     
+
+
+
 render(){ 
 	// this.setState({oriList:this.state.renderList})
         

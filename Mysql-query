@@ -1109,3 +1109,24 @@ delete from REPUTATION where UID=13 AND PID=4;
 select * from subscribe;
 
 
+select q.Qname,q.ave_rate,q.hot,q.description,q.reputationneed,q.Taketime,q.releasedate,
+        h.whendo,h.rate,h.score,h.timespend
+        from history h,quiz q where q.QID=h.QID AND UID=3 ;
+select q.Qname,q.ave_rate,q.hot,q.description,q.reputationneed,q.Taketime,q.releasedate,
+        h.whendo,h.rate,h.score,h.timespend,c.PID
+        from history h,quiz q,contain c where q.QID=h.QID AND UID=3 AND q.QID=C.QID
+        
+        
+        
+       
+
+delete from reputation where PID=15 OR PID=16 OR PID=17 OR PID=18 OR PID=19 OR PID=20 OR
+PID=21 OR PID=22 OR PID=23 OR PID=24 OR PID=25;
+delete from subscribe where PID=15 OR PID=16 OR PID=17 OR PID=18 OR PID=19 OR PID=20 OR
+PID=21 OR PID=22 OR PID=23 OR PID=24 OR PID=25;
+delete from own where PID=15 OR PID=16 OR PID=17 OR PID=18 OR PID=19 OR PID=20 OR
+PID=21 OR PID=22 OR PID=23 OR PID=24 OR PID=25;
+delete from platformstyle where PID=15 OR PID=16 OR PID=17 OR PID=18 OR PID=19 OR PID=20 OR
+PID=21 OR PID=22 OR PID=23 OR PID=24 OR PID=25;
+delete from platform where PID=15 OR PID=16 OR PID=17 OR PID=18 OR PID=19 OR PID=20 OR
+PID=21 OR PID=22 OR PID=23 OR PID=24 OR PID=25 
