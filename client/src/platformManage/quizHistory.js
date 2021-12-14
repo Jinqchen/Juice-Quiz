@@ -77,7 +77,7 @@ render(){
 			<Card.Title>{place.Qname}</Card.Title>
 			<Card.Text  style={{fontSize:"24px"}}>
 			{place.description} 
-			<h4>Score: {place.score}  </h4> 
+			<h4>Score: {place.score*100}  </h4> 
 			<h4>Finished at: {place.whendo}</h4> 
 			<h4>Reputation earned: {place.reputationneed}</h4>
 			{/* <Link className='SinglePlatformtitle' style={{textDecoration: "none"}} to={"/platform/"+place.PID+"/answer/"+place.QID } onClick={()=>this.store(place)}>    */}
@@ -96,7 +96,7 @@ render(){
 			<Card.Title>Deleted quiz</Card.Title>
 			<Card.Text  style={{fontSize:"24px"}}>
 				
-			<h4>Score: {place.score}  </h4>  
+			<h4>Score: {place.score*100}  </h4>  
 			<h4>Finished at: {place.whendo}</h4>  
 		 
  		</Card.Text >   

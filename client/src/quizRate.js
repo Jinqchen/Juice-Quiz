@@ -103,15 +103,15 @@ const initQuestions=   [
 
 get(){
   console.log("result start ")
-     const url = `https://juice-quiz.herokuapp.com/api/answer/result/${localStorage.getItem('QID')}`;
-		 //  const url= `http://localhost:3001/api/answer/result/${localStorage.getItem('QID')}`;
+    const url = `https://juice-quiz.herokuapp.com/api/answer/result/${localStorage.getItem('QID')}`;
+		       // const url= `http://localhost:3001/api/answer/result/${localStorage.getItem('QID')}`;
        Axios.get(url,{
          params:{
             UID: localStorage.getItem('UID')  
          }}).then((response) => { 
            console.log(response.data)
         console.log(response.data[0]['score']);
-        this.setState({score:response.data[0]['score']*100});
+        this.setState({score: Math.round(response.data[0]['score']*10000)/100});
         this.setState({timetaken:response.data[0]['timespend']});
         //h
         this.setState({limitedMin:  parseInt((this.state.timetaken)/60)})
