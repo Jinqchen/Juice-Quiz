@@ -38,7 +38,7 @@ export default class App extends Component {
 					   <Route path='/profile' element ={<ShowPlatformList/>}/>
 					   <Route path='/managePlatform' element ={<ManagePlatform/>}/>
 					   <Route path='/manageQuiz' element ={<QuizManageMent/>}/>
-					   <Route path='/platformEdit/:id' element ={<EditPlatform/>}/>
+					   <Route path='/managePlatform/platformEdit/:id' element ={<EditPlatform/>}/>
                        <Route path='/platformCreate' element ={<CreatePlatform/>}/>
 					   <Route path='/quizInit' element ={<QuizInit/>}/> 
 					   <Route path='/quizEdit/:id' element ={<QuizEdit/>}/>

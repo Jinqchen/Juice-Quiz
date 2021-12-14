@@ -1257,7 +1257,6 @@ app.post('/api/answer/updateHIS/:id', (req, res) => {
 	
 })
 
-
 // app.listen(3001,()=>{
 // 	  console.log("running");
 // 	})

@@ -7,7 +7,6 @@ import Axios from "axios";
 
 import styles  from "bootstrap/dist/css/bootstrap.min.css"
 import {Button, Card} from 'react-bootstrap';
-
     export default class managePlatform extends Component {
         constructor(props) {
             super(props);
@@ -60,7 +59,7 @@ render(){
     <Card.Title>{place.Pname}</Card.Title>
   
 
-	<Link to={'/platformEdit/'+place.Pname} onClick={()=>this.store(place)}>
+	<Link to={'./platformEdit/'+place.Pname} onClick={()=>this.store(place)}>
 	<Button variant="primary" onClick>Manage</Button>
 	</Link>
   </Card.Body>
