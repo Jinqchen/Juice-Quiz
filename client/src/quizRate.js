@@ -83,8 +83,8 @@ const initQuestions=   [
    setRate(rate){
        console.log(rate)
        this.setState({rating:rate},()=>{
-     //const url = `https://juice-quiz.herokuapp.com/api/answer/rating`;
-		  const url= `http://localhost:3001/api/answer/rating`;
+     const url = `https://juice-quiz.herokuapp.com/api/answer/rating`;
+		 // const url= `http://localhost:3001/api/answer/rating`;
        Axios.put(url,{
             QID:localStorage.getItem('QID'),
             rating:rate, 
@@ -100,8 +100,8 @@ const initQuestions=   [
 
 get(){
   console.log("result start ")
-     //const url = `https://juice-quiz.herokuapp.com/api/answer/result`;
-		  const url= `http://localhost:3001/api/answer/result/${localStorage.getItem('QID')}`;
+    const url = `https://juice-quiz.herokuapp.com/api/answer/result/${localStorage.getItem('QID')}`;
+		  // const url= `http://localhost:3001/api/answer/result/${localStorage.getItem('QID')}`;
        Axios.get(url,{
          params:{
             UID: localStorage.getItem('UID')  

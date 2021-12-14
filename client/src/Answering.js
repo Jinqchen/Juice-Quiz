@@ -69,8 +69,8 @@ export default class App extends Component {
 		  }
 	  }
 	componentDidMount = () => {
-        // const url = `https://juice-quiz.herokuapp.com/api/answer/${this.state.QID}`;
-		const url= `http://localhost:3001/api/answer/${this.state.QID}`;
+         const url = `https://juice-quiz.herokuapp.com/api/answer/${this.state.QID}`;
+		//const url= `http://localhost:3001/api/answer/${this.state.QID}`;
 		console.log("Component did mount")
         Axios.get(url)
 		.then(res=>{return res.data})
@@ -155,8 +155,8 @@ export default class App extends Component {
 
 
 	addHistory() {
-		// const url = `https://juice-quiz.herokuapp.com/api/answer/updateRep/${this.state.QID}`;
-			   const url= `http://localhost:3001/api/answer/updateHIS/${this.state.QID}`;
+		 const url = `https://juice-quiz.herokuapp.com/api/answer/updateHIS/${this.state.QID}`;
+		//	   const url= `http://localhost:3001/api/answer/updateHIS/${this.state.QID}`;
 				Axios.post(url,{
 					UID:localStorage.getItem('UID'),
 					Score: this.state.currentScore/this.state.queslength,
@@ -171,8 +171,8 @@ export default class App extends Component {
 
 
 	addRep=()=>{
-		 	 // const url = `https://juice-quiz.herokuapp.com/api/answer/updateRep/${this.state.QID}`;
-	     const url= `http://localhost:3001/api/answer/updateRep/${this.state.QID}`;
+		 	 const url = `https://juice-quiz.herokuapp.com/api/answer/updateRep/${this.state.QID}`;
+	      //const url= `http://localhost:3001/api/answer/updateRep/${this.state.QID}`;
 			Axios.put(url,{
 				PID:this.state.PID,
 				UID:localStorage.getItem('UID')

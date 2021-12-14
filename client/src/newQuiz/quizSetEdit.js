@@ -49,8 +49,8 @@ import './quizInit.css'
         
         
         submit(){ 
-       //     const url = `https://juice-quiz.herokuapp.com/api/updateQuizdes/${this.state.description}`;
-     const url= `http://localhost:3001/api/updateQuizdes/${this.state.description}`;
+            const url = `https://juice-quiz.herokuapp.com/api/updateQuizdes/${this.state.description}`;
+    // const url= `http://localhost:3001/api/updateQuizdes/${this.state.description}`;
      Axios.put(url,{QID:this.state.QID}).then((response) => { 
       console.log(response); 
       }

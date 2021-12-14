@@ -50,16 +50,16 @@ import {Button, Card} from 'react-bootstrap';
         }
 
        updateName(){
-    //    const url = `https://juice-quiz.herokuapp.com/api/EditPlatform/name/${this.state.name}`;
-          const url= `http://localhost:3001/api/EditPlatform/name/${this.state.name}`;
+       const url = `https://juice-quiz.herokuapp.com/api/EditPlatform/name/${this.state.name}`;
+         //  const url= `http://localhost:3001/api/EditPlatform/name/${this.state.name}`;
         Axios.put(url,{PID:this.state.EPID}).then((response) => { 
       console.log(response); 
       }
       )
     }
     updateTag(){
-    //  const url = `https://juice-quiz.herokuapp.com/api/EditPlatform/tag/${this.state.tag}`;
-        const url= `http://localhost:3001/api/EditPlatform/tag/${this.state.tag}`;
+     const url = `https://juice-quiz.herokuapp.com/api/EditPlatform/tag/${this.state.tag}`;
+       //  const url= `http://localhost:3001/api/EditPlatform/tag/${this.state.tag}`;
       
     Axios.put(url,{PID:this.state.EPID}).then((response) => { 
     console.log(response); 
@@ -67,8 +67,8 @@ import {Button, Card} from 'react-bootstrap';
     )
   }
   updateRep(){
-     // const url = `https://juice-quiz.herokuapp.com/api/EditPlatform/replimit/${this.state.replimit}`;
-     const url= `http://localhost:3001/api/EditPlatform/replimit/${this.state.requireReputation}`;
+      const url = `https://juice-quiz.herokuapp.com/api/EditPlatform/replimit/${this.state.replimit}`;
+     //const url= `http://localhost:3001/api/EditPlatform/replimit/${this.state.requireReputation}`;
     
   Axios.put(url,{PID:this.state.EPID}).then((response) => { 
   console.log(response); 
@@ -85,9 +85,10 @@ handlefileSelected (event){
 postImage(image, name) {
   const formData = new FormData();
   formData.append("image", image)
-  formData.append("name", name)
-
-  const result = Axios.post(`http://localhost:3001/images/${this.state.PID}`, formData, { headers: {'Content-Type': 'multipart/form-data'}})
+  formData.append("name", name);
+  const url=`https://juice-quiz.herokuapp.com/images/${this.state.PID}`;
+  //const url=`http://localhost:3001/images/${this.state.PID}`;
+  const result = Axios.post(url, formData, { headers: {'Content-Type': 'multipart/form-data'}})
   return result.data
 }
 uploadIcon(event){
@@ -101,8 +102,8 @@ submit(e){
   if(this.state.name==''||this.state.option==''||this.state.requireReputation<=0){
     alert("!")
   }else{
- //   const url = 'https://juice-quiz.herokuapp.com/api/createplatform';
- const url= 'http://localhost:3001/api/createplatform';
+    const url = 'https://juice-quiz.herokuapp.com/api/createplatform';
+ //const url= 'http://localhost:3001/api/createplatform';
  Axios.post(url, { 
         Pname: this.state.name, 
         tag: this.state.tag, 

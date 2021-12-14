@@ -107,8 +107,8 @@ store=(place)=>{
  
 
 delete_quiz(quizID){
-//  const url = `https://juice-quiz.herokuapp.com/api/platform/delCoown/${this.state.PID}`;
-    const url= `http://localhost:3001/api/quiz/delete/${quizID}`;	     
+ const url = `https://juice-quiz.herokuapp.com/api/quiz/delete/${quizID}`;
+  //   const url= `http://localhost:3001/api/quiz/delete/${quizID}`;	     
     Axios.delete(url,{ data:
 		{UID: localStorage.getItem("UID")}  
 }).then((response) => { 
