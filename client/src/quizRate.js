@@ -187,8 +187,8 @@ render(){
             
           </label>
  
-       <label style={{ textAlign:"left", width:"100%"}}>You defeated  <label style={{ textAlign:"left", width:"100%",color: "orange"}}>{this.state.rank }%  </label>
-       users of juice quiz</label>
+       {/* <label style={{ textAlign:"left", width:"100%"}}>You defeated  <label style={{ textAlign:"left", width:"100%",color: "orange"}}>{this.state.rank }%  </label>
+       users of juice quiz</label> */}
 
        </form>
        

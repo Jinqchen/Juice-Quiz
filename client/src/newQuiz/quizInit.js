@@ -16,24 +16,31 @@ import {Button, Card} from 'react-bootstrap';
               name:"",
               description:"",
               timeLimited:true,
-              limitedHour:0,
-              limitedMin:0,
+              limitedHour:1,
+              limitedMin:1,
               PID:localStorage.getItem('PID'),
               UID:localStorage.getItem('UID'),
               success:false,
               Repoint:0,
               QID:0,
+              validFlag:false
             };    
           }
         
         handleChangeName(e) {  
+          
+        this.checkValid()
             this.setState({name: e.target.value});   
         }
         handleChangeRep(e) {  
+          
+        this.checkValid()
           this.setState({Repoint: e.target.value});   
       }
      
         handleChangeDiscription(e) {  
+          
+        this.checkValid()
         this.setState({description: e.target.value});   
         }
 
@@ -49,7 +56,14 @@ import {Button, Card} from 'react-bootstrap';
         handleTimeMin(e){
             this.setState({limitedMin: e.target.value});    
         } 
-        
+        checkValid(){
+          console.log(this.state.checkValid)
+          if(this.state.name==''||this.state.description==''||this.state.requireReputation<=0){
+          return false
+          }else{
+            this.setState({validFlag:true})
+            return true
+          }}
         
         submit(){ 
            const url = 'https://juice-quiz.herokuapp.com/api/initQuiz';
@@ -82,7 +96,6 @@ import {Button, Card} from 'react-bootstrap';
 
 
 render(){ 
-        
 	
    
 	return (
@@ -116,22 +129,22 @@ render(){
         <div style={{display:'flex',color:'white',marginTop:'20px'}}> 
         <div className='timeInit'> Hour
              
-        <input maxLength={2} className="timeQuizInit" required onChange={this.handleTimeHour.bind(this)}></input> 
+        <input type="number" max="99"  value={this.state.limitedHour}  className="timeQuizInit" required onChange={this.handleTimeHour.bind(this)}></input> 
           </div> 
            <div  className='timeInit'> Min
-        <input maxLength={2} className="timeQuizInit" required onChange={this.handleTimeMin.bind(this)}></input> 
+        <input type="number" max="99" value={this.state.limitedMin} className="timeQuizInit" required onChange={this.handleTimeMin.bind(this)}></input> 
           </div>  
           </div>
           }
  
       <div className='initeditInput' >  Reputation Point
-        <input  className="initQuizTitle" style={{width:'50%',marginLeft:'20px'}} required onChange={this.handleChangeRep.bind(this)}></input>  
+        <input type="number" value={this.state.requireReputation} className="initQuizTitle" style={{width:'50%',marginLeft:'20px'}} required onChange={this.handleChangeRep.bind(this)}></input>  
         </div>    
 
  
-        <Link to={'/quizEdit/'+this.state.QID}>
+      {this.state.validFlag&&  <Link to={'/quizEdit/'+this.state.QID}>
       <Button style={{backgroundColor:'white',color:"#fc7e18",border:'none',marginLeft:'40%',width:'10%',height:'50px',marginTop:'20px'}} className="initSumbit" onClick={()=>this.submit()} >Create</Button>  
-        </Link>        
+        </Link>        }
 
        </form>
          </div>

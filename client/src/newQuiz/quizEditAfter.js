@@ -235,7 +235,37 @@ const initQuestions=   [
         
       }
        
-        
+      checkBoard(){ 
+          
+        let tmp=false
+       
+         this.state.questions.forEach(element => {
+           console.log( element.questionText +", "+
+           element.answerOptions[0].answerText +", "+
+           element.answerOptions[1].answerText+", "+
+           element.answerOptions[2].answerText +", "+
+           element.answerOptions[3].answerText)
+           console.log( element.questionText===""||
+           element.answerOptions[0].answerText===""||
+           element.answerOptions[1].answerText===""||
+           element.answerOptions[2].answerText===""||
+           element.answerOptions[3].answerText==="")
+         tmp= tmp||element.questionText===""||
+          element.answerOptions[0].answerText===""||
+          element.answerOptions[1].answerText===""||
+          element.answerOptions[2].answerText===""||
+          element.answerOptions[3].answerText===""
+          if( tmp
+         ) {  
+          // alert("empty field in questions!")  
+         } 
+        });
+        console.log("tmp: "+tmp)
+        return tmp
+      }
+
+
+
     
 
   
@@ -345,7 +375,11 @@ render(){
        {/* <button className="QEAedit" type="button" onClick={()=>this.addNewQuestion()} >new</button>  */}
        <button className="QEAedit" type="button"  onClick={()=>this.deleteCurrentQuestion()} >delete</button>
        
-      <button type="button" className="QEAsubmit" onClick={()=>this.submit()} >Submit</button>   
+       
+
+      {!this.checkBoard()&&  <Link to='/'>  
+      <button type="button" className="QEAsubmit" onClick={()=>this.submit()} >Submit?</button> 
+        </Link> }  
        </div>
         
        </form>

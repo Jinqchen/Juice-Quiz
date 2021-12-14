@@ -27,12 +27,14 @@ export default class App extends Component {
 			hour:1,
 			minute:0,
       		second:5,
-			time:0,
-			TimeLimitFlag:true,
-			timeSpend:0
+			TimeLimitFlag:true, 
+			timeSpend:0,
+			date:"",
+			confirmFlag:false
 		};
 		this.start = this.start.bind(this)
         this.no = this.no.bind(this) 
+		
 	}
 
 
@@ -62,12 +64,16 @@ export default class App extends Component {
 		  }
 		
 	  } 
-
-	  checkTime(){
-		   
+	 
+	  checkTime(){ 
+		
 		  if(!this.state.showScore&&this.state.minute+this.state.second<=0){
 			  this.setState({showScore:true})
+			 
+			
 		  }
+
+		  
 	  }
 	componentDidMount = () => {
 		this.get_time();
@@ -109,6 +115,8 @@ export default class App extends Component {
 
 
 	processData = () => {
+
+	
 		console.log(this.state.data);
 		var data= this.state.data
 		this.setState({ queslength: data.length/4 });
@@ -166,8 +174,7 @@ export default class App extends Component {
 			
 			});
 			if(this.state.currentQuestion==this.state.queslength-1){
-				
-			console.log("ss")
+				 
 			}
 		
 		
@@ -177,6 +184,8 @@ export default class App extends Component {
 
 
 	addHistory() {
+	
+
 		 const url = `https://juice-quiz.herokuapp.com/api/answer/updateHIS/${this.state.QID}`;
 		//	   const url= `http://localhost:3001/api/answer/updateHIS/${this.state.QID}`;
 				Axios.post(url,{
@@ -193,16 +202,22 @@ export default class App extends Component {
 
 
 	addRep=()=>{
+		
+		 const timestamp = Date.now();
+		 const record=new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(timestamp);
+		 this.setState({date:record})
+	 	console.log(this.state.date) 
+ 
 		 	 const url = `https://juice-quiz.herokuapp.com/api/answer/updateRep/${this.state.QID}`;
 	      //const url= `http://localhost:3001/api/answer/updateRep/${this.state.QID}`;
 			Axios.put(url,{
 				PID:this.state.PID,
 				UID:localStorage.getItem('UID')
-		  }).then((response) => { 
-			console.log(response);  
+		  }).then((response) => {  
 			
 		 })
 		this.addHistory()
+		this.setState({confirmFlag:true})
 		 }
 
 
@@ -219,15 +234,16 @@ export default class App extends Component {
 							Submit<button  onClick={()=>this.addRep()>Submit</button>
 			</Link> */}
 
-<Link   to ={{
+  
+{!this.state.confirmFlag&&<button onClick={()=>this.addRep()}>confirm</button>}
+{this.state.confirmFlag&&<Link   to ={{
     pathname: "/quizRate", 
     state: { 
        abb:1
     }
-   }} onClick={()=>this.addRep()}>
- 	 Submit
-
-</Link>
+   }}  >
+ 	 Submit   
+</Link> }
 					</div>
 				) : (
 					<>
@@ -241,12 +257,8 @@ export default class App extends Component {
 							{this.state.answerOptions.map((answerOption) =>
 								<button classname='answering_Btn' onClick={() => this.handleNextQuestion(answerOption)}>{answerOption['text']}</button>
 							)}
-							
 						</div>
-
 						<div>
-							
-
 								{this.state.TimeLimitFlag&&	<div className="Timer_container">
 								Time remain: {this.state.minute}m : {this.state.second}s
 								</div>

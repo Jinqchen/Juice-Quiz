@@ -24,12 +24,14 @@ import {Button, Card} from 'react-bootstrap';
               PID:'',
               success:false,
               file:'',
-              renderFlag:false
+              renderFlag:false,
+              validFlag:false
             };    
           }
         handleChangeName(e) {  
             this.setState({name: e.target.value}); 
             this.setState({namechange:true});  
+            this.checkValid()
         }
      
         handleChangeTag(e) {  
@@ -43,6 +45,7 @@ import {Button, Card} from 'react-bootstrap';
         }
 
         handleReputation(e){
+          this.checkValid()
             this.setState({requireReputation: e.target.value}); 
             console.log(this.state.requireReputation)
             this.setState({repchange:true});  
@@ -56,6 +59,15 @@ import {Button, Card} from 'react-bootstrap';
       }
       )
     }
+
+    checkValid(){
+      console.log(this.state.checkValid)
+      if(this.state.name==''||this.state.option==''||this.state.requireReputation<=0){
+      return false
+      }else{
+        this.setState({validFlag:true})
+        return true
+      }}
     updateTag(){
      const url = `https://juice-quiz.herokuapp.com/api/EditPlatform/tag/${this.state.tag}`;
        //  const url= `http://localhost:3001/api/EditPlatform/tag/${this.state.tag}`;
@@ -95,6 +107,8 @@ uploadIcon(event){
   event.preventDefault()
   const result =  this.postImage(this.state.file, this.state.name)
 }
+
+
 
 submit(e){      
  
@@ -189,7 +203,7 @@ render(){
 
             <label className='SIGNUP'>New Platform</label> 
                 <div className="CPuserInput">    
-                <div className='EPeditInput' style={{ color:'white',marginLeft:'30px'}}>Platform Name:  
+                <div className='EPeditInput' type="text" style={{ color:'white',marginLeft:'30px'}}>Platform Name:  
                 <input style={{width:"50%"}} onChange={this.handleChangeName.bind(this)}></input>
           </div> 
                   </div>
@@ -236,17 +250,14 @@ render(){
 }
 
                 <div className="userInput">     
-                <input onChange={this.handlefileSelected.bind(this)} type="file" accept="image/*"></input>
+                <input  onChange={this.handlefileSelected.bind(this)} type="file" accept="image/*"></input>
  
                 </div>
 
-                <div className="userInput">     
-
-               
-                <Link to='/' > 
-        
-                <Button className='EPsubmit' style={{background:'white',color:"#F78223",border:"none"}} onClick={(e)=>this.submit(e)}>Create</Button>
-                        </Link>
+                <div className="userInput">      
+                        { this.state.validFlag&&<Link to='/' > 
+                        <Button className='EPsubmit' style={{background:'white',color:"#F78223",border:"none"}} onClick={(e)=>this.submit(e)}>Create</Button>
+                        </Link>}
                
                 </div>
               
