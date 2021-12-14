@@ -49,8 +49,8 @@ function IconTab(props){
 
 
 useEffect(() => {
-      const url = `https://juice-quiz.herokuapp.com/api/getusername/${localStorage.getItem('UID')}`;
-  //  const url= `http://localhost:3001/api/getusername/${localStorage.getItem('UID')}`;
+    const url = `https://juice-quiz.herokuapp.com/api/getusername/${localStorage.getItem('UID')}`;
+    //  const url= `http://localhost:3001/api/getusername/${localStorage.getItem('UID')}`;
    Axios.get(url).then(res=>{return res.data})
    .then((response) => { 
      console.log(response[0]['Uname'])  

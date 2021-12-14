@@ -94,8 +94,8 @@ op_delrep=(PID)=>{
 
  unsubscribe=(PID)=>{
 	 console.log(PID)
-   // const url = 'https://juice-quiz.herokuapp.com/api/platform/owner';
-		 const url= `http://localhost:3001/api/platform/owner`;
+    const url = 'https://juice-quiz.herokuapp.com/api/platform/owner';
+	//	 const url= `http://localhost:3001/api/platform/owner`;
 		Axios.post(url, {
 		   PID : PID,
 		   UID: localStorage.getItem("UID"),
@@ -103,8 +103,8 @@ op_delrep=(PID)=>{
 		   //console.log(response.data);
 		   this.setState({owner: response.data["owner"]})
            var owner = response.data["owner"];
-			//const url = 'https://juice-quiz.herokuapp.com/api/platform/coowner';
-			const url= `http://localhost:3001/api/platform/coowner`;
+			const url = 'https://juice-quiz.herokuapp.com/api/platform/coowner';
+			//const url= `http://localhost:3001/api/platform/coowner`;
 			var result =  Axios.post(url, {
 			PID : PID,
 			UID: localStorage.getItem("UID"),
@@ -116,14 +116,14 @@ op_delrep=(PID)=>{
 				alert("You can't unsubscribe your own platform!")
 			}
 			else {
-				// if (co_owner){
-				// this.op_delrep(PID);
-				// this.op_uncoown(PID);	
-			    // }
-			    // else{
-				// this.op_delrep(PID);
-			    // }
-			    // this.op_subscribe(PID)
+				if (co_owner){
+				this.op_delrep(PID);
+				this.op_uncoown(PID);	
+			    }
+			    else{
+				this.op_delrep(PID);
+			    }
+			    this.op_subscribe(PID)
 			    }
 			});
 

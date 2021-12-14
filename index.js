@@ -1129,6 +1129,7 @@ app.post('/api/answer/updateHIS/:id', (req, res) => {
 	const UID= req.body.UID;  
 	const score = req.body.Score;
 	const timespend = req.body.timeSpend;
+	const whendo = req.body.Date;
 	console.log("update history")
 	console.log(QID);
 	console.log(UID);
@@ -1136,8 +1137,8 @@ app.post('/api/answer/updateHIS/:id', (req, res) => {
 	console.log("end")
     con.query(
 	   `insert into history(UID,QID,whendo,rate,score,timespend)
-	   value(?,?,now(),?,?,?);`,
-	   [UID,QID,null,score,timespend],
+	   value(?,?,?,?,?,?);`,
+	   [UID,QID,whendo,null,score,timespend],
 	   (err, result) => {
 		console.log(result); 		
 	   }
@@ -1161,10 +1162,10 @@ app.post('/api/answer/updateHIS/:id', (req, res) => {
 })
 
 
-app.listen(3001,()=>{
-	  console.log("running");
-	})
+// app.listen(3001,()=>{
+// 	  console.log("running");
+// 	})
 	
-// app.listen(process.env.PORT || 3001,()=>{
-//   console.log('listening for requests on port'+ process.env.PORT);
-// })
+app.listen(process.env.PORT || 3001,()=>{
+  console.log('listening for requests on port'+ process.env.PORT);
+})
