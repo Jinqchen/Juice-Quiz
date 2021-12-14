@@ -183,8 +183,8 @@ const initQuestions=   [
           }
           // console.log(question);
         
-             // const url = 'https://juice-quiz.herokuapp.com/api/quizsetEdit/insert';
-          const url= 'http://localhost:3001/api/quizsetEdit/insert';
+             const url = 'https://juice-quiz.herokuapp.com/api/quizsetEdit/insert';
+         //  const url= 'http://localhost:3001/api/quizsetEdit/insert';
                   
             Axios.post(url, { 
                 QID: localStorage.getItem('QID'), 

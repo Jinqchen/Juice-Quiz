@@ -73,8 +73,8 @@ export default class App extends Component {
 	  }
 	componentDidMount = () => {
 		this.get_time();
-        // const url = `https://juice-quiz.herokuapp.com/api/answer/${this.state.QID}`;
-		const url= `http://localhost:3001/api/answer/${this.state.QID}`;
+         const url = `https://juice-quiz.herokuapp.com/api/answer/${this.state.QID}`;
+		//const url= `http://localhost:3001/api/answer/${this.state.QID}`;
 		console.log("Component did mount")
         Axios.get(url)
 		.then(res=>{return res.data})
@@ -89,8 +89,8 @@ export default class App extends Component {
     
 
 	get_time(){
-		//const url = `https://juice-quiz.herokuapp.com/api/answer/time/${this.state.QID}`;
-		const url= `http://localhost:3001/api/answer/time/${this.state.QID}`;
+		const url = `https://juice-quiz.herokuapp.com/api/answer/time/${this.state.QID}`;
+		//const url= `http://localhost:3001/api/answer/time/${this.state.QID}`;
         Axios.get(url)
 		.then(res=>{return res.data})
 		.then( result =>{ 
@@ -181,8 +181,8 @@ export default class App extends Component {
 
 	addHistory(date) {
 		 console.log(date)
-		//	 const url = `https://juice-quiz.herokuapp.com/api/answer/updateHIS/${this.state.QID}`;
-		   const url= `http://localhost:3001/api/answer/updateHIS/${this.state.QID}`;
+			 const url = `https://juice-quiz.herokuapp.com/api/answer/updateHIS/${this.state.QID}`;
+		  // const url= `http://localhost:3001/api/answer/updateHIS/${this.state.QID}`;
 				Axios.post(url,{
 					UID:localStorage.getItem('UID'),
 					Score: this.state.currentScore/this.state.queslength,
@@ -197,23 +197,24 @@ export default class App extends Component {
 
 
 		addRep=()=>{
-		
+		    if(localStorage.getItem("SUB")){
 			const timestamp = Date.now();
 			const record=new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(timestamp);
 			this.setState({date:timestamp})
 			console.log(this.state.date) 
 	
-				//  const url = `https://juice-quiz.herokuapp.com/api/answer/updateRep/${this.state.QID}`;
-			  const url= `http://localhost:3001/api/answer/updateRep/${this.state.QID}`;
+				  const url = `https://juice-quiz.herokuapp.com/api/answer/updateRep/${this.state.QID}`;
+			  //const url= `http://localhost:3001/api/answer/updateRep/${this.state.QID}`;
 			   Axios.put(url,{
 				   PID:this.state.PID,
 				   UID:localStorage.getItem('UID')
 
 			 }).then((response) => {  
 			   
-			})
-		   this.addHistory(record)
+			})}
+		   this.addHistory()
 		   this.setState({confirmFlag:true})
+			
 			}
 
 

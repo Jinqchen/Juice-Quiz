@@ -751,8 +751,7 @@ app.post('/api/CreatePlatform/doown', (req, res) => {
 	const file = req.file
 	console.log(file);
 	console.log("start")
-	var link='/images.png';
-	if (file!==undefined){
+	
 	const result = await uploadFile(file);
 	console.log("phase1")
 	await unlinkFile(file.path);
@@ -760,7 +759,7 @@ app.post('/api/CreatePlatform/doown', (req, res) => {
 	var link = result.Location;
 	link = link.slice(38)
 	console.log(link)   
-   };
+  
 	
 	con.query(`insert into platformstyle(PID,Pcover) value(?,?);`,
 	[PID,link],
@@ -907,43 +906,63 @@ app.put('/api/updateQuizdes/:description',(req,res)=>{
 
 app.post('/api/quizsetCreate', (req, res) => {
 	const QID = req.body.QID;
-	const questions = req.body.questions;  
+	const index = req.body.index;
+	const questiontext = req.body.questiontext;  
 	console.log(QID);
-	console.log(questions[0]['answerOptions']);
-	console.log(questions.length);
-    for (var i=0;i<questions.length;i++){
-		console.log(i)
-		console.log(questions[i]['questionText'])
-		con.getConnection(function (err,connection) {
+	console.log(index);
+	console.log(questiontext);
+	con.getConnection(function (err,connection) {
 			connection.query(
 	     `insert into quizquestion(QID,QuestionID,Qtext)
 	     value(?,?,?);`,
-	     [QID,i+1,questions[i]['questionText']],
+	     [QID,index+1,questiontext],
 		 (err,res)=>{connection.destroy();}
 	     );
 		})
-		
-		
-	 var options=questions[i]['answerOptions']
-	 console.log(options)
-	 for (var j=0;j<options.length;j++){
-		 con.getConnection(function (err,connection) {
-			 connection.query(
-		`insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
-		VALUE(?,?,?,?,?);`,
-		[QID,i+1,j+1,options[j]['answerText'],options[j]['isCorrect']],
-		(err, result) => {
-			console.log(err);
-			connection.destroy();	
-		  }
-	    ); 
-		})
-    
-	 }
+})		
+	
+	// app.post('/api/quizsetInsert', (req, res) => {
+	// 	const QID = req.body.QID;
+	// 	const index = req.body.index;
+	// 	const j = req.body.j;
+	// 	const answertext = req.body.answertext; 
+	// 	const isCorrect = req.body.isCorrect; 
+	// 	console.log("insert quizoption")
+	// 	console.log(QID);
+	// 	console.log(index);
+	// 	console.log(j)
+	// 	console.log(answertext);
+	// 	con.getConnection(function (err,connection) {
+	// 			connection.query(
+	// 		 `insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+	// 	    	VALUE(?,?,?,?,?);`,
+	// 		 [QID,index+1,j+1,answertext,isCorrect],
+	// 		 (err,res)=>{connection.destroy();}
+	// 		 );
+	// 		})
+	// })	
 
-	}
-    res.send({success:true})
-});
+	app.post('/api/quizsetInsert', (req, res) => {
+		const value = req.body.value;
+		console.log(value)
+	
+		con.getConnection(function (err,connection) {
+				connection.query(
+			 `insert into quizoptions(QID,QuestionID,optionnumber,Optionx,correctness)
+		    	VALUE ?;`,
+			 [value],
+			 (err,res,fields)=>{
+				console.log(res) 
+				connection.destroy();
+			
+			
+			
+			
+			}
+			 );
+			})
+	})	
+
 
 app.post('/api/quizsetEdit/insert', (req, res) => {
 	const QID = req.body.QID;
@@ -1198,7 +1217,7 @@ app.post('/api/answer/updateHIS/:id', (req, res) => {
 	const UID= req.body.UID;  
 	const score = req.body.Score;
 	const timespend = req.body.timeSpend;
-	const whendo = req.body.Date;
+	
 	console.log("update history")
 	console.log(QID);
 	console.log(UID);
@@ -1207,8 +1226,8 @@ app.post('/api/answer/updateHIS/:id', (req, res) => {
 	con.getConnection(function (err,connection) {
 		connection.query(
 	   `insert into history(UID,QID,whendo,rate,score,timespend)
-	   value(?,?,?,?,?,?);`,
-	   [UID,QID,whendo,null,score,timespend],
+	   value(?,?,now(),?,?,?);`,
+	   [UID,QID,null,score,timespend],
 	   (err, result) => {
 		console.log(result);
 		connection.destroy(); 		

@@ -45,8 +45,8 @@ const initQuestions=   [
       
           componentDidMount = () => {
             
-            // const url = `https://juice-quiz.herokuapp.com/api/answer/${this.state.QID}`;
-          const url= `http://localhost:3001/api/answer/${this.state.QID}`;
+            const url = `https://juice-quiz.herokuapp.com/api/answer/${this.state.QID}`;
+           //const url= `http://localhost:3001/api/answer/${this.state.QID}`;
             Axios.get(url)
         .then(res=>{return res.data})
         .then( result =>{ 
@@ -184,23 +184,80 @@ const initQuestions=   [
         
         
         //sun
-        submit(){   
-        //  const url = 'https://juice-quiz.herokuapp.com/api/quizsetCreate';
-           const url= 'http://localhost:3001/api/quizsetCreate';
+       async insertQuestionText(i,questiontext){   
+          const url = 'https://juice-quiz.herokuapp.com/api/quizsetCreate';
+          // const url= 'http://localhost:3001/api/quizsetCreate';
       
          Axios.post(url, { 
               QID: localStorage.getItem('QID'), 
-              questions:this.state.questions 
+              index:i,
+              questiontext:questiontext 
          }).then((response) => { 
          console.log(response); 
-         alert("create success")
-         }); 
-    
+         });    
     }
 
+  //  async insertQuestionOption(i,j,answertext,isCorrect){   
+  //     //  const url = 'https://juice-quiz.herokuapp.com/api/quizsetInsert';
+  //        const url= 'http://localhost:3001/api/quizsetInsert';
+  //     console.log(answertext)
+  //      Axios.post(url, { 
+  //           QID: localStorage.getItem('QID'), 
+  //           index:i,
+  //           j:j,
+  //           answertext:answertext,
+  //           isCorrect:isCorrect
+  //      }).then((response) => { 
+  //      console.log(response); 
+  //      });    
+  // }
 
 
+     submit(){
+     var question = this.state.questions;
+     var length = question.length;
+     for(var i=0;i<length;i++){
+       console.log(i)
+       console.log(question[i]['questionText'])
+        this.insertQuestionText(i,question[i]['questionText']);
+       var options=question[i]['answerOptions']
+       var query =[];
+       console.log(options)
+      for(var j=0; j<options.length;j++){
+        console.log(j)
+        query.push([localStorage.getItem('QID'),i+1,j+1,options[j]['answerText'],options[j]['isCorrect']])
+      
+      }
+      this.insertQuestionOption(query)
+     }
 
+     }
+
+
+ async insertQuestionOption(query){   
+       const url = 'https://juice-quiz.herokuapp.com/api/quizsetInsert';
+       //   const url= 'http://localhost:3001/api/quizsetInsert';
+     
+       Axios.post(url, { 
+           value :query
+       }).then((response) => { 
+       console.log(response); 
+       });    
+  }
+
+  //   submit(){   
+  //     //  const url = 'https://juice-quiz.herokuapp.com/api/quizsetCreate';
+  //        const url= 'http://localhost:3001/api/quizsetCreate';
+    
+  //      Axios.post(url, { 
+  //           QID: localStorage.getItem('QID'), 
+  //           questions:this.state.questions 
+  //      }).then((response) => { 
+  //      console.log(response); 
+  //      alert("create success")
+  //      }); 
+  
+  // }
 
 
 
