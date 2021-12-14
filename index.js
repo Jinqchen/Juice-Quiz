@@ -259,7 +259,8 @@ app.get ('/api/manageQuiz/quizlist/:id',(req,res)=>{
     
 	con.query(
 		`select q.Qname,q.ave_rate,q.hot,q.description,q.reputationneed,q.Taketime,q.releasedate,
-		h.whendo,h.rate,h.score,h.timespend from history h,quiz q where q.QID=h.QID AND UID=${UID};`, 
+        h.whendo,h.rate,h.score,h.timespend,c.PID
+        from history h,quiz q,contain c where q.QID=h.QID AND UID=${UID} AND q.QID=C.QID;`, 
 		function (err1, result) {
 		if (err1) throw err1;
 		console.log(result);
@@ -468,9 +469,9 @@ app.post('/api/platform/coowner', (req, res) => {
 	  `SELECT EXISTS(SELECT UID FROM own WHERE UID=? AND PID=?)`,
 	  [UID,PID],
 	  (err, result) => {
-		//  console.log(result);
-		  var sub =result[0]["EXISTS(SELECT UID FROM own WHERE UID='"+UID+"' AND PID='"+PID+"')"];
-		//  console.log(sub);
+		  console.log(result);
+		  var sub =result[0][`EXISTS(SELECT UID FROM own WHERE UID='${UID}' AND PID=${PID})`];
+	     console.log(sub);
 		if (err) {
 		  res.send({ err: err });
 		}
@@ -702,7 +703,7 @@ app.post('/api/CreatePlatform/doown', (req, res) => {
 	const file = req.file
 	console.log(file);
 	console.log("start")
-	var link='/images.jpg';
+	var link='/images.png';
 	if (file!==undefined){
 	const result = await uploadFile(file);
 	console.log("phase1")

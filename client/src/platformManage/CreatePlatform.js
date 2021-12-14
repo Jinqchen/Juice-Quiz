@@ -99,29 +99,29 @@ uploadIcon(event){
 
 submit(e){      
    this.uploadIcon(e)
-//   if(this.state.name==''||this.state.option==''||this.state.requireReputation<=0){
-//     alert("!")
-//   }else{
-//     const url = 'https://juice-quiz.herokuapp.com/api/createplatform';
-//  //const url= 'http://localhost:3001/api/createplatform';
-//  Axios.post(url, { 
-//         Pname: this.state.name, 
-//         tag: this.state.tag, 
-//         replimit:this.state.requireReputation,
+  if(this.state.name==''||this.state.option==''||this.state.requireReputation<=0){
+    alert("!")
+  }else{
+   // const url = 'https://juice-quiz.herokuapp.com/api/createplatform';
+ const url= 'http://localhost:3001/api/createplatform';
+ Axios.post(url, { 
+        Pname: this.state.name, 
+        tag: this.state.tag, 
+        replimit:this.state.requireReputation,
         
-//    }).then((res)=>{return res.data})
-//    .then((response) => { 
-//      this.setState({PID:response['PID']});
-//      this.setState({success:response['success']});
-//    }); 
-//  if (this.state.success){
+   }).then((res)=>{return res.data})
+   .then((response) => { 
+     this.setState({PID:response['PID']});
+     this.setState({success:response['success']});
+   }); 
+ if (this.state.success){
  
-//   this.own();
-//   this.inital_reputation();
-//   alert("Platform Created!") 
-//  }
+  this.own();
+  this.inital_reputation();
+  alert("Platform Created!") 
+ }
   
-//   }
+  }
  
      }
     
