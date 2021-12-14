@@ -34,6 +34,7 @@ const initQuestions=   [
     key:1
 }
 
+ 
 
 ]
 
@@ -154,14 +155,15 @@ get(){
 
 
 render(){  
-   
+  // const { state } = this.useLocation();
+  //  console.log( this.props.location.state )
 	return (
 		<>
         <span>
       
 		 <div className='rateBoardlayOut'> 
-     <Link to='/'>
-            <button className="cancel"   >X</button> </Link>
+     <Link to='/' >
+            <button className="cancel"    >X</button> </Link>
          <img src="logo.jpg" className="quizInitIcon" style={{marginBottom:'20px'}}></img>  
         { <div className="editQuestionList"  >
         {this.state.questions.map((item, index) => {
@@ -199,7 +201,9 @@ render(){
 
  
  <div>
-          <Button className='rateConfirm' onClick={()=>this.confirm()}>Confirm</Button>
+       
+     <Link to='/' > 
+          <Button className='rateConfirm' onClick={()=>this.confirm()}>Confirm</Button></Link>
         </div>
         <div></div>
          </div>

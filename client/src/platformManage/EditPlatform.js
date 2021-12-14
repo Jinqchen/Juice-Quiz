@@ -14,7 +14,7 @@ import {Button, Card} from 'react-bootstrap';
             this.state = { 
               trigger:false,   
               name:"",
-              tag:"",
+              tag:"music",
               namechange:false,
               tagchange:false,
               oneOnwer:false,
@@ -22,10 +22,12 @@ import {Button, Card} from 'react-bootstrap';
               repchange:false,
               EPID:localStorage.getItem('EditPID'),
               success:false,
-              file:''
+              file:'',
+              validFlag:false
             };    
           }
-        handleChangeName(e) {  
+        handleChangeName(e) {   
+	this.checkValid()
             this.setState({name: e.target.value}); 
             this.setState({namechange:true});  
         }
@@ -40,6 +42,8 @@ import {Button, Card} from 'react-bootstrap';
         }
 
         handleReputation(e){
+          
+	this.checkValid()
             this.setState({requireReputation: e.target.value}); 
             console.log(this.state.requireReputation)
             this.setState({repchange:true});  
@@ -78,6 +82,7 @@ import {Button, Card} from 'react-bootstrap';
 
        
 handlefileSelected (event){
+
   const files = event.target.files[0]
   this.setState({file:files})
 }
@@ -98,12 +103,19 @@ uploadIcon(event){
   const result =  this.postImage(this.state.file, this.state.name)
 }
 
+
+checkValid(){
+  if(this.state.name==''||this.state.option==''||this.state.requireReputation<=0){
+  return false
+  }else{
+    this.setState({validFlag:true})
+    return true
+  }
+}
 submit(e){       
      const url = 'https://juice-quiz.herokuapp.com/api/createplatform';
       //const url= 'http://localhost:3001/api/createplatform';
-    if(this.state.name==''||this.state.option==''||this.state.requireReputation<=0){
-      alert("!")
-    }else{
+    if(this.checkValid()){
      Axios.post(url, { 
             Pname: this.state.name, 
             tag: this.state.tag, 
@@ -124,7 +136,6 @@ submit(e){
     
 render(){ 
         
-	
    
 	return (
 		<>
@@ -140,7 +151,7 @@ render(){
             <label className='SIGNUP'>Manage Platform</label> 
                 <div className="userInput">    
                 <label className='EPeditInput'>Platform Name:  
-                <input style={{width:"480px",marginLeft:'0px'}} value={this.state.name} onChange={this.handleChangeName.bind(this)}></input>
+                <input type={"text"} style={{width:"480px",marginLeft:'0px'}} value={this.state.name} onChange={this.handleChangeName.bind(this)}></input>
           </label> 
                   </div>
                    
@@ -186,7 +197,12 @@ render(){
                 <input onChange={this.handlefileSelected.bind(this)} type="file" accept="image/*"></input> </div>
 
                 <div className="userInput">     
-                <Button className='EPsubmit' style={{background:'white',color:"#F78223",border:"none"}} onClick={(e)=>this.submit(e)}>Save</Button>
+               
+    { this.state.validFlag&&<Link to='/' > 
+     <Button className='EPsubmit' style={{background:'white',color:"#F78223",border:"none"}} onClick={(e)=>this.submit(e)}>Save</Button>
+               </Link>}
+               
+               
                 </div>
               
         

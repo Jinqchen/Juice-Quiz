@@ -192,10 +192,20 @@ export default class App extends Component {
 					<div>
 
 <div className='score-section'>Finished</div>
-							
-							<Link to={'/quizRate'}  onClick={()=>this.addRep()}> 
-							Submit
-			</Link>
+							{/* state={{id:1}} */}
+							{/* <Link to={  '/quizRate'}  onClick={()=>this.addRep()}> 
+							Submit<button  onClick={()=>this.addRep()>Submit</button>
+			</Link> */}
+
+<Link   to ={{
+    pathname: "/quizRate", 
+    state: { 
+       abb:1
+    }
+   }} onClick={()=>this.addRep()}>
+ 	 Submit
+
+</Link>
 					</div>
 				) : (
 					<>
