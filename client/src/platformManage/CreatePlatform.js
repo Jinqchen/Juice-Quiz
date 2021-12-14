@@ -86,8 +86,8 @@ postImage(image, name) {
   const formData = new FormData();
   formData.append("image", image)
   formData.append("name", name);
-  const url=`https://juice-quiz.herokuapp.com/images/${this.state.PID}`;
-  //const url=`http://localhost:3001/images/${this.state.PID}`;
+  // const url=`https://juice-quiz.herokuapp.com/images/${this.state.PID}`;
+ const url=`http://localhost:3001/images/${this.state.PID}`;
   const result = Axios.post(url, formData, { headers: {'Content-Type': 'multipart/form-data'}})
   return result.data
 }
@@ -98,30 +98,30 @@ uploadIcon(event){
 }
 
 submit(e){      
-  
-  if(this.state.name==''||this.state.option==''||this.state.requireReputation<=0){
-    alert("!")
-  }else{
-    const url = 'https://juice-quiz.herokuapp.com/api/createplatform';
- //const url= 'http://localhost:3001/api/createplatform';
- Axios.post(url, { 
-        Pname: this.state.name, 
-        tag: this.state.tag, 
-        replimit:this.state.requireReputation,
+   this.uploadIcon(e)
+//   if(this.state.name==''||this.state.option==''||this.state.requireReputation<=0){
+//     alert("!")
+//   }else{
+//     const url = 'https://juice-quiz.herokuapp.com/api/createplatform';
+//  //const url= 'http://localhost:3001/api/createplatform';
+//  Axios.post(url, { 
+//         Pname: this.state.name, 
+//         tag: this.state.tag, 
+//         replimit:this.state.requireReputation,
         
-   }).then((res)=>{return res.data})
-   .then((response) => { 
-     this.setState({PID:response['PID']});
-     this.setState({success:response['success']});
-   }); 
- if (this.state.success){
-  this.uploadIcon(e)
-  this.own();
-  this.inital_reputation();
-  alert("Platform Created!") 
- }
+//    }).then((res)=>{return res.data})
+//    .then((response) => { 
+//      this.setState({PID:response['PID']});
+//      this.setState({success:response['success']});
+//    }); 
+//  if (this.state.success){
+ 
+//   this.own();
+//   this.inital_reputation();
+//   alert("Platform Created!") 
+//  }
   
-  }
+//   }
  
      }
     

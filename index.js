@@ -58,8 +58,9 @@ var con = mysql.createPool({
   
 app.post('/images', upload.single('image'), async (req, res) => {
 	const file = req.file
+	console.log("test file")
 	console.log(file)
-  
+    
   
 	const result = await uploadFile(file)
 	await unlinkFile(file.path)
@@ -87,6 +88,21 @@ app.get('/api/answer/:id',(req,res)=>{
 	}
   );
 
+
+  app.get('/api/answer/time/:id',(req,res)=>{
+	console.log("time");
+	const QID = req.params.id;
+  con.query(
+	  `SELECT TakeTime FROM quiz where QID=${QID}`,
+	  function (err1, result) {
+		  if (err1) throw err1;
+		  console.log(result);
+		  res.send(result);			
+	  }
+	)
+   
+  }
+);
   app.get('/api/getusername/:id',(req,res)=>{
 	console.log("Connected!");
 	const UID = req.params.id;
@@ -686,13 +702,17 @@ app.post('/api/CreatePlatform/doown', (req, res) => {
 	const file = req.file
 	console.log(file);
 	console.log("start")
+	var link='/images.jpg';
+	if (file!==undefined){
 	const result = await uploadFile(file);
 	console.log("phase1")
 	await unlinkFile(file.path);
 	console.log(result.Location);
 	var link = result.Location;
 	link = link.slice(38)
-	console.log(link)
+	console.log(link)   
+   };
+	
 	con.query(`insert into platformstyle(PID,Pcover) value(?,?);`,
 	[PID,link],
 	(err, result) => {
@@ -1150,10 +1170,10 @@ app.post('/api/answer/updateHIS/:id', (req, res) => {
 })
 
 
-// app.listen(3001,()=>{
-// 	  console.log("running");
-// 	})
+app.listen(3001,()=>{
+	  console.log("running");
+	})
 	
-app.listen(process.env.PORT || 3001,()=>{
-  console.log('listening for requests on port'+ process.env.PORT);
-})
+// app.listen(process.env.PORT || 3001,()=>{
+//   console.log('listening for requests on port'+ process.env.PORT);
+// })

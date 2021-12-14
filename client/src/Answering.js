@@ -27,6 +27,7 @@ export default class App extends Component {
 			hour:1,
 			minute:0,
       		second:5,
+			time:0,
 			TimeLimitFlag:true,
 			timeSpend:0
 		};
@@ -69,6 +70,7 @@ export default class App extends Component {
 		  }
 	  }
 	componentDidMount = () => {
+		this.get_time();
          const url = `https://juice-quiz.herokuapp.com/api/answer/${this.state.QID}`;
 		//const url= `http://localhost:3001/api/answer/${this.state.QID}`;
 		console.log("Component did mount")
@@ -82,7 +84,27 @@ export default class App extends Component {
 
     
 	}
+    
 
+	get_time(){
+		//const url = `https://juice-quiz.herokuapp.com/api/answer/time/${this.state.QID}`;
+		const url= `http://localhost:3001/api/answer/time/${this.state.QID}`;
+        Axios.get(url)
+		.then(res=>{return res.data})
+		.then( result =>{ 
+			console.log(result[0]['TakeTime']);
+			var time =result[0]['TakeTime'];
+			var hour =parseInt(time / 3600);
+			var min = (time-hour*3600)/60;
+
+			console.log(min)
+			this.setState({time:result[0]['TakeTime']});	
+			this.setState({hour: hour})
+			//this.setState({})	       
+		 });
+
+
+	}
 
 
 
