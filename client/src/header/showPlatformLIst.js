@@ -25,7 +25,7 @@ import {Button, Card} from 'react-bootstrap';
 		  async get(){
 			this._isMounted = true;
 		  const url = `https://juice-quiz.herokuapp.com/api/user/subscribed/${this.state.UID}`;
-			//  const url= `http://localhost:3001/api/user/subscribed/${this.state.UID}`;
+			  //const url= `http://localhost:3001/api/user/subscribed/${this.state.UID}`;
 		  const res = await Axios.get(url)
 		  .then(res=>{return res.data})
 		  .then( result =>{
@@ -56,7 +56,7 @@ import {Button, Card} from 'react-bootstrap';
 
    op_subscribe=(PID)=>{
 	  const url = `https://juice-quiz.herokuapp.com/platform/delSub/${PID}`;
-	// const url= `http://localhost:3001/api/platform/delSub/${PID}`;
+	 //const url= `http://localhost:3001/api/platform/delSub/${PID}`;
 	     
 	Axios.delete(url, { data:{UID: localStorage.getItem("UID")}}).then((response) => {  
     this.get();
@@ -72,7 +72,7 @@ import {Button, Card} from 'react-bootstrap';
 }
 
 op_uncoown=(PID)=>{
-    const url = `https://juice-quiz.herokuapp.com/api/platform/delCoown/${this.state.PID}`;
+    const url = `https://juice-quiz.herokuapp.com/api/platform/delCoown/${PID}`;
 	//const url= `http://localhost:3001/api/platform/delCoown/${PID}`;
 		  Axios.delete(url, { data:{UID: localStorage.getItem("UID")}			
 		  }).then((response) => { 
@@ -81,7 +81,7 @@ op_uncoown=(PID)=>{
 }
 
 op_delrep=(PID)=>{
-	  const url = `https://juice-quiz.herokuapp.com/api/platform/delRep/${this.state.PID}`;
+	  const url = `https://juice-quiz.herokuapp.com/api/platform/delRep/${PID}`;
 	  //const url= `http://localhost:3001/api/platform/delRep/${PID}`;
 		   
 			Axios.delete(url, { data:{UID: localStorage.getItem("UID")}  
@@ -95,7 +95,7 @@ op_delrep=(PID)=>{
  unsubscribe=(PID)=>{
 	 console.log(PID)
    const url = 'https://juice-quiz.herokuapp.com/api/platform/owner';
-	// 	 const url= `http://localhost:3001/api/platform/owner`;
+	 	// const url= `http://localhost:3001/api/platform/owner`;
 		Axios.post(url, {
 		   PID : PID,
 		   UID: localStorage.getItem("UID"),
