@@ -125,6 +125,37 @@ submit(e){
  
      }
     
+
+     own(){
+      const url = `https://juice-quiz.herokuapp.com/api/CreatePlatform/doown`;
+     //const url= `http://localhost:3001/api/CreatePlatform/doown`;
+      
+     Axios.post(url, { 
+     PID : this.state.PID,
+     UID: localStorage.getItem("UID"),
+     }).then((response) => { 
+     console.log(response); 
+     
+     }); 
+   }
+
+   inital_reputation(){
+     const url = 'https://juice-quiz.herokuapp.com/api/CreatePlatform/initalR';
+     //const url= 'http://localhost:3001/api/CreatePlatform/initalR';
+       
+      Axios.post(url, { 
+      PID : this.state.PID,
+      UID: localStorage.getItem("UID"),
+      }).then((response) => { 
+      console.log(response); 
+      
+      }); 
+
+
+  }
+
+
+
 render(){ 
        // this.setState({oneOnwer:this.state.renderFlag})
 	
