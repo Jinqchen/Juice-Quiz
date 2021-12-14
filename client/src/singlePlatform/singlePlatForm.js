@@ -285,7 +285,7 @@ op_delrep(){
 	is_owner(){
 		
 			 const url = 'https://juice-quiz.herokuapp.com/api/platform/owner';
-	 //const url= `http://localhost:3001/api/platform/owner`;
+	// const url= `http://localhost:3001/api/platform/owner`;
 		Axios.post(url, {
 		   PID : this.state.PID,
 		   UID: localStorage.getItem("UID"),
@@ -298,7 +298,7 @@ op_delrep(){
     is_allowCown(){
 		console.log("start")
 	 const url = 'https://juice-quiz.herokuapp.com/api/platform/allow_co';
-   //const url= `http://localhost:3001/api/platform/allow_co`;
+  // const url= `http://localhost:3001/api/platform/allow_co`;
     Axios.post(url, {
       PID : this.state.PID,
     }).then((response) => {

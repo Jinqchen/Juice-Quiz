@@ -507,14 +507,16 @@ app.post('/api/platform/coowner', (req, res) => {
 	);
   });
   app.post('/api/platform/owner', (req, res) => {
-	const PID = req.body.PID;
-	const UID = req.body.UID;  
+	const PID = req.body.PID.toString();
+	const UID = req.body.UID.toString();  
+	console.log(PID)
 	con.query(
 	  `SELECT EXISTS(SELECT UID FROM own WHERE UID=? AND PID=?)`,
 	  [UID,PID],
 	  (err, result) => {
+		  console.log("owner")
 		  console.log(result);
-		  var sub =result[0][`EXISTS(SELECT UID FROM own WHERE UID='${UID}' AND PID=${PID})`];
+		  var sub =result[0]["EXISTS(SELECT UID FROM own WHERE UID='"+UID+"' AND PID='"+PID+"')"];
 	     console.log(sub);
 		if (err) {
 		  res.send({ err: err });
@@ -1256,10 +1258,10 @@ app.post('/api/answer/updateHIS/:id', (req, res) => {
 })
 
 
-// app.listen(3001,()=>{
-// 	  console.log("running");
-// 	})
+app.listen(3001,()=>{
+	  console.log("running");
+	})
 	
-app.listen(process.env.PORT || 3001,()=>{
-  console.log('listening for requests on port'+ process.env.PORT);
-})
+// app.listen(process.env.PORT || 3001,()=>{
+//   console.log('listening for requests on port'+ process.env.PORT);
+// })

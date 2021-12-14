@@ -18,14 +18,15 @@ import {Button, Card} from 'react-bootstrap';
                 renderList:[],
 				oriList:[],
 				co_owner:'',
+				owner:'',
             };   
        this.get();
           }
   
 		  async get(){
 			this._isMounted = true;
-		  const url = `https://juice-quiz.herokuapp.com/api/user/subscribed/${this.state.UID}`;
-			  //const url= `http://localhost:3001/api/user/subscribed/${this.state.UID}`;
+		   const url = `https://juice-quiz.herokuapp.com/api/user/subscribed/${this.state.UID}`;
+			// const url= `http://localhost:3001/api/user/subscribed/${this.state.UID}`;
 		  const res = await Axios.get(url)
 		  .then(res=>{return res.data})
 		  .then( result =>{
@@ -94,8 +95,8 @@ op_delrep=(PID)=>{
 
  unsubscribe=(PID)=>{
 	 console.log(PID)
-   const url = 'https://juice-quiz.herokuapp.com/api/platform/owner';
-	 	// const url= `http://localhost:3001/api/platform/owner`;
+   //const url = 'https://juice-quiz.herokuapp.com/api/platform/owner';
+	 	 const url= `http://localhost:3001/api/platform/owner`;
 		Axios.post(url, {
 		   PID : PID,
 		   UID: localStorage.getItem("UID"),
