@@ -140,9 +140,9 @@ delete_quiz(quizID){
 			{place.description}
 			</Card.Text >  
 			<div className="quizMngBtn"  style={{marginLeft:"-5%"}}>
-			<Link   to={'/quizEditAfter/'+place.QID}  onClick={()=>this.store(place)}>
+			{/* <Link   to={'/quizEditAfter/'+place.QID}  onClick={()=>this.store(place)}>
 			<Button variant="primary" onClick>Edit</Button>
-			</Link>
+			</Link> */}
 		<Button  variant="primary" onClick={()=>this.delete_quiz(place.QID)}>Delete</Button>
 		
 		</div>
@@ -158,10 +158,10 @@ delete_quiz(quizID){
 		
             <div className="header"> 
 			</div> 
-			  <div className="singlePlatformsearch"> 
+			  {/* <div className="singlePlatformsearch"> 
 			<input className='singlePlatformsearchContent' required onChange={this.handleChangeSearch.bind(this)}></input>
 			<button className='singlePlatformsearchButton'onClick={()=>this.search()}>Search </button>
-			</div>     
+			</div>      */}
              
   
 			<div>

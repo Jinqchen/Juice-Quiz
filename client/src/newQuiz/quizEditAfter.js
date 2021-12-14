@@ -199,8 +199,8 @@ const initQuestions=   [
                 del.push(i)
               }
               // console.log(del);
-                //  const url = 'https://juice-quiz.herokuapp.com/quizsetEdit/delete';
-              const url= 'http://localhost:3001/api/quizsetEdit/delete';
+                  const url = 'https://juice-quiz.herokuapp.com/quizsetEdit/delete';
+              //const url= 'http://localhost:3001/api/quizsetEdit/delete';
                       
                 Axios.delete(url, { data:{
                   QID: localStorage.getItem('QID'), 
@@ -211,8 +211,8 @@ const initQuestions=   [
 
  
        update(){
- // const url = `https://juice-quiz.herokuapp.com/api/quizsetEdit/change`;
- const url= `http://localhost:3001/api/quizsetEdit/change`;
+  const url = `https://juice-quiz.herokuapp.com/api/quizsetEdit/change`;
+ //const url= `http://localhost:3001/api/quizsetEdit/change`;
      console.log(this.state.questions);
  Axios.put(url,{QID:localStorage.getItem('QID'),
   question:this.state.questions

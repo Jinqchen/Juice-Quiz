@@ -92,9 +92,10 @@ postImage(image, name) {
   const formData = new FormData();
   formData.append("image", image)
   formData.append("name", name)
-   
+  const url=`https://juice-quiz.herokuapp.com/images/${this.state.PID}`;
+  //const url=`http://localhost:3001/images/${this.state.PID}`;
 
-  const result = Axios.post(`http://localhost:3001/images/${this.state.PID}`, formData, { headers: {'Content-Type': 'multipart/form-data'}})
+  const result = Axios.post(url, formData, { headers: {'Content-Type': 'multipart/form-data'}})
   return result.data
 }
 uploadIcon(event){

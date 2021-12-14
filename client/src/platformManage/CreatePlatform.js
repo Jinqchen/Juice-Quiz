@@ -152,7 +152,21 @@ submit(e){
 
 
   }
-
+  subscribe(){
+    const url = 'https://juice-quiz.herokuapp.com/api/platform/dosubscribe';
+   //    const url= 'http://localhost:3001/api/platform/dosubscribe';
+        
+       Axios.post(url, { 
+       PID : this.state.PID,
+       UID: localStorage.getItem("UID"),
+       }).then((response) => { 
+       console.log(response);
+      } 
+       )
+       
+    
+  
+   }
 
 
 render(){ 
