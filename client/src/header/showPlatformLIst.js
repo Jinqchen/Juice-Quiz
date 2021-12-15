@@ -25,8 +25,8 @@ import {Button, Card} from 'react-bootstrap';
   
 		  async get(){
 			this._isMounted = true;
-		  // const url = `https://juice-quiz.herokuapp.com/api/user/subscribed/${this.state.UID}`;
-			 const url= `http://localhost:3001/api/user/subscribed/${this.state.UID}`;
+		   const url = `https://juice-quiz.herokuapp.com/api/user/subscribed/${this.state.UID}`;
+			 //const url= `http://localhost:3001/api/user/subscribed/${this.state.UID}`;
 		  const res = await Axios.get(url)
 		  .then(res=>{return res.data})
 		  .then( result =>{
