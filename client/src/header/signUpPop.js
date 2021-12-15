@@ -49,8 +49,9 @@ import Axios from "axios";
               password:this.state.password,
               confirmPassword:this.state.confirmPassword 
          }).then((response) => { 
-         console.log(response); 
+         console.log(response.data); 
          this.setState({visible:false})
+         localStorage.setItem('UID',response.data['UID'])
          this.props.signUpcallback();
          this.props.Success()
          }); 
@@ -88,7 +89,7 @@ import Axios from "axios";
                     <input type="password" placeholder="Confirm your password" name="confirmPassword" required onChange={this.handleChangeConfirmPassword.bind(this)}></input>
                   </div>
                  
-            <button className="SignUp" onClick={()=>this.signUp()} >Sign in</button>
+            <button className="SignUp" onClick={()=>this.signUp()} >Sign up</button>
                   </div>
 
                   

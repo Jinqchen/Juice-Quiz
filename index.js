@@ -420,7 +420,7 @@ app.post('/api/register', (req, res) => {
 		[id,username,email,password],
 		(err, result) => {
 		  console.log(err);
-		  res.send(result);
+		  res.send({UID: id});
 		}
 	  );
 	});
