@@ -95,8 +95,8 @@ op_delrep=(PID)=>{
 
  unsubscribe=(PID)=>{
 	 console.log(PID)
-   //const url = 'https://juice-quiz.herokuapp.com/api/platform/owner';
-	 	 const url= `http://localhost:3001/api/platform/owner`;
+   const url = 'https://juice-quiz.herokuapp.com/api/platform/owner';
+	 	// const url= `http://localhost:3001/api/platform/owner`;
 		Axios.post(url, {
 		   PID : PID,
 		   UID: localStorage.getItem("UID"),
