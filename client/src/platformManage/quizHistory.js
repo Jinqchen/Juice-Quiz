@@ -97,7 +97,7 @@ render(){
 			<Card.Text  style={{fontSize:"24px"}}>
 				
 			<h4>Score: {Math.round(place.score*10000)/100}  </h4>  
-			<h4>Finished at: {new Date(place.whendo.getUTCFullYear(), place.whendo.getUTCMonth(), place.whendo.getUTCDate(),  place.whendo.getUTCHours()-5, place.whendo.getMinutes(), place.whendo.getUTCSeconds())}</h4>  
+			<h4>Finished at: {place.whendo}</h4>  
 		 
  		</Card.Text >   
          
