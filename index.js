@@ -413,8 +413,8 @@ app.post('/api/register', (req, res) => {
 	con.query('select COUNT(UID) from users',function(err,result){
 		var index = result[0]["COUNT(UID)"]
 		//console.log(index);
-		var id =index;
-		//console.log(id);
+		var id =index+1;
+		console.log(id);
 		con.query(
 		"INSERT INTO users (UID,Uname,Uemail,Upass) VALUES (?,?,?,?)",
 		[id,username,email,password],
