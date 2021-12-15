@@ -578,6 +578,7 @@ app.post('/api/platform/coowner', (req, res) => {
   app.delete('/api/platform/delSub/:id', (req, res) => {
 	const PID = req.params.id;
 	const UID = req.body.UID;  
+	console.log('delete sub');
 	con.getConnection(function (err, connection) {
 		connection.query(
 	  `delete from subscribe where PID=? and UID=?`,
@@ -1274,10 +1275,10 @@ app.post('/api/answer/updateHIS/:id', (req, res) => {
 	
 })
 
-// app.listen(3001,()=>{
-// 	  console.log("running");
-// 	})
+app.listen(3001,()=>{
+	  console.log("running");
+	})
 	
-app.listen(process.env.PORT || 3001,()=>{
-  console.log('listening for requests on port'+ process.env.PORT);
-})
+// app.listen(process.env.PORT || 3001,()=>{
+//   console.log('listening for requests on port'+ process.env.PORT);
+// })
