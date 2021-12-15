@@ -410,20 +410,36 @@ app.post('/api/register', (req, res) => {
 	const username = req.body.username;
 	const password = req.body.password;
     const email  = req.body.email;
-	con.query('select COUNT(UID) from users',function(err,result){
+	con.getConnection(function(err,connection){
+     connection.query('select COUNT(UID) from users',function(err,result){
 		var index = result[0]["COUNT(UID)"]
 		//console.log(index);
 		var id =index+1;
 		console.log(id);
-		con.query(
-		"INSERT INTO users (UID,Uname,Uemail,Upass) VALUES (?,?,?,?)",
-		[id,username,email,password],
-		(err, result) => {
-		  console.log(err);
-		  res.send({UID: id});
-		}
-	  );
+		connection.destroy();
+		con.getConnection(function(err,connection){
+		connection.query(
+				"INSERT INTO users (UID,Uname,Uemail,Upass) VALUES (?,?,?,?)",
+				[id,username,email,password],
+				(err, result) => {
+				console.log(err);
+				res.send({UID: id});
+                connection.destroy(); 
+				con.query(`insert into userstyle(UID,pic)
+				value(${id},'./user_image/1.png');`)
+
+				}
+			);
+
+
+
+		})
+		
 	});
+
+
+	})
+	
   }); 
 
 app.post('/api/login', (req, res) => {
